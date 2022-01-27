@@ -1,0 +1,104 @@
+// eventForm
+%eventFormWidthSets {
+  @media screen and (max-width: 770px) {
+    width: 80%;
+    height: 770px;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 380px) {
+    height: 720px;
+  }
+}
+
+%dateLabelWidthSets {
+  @media screen and (max-width: 770px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 89%;
+  }
+
+  @media screen and (max-width: 410px) {
+    width: 95%;
+  }
+
+  @media screen and (max-width: 380px) {
+    width: 98%;
+
+    & > div {
+      padding: 1px;
+    }
+  }
+}
+
+%dateElementWidthSets {
+  @media screen and (max-width: 1000px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 67%;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 75%;
+  }
+}
+
+%eventButtonWidthSets {
+  @media screen and (max-width: 800px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 60%;
+  }
+}
+
+// eventList
+%timerViewWidthSets {
+  @media screen and (max-width: 850px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 770px) {
+    width: 53%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 56%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 530px) {
+    width: 65%;
+  }
+
+  @media screen and (max-width: 490px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 96%;
+  }
+}

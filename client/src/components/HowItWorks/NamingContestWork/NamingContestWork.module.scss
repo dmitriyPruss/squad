@@ -1,0 +1,87 @@
+.contestWorkContainer {
+  border-top: 1px solid #e7eaf3;
+  border-bottom: 1px solid #e7eaf3;
+  padding: 128px 30px;
+}
+
+.contestWorkItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 35%;
+  height: 500px;
+  margin: 0px auto;
+  position: relative;
+
+  @media screen and (max-width: 800px) {
+    order: -1;
+  }
+}
+
+.headerContestBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64px;
+
+  & > h2 {
+    font-weight: 500;
+    font-size: 2em;
+    margin: 8px 0;
+  }
+}
+
+.mainContestBlock {
+  display: flex;
+
+  & > * {
+    width: 45%;
+
+    @media screen and (max-width: 800px) {
+      width: 90%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.workItem {
+  height: 20%;
+  border: 1px solid #e7eaf3;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.workItemNum {
+  color: #377dff;
+  font-size: 3.5rem;
+  width: 23%;
+  text-align: center;
+}
+
+.workItemContext {
+  color: #77838f;
+  width: 75%;
+}
+
+.linesVisualItem {
+  position: absolute;
+  top: 65px;
+  left: 10px;
+  height: 75%;
+  width: 20px;
+  border-left: 1px solid #e7eaf3;
+
+  & > * {
+    border-top: 1px solid #e7eaf3;
+    height: 33.3%;
+    margin-bottom: 0px;
+  }
+
+  & > *:last-child {
+    border-bottom: 1px solid #e7eaf3;
+  }
+}

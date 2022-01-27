@@ -1,0 +1,35 @@
+.companiesContainer {
+  display: flex;
+  justify-content: space-around;
+
+  & h3 {
+    font-size: 1.75em;
+    font-weight: 300;
+    line-height: 2em;
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.companyHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.companiesList {
+  display: flex;
+  border-top: 1px solid #e5e7eb;
+
+  & > a {
+    width: '70px';
+    margin: 24px;
+  }
+
+  @media screen and (max-width: 800px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

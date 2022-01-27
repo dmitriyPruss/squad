@@ -1,0 +1,53 @@
+.articlesMainContainer {
+  display: flex;
+  min-width: 300px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: white;
+  letter-spacing: 1px;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+}
+
+.ColumnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 60px 90px;
+  flex: 1;
+  padding-top: 20px;
+
+  @media (max-width: 1000px) {
+    margin: 0px 30px;
+  }
+}
+
+.headerArticle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #363945;
+  margin-bottom: 20px;
+}
+
+.articleEmphasized {
+  color: #888f99;
+  font-weight: bold;
+}
+
+.article {
+  color: #9ca8b7;
+  line-height: 30px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.orangeSpan {
+  color: #f18762;
+  text-decoration: none;
+}

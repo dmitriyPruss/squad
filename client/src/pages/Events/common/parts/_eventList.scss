@@ -1,0 +1,94 @@
+@import './../styles/templates';
+@import './../styles/vars';
+
+.eventList {
+  background-color: #e5e7eb;
+  width: 96%;
+  min-height: 370px;
+  margin: 20px auto;
+  color: #1e2022;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 5px;
+}
+
+.eventItem {
+  width: 97%;
+  margin: 16px auto 0;
+  display: flex;
+
+  border-radius: 5px;
+  box-shadow: inset 2px 2px 5px rgba(179, 177, 176, 0.5),
+    1px 1px 5px rgba(255, 255, 255, 1);
+
+  & > * {
+    padding: 7px;
+  }
+
+  @media screen and (max-width: 850px) {
+    flex-direction: column;
+  }
+}
+
+.runTimer,
+.stopTimer {
+  width: 62%;
+  border-radius: 5px;
+  margin: 3px 0 3px 3px;
+
+  @media screen and (max-width: 850px) {
+    width: 98%;
+    margin: 5px auto;
+  }
+}
+
+.runTimer {
+  background: rgb(193, 216, 193);
+}
+
+.stopTimer {
+  background-color: rgb(237, 87, 87);
+
+  & > span {
+    color: #fff;
+  }
+}
+
+.timerView {
+  width: 37%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3px auto;
+
+  & > span {
+    width: 14%;
+    color: #9b9b9b;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  & > span:first-child {
+    width: 19%;
+  }
+
+  @extend %timerViewWidthSets;
+}
+
+.timeIsOver {
+  background-color: rgb(237, 87, 87);
+  border-radius: 5px;
+  margin: 3px auto;
+
+  display: flex;
+
+  & > span {
+    height: 80%;
+    color: #fff;
+    padding: 2px;
+  }
+}

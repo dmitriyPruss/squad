@@ -1,0 +1,30 @@
+import React from 'react';
+import styles from './Catalog.module.sass';
+
+const Catalog = props => {
+  const {
+    catalog,
+    catalog: { catalogName, chats, _id },
+    destroyCatalog,
+    goToCatalog
+  } = props;
+
+  return (
+    <div
+      className={styles.catalogContainer}
+      onClick={event => goToCatalog(event, catalog)}
+    >
+      <span className={styles.catalogName}>{catalogName}</span>
+      <div className={styles.infoContainer}>
+        <span>Chats number: </span>
+        <span className={styles.numbers}>{chats.length}</span>
+        <i
+          className='fas fa-trash-alt'
+          onClick={event => destroyCatalog(event, _id)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Catalog;

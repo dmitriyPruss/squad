@@ -1,0 +1,50 @@
+.listContainer {
+  display: flex;
+  justify-content: space-evenly;
+
+  padding: 0px 15px;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+  }
+}
+
+.listGroup {
+  margin-top: 64px;
+  width: 25%;
+  background: #377dff;
+
+  list-style: none;
+  max-height: 720px;
+  height: 100%;
+  overflow-y: auto;
+
+  border-radius: 5px;
+
+  padding: 1em 2em;
+
+  display: flex;
+  flex-direction: column;
+
+  & > li {
+    margin: 16px 0;
+    text-align: center;
+  }
+
+  & a:link,
+  a:visited {
+    color: rgb(208, 208, 208);
+    text-decoration: none;
+  }
+  & a:hover {
+    color: white;
+  }
+
+  font-size: 0.88em;
+  font-weight: 300;
+
+  @media screen and (max-width: 800px) {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

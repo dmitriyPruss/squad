@@ -1,0 +1,191 @@
+* 
+  box-sizing: border-box
+  
+.articlesList
+  max-width: 1240px
+  min-width: 320px
+  margin: 20px 0 20px
+  padding: 30px
+  width: 100%
+  // height: 700px
+  display: flex
+  justify-content: space-between
+  background: rgb(248, 248, 248)
+
+  @media screen and (max-width: 1000px) 
+    flex-direction: column
+    height: auto
+
+  @media screen and (max-width: 810px) 
+    align-items: center
+
+.pricesListItem
+  width: 23%
+  cursor: pointer
+  font-size: 15px
+
+  @media screen and (max-width: 1000px) 
+    width: 83%
+    height: auto
+    margin-bottom: 20px
+
+  @media screen and (max-width: 810px) 
+    width: 95%
+
+.header
+  border-style: solid
+  border-width: 10px
+  padding: 10px
+  height: 200px
+  width: 100%
+  margin-bottom: 20px
+  font-family: 'Raleway',sans-serif
+  display: flex
+  flex-direction: column
+  position: relative
+  background: white
+
+  @media screen and (max-width: 810px) 
+    height: 170px
+    align-items: center
+
+  .toggledButton
+    display: none
+    height: 50px
+    position: absolute
+    top: 5px
+    right: 10px
+    font-size: 30px
+    font-weight: bold
+
+    @media screen and (max-width: 810px)
+      display: block
+
+  h3
+    font-size: 33px
+    font-family: 'Raleway', sans-serif
+    font-weight: 700
+  
+  p
+    padding: 15px 10px
+    letter-spacing: 1px
+    color: rgb(123, 123, 123)
+    font-size: 16px
+
+  div
+    text-align: right
+
+.header:hover
+  box-shadow: 0px 10px 15px grey
+
+.mainInfo
+  width: 100%
+
+  @media screen and (max-width: 810px)
+    display: none
+
+.optionsList
+  position: relative
+
+  li 
+    padding: 10px 0
+    border-bottom: 2px solid lightgrey
+
+  .showedElem, .unshowedElem
+    padding: 10px 0
+
+  .showedElem:hover
+    font-weight: 500
+
+    @media screen and (max-width: 810px) 
+      font-weight: normal
+
+  .showedElem::after
+    content: attr(data-tooltip)
+    position: absolute
+    left: 105%
+    padding: 20px
+    opacity: 0
+    transform: translateY(-50%) scale(0)
+    background: black
+    color: white
+    z-index: 98
+    font-weight: normal
+    border: 2px solid black
+    border-radius: 2px
+    font-size: 14px
+    width: 100px
+    pointer-events: none
+
+    transition: all 0.05s ease-in-out
+
+    @media screen and (max-width: 1000px) 
+      left: 102%
+    
+    @media screen and (max-width: 900px) 
+      margin-bottom: 0
+
+    @media screen and (max-width: 810px) 
+      display: none
+
+  .showedElem:before
+    opacity: 0
+    position: absolute
+    left: 97%
+    border: 10px solid transparent
+    border-right: 12px solid black
+    content: ''
+    transform: translateY(50%) scale(0) 
+    transition: all 0.05s ease-in-out
+
+    @media screen and (max-width: 1000px) 
+      left: 99.2%
+    
+    @media screen and (max-width: 810px) 
+      display: none
+
+  .showedElem:hover::before, .showedElem:hover::after
+    opacity: 1
+    transform: translateY(-50%) scale(1) 
+
+  li:last-child
+    border-bottom: none
+
+  li:last-child:hover
+    margin-bottom: 3px
+
+    @media screen and (max-width: 900px) 
+      margin-bottom: 0
+
+  .innerShowedElement
+    padding-left: 20px
+    font-size: 13px
+
+  .showedElem, .unshowedElem 
+    a
+      color: #337ab7
+    a:hover
+      color: rgb(87, 123, 154)
+
+.currency
+  font-size: 20px
+  font-weight: bold
+  position: absolute
+  bottom: 20px
+  right: 58px 
+
+.currencyValue
+  height: 20px
+  font-size: 22px
+  font-family: 'Raleway', sans-serif
+  position: relative
+    
+.startLink
+  display: block
+  width: 100%
+  height: 3em
+  line-height: 3em
+  text-align: center
+  text-decoration: none
+  color: white
+  border-radius: 3px
