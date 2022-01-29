@@ -1,4 +1,9 @@
 $formShadow: inset 2px 2px 5px rgba(179, 177, 176, 0.5),
   1px 1px 5px rgba(255, 255, 255, 1);
 
-$invalid: linear-gradient(to right, black, rgb(70, 68, 68), black);
+$invalid: linear-gradient(
+  to right,
+  rgb(111, 7, 7),
+  rgb(143, 35, 35),
+  rgb(111, 7, 7)
+);

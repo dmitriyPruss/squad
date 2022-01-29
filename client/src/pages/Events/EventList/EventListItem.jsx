@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { subMilliseconds } from 'date-fns';
 import TimeIsOver from '../EventList/TimeIsOver';
 import calcTime from '../helperFuncs/calcTime';
+import ProgressItem from './ProgressItem';
 import styles from './../Events.module.scss';
 
 function EventListItem (props) {
@@ -9,7 +10,8 @@ function EventListItem (props) {
     id,
     eventBody: {
       eventName,
-      eventDate: { year, month, day }
+      eventDate: { year, month, day, hours, minutes },
+      createdEventDate
     },
     eventArr: [events, setEvents],
     finishItem
@@ -17,14 +19,19 @@ function EventListItem (props) {
 
   const currentDate = new Date();
 
-  const userDate = new Date(year, month, day);
+  const userDate = new Date(year, month, day, hours, minutes);
 
   const timerData =
-    currentDate < userDate ? new Date(userDate - currentDate) : '';
+    currentDate < userDate ? Number(userDate - currentDate) : '';
 
   const [timer, setTimer] = useState(timerData);
+  const timeValues = calcTime(timerData);
 
-  const timeValues = calcTime(timer);
+  const initialProgressData =
+    Math.round((new Date() - Number(new Date(createdEventDate))) / 1000) * 1000;
+
+  const [progressState, setProgressState] = useState(initialProgressData);
+  const period = useMemo(() => userDate - new Date(createdEventDate), []);
 
   useEffect(() => {
     if (timer > 0) {
@@ -47,19 +54,40 @@ function EventListItem (props) {
     }
   });
 
+  useEffect(() => {
+    let progressId = setTimeout(function runProgress () {
+      setProgressState(progressState + 1000);
+
+      progressId = setTimeout(runProgress, 1000);
+    }, 1000);
+
+    return () => {
+      clearTimeout(progressId);
+    };
+  }, [progressState]);
+
   return (
     <li className={styles.eventItem}>
       <div className={timerData !== '' ? styles.runTimer : styles.stopTimer}>
-        <span>{eventName}</span>
+        {timerData !== '' ? (
+          <div className={styles.progressContainer}>
+            <ProgressItem progressState={progressState} period={period} />
+            <span>{eventName}</span>
+          </div>
+        ) : (
+          <p>{eventName}</p>
+        )}
       </div>
 
       {timer > 0 ? (
-        <div className={styles.timerView}>
-          <span> {timeValues.days} d</span>
-          <span> {`${timeValues.hours} h`}</span>
-          <span> {`${timeValues.minutes} m`}</span>
-          <span> {`${timeValues.seconds} s`}</span>
-        </div>
+        <>
+          <div className={styles.timerView}>
+            <span> {timeValues.days} d</span>
+            <span> {`${timeValues.hours} h`}</span>
+            <span> {`${timeValues.minutes} m`}</span>
+            <span> {`${timeValues.seconds} s`}</span>
+          </div>
+        </>
       ) : (
         <TimeIsOver id={id} events={events} finishItem={finishItem} />
       )}

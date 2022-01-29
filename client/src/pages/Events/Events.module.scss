@@ -13,6 +13,7 @@
 
 .eventHeader {
   width: 90%;
+  min-width: 320px;
   margin: 50px auto 0;
   position: relative;
 
@@ -28,7 +29,7 @@
 
   padding: 2px;
   background-image: $invalid;
-  color: red;
+  color: #fff;
   border-radius: 5px;
   font-weight: bold;
   font-size: 0.8em;

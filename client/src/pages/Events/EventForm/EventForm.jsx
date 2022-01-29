@@ -8,8 +8,8 @@ import createNewEvents from '../helperFuncs/createNewEvents';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
+import TimePicker from '@mui/lab/TimePicker';
 import TextField from '@mui/material/TextField';
-
 import styles from './../Events.module.scss';
 
 function EventForm (props) {
@@ -24,29 +24,43 @@ function EventForm (props) {
   };
 
   const [dateValue, setDateValue] = useState(new Date());
+  const [timeValue, setTimeValue] = useState(new Date());
 
   const addEvent = (values, formikBag) => {
     const { eventName } = values;
+
     const eventDate = {
       year: dateValue.getFullYear(),
       month: dateValue.getMonth(),
-      day: dateValue.getDate()
+      day: dateValue.getDate(),
+      hours: timeValue.getHours(),
+      minutes: timeValue.getMinutes()
     };
 
-    console.log('dateValue.getDate( ):>> ', dateValue.getDate());
-    console.log('dateValue.getMonth() :>> ', dateValue.getMonth());
-    console.log('dateValue.getHours() :>> ', dateValue.getFullYear());
+    const createdEventDate = new Date();
 
-    const isValidData = validateInputData(events, eventName, eventDate);
+    const isValidData = validateInputData(
+      events,
+      eventName,
+      eventDate,
+      createdEventDate
+    );
 
     if (isValidData) {
       setInvalidInputData(isValidData);
       return;
     }
-    setInvalidInputData(false);
 
-    const newEvents = createNewEvents(events, eventName, eventDate);
+    setInvalidInputData(isValidData);
 
+    const newEvents = createNewEvents(
+      events,
+      eventName,
+      eventDate,
+      createdEventDate
+    );
+
+    setEvents([]);
     setEvents(newEvents);
 
     formikBag.resetForm();
@@ -56,7 +70,7 @@ function EventForm (props) {
     <>
       <Formik
         initialValues={initValues}
-        // validationSchema={INPUT_SCHEMA}
+        validationSchema={INPUT_SCHEMA}
         onSubmit={addEvent}
       >
         {formikProps => {
@@ -82,6 +96,22 @@ function EventForm (props) {
                     value={dateValue}
                     onChange={newValue => {
                       setDateValue(newValue);
+                    }}
+                    renderInput={params => (
+                      <TextField
+                        style={{
+                          width: '300px',
+                          margin: '10px 0 25px'
+                        }}
+                        {...params}
+                      />
+                    )}
+                  />
+                  <TimePicker
+                    label='Enter time'
+                    value={timeValue}
+                    onChange={newValue => {
+                      setTimeValue(newValue);
                     }}
                     renderInput={params => (
                       <TextField

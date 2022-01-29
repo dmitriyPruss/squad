@@ -4,6 +4,7 @@
 .eventList {
   background-color: #e5e7eb;
   width: 96%;
+  min-width: 320px;
   min-height: 370px;
   margin: 20px auto;
   color: #1e2022;
@@ -36,9 +37,10 @@
 
 .runTimer,
 .stopTimer {
-  width: 62%;
-  border-radius: 5px;
-  margin: 3px 0 3px 3px;
+  width: 60%;
+  border-radius: 3px;
+  margin: 3px;
+  padding: 0px;
 
   @media screen and (max-width: 850px) {
     width: 98%;
@@ -47,25 +49,60 @@
 }
 
 .runTimer {
-  background: rgb(193, 216, 193);
+  background: #e5e7eb;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .stopTimer {
   background-color: rgb(237, 87, 87);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > p {
+    color: #fff;
+    text-shadow: 0px 2px black;
+    padding: 3px;
+    margin: 0;
+  }
+}
+
+.progressContainer {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 3px;
+
+  & > div {
+    width: 100%;
+    height: 30px;
+    font-size: 1rem;
+    opacity: 0.45;
+  }
 
   & > span {
-    color: #fff;
+    position: absolute;
+    top: 3px;
+    left: 5px;
+    color: #1e2022;
   }
 }
 
 .timerView {
-  width: 37%;
+  width: 39%;
   display: flex;
   justify-content: space-evenly;
   margin: 3px auto;
 
   & > span {
-    width: 14%;
+    width: 17%;
+    padding: 3px;
     color: #9b9b9b;
     text-align: center;
     background-color: #fff;
@@ -73,10 +110,20 @@
   }
 
   & > span:first-child {
-    width: 19%;
+    width: 20%;
   }
 
-  @extend %timerViewWidthSets;
+  @media screen and (max-width: 850px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 770px) {
+    width: 73%;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 98%;
+  }
 }
 
 .timeIsOver {
@@ -89,6 +136,7 @@
   & > span {
     height: 80%;
     color: #fff;
+    text-shadow: 0px 1px black;
     padding: 2px;
   }
 }

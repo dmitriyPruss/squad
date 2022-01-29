@@ -9,18 +9,22 @@ function getInitData () {
 
       const {
         eventBody: {
-          eventDate: { year, month, day }
+          eventDate: { year, month, day, hours, minutes }
         }
       } = newItem;
 
-      const date = new Date(year, month, day);
+      const date = new Date(year, month, day, hours, minutes);
       newItem.date = date;
 
       initialData.push(newItem);
     }
   }
 
-  return initialData.sort((a, b) => a.date - b.date);
+  initialData.sort((a, b) => a.date - b.date);
+
+  initialData.forEach(data => delete data.date);
+
+  return initialData;
 }
 
 export default getInitData;
