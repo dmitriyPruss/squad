@@ -1,7 +1,11 @@
 // eventForm
 %eventFormWidthSets {
+  @media screen and (max-width: 1000px) {
+    width: 62%;
+  }
+
   @media screen and (max-width: 770px) {
-    width: 80%;
+    width: 75%;
   }
 
   @media screen and (max-width: 700px) {

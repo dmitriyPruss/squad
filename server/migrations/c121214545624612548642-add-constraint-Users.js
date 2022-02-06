@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addConstraint('Users', {
-      type: 'check',
-      fields: ['balance'],
+    await queryInterface.addConstraint("Users", {
+      type: "check",
+      fields: ["balance"],
       where: {
         balance: {
-          [Sequelize.Op.gte]: 0
-        }
+          [Sequelize.Op.gte]: 0,
+        },
       },
-      name: 'User_balance'
+      name: "User_balance",
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users', 'User_balance');
-  }
+    await queryInterface.dropTable("Users", "User_balance");
+  },
 };

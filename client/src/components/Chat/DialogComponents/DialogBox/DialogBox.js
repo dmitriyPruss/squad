@@ -16,11 +16,15 @@ const DialogBox = props => {
     interlocutor
   } = props;
 
+  console.log('props', props);
+
   const {
     ANONYM_IMAGE_PATH,
     PUBLIC_URL,
     PREVIEW_CHAT_MODE: { CATALOG }
   } = CONSTANTS;
+
+  console.log('constants', CONSTANTS);
 
   const isFavorite = favoriteList[participants.indexOf(userId)];
   const isBlocked = blackList[participants.indexOf(userId)];
@@ -42,9 +46,9 @@ const DialogBox = props => {
     >
       <img
         src={
-          interlocutor.avatar === 'anon.png'
+          props.interlocutor.avatar === 'anon.png'
             ? ANONYM_IMAGE_PATH
-            : `${PUBLIC_URL}${interlocutor.avatar}`
+            : `${PUBLIC_URL}${props.interlocutor.avatar}`
         }
         alt='user'
       />

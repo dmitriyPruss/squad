@@ -20,6 +20,7 @@
     "immer": "^9.0.12",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
+    "node-sass": "^6.0.0",
     "query-string": "^7.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.0",
@@ -63,7 +64,6 @@
   ],
   "devDependencies": {
     "eslint": "^7.26.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "node-sass": "^4.13.1"
+    "eslint-config-airbnb": "^18.2.1"
   }
 }

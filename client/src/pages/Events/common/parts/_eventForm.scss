@@ -3,12 +3,12 @@
 
 .eventForm {
   min-width: 320px;
-  width: 70%;
+  width: 44%;
   height: 380px;
   margin: 20px auto;
   background-color: #e5e7eb;
   color: #1e2022;
-  border-radius: 5px;
+  border-radius: 3px;
 
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@
 
   position: relative;
 
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: $formShadow;
 
   & > legend {

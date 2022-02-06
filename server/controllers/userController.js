@@ -64,7 +64,7 @@ module.exports.login = async (req, res, next) => {
 };
 
 module.exports.registration = async (req, res, next) => {
-  console.log(`registration!`, req.body);
+  // console.log(`registration!`, req.body);
 
   try {
     const newUser = await userQueries.userCreation(
@@ -273,7 +273,7 @@ module.exports.cashout = async (req, res, next) => {
     tokenData: { userId }
   } = req;
 
-  console.log('req.body', req.body);
+  // console.log('req.body', req.body);
 
   try {
     transaction = await sequelize.transaction();
@@ -283,7 +283,7 @@ module.exports.cashout = async (req, res, next) => {
       transaction
     );
 
-    console.log('updatedUser', updatedUser);
+    // console.log('updatedUser', updatedUser);
 
     await bankQueries.updateBankBalance(
       {

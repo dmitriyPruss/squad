@@ -1,21 +1,21 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Field, Form, Formik } from 'formik';
-import Error from '../Error/Error';
-import { authActionRegister, clearAuth } from '../../actions/actionCreator';
-import styles from './RegistrationForm.module.sass';
-import FormInput from '../FormInput/FormInput';
-import RoleInput from '../RoleInput/RoleInput';
-import AgreeTermOfServiceInput from '../AgreeTermOfServiceInput/AgreeTermOfServiceInput';
-import CONSTANTS from '../../constants';
-import Schems from '../../validators/validationSchems';
+import React from "react";
+import { connect } from "react-redux";
+import { Field, Form, Formik } from "formik";
+import Error from "../Error/Error";
+import { authActionRegister, clearAuth } from "../../actions/actionCreator";
+import styles from "./RegistrationForm.module.sass";
+import FormInput from "../FormInput/FormInput";
+import RoleInput from "../RoleInput/RoleInput";
+import AgreeTermOfServiceInput from "../AgreeTermOfServiceInput";
+import CONSTANTS from "../../constants";
+import Schems from "../../validators/validationSchems";
 
 class RegistrationForm extends React.Component {
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.authClear();
   }
 
-  clicked = values => {
+  clicked = (values) => {
     const { firstName, lastName, displayName, email, password, role } = values;
 
     const { register, history } = this.props;
@@ -27,17 +27,17 @@ class RegistrationForm extends React.Component {
         displayName,
         email,
         password,
-        role
+        role,
       },
-      history
+      history,
     });
   };
 
-  render () {
+  render() {
     const {
       submitting,
       auth: { error },
-      authClear
+      authClear,
     } = this.props;
 
     const formInputClasses = {
@@ -45,31 +45,25 @@ class RegistrationForm extends React.Component {
       input: styles.input,
       warning: styles.fieldWarning,
       notValid: styles.notValid,
-      valid: styles.valid
+      valid: styles.valid,
     };
     return (
       <div className={styles.signUpFormContainer}>
-        {error && (
-          <Error
-            data={error.data}
-            status={error.status}
-            clearError={authClear}
-          />
-        )}
+        {error && <Error data={error.data} status={error.status} clearError={authClear} />}
         <div className={styles.headerFormContainer}>
           <h2>CREATE AN ACCOUNT</h2>
           <h4>We always keep your name and email address private.</h4>
         </div>
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
+            firstName: "",
+            lastName: "",
+            displayName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
             role: CONSTANTS.CUSTOMER,
-            agreeOfTerms: false
+            agreeOfTerms: false,
           }}
           onSubmit={this.clicked}
           validationSchema={Schems.RegistrationSchem}
@@ -77,82 +71,82 @@ class RegistrationForm extends React.Component {
           <Form>
             <div className={styles.row}>
               <FormInput
-                name='firstName'
+                name="firstName"
                 classes={formInputClasses}
-                type='text'
-                label='First name'
+                type="text"
+                label="First name"
+              />
+              <FormInput name="lastName" classes={formInputClasses} type="text" label="Last name" />
+            </div>
+            <div className={styles.row}>
+              <FormInput
+                name="displayName"
+                classes={formInputClasses}
+                type="text"
+                label="Display Name"
               />
               <FormInput
-                name='lastName'
+                name="email"
                 classes={formInputClasses}
-                type='text'
-                label='Last name'
+                type="text"
+                label="Email Address"
               />
             </div>
             <div className={styles.row}>
               <FormInput
-                name='displayName'
+                name="password"
                 classes={formInputClasses}
-                type='text'
-                label='Display Name'
+                type="password"
+                label="Password"
               />
               <FormInput
-                name='email'
+                name="confirmPassword"
                 classes={formInputClasses}
-                type='text'
-                label='Email Address'
-              />
-            </div>
-            <div className={styles.row}>
-              <FormInput
-                name='password'
-                classes={formInputClasses}
-                type='password'
-                label='Password'
-              />
-              <FormInput
-                name='confirmPassword'
-                classes={formInputClasses}
-                type='password'
-                label='Password confirmation'
+                type="password"
+                label="Password confirmation"
               />
             </div>
             <div className={styles.choseRoleContainer}>
               <Field
-                name='role'
-                type='radio'
+                name="role"
+                type="radio"
                 value={CONSTANTS.CUSTOMER}
-                strRole='Join As a Buyer'
-                infoRole='I am looking for a Name, Logo or Tagline for my business, brand or product.'
+                strRole="Join As a Buyer"
+                infoRole="I am looking for a Name, Logo or Tagline for my business, brand or product."
                 component={RoleInput}
                 id={CONSTANTS.CUSTOMER}
               />
               <Field
-                name='role'
-                type='radio'
+                name="role"
+                type="radio"
                 value={CONSTANTS.CREATOR}
-                strRole='Join As a Creative'
-                infoRole='I plan to submit name ideas, Logo designs or sell names in Domain Marketplace.'
+                strRole="Join As a Creative"
+                infoRole="I plan to submit name ideas, Logo designs or sell names in Domain Marketplace."
                 component={RoleInput}
                 id={CONSTANTS.CREATOR}
+              />
+              <Field
+                name="role"
+                type="radio"
+                value={CONSTANTS.MODERATOR}
+                strRole="Join As a Moderator"
+                infoRole="I can view all offers, confirm and reject them"
+                component={RoleInput}
+                id={CONSTANTS.MODERATOR}
               />
             </div>
             <div className={styles.termsOfService}>
               <AgreeTermOfServiceInput
-                name='agreeOfTerms'
+                name="agreeOfTerms"
                 classes={{
                   container: styles.termsOfService,
-                  warning: styles.fieldWarning
+                  warning: styles.fieldWarning,
                 }}
-                id='termsOfService'
-                type='checkbox'
+                id="termsOfService"
+                type="checkbox"
               />
             </div>
-            <button
-              type='submit'
-              disabled={submitting}
-              className={styles.submitContainer}
-            >
+            <button type="submit" disabled={submitting} className={styles.submitContainer}>
               <span className={styles.inscription}>Create Account</span>
             </button>
           </Form>
@@ -162,16 +156,16 @@ class RegistrationForm extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
   initialValues: {
-    role: CONSTANTS.CUSTOMER
-  }
+    role: CONSTANTS.CUSTOMER,
+  },
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   register: ({ data, history }) => dispatch(authActionRegister(data, history)),
-  authClear: () => dispatch(clearAuth())
+  authClear: () => dispatch(clearAuth()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);
