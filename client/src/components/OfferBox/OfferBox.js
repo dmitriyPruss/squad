@@ -47,6 +47,8 @@ const OfferBox = props => {
 
   const { User } = props.data;
 
+  console.log('User', User);
+
   const findConversationInfo = () => {
     const participants = [id, User.id];
 
@@ -56,13 +58,14 @@ const OfferBox = props => {
 
     for (let i = 0; i < messagesPreview.length; i++) {
       if (isEqual(participants, messagesPreview[i].participants)) {
-        const { participants, _id, blackList, favoriteList } = messagesPreview[
+
+        const { participants, id, blackList, favoriteList } = messagesPreview[
           i
         ];
 
         return {
           participants,
-          _id,
+          id,
           blackList,
           favoriteList
         };

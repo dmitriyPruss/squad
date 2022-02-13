@@ -5,7 +5,7 @@ import CONSTANTS from '../../../../constants';
 
 const DialogBox = props => {
   const {
-    chatPreview: { favoriteList, participants, blackList, _id, text, createAt },
+    chatPreview: { favoriteList, participants, blackList, id, text, createdAt },
     userId,
     getTimeStr,
     changeFavorite,
@@ -16,15 +16,11 @@ const DialogBox = props => {
     interlocutor
   } = props;
 
-  console.log('props', props);
-
   const {
     ANONYM_IMAGE_PATH,
     PUBLIC_URL,
     PREVIEW_CHAT_MODE: { CATALOG }
   } = CONSTANTS;
-
-  console.log('constants', CONSTANTS);
 
   const isFavorite = favoriteList[participants.indexOf(userId)];
   const isBlocked = blackList[participants.indexOf(userId)];
@@ -37,7 +33,7 @@ const DialogBox = props => {
           interlocutor,
           conversationData: {
             participants,
-            _id,
+            id,
             blackList,
             favoriteList
           }
@@ -60,7 +56,7 @@ const DialogBox = props => {
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>
         <div className={styles.buttonsContainer}>
-          <span className={styles.time}>{getTimeStr(createAt)}</span>
+          <span className={styles.time}>{getTimeStr(createdAt)}</span>
           <i
             onClick={event =>
               changeFavorite(
@@ -92,7 +88,7 @@ const DialogBox = props => {
             })}
           />
           <i
-            onClick={event => catalogOperation(event, _id)}
+            onClick={event => catalogOperation(event, id)}
             className={classNames({
               'far fa-plus-square': chatMode !== CATALOG,
               'fas fa-minus-circle': chatMode === CATALOG

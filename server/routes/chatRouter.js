@@ -1,43 +1,33 @@
-const { Router } = require('express');
-const { checkToken } = require('./../middlewares/checkToken');
-const chatController = require('./../controllers/chatController');
+const { Router } = require("express");
+const { checkToken } = require("./../middlewares/checkToken");
+const chatController = require("./../controllers/chatController");
 
 const chatRouter = Router();
 
 chatRouter.use(checkToken);
 
-chatRouter.post('/newMessage', chatController.addMessage);
+chatRouter.post("/newMessage", chatController.addMessage);
 
-chatRouter.post('/getChat', chatController.getChat);
+chatRouter.post("/newCatalog", chatController.createCatalog);
 
-chatRouter.post('/getPreview', chatController.getPreview);
+chatRouter.get("/preview", chatController.getPreview);
 
-chatRouter.post('/blackList', chatController.blackList);
+chatRouter.get("/catalogs", chatController.getCatalogs);
 
-chatRouter.post('/favorite', chatController.favoriteChat);
+chatRouter.get("/:interlocutorId", chatController.getChat);
 
-chatRouter.post('/createCatalog', chatController.createCatalog);
+chatRouter.patch("/blackList", chatController.blackList);
 
-chatRouter.post(
-  '/updateNameCatalog',
+chatRouter.patch("/favoriteList", chatController.favoriteList);
 
-  chatController.updateNameCatalog
-);
+chatRouter
+  .route("/:catalogId/:chatId")
+  .patch( chatController.addNewChatToCatalog)
+  .delete(chatController.removeChatFromCatalog);
 
-chatRouter.post(
-  '/addNewChatToCatalog',
-
-  chatController.addNewChatToCatalog
-);
-
-chatRouter.post(
-  '/removeChatFromCatalog',
-
-  chatController.removeChatFromCatalog
-);
-
-chatRouter.post('/deleteCatalog', chatController.deleteCatalog);
-
-chatRouter.post('/getCatalogs', chatController.getCatalogs);
+chatRouter
+  .route("/:catalogId")
+  .patch(chatController.updateNameCatalog)
+  .delete(chatController.deleteCatalog);
 
 module.exports = chatRouter;

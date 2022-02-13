@@ -25,16 +25,17 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-// const chatModelsDir = `${__dirname}/ChatModels`;
+const chatModelsDir = `${__dirname}/ChatModels`;
+const schema = "chat";
 
-// fs.readdirSync(chatModelsDir)
-//   .filter((file) => {
-//     return file.indexOf(".") !== 0 && file.slice(-3) === ".js";
-//   })
-//   .forEach((file) => {
-//     const model = require(path.join(chatModelsDir, file))(sequelize, Sequelize.DataTypes);
-//     db[model.name] = model;
-//   });
+fs.readdirSync(chatModelsDir)
+  .filter((file) => {
+    return file.indexOf(".") !== 0 && file.slice(-3) === ".js";
+  })
+  .forEach((file) => {
+    const model = require(path.join(chatModelsDir, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
+  }); 
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
@@ -42,11 +43,13 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-// sequelize.sync({force: true}).then(() => {
-//   console.log('Sync OK!');
+// sequelize.sync({ force: true }).then(() => {
+//   console.log("Sync ok!");
 // });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+// console.log("db", db);
 
 module.exports = db;

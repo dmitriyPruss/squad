@@ -1,24 +1,15 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Offer extends Model {
-    static associate (models) {
-      Offer.belongsTo(models.User, { foreignKey: 'userId', sourceKey: 'id' });
+    static associate(models) {
+      Offer.belongsTo(models.User, { foreignKey: "userId", targetKey: "id" });
       Offer.belongsTo(models.Contest, {
-        foreignKey: 'contestId',
-        sourceKey: 'id'
+        foreignKey: "contestId",
+        targetKey: "id",
       });
-      Offer.hasOne(models.Rating, { foreignKey: 'offerId', targetKey: 'id' });
-
-      // Offer.belongsTo(models.User, {
-      //   foreignKey: 'userId',
-      //   sourceKey: 'id'
-      // });
-      // Offer.belongsTo(models.Contest, {
-      //   foreignKey: 'contestId',
-      //   sourceKey: 'id'
-      // });
+      Offer.hasOne(models.Rating, { foreignKey: "offerId", sourceKey: "id" });
     }
   }
   Offer.init(
@@ -27,90 +18,40 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       contestId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       text: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       fileName: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       originalFileName: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
       },
       status: {
         type: DataTypes.STRING,
         allowNull: true,
-        defaultValue: 'pending'
-      }
+        defaultValue: "pending",
+      },
     },
     {
       sequelize,
-      modelName: 'Offer',
-      timestamps: false
+      modelName: "Offer",
+      timestamps: false,
     }
   );
   return Offer;
 };
 
-// module.exports = (sequelize, DataTypes) => {
-//   const Offer = sequelize.define('Offers', {
-//     id: {
-//       allowNull: false,
-//       autoIncrement: true,
-//       primaryKey: true,
-//       type: DataTypes.INTEGER,
-//     },
-//     userId: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-
-//     },
-//     contestId: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//     },
-//     text: {
-//       type: DataTypes.STRING,
-//       allowNull: true,
-//     },
-//     fileName: {
-//       type: DataTypes.STRING,
-//       allowNull: true,
-//     },
-//     originalFileName: {
-//       type: DataTypes.STRING,
-//       allowNull: true,
-//     },
-//     status: {
-//       type: DataTypes.STRING,
-//       allowNull: true,
-//       defaultValue: 'pending',
-//     },
-//   },
-//   {
-//     timestamps: false,
-//   });
-
-//   Offer.associate = function (models) {
-//     Offer.belongsTo(models.User, { foreignKey: 'user_id', sourceKey: 'id' });
-//   };
-
-//   Offer.associate = function (models) {
-//     Offer.belongsTo(models.Contest,
-//       { foreignKey: 'contest_id', sourceKey: 'id' });
-//   };
-
-//   return Offer;
-// };

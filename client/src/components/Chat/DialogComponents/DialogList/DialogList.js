@@ -23,6 +23,8 @@ const DialogList = props => {
     removeChat
   } = props;
 
+  console.log('props.preview', props.preview);
+
   const {
     PREVIEW_CHAT_MODE: { BLOCKED, CATALOG, FAVORITE }
   } = CONSTANTS;
@@ -75,7 +77,7 @@ const DialogList = props => {
     const arrayList = [];
 
     preview.forEach((chatPreview, index) => {
-      console.log('chatPreview', chatPreview);
+      
       const dialogNode = (
         <DialogBox
           interlocutor={chatPreview.interlocutor}

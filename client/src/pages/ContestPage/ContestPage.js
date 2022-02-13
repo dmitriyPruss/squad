@@ -139,10 +139,10 @@ class ContestPage extends React.Component {
 
     const findedMsgPrev = messagesPreview.find(prev => {
       if (isEqual(participants, prev.participants)) {
-        const { participants, _id, blackList, favoriteList } = prev;
+        const { participants, id, blackList, favoriteList } = prev;
         return {
           participants,
-          _id,
+          id,
           blackList,
           favoriteList
         };

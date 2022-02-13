@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/public', express.static('public'));
 app.use(router);
-app.use(errorLogger);
+app.use(errorLogger());
 fileErrorMw();
 
 app.use(handlerError);

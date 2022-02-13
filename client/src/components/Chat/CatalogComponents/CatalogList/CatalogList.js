@@ -26,7 +26,7 @@ const CatalogList = props => {
       elementList.push(
         <Catalog
           catalog={catalog}
-          key={catalog._id}
+          key={catalog.id}
           destroyCatalog={destroyCatalog}
           goToCatalog={goToCatalog}
         />
