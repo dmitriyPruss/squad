@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 import PricesList from './PricesList';
 import styles from './PricingPage.module.scss';
 

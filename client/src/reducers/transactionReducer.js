@@ -6,7 +6,7 @@ const initialState = {
   transactions: []
 };
 
-export default function (state = initialState, action) {
+function transactionReducer (state = initialState, action) {
   const { type } = action;
   switch (type) {
     case ACTION_TYPES.GET_TRANSACTION_REQUEST: {
@@ -24,4 +24,8 @@ export default function (state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default transactionReducer;
+
+

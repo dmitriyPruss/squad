@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import DataColumn from '../DataColumn';
-import LevelElement from './LevelElement';
-import styles from './AgencyLevel.module.scss';
+import React from "react";
+import DataColumn from "../DataColumn";
+import LevelElement from "./LevelElement";
+import styles from "./AgencyLevel.module.scss";
 
 const AgencyLevel = () => {
   const columnsRender = ({ data, isFetching, error }) => (
     <>
-      {isFetching && <div style={{ color: 'blue' }}>Loading...</div>}
-      {error && <div style={{ color: 'red' }}>ERROR</div>}
+      {isFetching && <div style={{ color: "blue" }}>Loading...</div>}
+      {error && <div style={{ color: "red" }}>ERROR</div>}
       <ul className={styles.agencyElementsContainer}>
-        {data.map(levelElementData => (
-          <LevelElement levelElementData={levelElementData} />
+        {data.map((levelElementData, index) => (
+          <LevelElement key={index} levelElementData={levelElementData} />
         ))}
       </ul>
     </>
@@ -18,7 +18,7 @@ const AgencyLevel = () => {
   return (
     <article className={styles.agencyLevelContainer}>
       <h2>Agency Level Experience</h2>
-      <DataColumn fileName='agencyExperience.json' render={columnsRender} />
+      <DataColumn fileName="agencyExperience.json" render={columnsRender} />
     </article>
   );
 };

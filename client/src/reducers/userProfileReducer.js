@@ -6,7 +6,7 @@ const initialState = {
   isEdit: false,
 };
 
-export default function (state = initialState, action) {
+function userProfileReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION.CHANGE_PROFILE_MODE_VIEW: {
       return {
@@ -24,3 +24,5 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export default userProfileReducer;

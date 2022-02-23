@@ -2,7 +2,7 @@ const { Router } = require("express");
 const { checkToken } = require("./../middlewares/checkToken");
 const chatController = require("./../controllers/chatController");
 
-const chatRouter = Router();
+const chatRouter = Router({strict: true});
 
 chatRouter.use(checkToken);
 
@@ -29,5 +29,7 @@ chatRouter
   .route("/:catalogId")
   .patch(chatController.updateNameCatalog)
   .delete(chatController.deleteCatalog);
+
+
 
 module.exports = chatRouter;

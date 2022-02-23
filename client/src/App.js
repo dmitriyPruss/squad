@@ -2,28 +2,28 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import Payment from "./pages/Payment/Payment";
-import StartContestPage from "./pages/StartContestPage/StartContestPage";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import NotFound from "./components/NotFound/NotFound";
-import Home from "./pages/Home/Home";
-import ContestPage from "./pages/ContestPage/ContestPage";
-import UserProfile from "./pages/UserProfile/UserProfile";
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import Payment from "./pages/Payment";
+import StartContestPage from "./pages/StartContestPage";
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./components/NotFound";
+import Home from "./pages/Home";
+import ContestPage from "./pages/ContestPage";
+import UserProfile from "./pages/UserProfile";
 import "react-toastify/dist/ReactToastify.css";
-import ContestCreationPage from "./pages/ContestCreation/ContestCreationPage";
+import ContestCreationPage from "./pages/ContestCreationPage";
 import CONSTANTS from "./constants";
 import browserHistory from "./browserHistory";
-import ChatContainer from "./components/Chat/ChatComponents/ChatContainer/ChatContainer";
+import ChatContainer from "./components/Chat/ChatComponents/ChatContainer";
 import { withAuth, withNotAuth } from "./components/HOCs";
 import PricingPage from "./pages/PricingPage";
 import TransactionPage from "./pages/TransactionPage";
 import HowItWorks from "./components/HowItWorks";
 import ButtonGroup from "./components/ButtonGroup";
 import Events from "./pages/Events";
-// import OfferList from "./pages/OfferList";
-// import EmailPage from "./pages/EmailPage";
+import OfferList from "./pages/OfferList";
+import EmailPage from "./pages/EmailPage";
 
 const {
   CONTEST: { NAME, LOGO, TAGLINE },
@@ -82,8 +82,8 @@ class App extends Component {
           <Route exact path="/account" component={withAuth(UserProfile)} />
 
           <Route exact path="/transactions" component={withAuth(TransactionPage)} />
-          {/* <Route exact path="/offerList" component={withAuth(OfferList)} />
-          <Route exact path="/emailPage" component={withAuth(EmailPage)} /> */}
+          <Route exact path="/offerList" component={withAuth(OfferList)} />
+          <Route exact path="/emailPage" component={withAuth(EmailPage)} />
           <Route exact path="/pricing" component={PricingPage} />
           <Route component={NotFound} />
         </Switch>

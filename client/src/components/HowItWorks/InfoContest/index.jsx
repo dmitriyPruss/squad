@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import InfoItem from './Items/InfoItem';
 import contestData from './InfoData/contestData.json';
 import marketplaceData from './InfoData/marketplaceData.json';

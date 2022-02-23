@@ -6,6 +6,7 @@ const ServerError = require('../errors/ServerError');
 const {
   CUSTOMER,
   CREATOR: { NAME },
+  MODERATOR,
   CONTEST: {
     STATUS: { ACTIVE, FINISHED }
   }
@@ -76,7 +77,10 @@ module.exports.canSendOffer = async (req, res, next) => {
     body: { contestId: id }
   } = req;
 
-  if (role === CUSTOMER) {
+  console.log('role', role);
+  console.log('id', id);
+
+  if (role === CUSTOMER || role === MODERATOR) {
     return next(new RightsError());
   }
   try {
@@ -84,9 +88,12 @@ module.exports.canSendOffer = async (req, res, next) => {
       where: {
         id
       },
-      attributes: ['status']
+      raw: true
     });
-    if (result.get({ plain: true }).status === ACTIVE) {
+
+    console.log('canSendOffer result', result)
+
+    if (result.status === ACTIVE) {
       next();
     } else {
       return next(new RightsError());
@@ -98,18 +105,21 @@ module.exports.canSendOffer = async (req, res, next) => {
 
 module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
   const {
-    tokenData: { userId },
-    body: { contestId: id }
+    body: { contestId: id, orderId}
   } = req;
+
+  console.log('req.body', req.body);
 
   try {
     const result = await Contest.findOne({
       where: {
-        userId,
+        orderId,
         id,
         status: ACTIVE
       }
     });
+
+    console.log('result', result)
 
     if (!result) {
       return next(new RightsError());

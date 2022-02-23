@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ButtonItem from './ButtonItem';
-import Header from './../Header/Header';
-import Footer from './../Footer/Footer';
+import Header from './../Header';
+import Footer from './../Footer';
 import styles from './ButtonGroup.module.scss';
 
 function ButtonGroup () {

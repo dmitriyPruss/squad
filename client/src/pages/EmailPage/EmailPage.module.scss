@@ -1,0 +1,88 @@
+.emailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > h1 {
+    color: #e5e7eb;
+    margin: 10px;
+    letter-spacing: 2px;
+  }
+}
+
+.messageList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 90%;
+}
+
+.message {
+  width: 90%;
+
+  & > div {
+    border: 14px double #e5e7eb;
+    border-radius: 8px;
+    position: relative;
+    height: 150px;
+    padding: 12px;
+
+    & > p:first-child {
+      margin: 0px 100px 0px 5px;
+    }
+
+    & > p:last-child {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+
+      & > span {
+        font-size: 0.7em;
+        text-shadow: 0px 1px 1px black;
+      }
+
+      & > a {
+        color: #4083ff;
+        text-decoration: none;
+        font-size: 0.8em;
+      }
+
+      & > a:hover {
+        color: #2b3030;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.messageSender {
+  font-size: 0.7em;
+}
+
+.pageButtons {
+  width: 70%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+
+  & > button {
+    width: 12%;
+    padding: 5px 15px;
+    border: 2px solid #dee0e4;
+    color: #46568a;
+    border-radius: 8px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #e5e7eb;
+  }
+
+  & > button:hover {
+    background-color: #46568a;
+    border: 2px solid #46568a;
+    transition: all 0.3s ease-in-out;
+  }
+}

@@ -138,6 +138,8 @@ export function* deleteCatalog(action) {
   try {
     const { catalogId: id } = action.data;
 
+    console.log('action.data', action.data)
+
     yield restController.deleteCatalog(id);
 
     const { catalogList } = yield select((state) => state.chatStore);

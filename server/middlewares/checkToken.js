@@ -5,11 +5,13 @@ const userQueries = require('../controllers/queries/userQueries');
 
 module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
+
   if (!accessToken) {
     return next(new TokenError('need token'));
   }
   try {
     const tokenData = jwt.verify(accessToken, JWT_SECRET);
+    
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
 
     const {

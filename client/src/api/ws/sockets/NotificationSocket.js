@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import WebSocket from './WebSocket';
-import Notification from '../../../components/Notification/Notification';
+import Notification from '../../../components/Notification';
 
 class NotificationSocket extends WebSocket {
   constructor (dispatch, getState, room) {

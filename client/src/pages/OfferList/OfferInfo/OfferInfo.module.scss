@@ -1,0 +1,45 @@
+.offerInfoContainer {
+  background: #ebf2ff;
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  height: 300px;
+
+  & > h4 {
+    color: #46568a;
+    writing-mode: tb-rl;
+    transform: rotate(180deg);
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    text-align: center;
+    word-spacing: 1px;
+  }
+}
+
+.offerInfoList {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  color: #46568a;
+  font-size: 0.8em;
+
+  & > li {
+    background-color: #fff;
+    padding: 2px;
+    margin: 2px;
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    & > span:first-child {
+      font-style: italic;
+    }
+
+    & > span:last-child {
+      margin-left: 5px;
+      color: #2b3030;
+    }
+  }
+}

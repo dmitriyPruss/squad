@@ -1,14 +1,14 @@
-import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import BeginInfoBlock from './BeginInfoBlock';
-import ThreeWaysBlock from './ThreeWaysBlock';
-import NamingContestWork from './NamingContestWork';
-import ReadyStarted from './ReadyStarted';
-import CompaniesList from './CompaniesList';
-import Tool from './Tool';
-import InfoBlock from './InfoBlock';
-import ContestsList from './ContestsList';
+import React from "react";
+import Header from "../Header";
+import Footer from "../Footer";
+import BeginInfoBlock from "./BeginInfoBlock";
+import ThreeWaysBlock from "./ThreeWaysBlock";
+import NamingContestWork from "./NamingContestWork";
+import ReadyStarted from "./ReadyStarted";
+import CompaniesList from "./CompaniesList";
+import Tool from "./Tool";
+import InfoBlock from "./InfoBlock";
+import ContestsList from "./ContestsList";
 
 const HowItWorks = () => {
   return (

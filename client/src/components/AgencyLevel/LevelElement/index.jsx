@@ -8,7 +8,7 @@ function LevelElement (props) {
   return (
     <li key={id} className={styles.agencyElement}>
       <div className={styles.imgContainer}>
-        <img src={src} width={50} />
+        <img src={src} alt={header} width={50} />
       </div>
       <section>
         <h3>{header}</h3>

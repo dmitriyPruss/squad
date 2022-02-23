@@ -14,13 +14,12 @@ export const cashOut = (data) => http.post("/users/cashout", data);
 
 // Chats
 export const getPreviewChat = () => http.get("/chats/preview");
-export const getDialog = interlocutorId => http.get(`/chats/${interlocutorId}`);
+export const getDialog = (interlocutorId) => http.get(`/chats/${interlocutorId}`);
 export const newMessage = (data) => http.post("/chats/newMessage", data);
 export const changeChatFavorite = (data) => http.patch("/chats/favoriteList", data);
 export const changeChatBlock = (data) => http.patch("/chats/blackList", data);
 export const getCatalogList = () => http.get("/chats/catalogs");
-export const addChatToCatalog = (catalogId, chatId) =>
-http.patch(`/chats/${catalogId}/${chatId}`);
+export const addChatToCatalog = (catalogId, chatId) => http.patch(`/chats/${catalogId}/${chatId}`);
 export const createCatalog = (data) => http.post("/chats/newCatalog", data);
 export const deleteCatalog = (id) => http.delete(`/chats/${id}`);
 export const removeChatFromCatalog = (catalogId, chatId) =>
@@ -41,6 +40,13 @@ export const updateContest = (data) => http.patch(`/contests/${data.get("contest
 export const dataForContest = (data) => http.post("/contests/dataForContest", data);
 
 // Contests 2
+export const checkNewOffer = (page) => http.get(`/contests/checkNewOffer/${page}`);
+export const checkOfferEmail = (data) => http.post("/contests/checkOfferEmail", data);
+export const getEmailMessages = (page) => http.get(`/contests/getEmailMessages/${page}`);
+export const directEmailBox = (data) => http.post("/contests/directEmailBox", data);
+
+export const changeOfferStatus = (data) => http.patch("/contests/changeOfferStatus");
+
 export const setNewOffer = (data) => http.post("/contests/setNewOffer", data);
 
 export const setOfferStatus = (data) => http.post("/contests/setOfferStatus", data);

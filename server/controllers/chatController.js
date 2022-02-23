@@ -1,8 +1,7 @@
 const { Op } = require("sequelize");
 const _ = require("lodash");
 // const { Conversation, Message, Catalog } = require("./../models/mongoModels");
-const { User, sequelize } = require("../models/postgreModels");
-const { Conversation, Message, Catalog } = require("./../models/postgreModels");
+const { User, Conversation, Message, Catalog, sequelize} = require("./../models/postgreModels");
 
 const userQueries = require("./queries/userQueries");
 const controller = require("../socketInit");
@@ -330,6 +329,9 @@ module.exports.updateNameCatalog = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
+  console.log('req.query', req.query);
+  console.log('req.params', req.params);
+
   try {
     const [catalogCount, [catalog]] = await Catalog.update(
       { catalogName },
@@ -418,7 +420,6 @@ module.exports.deleteCatalog = async (req, res, next) => {
   } = req;
 
   console.log("req.params", req.params);
-  console.log("req.body", req.body);
 
   try {
     await Catalog.destroy({

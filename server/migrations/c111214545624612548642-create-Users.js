@@ -37,7 +37,7 @@ module.exports = {
           defaultValue: "anon.png",
         },
         role: {
-          type: Sequelize.ENUM("customer", "creator"),
+          type: Sequelize.ENUM("customer", "creator", "moderator"),
           allowNull: false,
         },
         balance: {

@@ -13,6 +13,7 @@ const CONSTANTS = {
     NAME: 'creator',
     CREATOR_ENTRIES: 'creator_entries'
   },
+  MODERATOR: 'moderator',
   CONTEST: {
     NAME: 'name',
     LOGO: 'logo',
