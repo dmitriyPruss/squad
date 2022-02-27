@@ -4,7 +4,7 @@ import CONSTANTS from "../constants";
 const initialState = {
   checkOffers: [],
   isEndData: false,
-  isFetching: true,
+  isFetching: false,
   error: null,
   sendedEmailMessages: [],
   isEndMessages: false

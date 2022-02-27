@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import MarkEmailUnreadTwoToneIcon from '@mui/icons-material/MarkEmailUnreadTwoTone';
+import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
 import styles from "./Header.module.sass";
 import CONSTANTS from "../../constants";
 import { clearUserStore, headerRequest } from "../../actions/actionCreator";
@@ -42,7 +43,6 @@ class Header extends React.Component {
     const { data } = this.props;
 
     if (data) {
-      console.log("Header data", data);
 
       return (
         <>
@@ -93,15 +93,16 @@ class Header extends React.Component {
               </li>
             </ul>
           </div>
-          {data.role === CREATOR ? (
+          {data.role !== CREATOR ? (
+            <img src={`${STATIC_IMAGES_PATH}email.png`} className={styles.emailIcon} alt="email" />
+          ) : (
             <div>
               <Link to="/emailPage" style={{ textDecoration: "none" }}>
-                <MarkEmailUnreadTwoToneIcon className={styles.creatorEmailIcon} />
-              </Link>
-            </div>
-          ) : (
-            <img src={`${STATIC_IMAGES_PATH}email.png`} className={styles.emailIcon} alt="email" />
-          )}
+                <MarkAsUnreadIcon className={styles.creatorEmailIcon} />
+             </Link>
+          </div>
+          )
+          }
         </>
       );
     }
@@ -119,6 +120,8 @@ class Header extends React.Component {
 
   render() {
     const { isFetching, data } = this.props;
+
+    console.log('this.props', this.props);
 
     if (isFetching) {
       return null;
@@ -282,6 +285,7 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => state.userStore;
+
 const mapDispatchToProps = (dispatch) => ({
   getUser: () => dispatch(headerRequest()),
   clearUserStore: () => dispatch(clearUserStore()),

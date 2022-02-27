@@ -298,7 +298,6 @@ module.exports.getEmailMessages = async (req, res, next) => {
     offset: currentOffset,
     raw: true,
   }).then((results) => {
-    console.log("results", results);
     const offerData = [];
 
     for (const result of results) {

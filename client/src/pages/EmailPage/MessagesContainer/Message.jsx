@@ -13,7 +13,7 @@ function Message(props) {
       status,
       email
     },
-    directEmailBox,
+    directEmailBox, isFetching
   } = props;
 
   const {
@@ -43,7 +43,7 @@ function Message(props) {
               <span>Follow </span>               
               <FontAwesomeIcon icon={faShareFromSquare} />
             </a>
-          ) : 
+          ) :
           (
             <a href='#' onClick={() => directEmailBox(props.message)}>
               <span>See more details... </span>

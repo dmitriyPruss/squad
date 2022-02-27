@@ -5,12 +5,13 @@ import Message from "./Message";
 import { getEmailMessageAction, directEmailBoxAction } from "../../../actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import Spinner from 'react-bootstrap/Spinner';
 import styles from "./../EmailPage.module.scss";
 
 function MessagesContainer(props) {
   console.log("props MessagesContainer", props);
 
-  const { getEmailMessages, directEmailBox, sendedEmailMessages, isEndMessages } = props;
+  const { getEmailMessages, directEmailBox, sendedEmailMessages, isEndMessages, isFetching } = props;
 
   const [page, setPage] = useState(1);
 
@@ -33,12 +34,21 @@ function MessagesContainer(props) {
   useEffect(() => getEmailMessages(page), [page]);
 
   const getMessage = (item, index) => {
-    return <Message key={index} message={item} directEmailBox={directEmailBox} />;
+    return <Message key={index} isFetching={isFetching} message={item} directEmailBox={directEmailBox} />;
   };
 
   return (
     <main className={styles.emailContainer}>
       <h1>Email Post</h1>
+      {
+        isFetching && (
+          <div className={styles.loaderContainer}>
+            <Spinner animation='grow' size="sm" />
+            <Spinner animation='grow' size="sm" variant='dark' />
+            <Spinner animation='grow' size="sm" />
+          </div>
+        ) 
+      }
       <ul className={styles.messageList}>{sendedEmailMessages.map(getMessage)}</ul>
       <section class={styles.pageButtons}>
         <Button onClick={clickPrevPage} as="button" variant="outline-primary">
@@ -56,9 +66,9 @@ function MessagesContainer(props) {
 
 const mapStateToProps = (state) => {
   const {
-    checkOfferStore: { sendedEmailMessages, isEndMessages },
+    checkOfferStore: { sendedEmailMessages, isEndMessages, isFetching }, 
   } = state;
-  return { sendedEmailMessages, isEndMessages };
+  return { sendedEmailMessages, isEndMessages, isFetching };
 };
 
 const mapDispatchToProps = (dispatch) => ({
