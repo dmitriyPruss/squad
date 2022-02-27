@@ -18,7 +18,7 @@ function BeginInfoBlock () {
         <button className={styles.playVideoButton}>
           {' '}
           <PlayArrowIcon />{' '}
-          <a target='_blank' href='https://vimeo.com/368584367'>
+          <a target='_blank' rel="noreferrer" href='https://vimeo.com/368584367'>
             Play Video
           </a>
         </button>

@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import PricesList from './PricesList';
-import styles from './PricingPage.module.scss';
+import styles from './PricingPage.module.sass';
 
 function PricingPage () {
   return (

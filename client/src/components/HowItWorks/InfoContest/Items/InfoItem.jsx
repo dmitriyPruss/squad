@@ -36,6 +36,8 @@ function InfoItem (props) {
                   </li>
                 );
               }
+              
+              return null;
             })}
           </ul>
         </AccordionItem>

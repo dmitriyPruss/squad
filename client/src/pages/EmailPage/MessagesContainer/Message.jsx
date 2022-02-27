@@ -13,13 +13,13 @@ function Message(props) {
       status,
       email
     },
-    directEmailBox, isFetching
+    directEmailBox,
   } = props;
 
   const {
     STATUS: {
       OFFER: {
-        PENDING, WON
+        WON
       }
     }
   } = CONSTANTS;

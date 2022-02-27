@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Rating from "react-rating";
 import { withRouter } from "react-router-dom";
@@ -26,7 +26,6 @@ const CreatorBox = (props) => {
       OFFER: { REJECTED, WON },
     },
     CONTEST: { LOGO },
-    CREATOR,
     ANONYM_IMAGE_PATH,
     PUBLIC_URL,
     STATIC_IMAGES_PATH,
@@ -36,30 +35,20 @@ const CreatorBox = (props) => {
     page,
     data: {
       id,
-      userId,
       contestId,
       text,
       fileName,
-      originalFileName,
       status,
       "User.id": User_id,
       "User.avatar": User_avatar,
       "User.firstName": User_firstName,
       "User.lastName": User_lastName,
-      "User.displayName": User_displayName,
       "User.email": User_email,
       "User.rating": User_rating,
       "Contest.contestType": Contest_contestType,
-      "Contest.title": Contest_title,
-      "Contest.typeOfName": Contest_typeOfName,
-      "Contest.styleName": Contest_styleName,
-      "Contest.focusOfWork": Contest_focusOfWork,
-      "Contest.targetCustomer": Contest_targetCustomer,
-      "Contest.industry": Contest_industry,
       "Contest.orderId": Contest_orderId,
       "Contest.priority": Contest_priority,
     },
-    checkOfferEmail,
     setOfferStatus,
     checkNewOffer,
   } = props;
@@ -87,7 +76,7 @@ const CreatorBox = (props) => {
               setTimeout(() => {
                 console.log('before or after?');
                 resolve(true);
-              }, 0);
+              }, 300);
             }).then((res) => {
               console.log("res", res);
               checkNewOffer(page);
@@ -107,7 +96,7 @@ const CreatorBox = (props) => {
       buttons: [
         {
           label: "Yes",
-          onClick: async () => {
+          onClick: () => {
             new Promise((resolve, reject) => {
               setOfferStatus({
                 command: "reject",
@@ -121,7 +110,7 @@ const CreatorBox = (props) => {
               setTimeout(() => {
                 console.log('before or after?');
                 resolve(true);
-              }, 0);
+              }, 300);
             }).then((res) => {
               console.log("res reject", res);
               checkNewOffer(page);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -28,7 +28,9 @@ function OfferList(props) {
   const [page, setPage] = useState(1);
 
   const clickNextPage = () => {
-    setPage(page + 1); 
+    if (checkOffers.length) {
+      setPage(page + 1); 
+    }
 
     console.log("page", page);
   };
@@ -40,7 +42,7 @@ function OfferList(props) {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setPage(1); 
   }, [isEndData]);
 
@@ -76,24 +78,23 @@ function OfferList(props) {
     <>
       <Header />
       <article className={styles.offerList}>
-        <h1>Offers</h1>
+        <h1>OFFERS</h1>
         <section className={styles.offerContainer}>
           {checkOffers.length !== 0 ? (
             checkOffers.map(setOfferList)
           ) : (
             <div className={styles.offerInfo}>
-              There are no offers at this moment... Go back 
-              <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+              There are no offers at this moment...
             </div>
           )}
         </section>
-        <section class={styles.pageButtons}>
+        <section className={styles.pageButtons}>
           <Button onClick={clickPrevPage} as="button" variant="outline-primary">
             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
             <span>Prev</span>
           </Button>
           <div className={styles.pageNumber}>
-            {page}
+            <span>{page}</span>
           </div>
           <Button onClick={clickNextPage} as="button" variant="outline-primary">
             <span>Next</span>

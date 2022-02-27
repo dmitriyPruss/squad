@@ -11,6 +11,7 @@
   & > h1 {
     color: #46568a;
     margin: 10px 0;
+    letter-spacing: 2px;
   }
 }
 
@@ -20,7 +21,7 @@
 
   display: flex;
 
-  @media screen and (max-width: 980px) {
+  @media screen and (max-width: 1100px) {
     flex-direction: column;
     align-items: center;
   }
@@ -44,17 +45,17 @@
 }
 
 .offerItem {
-  width: 90%;
-  border: 2px solid #46568a;
+  border: 5px double #2B3030;
   background-color: #f9fafb;
-  border-radius: 10px;
+  border-radius: 8px;
   margin: 10px;
+  width: 32%;
 
-  @media screen and (max-width: 980px) {
-    width: 80%;
+  @media screen and (max-width: 1100px) {
+    width: 65%;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 850px) {
     width: 80%;
   }
 
@@ -144,7 +145,11 @@
   color: #46568a;
   border: 2px solid #46568a;
   border-radius: 8px;
-  padding: 2px 10px;
+  padding: 1px 10px;
   font-weight: bold;
   font-size: 1.1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

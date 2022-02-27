@@ -53,6 +53,10 @@ class ContestForm extends React.Component {
         getData({ characteristic1: "brandStyle" });
         break;
       }
+      default:{
+        break;
+      }
+
     }
   };
 
