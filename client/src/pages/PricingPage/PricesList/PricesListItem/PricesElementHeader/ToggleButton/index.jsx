@@ -11,9 +11,9 @@ function ToggleButton (props) {
   return (
     <div className={toggledButton} style={color} onClick={toggleElement}>
       {toggleSign ? (
-        <i class='far fa-plus-square'></i>
+        <i className='far fa-plus-square'></i>
       ) : (
-        <i class='far fa-minus-square'></i>
+        <i className='far fa-minus-square'></i>
       )}
     </div>
   );

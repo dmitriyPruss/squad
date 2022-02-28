@@ -44,13 +44,13 @@ function MessagesContainer(props) {
         isFetching && (
           <div className={styles.loaderContainer}>
             <Spinner animation='grow' size="sm" />
-            <Spinner animation='grow' size="sm" variant='dark' />
+            <Spinner animation='grow' size="sm" />
             <Spinner animation='grow' size="sm" />
           </div>
         ) 
       }
       <ul className={styles.messageList}>{sendedEmailMessages.map(getMessage)}</ul>
-      <section class={styles.pageButtons}>
+      <section className={styles.pageButtons}>
         <Button onClick={clickPrevPage} as="button" variant="outline-primary">
           <FontAwesomeIcon icon={faArrowAltCircleLeft} />
           <span>Prev</span>

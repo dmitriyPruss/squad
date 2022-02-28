@@ -2,12 +2,9 @@ import { put, select } from "redux-saga/effects";
 import ACTION from "../actions/actionTypes";
 import * as restController from "../api/rest/restController";
 import {
-  checkNewOfferRequest,
-  checkNewOfferSuccess,
-  checkNewOfferError,
-  checkOfferSendmailRequest,
-  checkOfferSendmailSuccess,
-  checkOfferSendmailError,
+  getOffersForModeratorRequest,
+  getOffersForModeratorSuccess,
+  getOffersForModeratorError,
   getEmailMessageRequest,
   getEmailMessageSuccess,
   getEmailMessageError,
@@ -85,36 +82,20 @@ export function* setOfferStatusSaga(action) {
 }
 
 // Check new Offer
-export function* checkOfferSaga(action) {
+export function* getOffersForModeratorSaga(action) {
   console.log("checkOfferSaga action", action);
 
   const { page } = action;
 
-  yield put(checkNewOfferRequest());
+  yield put(getOffersForModeratorRequest());
 
   try {
-    const { data } = yield restController.checkNewOffer(page);
-    console.log("restController.checkNewOffer data", data);
+    const { data } = yield restController.getOffersForModerator(page);
+    console.log("restController.getOffersForModerator data", data);
 
-    yield put(checkNewOfferSuccess(data));
+    yield put(getOffersForModeratorSuccess(data));
   } catch (error) {
-    yield put(checkNewOfferError(error));
-  }
-}
-
-// Check Offer Email
-export function* checkOfferEmailSaga(action) {
-  console.log("action.data EMAIL", action.data);
-
-  yield put(checkOfferSendmailRequest());
-
-  try {
-    const { data } = yield restController.checkOfferEmail(action.data);
-    console.log("restController.checkOfferEmail data", data);
-
-    yield put(checkOfferSendmailSuccess(data));
-  } catch (error) {
-    yield put(checkOfferSendmailError(error));
+    yield put(getOffersForModeratorError(error));
   }
 }
 
@@ -147,21 +128,5 @@ export function* directEmailBoxSaga(action) {
     yield put(directEmailBoxSuccess(data));
   } catch (error) {
     yield put(directEmailBoxError(error));
-  }
-}
-
-// Change offer status
-export function* changeOfferStatusSaga(action) {
-  console.log("action.data EMAIL BOX", action.data);
-
-  yield put(changeOfferStatusRequest());
-
-  try {
-    const { data } = yield restController.changeOfferStatus(action.data);
-    console.log("restController.changeOfferStatus data", data);
-
-    yield put(changeOfferStatusSuccess(data));
-  } catch (error) {
-    yield put(changeOfferStatusError(error));
   }
 }

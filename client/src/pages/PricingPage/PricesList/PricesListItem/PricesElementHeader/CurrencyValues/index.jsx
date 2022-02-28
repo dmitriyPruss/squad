@@ -17,6 +17,7 @@ function CurrencyValues (props) {
           if (index === 0) {
             return +value === 4 || +value === 9 ? (
               <CurrencyValue
+                key={index}
                 value={value}
                 leftVal={index + 1}
                 translateVal={2}
@@ -24,6 +25,7 @@ function CurrencyValues (props) {
               />
             ) : (
               <CurrencyValue
+                key={index}
                 value={value}
                 leftVal={index + 1}
                 translateVal={3 + index}
@@ -33,6 +35,7 @@ function CurrencyValues (props) {
           } else {
             return +value === 4 || +value === 9 ? (
               <CurrencyValue
+                key={index}
                 value={value}
                 leftVal={12 * index}
                 translateVal={2 + index}
@@ -40,6 +43,7 @@ function CurrencyValues (props) {
               />
             ) : (
               <CurrencyValue
+                key={index}  
                 value={value}
                 leftVal={12 * index}
                 translateVal={3 + index}

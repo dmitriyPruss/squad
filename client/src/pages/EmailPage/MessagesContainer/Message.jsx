@@ -2,7 +2,7 @@ import React from "react";
 import Alert from "react-bootstrap/Alert";
 import styles from "./../EmailPage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faShareFromSquare, faArrowAltCircleRight} from "@fortawesome/free-solid-svg-icons";
 import CONSTANTS from './../../../constants';
 
 function Message(props) {
@@ -30,7 +30,7 @@ function Message(props) {
     <li className={styles.message}>
       <Alert variant={status === WON ? "success" : "dark"}>
         <p>{text}</p>
-        <p>
+        <div>
           <span className={styles.messageSender}>
             From: {role[0].toUpperCase() + role.substr(1)}
           </span>
@@ -39,9 +39,9 @@ function Message(props) {
           <span>Status: {status}</span>
           <hr />
           {email ? (
-            <a style={{color: '#46568a'}} href={email} target="blank">
+            <a className={styles.emailInfoLink} href={email} target="blank">
               <span>Follow </span>               
-              <FontAwesomeIcon icon={faShareFromSquare} />
+              <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </a>
           ) :
           (
@@ -50,7 +50,7 @@ function Message(props) {
               <FontAwesomeIcon icon={faShareFromSquare} />
             </a>
           )}
-        </p>
+        </div>
       </Alert>
     </li>
   );

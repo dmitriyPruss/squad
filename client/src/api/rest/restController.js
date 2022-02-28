@@ -40,12 +40,9 @@ export const updateContest = (data) => http.patch(`/contests/${data.get("contest
 export const dataForContest = (data) => http.post("/contests/dataForContest", data);
 
 // Contests 2
-export const checkNewOffer = (page) => http.get(`/contests/checkNewOffer/${page}`);
-export const checkOfferEmail = (data) => http.post("/contests/checkOfferEmail", data);
-export const getEmailMessages = (page) => http.get(`/contests/getEmailMessages/${page}`);
+export const getOffersForModerator = (page) => http.get(`/contests/offers/${page}`);
+export const getEmailMessages = (page) => http.get(`/contests/emailMessages/${page}`);
 export const directEmailBox = (data) => http.post("/contests/directEmailBox", data);
-
-export const changeOfferStatus = (data) => http.patch("/contests/changeOfferStatus");
 
 export const setNewOffer = (data) => http.post("/contests/setNewOffer", data);
 

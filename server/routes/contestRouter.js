@@ -5,6 +5,7 @@ const {
   parseQuery,
   canSendOffer,
   onlyForCustomerWhoCreateContest,
+  onlyForModerator,
 } = require("./../middlewares/basicMiddlewares");
 const { checkToken } = require("./../middlewares/checkToken");
 const {
@@ -15,8 +16,7 @@ const {
   updateContest,
   downloadFile,
   setNewOffer,
-  checkNewOffer,
-  checkOfferEmail,
+  getOffersForModerator,
   getEmailMessages,
   setOfferStatus,
   directEmailBox,
@@ -28,11 +28,9 @@ const contestRouter = Router();
 
 contestRouter.use(checkToken);
 
-contestRouter.get("/checkNewOffer/:page", checkNewOffer);
-contestRouter.post("/checkOfferEmail", checkOfferEmail);
-contestRouter.get("/getEmailMessages/:page", getEmailMessages);
+contestRouter.get("/offers/:page", onlyForModerator, getOffersForModerator);
+contestRouter.get("/emailMessages/:page", onlyForCreative, getEmailMessages);
 contestRouter.post("/directEmailBox", directEmailBox);
-contestRouter.patch("/changeOfferStatus", changeOfferStatus);
 
 contestRouter.get("/all", onlyForCreative, parseQuery, getContests);
 

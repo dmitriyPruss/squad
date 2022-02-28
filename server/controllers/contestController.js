@@ -132,8 +132,9 @@ module.exports.updateContest = async (req, res, next) => {
   }
 };
 
-// CHECK NEW OFFER!
-module.exports.checkNewOffer = async (req, res, next) => {
+// +
+// GET OFFERS FOR MODERATOR!
+module.exports.getOffersForModerator= async (req, res, next) => {
   const {
     tokenData: { userId },
     params: { page },
@@ -143,53 +144,19 @@ module.exports.checkNewOffer = async (req, res, next) => {
   console.log("page", typeof page);
   console.log("page", page);
 
-  let currentOffset;
+  try {
+    let currentOffset;
 
-  page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
+    page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
 
-  console.log("checkNewOffer req.body", req.body);
+    console.log("getOffersForModerator req.body", req.body);
 
-  let foundOffers = await Offer.findAll({
-    where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
-    raw: true,
-    limit: 3,
-    order: [["id"]],
-    offset: currentOffset,
-    include: [
-      {
-        model: User,
-        raw: true,
-        attributes: ["id", "avatar", "firstName", "lastName", "displayName", "email", "rating"],
-      },
-      {
-        model: Contest,
-        attributes: [
-          "orderId",
-          "contestType",
-          "title",
-          "typeOfName",
-          "styleName",
-          "focusOfWork",
-          "targetCustomer",
-          "industry",
-          "priority"
-        ],
-      },
-    ],
-  });
-
-  let isEndData = false;
-
-  console.log("foundOffers", foundOffers);
-  console.log('isEndData', isEndData);
-
-  if (!foundOffers.length) {
-    foundOffers = await Offer.findAll({
+    let foundOffers = await Offer.findAll({
       where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
       raw: true,
       limit: 3,
       order: [["id"]],
-      offset: 0,
+      offset: currentOffset,
       include: [
         {
           model: User,
@@ -213,60 +180,52 @@ module.exports.checkNewOffer = async (req, res, next) => {
       ],
     });
 
-    isEndData = true;
+    let isEndData = false;
+
+    console.log("foundOffers", foundOffers);
+    console.log('isEndData', isEndData);
+
+    if (!foundOffers.length) {
+      foundOffers = await Offer.findAll({
+        where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
+        raw: true,
+        limit: 3,
+        order: [["id"]],
+        offset: 0,
+        include: [
+          {
+            model: User,
+            raw: true,
+            attributes: ["id", "avatar", "firstName", "lastName", "displayName", "email", "rating"],
+          },
+          {
+            model: Contest,
+            attributes: [
+              "orderId",
+              "contestType",
+              "title",
+              "typeOfName",
+              "styleName",
+              "focusOfWork",
+              "targetCustomer",
+              "industry",
+              "priority"
+            ],
+          },
+        ],
+      });
+
+      isEndData = true;
+    }
+
+    res.status(200).send({foundOffers, isEndData});
+  } catch (error) {
+    console.log('error', error);
+    next(error);
   }
-
-  res.send({foundOffers, isEndData});
 };
 
-
-module.exports.checkOfferEmail = async (req, res, next) => {
-  const {
-    body: { "User.email": userEmail, text, "Contest.title": contestTitle },
-    tokenData: { email, firstName, lastName, role },
-  } = req;
-
-  // email
-  const myTestAccount = await nodemailer.createTestAccount();
-
-  const transportOptions = {
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    auth: {
-      user: myTestAccount.user,
-      pass: myTestAccount.pass,
-    },
-  };
-
-  const sendMailOptions = {
-    from: email,
-    to: `${userEmail}`,
-    subject: `Moderator's permission - ${role} ${firstName} ${lastName}`,
-    text: `Your offer ${contestTitle} is resolved. Details: ${JSON.stringify(req.body, null, 2)}`,
-  };
-
-  const transporter = nodemailer.createTransport(transportOptions);
-
-  const info = await transporter.sendMail(sendMailOptions);
-
-  const emailLink = nodemailer.getTestMessageUrl(info);
-  // email
-
-  const emailMessage = {
-    text,
-    moderator: {
-      role,
-      fullName: `${firstName} ${lastName}`,
-    },
-    emailLink,
-    contestTitle,
-    confirm: true,
-  };
-
-  res.send(emailMessage);
-};
-
+// +
 module.exports.getEmailMessages = async (req, res, next) => {
   const {
     tokenData: { userId, email },
@@ -282,55 +241,23 @@ module.exports.getEmailMessages = async (req, res, next) => {
 
   console.log("moderator", moderator);
 
-  let currentOffset;
+  try {
+    let currentOffset;
 
-  page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
-
-  let offers = await Offer.findAll({
-    where: {
-      userId,
-      status: {
-        [Op.or]: [CONSTANTS.OFFER_STATUS.REJECTED, CONSTANTS.OFFER_STATUS.WON]
-      }
-    },
-    limit: 3,
-    order: [["id", "DESC"]],
-    offset: currentOffset,
-    raw: true,
-  }).then((results) => {
-    const offerData = [];
-
-    for (const result of results) {
-
-      result.moderator = {
-        firstName: moderator.firstName,
-        lastName: moderator.lastName,
-        role: moderator.role,
-      };
-
-      result.email = null;
-
-      offerData.push(result);
-    }
-
-    return offerData;
-  });
-
-  let isEndMessages = false;
-
-  if(!offers.length) {
-    isEndMessages = true;
-
-    offers = await Offer.findAll({
+    page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
+  
+    let offers = await Offer.findAll({
       where: {
         userId,
+        status: {
+          [Op.or]: [CONSTANTS.OFFER_STATUS.REJECTED, CONSTANTS.OFFER_STATUS.WON]
+        }
       },
       limit: 3,
       order: [["id", "DESC"]],
-      offset: 0,
+      offset: currentOffset,
       raw: true,
     }).then((results) => {
-      console.log("results", results);
       const offerData = [];
   
       for (const result of results) {
@@ -348,13 +275,51 @@ module.exports.getEmailMessages = async (req, res, next) => {
   
       return offerData;
     });
-  };
-
-  console.log("sendedOffers", offers);
-
-  res.send({offers, isEndMessages});
+  
+    let isEndMessages = false;
+  
+    if(!offers.length) {
+      isEndMessages = true;
+  
+      offers = await Offer.findAll({
+        where: {
+          userId,
+        },
+        limit: 3,
+        order: [["id", "DESC"]],
+        offset: 0,
+        raw: true,
+      }).then((results) => {
+        console.log("results", results);
+        const offerData = [];
+    
+        for (const result of results) {
+    
+          result.moderator = {
+            firstName: moderator.firstName,
+            lastName: moderator.lastName,
+            role: moderator.role,
+          };
+    
+          result.email = null;
+    
+          offerData.push(result);
+        }
+    
+        return offerData;
+      });
+    };
+  
+    console.log("sendedOffers", offers);
+  
+    res.status(200).send({offers, isEndMessages});
+  } catch (error) {
+    console.log('error', error);
+    next(error);
+  }
 };
 
+// +
 module.exports.directEmailBox = async (req, res, next) => {
   console.log("req.body", req.body);
 
@@ -364,68 +329,67 @@ module.exports.directEmailBox = async (req, res, next) => {
     }, status, contestId
   } = req.body;
 
-  const moderator = await User.findOne({
-    where: {
-      role: CONSTANTS.MODERATOR,
-    },
-    raw: true,
-  });
-
-  const creator = await User.findOne({
-    where: {
-      id: req.body.userId,
-    },
-    raw: true,
-  });
-
-  console.log("creator", creator);
-
-  const offerDetails = await Contest.findOne({
-    where: {
-      id: contestId
-    },
-    attributes: {
-      exclude: ['id', 'orderId', 'userId'],
-    },
-    include: {
-      model: Offer,
-      attributes: ['status']
-    },
-    raw: true
-  })
-
-  const myTestAccount = await nodemailer.createTestAccount();
-
-  const transportOptions = {
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    auth: {
-      user: myTestAccount.user,
-      pass: myTestAccount.pass,
-    },
-  };
-
-  const transporter = nodemailer.createTransport(transportOptions);
-
-  const sendMailOptions = {
-    from: moderator.email,
-    to: creator.email,
-    subject: `Moderator's permission`,
-    text: `Your offer ${req.body.text} is ${status === CONSTANTS.OFFER_STATUS.REJECTED ? CONSTANTS.OFFER_STATUS.REJECTED : CONSTANTS.OFFER_STATUS.WON} by ${role} ${firstName} ${lastName}. Details: ${JSON.stringify(offerDetails, null, 2)}`,
-  };
-
-  const info = await transporter.sendMail(sendMailOptions);
-
-  const emailLink = nodemailer.getTestMessageUrl(info);
-
-  res.send({ id: req.body.id, emailLink });
-};
-
-module.exports.changeOfferStatus = async (req, res, next) => {
-  console.log("req.body", req.body);
-
-  res.send(req.body);
+  try {
+    const moderator = await User.findOne({
+      where: {
+        role: CONSTANTS.MODERATOR,
+      },
+      raw: true,
+    });
+  
+    const creator = await User.findOne({
+      where: {
+        id: req.body.userId,
+      },
+      raw: true,
+    });
+  
+    console.log("creator", creator);
+  
+    const offerDetails = await Contest.findOne({
+      where: {
+        id: contestId
+      },
+      attributes: {
+        exclude: ['id', 'orderId', 'userId'],
+      },
+      include: {
+        model: Offer,
+        attributes: ['status']
+      },
+      raw: true
+    })
+  
+    const myTestAccount = await nodemailer.createTestAccount();
+  
+    const transportOptions = {
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: myTestAccount.user,
+        pass: myTestAccount.pass,
+      },
+    };
+  
+    const transporter = nodemailer.createTransport(transportOptions);
+  
+    const sendMailOptions = {
+      from: moderator.email,
+      to: creator.email,
+      subject: `Moderator's permission`,
+      text: `Your offer ${req.body.text} is ${status === CONSTANTS.OFFER_STATUS.REJECTED ? CONSTANTS.OFFER_STATUS.REJECTED : CONSTANTS.OFFER_STATUS.WON} by ${role} ${firstName} ${lastName}. Details: ${JSON.stringify(offerDetails, null, 2)}`,
+    };
+  
+    const info = await transporter.sendMail(sendMailOptions);
+  
+    const emailLink = nodemailer.getTestMessageUrl(info);
+  
+    res.status(201).send({ id: req.body.id, emailLink });
+  } catch (error) {
+    console.log('error', error);
+    next(error);
+  }
 };
 
 module.exports.setNewOffer = async (req, res, next) => {

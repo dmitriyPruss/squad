@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import CreatorBox from "./CreatorBox";
-import { setOfferStatus, checkNewOfferAction } from "../../actions/actionCreator";
+import { setOfferStatus, getOffersForModeratorAction } from "../../actions/actionCreator";
 import CONSTANTS from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,7 @@ const {
 } = CONSTANTS;
 
 function OfferList(props) {
-  const { checkNewOffer, checkOffers, isEndData } = props;
+  const { getOffersForModerator, checkOffers, isEndData } = props;
 
   console.log("OfferList checkOffers", checkOffers);
   console.log('OfferList isEndData', isEndData);
@@ -47,7 +47,7 @@ function OfferList(props) {
   }, [isEndData]);
 
   useEffect(() => {
-    checkNewOffer(page);
+    getOffersForModerator(page);
   }, [page]);
 
   const setOfferList = (item, index) => {
@@ -61,7 +61,7 @@ function OfferList(props) {
       <section key={index} className={styles.offerItem}>
         <CreatorBox
           page={page}
-          checkNewOffer={checkNewOffer}
+          getOffersForModerator={getOffersForModerator}
           data={item}
           key={item.id}
           needButtons={needButtons}
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  checkNewOffer: (page) => dispatch(checkNewOfferAction(page)),
+  getOffersForModerator: (page) => dispatch(getOffersForModeratorAction(page)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferList));

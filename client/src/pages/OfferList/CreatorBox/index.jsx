@@ -9,9 +9,7 @@ import {
   clearChangeMarkError,
   goToExpandedDialog,
   changeShowImage,
-  checkOfferSendmailAction,
   setOfferStatus,
-  changeOfferStatusAction,
 } from "./../../../actions/actionCreator";
 import CONSTANTS from "./../../../constants";
 import { Button } from "react-bootstrap";
@@ -50,7 +48,7 @@ const CreatorBox = (props) => {
       "Contest.priority": Contest_priority,
     },
     setOfferStatus,
-    checkNewOffer,
+    getOffersForModerator,
   } = props;
 
   console.log("CREATOR_BOX props.data", props.data);
@@ -79,7 +77,7 @@ const CreatorBox = (props) => {
               }, 300);
             }).then((res) => {
               console.log("res", res);
-              checkNewOffer(page);
+              getOffersForModerator(page);
             });
           },
         },
@@ -113,7 +111,7 @@ const CreatorBox = (props) => {
               }, 300);
             }).then((res) => {
               console.log("res reject", res);
-              checkNewOffer(page);
+              getOffersForModerator(page);
             });
           },
         },
@@ -241,9 +239,7 @@ const mapDispatchToProps = (dispatch) => ({
   clearError: () => dispatch(clearChangeMarkError()),
   goToExpandedDialog: (data) => dispatch(goToExpandedDialog(data)),
   changeShowImage: (data) => dispatch(changeShowImage(data)),
-  checkOfferEmail: (data) => dispatch(checkOfferSendmailAction(data)),
-  setOfferStatus: (data) => dispatch(setOfferStatus(data)),
-  changeOfferStatus: (data) => dispatch(changeOfferStatusAction(data)),
+  setOfferStatus: (data) => dispatch(setOfferStatus(data))
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatorBox));

@@ -31,7 +31,6 @@
   }
 }
 
-
 .messageList {
   min-width: 320px;
   display: flex;
@@ -73,7 +72,7 @@
       margin: 0px 100px 0px 5px;
     }
 
-    & > p:last-child {
+    & > div:last-child {
       position: absolute;
       top: 1px;
       right: 3px;
@@ -83,7 +82,7 @@
         text-shadow: 0px 1px 1px black;
       }
 
-      & > a {
+      & > a:link {
         color: #4083ff;
         text-decoration: none;
         font-size: 0.8em;
@@ -93,6 +92,19 @@
         color: #2b3030;
         text-decoration: underline;
       }
+
+      & > a:active {
+        color: rgb(157, 157, 116);
+        text-decoration: none;
+        font-size: 0.8em;
+      }
+
+      & > a.emailInfoLink{
+        color: rgb(167, 8, 8);
+        text-decoration: underline dashed;
+        letter-spacing: 1px;
+      }
+
 
       @media screen and (max-width: 800px) {
         position: static;

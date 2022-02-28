@@ -320,43 +320,24 @@ export const getTransactionError = (error) => ({
   error,
 });
 
-// check New Offer
-export const checkNewOfferAction = (page) => ({
-  type: ACTION.CHECK_NEW_OFFER_ACTION,
+// +
+// get New Offers
+export const getOffersForModeratorAction = (page) => ({
+  type: ACTION.GET_OFFERS_FOR_MODERATOR_ACTION,
   page,
 });
 
-export const checkNewOfferRequest = () => ({
-  type: ACTION.CHECK_NEW_OFFER_REQUEST,
+export const getOffersForModeratorRequest = () => ({
+  type: ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST,
 });
 
-export const checkNewOfferSuccess = (data) => ({
-  type: ACTION.CHECK_NEW_OFFER_SUCCESS,
+export const getOffersForModeratorSuccess = (data) => ({
+  type: ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS,
   data, //?
 });
 
-export const checkNewOfferError = (error) => ({
-  type: ACTION.CHECK_NEW_OFFER_ERROR,
-  error,
-});
-
-// check offer email
-export const checkOfferSendmailAction = (data) => ({
-  type: ACTION.CHECK_OFFER_SENDMAIL_ACTION,
-  data,
-});
-
-export const checkOfferSendmailRequest = () => ({
-  type: ACTION.CHECK_OFFER_SENDMAIL_REQUEST,
-});
-
-export const checkOfferSendmailSuccess = (data) => ({
-  type: ACTION.CHECK_OFFER_SENDMAIL_SUCCESS,
-  data, //?
-});
-
-export const checkOfferSendmailError = (error) => ({
-  type: ACTION.CHECK_OFFER_SENDMAIL_ERROR,
+export const getOffersForModeratorError = (error) => ({
+  type: ACTION.GET_OFFERS_FOR_MODERATOR_ERROR,
   error,
 });
 
@@ -397,25 +378,5 @@ export const directEmailBoxSuccess = (data) => ({
 
 export const directEmailBoxError = (error) => ({
   type: ACTION.DIRECT_EMAIL_BOX_ERROR,
-  error,
-});
-
-// change offer status by Moderator
-export const changeOfferStatusAction = (data) => ({
-  type: ACTION.CHANGE_OFFER_STATUS_BY_MODERATOR_ACTION,
-  data,
-});
-
-export const changeOfferStatusRequest = () => ({
-  type: ACTION.CHANGE_OFFER_STATUS_BY_MODERATOR_REQUEST,
-});
-
-export const changeOfferStatusSuccess = (data) => ({
-  type: ACTION.CHANGE_OFFER_STATUS_BY_MODERATOR_SUCCESS,
-  data, //?
-});
-
-export const changeOfferStatusError = (error) => ({
-  type: ACTION.CHANGE_OFFER_STATUS_BY_MODERATOR_ERROR,
   error,
 });

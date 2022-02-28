@@ -15,11 +15,9 @@ import {
   changeMarkSaga,
   setOfferStatusSaga,
   addOfferSaga,
-  checkOfferSaga,
-  checkOfferEmailSaga,
+  getOffersForModeratorSaga,
   getEmailMessageSaga,
   directEmailBoxSaga,
-  changeOfferStatusSaga,
 } from "./offerSagas";
 import {
   previewSaga,
@@ -66,11 +64,9 @@ function* rootSaga() {
   yield takeLatest(ACTION.REMOVE_CHAT_FROM_CATALOG_REQUEST, removeChatFromCatalogSaga);
   yield takeLatest(ACTION.CHANGE_CATALOG_NAME_REQUEST, changeCatalogName);
   yield takeLatest(ACTION.GET_TRANSACTION_ACTION, getTransactionSaga);
-  yield takeLatest(ACTION.CHECK_NEW_OFFER_ACTION, checkOfferSaga);
-  yield takeLatest(ACTION.CHECK_OFFER_SENDMAIL_ACTION, checkOfferEmailSaga);
+  yield takeLatest(ACTION.GET_OFFERS_FOR_MODERATOR_ACTION, getOffersForModeratorSaga);
   yield takeLatest(ACTION.GET_EMAIL_MESSAGE_ACTION, getEmailMessageSaga);
   yield takeLatest(ACTION.DIRECT_EMAIL_BOX_ACTION, directEmailBoxSaga);
-  yield takeLatest(ACTION.CHANGE_OFFER_STATUS_BY_MODERATOR_ACTION, changeOfferStatusSaga);
 }
 
 export default rootSaga;

@@ -19,14 +19,16 @@ function ListElements (props) {
             <li key={i}>
               {o.map((item, index) =>
                 Array.isArray(item) ? (
-                  item.map(innerItem => (
+                  item.map( (innerItem, index ) => (
                     <ElemWithLinkViewReport
+                      key={index}
                       innerItem={innerItem}
                       listElementsClasses={props.listElementsClasses}
                     />
                   ))
                 ) : (
                   <div
+                    key={index}
                     className={showedElemClass}
                     data-tooltip={item['tooltip']}
                   >
@@ -38,7 +40,7 @@ function ListElements (props) {
           );
         } else if (typeof o === 'string') {
           return o.indexOf('Learn') === 0 ? (
-            <p className={unshowedElemClass}>
+            <li key={i} className={unshowedElemClass}>
               {o.split('|')[0]}
               <a
                 style={{ textDecoration: 'none' }}
@@ -46,9 +48,9 @@ function ListElements (props) {
               >
                 {o.split('|')[1]}
               </a>
-            </p>
+            </li>
           ) : (
-            <p className={unshowedElemClass}>{o}</p>
+            <li key={i} className={unshowedElemClass}>{o}</li>
           );
         } else {
           return (
