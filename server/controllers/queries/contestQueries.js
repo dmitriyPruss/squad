@@ -1,4 +1,7 @@
-const { Contest, Offer } = require('../../models/postgreModels');
+const nodemailer = require("nodemailer");
+const { Op } = require("sequelize");
+const { Contest, User, Offer } = require('../../models/postgreModels');
+const CONSTANTS = require('./../../constants');
 const ServerError = require('../../errors/ServerError');
 
 module.exports.updateContest = async (data, predicate, transaction) => {
@@ -7,6 +10,7 @@ module.exports.updateContest = async (data, predicate, transaction) => {
     returning: true,
     transaction
   });
+
   if (updatedCount !== 1) {
     throw new ServerError('cannot update Contest');
   } else {
@@ -20,6 +24,7 @@ module.exports.updateContestStatus = async (data, predicate, transaction) => {
     returning: true,
     transaction
   });
+
   if (updatedCount < 1) {
     throw new ServerError('cannot update Contest');
   } else {
@@ -60,4 +65,130 @@ module.exports.createOffer = async data => {
   } else {
     return result.get({ plain: true });
   }
+};
+
+module.exports.offersForModerator = async (currentOffset) => {
+  const offers = await Offer.findAll({
+    where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
+    raw: true,
+    limit: 3,
+    order: [["id"]],
+    offset: currentOffset,
+    include: [
+      {
+        model: User,
+        raw: true,
+        attributes: ["id", "avatar", "firstName", "lastName", "displayName", "email", "rating"],
+      },
+      {
+        model: Contest,
+        attributes: [
+          "orderId",
+          "contestType",
+          "title",
+          "typeOfName",
+          "styleName",
+          "focusOfWork",
+          "targetCustomer",
+          "industry",
+          "priority"
+        ],
+      },
+    ],
+  });
+
+  return offers;
+};
+
+module.exports.messagesForCreator = async (userId, currentOffset, moderator) => {
+  const messages = await Offer.findAll({
+    where: {
+      userId,
+      status: {
+        [Op.or]: [CONSTANTS.OFFER_STATUS.REJECTED, CONSTANTS.OFFER_STATUS.WON]
+      }
+    },
+    limit: 3,
+    order: [["id", "DESC"]],
+    offset: currentOffset,
+    raw: true,
+  }).then((results) => {
+    const offerData = [];
+
+    for (const result of results) {
+
+      const {firstName, lastName, role} = moderator;
+
+      result.moderator = {
+        firstName,
+        lastName,
+        role,
+      };
+
+      result.email = null;
+
+      offerData.push(result);
+    }
+
+    return offerData;
+  });
+
+  return messages;
+};
+
+module.exports.createEmailLink = async (userId, contestId, text, status, role, firstName, lastName) => {
+  const moderator = await User.findOne({
+    where: {
+      role: CONSTANTS.MODERATOR,
+    },
+    raw: true,
+  });
+
+  const creator = await User.findOne({
+    where: {
+      id: userId,
+    },
+    raw: true,
+  });
+
+  const offerDetails = await Contest.findOne({
+    where: {
+      id: contestId
+    },
+    attributes: {
+      exclude: ['id', 'orderId', 'userId'],
+    },
+    include: {
+      model: Offer,
+      attributes: ['status']
+    },
+    raw: true
+  })
+
+  const myTestAccount = await nodemailer.createTestAccount();
+
+  const transportOptions = {
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false,
+    auth: {
+      user: myTestAccount.user,
+      pass: myTestAccount.pass,
+    },
+  };
+
+  const transporter = nodemailer.createTransport(transportOptions);
+
+  const sendMailOptions = {
+    from: moderator.email,
+    to: creator.email,
+    subject: `Moderator's permission`,
+    text: `Your offer ${text} is ${status === CONSTANTS.OFFER_STATUS.REJECTED ? CONSTANTS.OFFER_STATUS.REJECTED : CONSTANTS.OFFER_STATUS.WON} by ${role} ${firstName} ${lastName}. Details: ${JSON.stringify(offerDetails, null, 2)}`,
+  };
+
+  const info = await transporter.sendMail(sendMailOptions);
+
+  const link = nodemailer.getTestMessageUrl(info);
+
+  return link;
 };

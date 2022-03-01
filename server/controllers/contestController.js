@@ -1,5 +1,4 @@
 const queryString = require("query-string");
-const nodemailer = require("nodemailer");
 const { Contest, Offer, Rating, Select, User, sequelize } = require("../models/postgreModels");
 const { Op } = require("sequelize");
 const ServerError = require("../errors/ServerError");
@@ -47,8 +46,6 @@ module.exports.getContestById = async (req, res, next) => {
     params: { contestId },
     tokenData: { userId, role },
   } = req;
-
-  // console.log(`req.headers`, req.params);
 
   try {
     let contestInfo = await Contest.findOne({
@@ -140,87 +137,23 @@ module.exports.getOffersForModerator= async (req, res, next) => {
     params: { page },
   } = req;
 
-  console.log("userId", userId);
-  console.log("page", typeof page);
-  console.log("page", page);
-
   try {
     let currentOffset;
 
     page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
 
-    console.log("getOffersForModerator req.body", req.body);
-
-    let foundOffers = await Offer.findAll({
-      where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
-      raw: true,
-      limit: 3,
-      order: [["id"]],
-      offset: currentOffset,
-      include: [
-        {
-          model: User,
-          raw: true,
-          attributes: ["id", "avatar", "firstName", "lastName", "displayName", "email", "rating"],
-        },
-        {
-          model: Contest,
-          attributes: [
-            "orderId",
-            "contestType",
-            "title",
-            "typeOfName",
-            "styleName",
-            "focusOfWork",
-            "targetCustomer",
-            "industry",
-            "priority"
-          ],
-        },
-      ],
-    });
+    let foundOffers = await contestQueries.offersForModerator(currentOffset);
 
     let isEndData = false;
 
-    console.log("foundOffers", foundOffers);
-    console.log('isEndData', isEndData);
-
     if (!foundOffers.length) {
-      foundOffers = await Offer.findAll({
-        where: {status: CONSTANTS.CONTEST.STATUS.PENDING},
-        raw: true,
-        limit: 3,
-        order: [["id"]],
-        offset: 0,
-        include: [
-          {
-            model: User,
-            raw: true,
-            attributes: ["id", "avatar", "firstName", "lastName", "displayName", "email", "rating"],
-          },
-          {
-            model: Contest,
-            attributes: [
-              "orderId",
-              "contestType",
-              "title",
-              "typeOfName",
-              "styleName",
-              "focusOfWork",
-              "targetCustomer",
-              "industry",
-              "priority"
-            ],
-          },
-        ],
-      });
+      foundOffers = await contestQueries.offersForModerator(0);;
 
       isEndData = true;
     }
 
     res.status(200).send({foundOffers, isEndData});
   } catch (error) {
-    console.log('error', error);
     next(error);
   }
 };
@@ -239,155 +172,40 @@ module.exports.getEmailMessages = async (req, res, next) => {
     raw: true,
   });
 
-  console.log("moderator", moderator);
-
   try {
     let currentOffset;
 
     page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
   
-    let offers = await Offer.findAll({
-      where: {
-        userId,
-        status: {
-          [Op.or]: [CONSTANTS.OFFER_STATUS.REJECTED, CONSTANTS.OFFER_STATUS.WON]
-        }
-      },
-      limit: 3,
-      order: [["id", "DESC"]],
-      offset: currentOffset,
-      raw: true,
-    }).then((results) => {
-      const offerData = [];
-  
-      for (const result of results) {
-  
-        result.moderator = {
-          firstName: moderator.firstName,
-          lastName: moderator.lastName,
-          role: moderator.role,
-        };
-  
-        result.email = null;
-  
-        offerData.push(result);
-      }
-  
-      return offerData;
-    });
+    let messages = await contestQueries.messagesForCreator(userId, currentOffset, moderator);
   
     let isEndMessages = false;
   
-    if(!offers.length) {
+    if(!messages.length) {
       isEndMessages = true;
   
-      offers = await Offer.findAll({
-        where: {
-          userId,
-        },
-        limit: 3,
-        order: [["id", "DESC"]],
-        offset: 0,
-        raw: true,
-      }).then((results) => {
-        console.log("results", results);
-        const offerData = [];
-    
-        for (const result of results) {
-    
-          result.moderator = {
-            firstName: moderator.firstName,
-            lastName: moderator.lastName,
-            role: moderator.role,
-          };
-    
-          result.email = null;
-    
-          offerData.push(result);
-        }
-    
-        return offerData;
-      });
+      messages = await contestQueries.messagesForCreator(userId, 0, moderator);
     };
   
-    console.log("sendedOffers", offers);
-  
-    res.status(200).send({offers, isEndMessages});
+    res.status(200).send({messages, isEndMessages});
   } catch (error) {
-    console.log('error', error);
     next(error);
   }
 };
 
 // +
 module.exports.directEmailBox = async (req, res, next) => {
-  console.log("req.body", req.body);
-
   const {
     moderator: {
       role, firstName, lastName
-    }, status, contestId
+    }, status, contestId, id, userId, text
   } = req.body;
 
   try {
-    const moderator = await User.findOne({
-      where: {
-        role: CONSTANTS.MODERATOR,
-      },
-      raw: true,
-    });
+    const emailLink = await contestQueries.createEmailLink(userId, contestId, text, status, role, firstName, lastName);
   
-    const creator = await User.findOne({
-      where: {
-        id: req.body.userId,
-      },
-      raw: true,
-    });
-  
-    console.log("creator", creator);
-  
-    const offerDetails = await Contest.findOne({
-      where: {
-        id: contestId
-      },
-      attributes: {
-        exclude: ['id', 'orderId', 'userId'],
-      },
-      include: {
-        model: Offer,
-        attributes: ['status']
-      },
-      raw: true
-    })
-  
-    const myTestAccount = await nodemailer.createTestAccount();
-  
-    const transportOptions = {
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: {
-        user: myTestAccount.user,
-        pass: myTestAccount.pass,
-      },
-    };
-  
-    const transporter = nodemailer.createTransport(transportOptions);
-  
-    const sendMailOptions = {
-      from: moderator.email,
-      to: creator.email,
-      subject: `Moderator's permission`,
-      text: `Your offer ${req.body.text} is ${status === CONSTANTS.OFFER_STATUS.REJECTED ? CONSTANTS.OFFER_STATUS.REJECTED : CONSTANTS.OFFER_STATUS.WON} by ${role} ${firstName} ${lastName}. Details: ${JSON.stringify(offerDetails, null, 2)}`,
-    };
-  
-    const info = await transporter.sendMail(sendMailOptions);
-  
-    const emailLink = nodemailer.getTestMessageUrl(info);
-  
-    res.status(201).send({ id: req.body.id, emailLink });
+    res.status(201).send({ id, emailLink });
   } catch (error) {
-    console.log('error', error);
     next(error);
   }
 };
@@ -399,8 +217,6 @@ module.exports.setNewOffer = async (req, res, next) => {
     body: { contestId, customerId, offerData },
     tokenData: { userId },
   } = req;
-
-  console.log("setNewOffer req.body", req.body);
 
   if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
     obj.fileName = file.filename;

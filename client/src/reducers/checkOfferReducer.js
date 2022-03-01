@@ -11,7 +11,6 @@ const initialState = {
 
 function checkOfferReducer(state = initialState, action) {
   switch (action.type) {
-    // getOffersForModerator !!!
     case ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST: {
       return {
         ...state,
@@ -21,8 +20,6 @@ function checkOfferReducer(state = initialState, action) {
     }
     case ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS: {
       const { foundOffers, isEndData } = action.data;
-
-      console.log("REDUCER - GET_OFFERS_FOR_MODERATOR_SUCCESS data", foundOffers, isEndData );
 
       return {
         ...state,
@@ -49,12 +46,12 @@ function checkOfferReducer(state = initialState, action) {
       };
     }
     case ACTION.GET_EMAIL_MESSAGE_SUCCESS: {
-      const { offers, isEndMessages } = action.data;
+      const { messages, isEndMessages } = action.data;
 
       return {
         ...state,
         isFetching: false,
-        sendedEmailMessages: offers,
+        sendedEmailMessages: messages,
         isEndMessages
       };
     }
@@ -82,8 +79,6 @@ function checkOfferReducer(state = initialState, action) {
 
       const { sendedEmailMessages } = state;
 
-      console.log("checkOffers", sendedEmailMessages);
-
       const newEmailMessages = sendedEmailMessages.map((message) => {
         if (message.id === id) {
           message.email = emailLink;
@@ -91,10 +86,6 @@ function checkOfferReducer(state = initialState, action) {
 
         return message;
       });
-
-      console.log("REDUCER - DIRECT_EMAIL_BOX_SUCCESS data", action.data);
-
-      console.log("newEmailMessages", newEmailMessages);
 
       return {
         ...state,

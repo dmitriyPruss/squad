@@ -20,7 +20,6 @@ const {
   getEmailMessages,
   setOfferStatus,
   directEmailBox,
-  changeOfferStatus
 } = require("./../controllers/contestController");
 const { updateContestFile, uploadLogoFiles } = require("./../utils/fileUpload");
 
@@ -30,7 +29,7 @@ contestRouter.use(checkToken);
 
 contestRouter.get("/offers/:page", onlyForModerator, getOffersForModerator);
 contestRouter.get("/emailMessages/:page", onlyForCreative, getEmailMessages);
-contestRouter.post("/directEmailBox", directEmailBox);
+contestRouter.post("/directEmailBox", onlyForCreative, directEmailBox);
 
 contestRouter.get("/all", onlyForCreative, parseQuery, getContests);
 
