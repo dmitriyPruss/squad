@@ -22,7 +22,7 @@ function ButtonItem (props) {
               transitionProperty: 'transform, color',
               transitionDuration: '0.5s'
             }}
-            class='fas fa-arrow-right'
+            className='fas fa-arrow-right'
           ></i>
         ) : (
           <i
@@ -32,7 +32,7 @@ function ButtonItem (props) {
               transitionProperty: 'transform, color',
               transitionDuration: '0.5s'
             }}
-            class='fas fa-arrow-right'
+            className='fas fa-arrow-right'
           ></i>
         )}
       </span>

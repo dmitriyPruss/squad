@@ -13,7 +13,7 @@ function LaunchingContest () {
         <h3 className={styles.contextHeader}>Launching A Contest</h3>
         <ul>
           {contestData.map((i, index) => (
-            <InfoItem info={i} index={index} />
+            <InfoItem key={index} info={i} index={index} />
           ))}
         </ul>
       </section>
@@ -21,7 +21,7 @@ function LaunchingContest () {
         <h3 className={styles.contextHeader}>Buying From Marketplace</h3>
         <ul>
           {marketplaceData.map((i, index) => (
-            <InfoItem info={i} index={index} />
+            <InfoItem key={index} info={i} index={index} />
           ))}
         </ul>
       </section>
@@ -29,7 +29,7 @@ function LaunchingContest () {
         <h3 className={styles.contextHeader}>Managed Contests</h3>
         <ul>
           {managedData.map((i, index) => (
-            <InfoItem sectionId={'managed'} info={i} index={index} />
+            <InfoItem key={index} sectionId={'managed'} info={i} index={index} />
           ))}
         </ul>
       </section>
@@ -37,7 +37,7 @@ function LaunchingContest () {
         <h3 className={styles.contextHeader}>For Creatives</h3>
         <ul>
           {creativeData.map((i, index) => (
-            <InfoItem info={i} index={index} />
+            <InfoItem key={index} info={i} index={index} />
           ))}
         </ul>
       </section>

@@ -22,14 +22,14 @@ function InfoItem (props) {
           <ul style={{ listStyle: 'disc' }}>
             {listText.map((i, index) => {
               if (index <= 2) {
-                return <li>{i}</li>;
+                return <li key={index}>{i}</li>;
               }
               if (index === 3) {
                 return null;
               }
               if (index === listText.length - 1) {
                 return (
-                  <li>
+                  <li key={index}>
                     {listText[index - 1]}
                     <a href={linkText.path}>{linkText.name}</a>
                     {i}
@@ -50,11 +50,11 @@ function InfoItem (props) {
           <ul style={{ listStyle: 'none' }}>
             {infoText.map((i, index) =>
               index === 2 ? (
-                <li>
+                <li key={index}>
                   {i} <a href={linkText.path}>{linkText.name}</a>
                 </li>
               ) : (
-                <li>{i}</li>
+                <li key={index}>{i}</li>
               )
             )}
           </ul>
@@ -67,8 +67,8 @@ function InfoItem (props) {
         <AccordionItem index={index} buttonText={buttonText}>
           <p>{infoText}</p>
           <ul style={{ listStyle: 'disc' }}>
-            {listText.map(i => (
-              <li>{i}</li>
+            {listText.map( (i, index) => (
+              <li key={index}>{i}</li>
             ))}
           </ul>
         </AccordionItem>
@@ -83,11 +83,11 @@ function InfoItem (props) {
         <ul style={{ listStyle: 'disc' }}>
           {listText.map((i, index) =>
             index === 2 ? (
-              <li>
+              <li key={index}>
                 {i} <a href={linkText.path}>{linkText.name}</a>
               </li>
             ) : (
-              <li>{i}</li>
+              <li key={index}>{i}</li>
             )
           )}
         </ul>
@@ -101,7 +101,7 @@ function InfoItem (props) {
         <p>{infoText}</p>
         <ul style={{ listStyle: 'disc' }}>
           {listText.map((i, index) => (
-            <li>
+            <li key={index}>
               <a href={squadLinks[index]}>{i}</a>
             </li>
           ))}
