@@ -1,6 +1,6 @@
 import React from "react";
-
 import PhoneForwardedOutlinedIcon from "@mui/icons-material/PhoneForwardedOutlined";
+import CONSTANTS from '../../../constants';
 import styles from "./InfoBlock.module.scss";
 
 function InfoBlock() {
@@ -38,7 +38,7 @@ function InfoBlock() {
         </button>
         <p className={styles.phoneNumber}>
           <PhoneForwardedOutlinedIcon style={{ width: "30px", color: "white" }} />
-          <span>(877) 355-3585</span>
+          <span>{CONSTANTS.CONTACTS.TEL}</span>
         </p>
         <p>Call us for assistance</p>
       </div>

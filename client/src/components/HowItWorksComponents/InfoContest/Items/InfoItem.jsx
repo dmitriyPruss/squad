@@ -31,7 +31,7 @@ function InfoItem (props) {
                 return (
                   <li key={index}>
                     {listText[index - 1]}
-                    <a href={linkText.path}>{linkText.name}</a>
+                    <a href={linkText.path}>{' '}{linkText.name}{' '}</a>
                     {i}
                   </li>
                 );
@@ -116,12 +116,12 @@ function InfoItem (props) {
         {Array.isArray(infoText) ? (
           <>
             {infoText[0]}
-            <a href={linkText.path}>{linkText.name}</a> {infoText[1]}
+            <a href={linkText.path}>{' '}{linkText.name}</a> {infoText[1]}
           </>
         ) : (
           <>
             {infoText}
-            <a href={linkText.path}>{linkText.name}</a>
+            <a href={linkText.path}>{' '}{linkText.name}</a>
           </>
         )}
       </AccordionItem>

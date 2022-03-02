@@ -4,6 +4,12 @@
   width: 90%;
   margin: 64px auto;
 
+  .slash {
+    color: #e5e7eb;
+    font-size: 60px;
+    font-weight: 100;
+  }
+
   & span {
     color: #77838f;
   }
@@ -16,6 +22,10 @@
 
   @media screen and (max-width: 700px) {
     flex-direction: column;
+
+    .slash {
+      display: none;
+    }
   }
 }
 

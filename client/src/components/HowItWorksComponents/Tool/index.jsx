@@ -14,6 +14,7 @@ function Tool () {
           <span> from 25,000+ customers.</span>
         </p>
       </div>
+      <div className={styles.slash}>/</div>
       <div className={styles.toolItem}>
         <img
           src='https://www.squadhelp.com/resources/assets/imgs/front/img2(1).png'
@@ -25,6 +26,7 @@ function Tool () {
           <span> strong.</span>
         </p>
       </div>
+      <div className={styles.slash}>/</div>
       <div className={styles.toolItem}>
         <img
           src='https://www.squadhelp.com/resources/assets/imgs/front/sharing-files.svg'
