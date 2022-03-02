@@ -1,8 +1,7 @@
 import React from 'react';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import styles from './BeginInfoBlock.module.scss';
-
 import { ReactComponent as MobileUser } from './mobileUser.svg';
+import styles from './BeginInfoBlock.module.scss';
 
 function BeginInfoBlock () {
   return (

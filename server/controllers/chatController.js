@@ -6,7 +6,7 @@ const { User, Conversation, Message, Catalog, sequelize} = require("./../models/
 const userQueries = require("./queries/userQueries");
 const controller = require("../socketInit");
 
-// (bugs ChatSocket) дописать коды статуса при отправке
+// (bugs ChatSocket)
 // ++
 module.exports.addMessage = async (req, res, next) => {
   const {
@@ -67,7 +67,7 @@ module.exports.addMessage = async (req, res, next) => {
       },
     });
 
-    res.send({
+    res.status(201).send({
       message,
       preview: Object.assign(postgresPreview, { interlocutor }),
     });
@@ -114,7 +114,7 @@ module.exports.getChat = async (req, res, next) => {
 
     const { firstName, lastName, displayName, id, avatar } = interlocutor;
 
-    res.send({
+    res.status(200).send({
       messages,
       interlocutor: {
         firstName,
@@ -164,8 +164,6 @@ module.exports.getPreview = async (req, res, next) => {
 
     //   return conversation;
     // });
-
-    // console.log('conversations', conversations);
 
     // 2 variant - using Lazy Loading (Magic methods)
     const conversations = await Conversation.findAll({
@@ -223,7 +221,7 @@ module.exports.getPreview = async (req, res, next) => {
       });
     });
 
-    res.send(conversations);
+    res.status(200).send(conversations);
   } catch (err) {
     next(err);
   }
@@ -257,7 +255,7 @@ module.exports.blackList = async (req, res, next) => {
       }
     );
 
-    res.send(chat);
+    res.status(200).send(chat);
 
     const interlocutorId = participants.filter((participant) => participant !== userId)[0];
 
@@ -295,7 +293,7 @@ module.exports.favoriteList = async (req, res, next) => {
       }
     );
 
-    res.send(chat);
+    res.status(200).send(chat);
   } catch (err) {
     res.send(err);
   }
@@ -315,7 +313,7 @@ module.exports.createCatalog = async (req, res, next) => {
       chats: [chatId],
     });
 
-    res.send(catalog);
+    res.status(201).send(catalog);
   } catch (err) {
     next(err);
   }
@@ -342,7 +340,7 @@ module.exports.updateNameCatalog = async (req, res, next) => {
       }
     );
 
-    res.send(catalog);
+    res.status(200).send(catalog);
   } catch (err) {
     next(err);
   }
@@ -375,7 +373,7 @@ module.exports.addNewChatToCatalog = async (req, res, next) => {
       }
     );
 
-    res.send(catalog);
+    res.status(200).send(catalog);
   } catch (err) {
     next(err);
   }
@@ -406,7 +404,7 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
       }
     );
 
-    res.send(catalog);
+    res.status(200).send(catalog);
   } catch (err) {
     next(err);
   }
@@ -429,7 +427,7 @@ module.exports.deleteCatalog = async (req, res, next) => {
       },
     });
 
-    res.end();
+    res.status(204).send();
   } catch (err) {
     next(err);
   }
@@ -450,7 +448,7 @@ module.exports.getCatalogs = async (req, res, next) => {
       attributes: ["id", "catalogName", "chats"], // alternate variant
     });
 
-    res.send(catalogs);
+    res.status(200).send(catalogs);
   } catch (err) {
     next(err);
   }
