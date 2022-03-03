@@ -1,86 +1,28 @@
-import React from 'react';
-import AccordionItem from './AccordionItem';
+import React from "react";
+import ManagedItems from "./ManagedItems";
+import AccordionItem from "./AccordionItem";
+import CONSTANTS from "../../../../constants";
 
-function InfoItem (props) {
+function InfoItem(props) {
   const {
     info: { buttonText, infoText, listText, linkText },
     sectionId,
-    index
+    index,
   } = props;
 
-  const squadLinks = [
-    'https://www.squadhelp.com/Name-Ideas',
-    'https://www.squadhelp.com/tagline-slogan-ideas',
-    'https://www.squadhelp.com/logo-design-examples'
-  ];
+  const {
+    HOW_IT_WORKS: { SQUADHELP_LINKS },
+  } = CONSTANTS;
 
-  if (sectionId === 'managed') {
-    if (listText && linkText) {
-      return (
-        <AccordionItem index={index} buttonText={buttonText}>
-          <p>{infoText}</p>
-          <ul style={{ listStyle: 'disc' }}>
-            {listText.map((i, index) => {
-              if (index <= 2) {
-                return <li key={index}>{i}</li>;
-              }
-              if (index === 3) {
-                return null;
-              }
-              if (index === listText.length - 1) {
-                return (
-                  <li key={index}>
-                    {listText[index - 1]}
-                    <a href={linkText.path}>{' '}{linkText.name}{' '}</a>
-                    {i}
-                  </li>
-                );
-              }
-              
-              return null;
-            })}
-          </ul>
-        </AccordionItem>
-      );
-    }
-
-    if (linkText) {
-      return (
-        <AccordionItem index={index} buttonText={buttonText}>
-          <ul style={{ listStyle: 'none' }}>
-            {infoText.map((i, index) =>
-              index === 2 ? (
-                <li key={index}>
-                  {i} <a href={linkText.path}>{linkText.name}</a>
-                </li>
-              ) : (
-                <li key={index}>{i}</li>
-              )
-            )}
-          </ul>
-        </AccordionItem>
-      );
-    }
-
-    if (listText) {
-      return (
-        <AccordionItem index={index} buttonText={buttonText}>
-          <p>{infoText}</p>
-          <ul style={{ listStyle: 'disc' }}>
-            {listText.map( (i, index) => (
-              <li key={index}>{i}</li>
-            ))}
-          </ul>
-        </AccordionItem>
-      );
-    }
+  if (sectionId === "managed") {
+    return <ManagedItems index={index} info={props.info} />;
   }
 
   if (listText && linkText) {
     return (
       <AccordionItem index={index} buttonText={buttonText}>
         <p>{infoText}</p>
-        <ul style={{ listStyle: 'disc' }}>
+        <ul style={{ listStyle: "disc" }}>
           {listText.map((i, index) =>
             index === 2 ? (
               <li key={index}>
@@ -99,10 +41,10 @@ function InfoItem (props) {
     return (
       <AccordionItem index={index} buttonText={buttonText}>
         <p>{infoText}</p>
-        <ul style={{ listStyle: 'disc' }}>
+        <ul style={{ listStyle: "disc" }}>
           {listText.map((i, index) => (
             <li key={index}>
-              <a href={squadLinks[index]}>{i}</a>
+              <a href={SQUADHELP_LINKS[index]}>{i}</a>
             </li>
           ))}
         </ul>
@@ -116,12 +58,12 @@ function InfoItem (props) {
         {Array.isArray(infoText) ? (
           <>
             {infoText[0]}
-            <a href={linkText.path}>{' '}{linkText.name}</a> {infoText[1]}
+            <a href={linkText.path}> {linkText.name}</a> {infoText[1]}
           </>
         ) : (
           <>
             {infoText}
-            <a href={linkText.path}>{' '}{linkText.name}</a>
+            <a href={linkText.path}> {linkText.name}</a>
           </>
         )}
       </AccordionItem>

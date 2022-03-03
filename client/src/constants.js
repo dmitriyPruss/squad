@@ -97,23 +97,48 @@ const CONSTANTS = {
       items: ["Terms of Service", "Privacy Policy", "Cookie Policy"],
     },
   ],
-  HOW_IT_WORKS_COMPANY_LINKS: {
-    forbes: {
-      path: 'https://www.forbes.com/sites/forbestreptalks/2016/07/11/not-sure-how-to-name-a-startup-squadhelp-will-crowdsource-it-for-199/?sh=6b5e55e46145',
-      image: 'https://www.squadhelp.com/resources/assets/imgs/front/forbes.svg'
-    },
-    tnw: {
-      path: 'https://thenextweb.com/latest',
-      image: 'https://www.squadhelp.com/resources/assets/imgs/front/TNW.svg'
-    },
-    chicagoTribune: {
-      path: 'https://www.chicagotribune.com/business/blue-sky/ct-squadhelp-startup-names-bsi-20170331-story.html',
-      image: 'https://www.squadhelp.com/resources/assets/imgs/front/chicago.svg'
-    },
-    mashable: {
-      path: 'https://mashable.com/archive/make-money-crowdworking',
-      image: 'https://www.squadhelp.com/resources/assets/imgs/front/Mashable.svg'
-    },
+  HOW_IT_WORKS:{
+    CONTEST_LIST: [
+      {
+        link: '#contests',
+        text: 'Launching A Contest',
+      },
+      {
+        link: '#marketplace',
+        text: 'Buying From Marketplace',
+      },
+      {
+        link: '#managed',
+        text: 'Managed Contests',
+      },
+      {
+        link: '#creatives',
+        text: 'For Creatives',
+      },
+    ],
+    SQUADHELP_LINKS: [
+      'https://www.squadhelp.com/Name-Ideas',
+      'https://www.squadhelp.com/tagline-slogan-ideas',
+      'https://www.squadhelp.com/logo-design-examples'
+    ],
+    COMPANY_LINKS: {
+      forbes: {
+        path: 'https://www.forbes.com/sites/forbestreptalks/2016/07/11/not-sure-how-to-name-a-startup-squadhelp-will-crowdsource-it-for-199/?sh=6b5e55e46145',
+        image: 'https://www.squadhelp.com/resources/assets/imgs/front/forbes.svg'
+      },
+      tnw: {
+        path: 'https://thenextweb.com/latest',
+        image: 'https://www.squadhelp.com/resources/assets/imgs/front/TNW.svg'
+      },
+      chicagoTribune: {
+        path: 'https://www.chicagotribune.com/business/blue-sky/ct-squadhelp-startup-names-bsi-20170331-story.html',
+        image: 'https://www.squadhelp.com/resources/assets/imgs/front/chicago.svg'
+      },
+      mashable: {
+        path: 'https://mashable.com/archive/make-money-crowdworking',
+        image: 'https://www.squadhelp.com/resources/assets/imgs/front/Mashable.svg'
+      },
+    }
   }
 };
 

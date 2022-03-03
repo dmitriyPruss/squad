@@ -27,7 +27,6 @@
   border-bottom: 1px solid #e7eaf3;
 
   width: 95%;
-  // height: 500px;
   align-items: space-evenly;
 
   & > * {
@@ -94,4 +93,18 @@
   visibility: hidden;
   border: 0px solid #e7eaf3;
   transition: height 0.3s, opacity 0.1s, border 0.3s, visibility 1s;
+}
+
+.arrowDown {
+  color: #D2D8A1;
+  transform: rotate(90deg);
+  transition-property: transform, color;
+  transition-duration: 0.5s;
+}
+
+.arrowRight {
+  color: #377dff;
+  transform: rotate(0deg);
+  transition-property: transform, color;
+  transition-duration: 0.5s;
 }

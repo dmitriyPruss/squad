@@ -16,23 +16,11 @@ function ButtonItem (props) {
       <span>
         {view ? (
           <i
-            style={{
-              color: ' #D2D8A1 ',
-              transform: 'rotate(90deg)',
-              transitionProperty: 'transform, color',
-              transitionDuration: '0.5s'
-            }}
-            className='fas fa-arrow-right'
+            className={`fas fa-arrow-right ${styles.arrowDown}`}
           ></i>
         ) : (
           <i
-            style={{
-              color: ' #377dff',
-              transform: 'rotate(0deg)',
-              transitionProperty: 'transform, color',
-              transitionDuration: '0.5s'
-            }}
-            className='fas fa-arrow-right'
+            className={`fas fa-arrow-right ${styles.arrowRight}`}
           ></i>
         )}
       </span>
