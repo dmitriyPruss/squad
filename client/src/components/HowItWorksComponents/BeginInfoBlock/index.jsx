@@ -1,9 +1,14 @@
-import React from 'react';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import { ReactComponent as MobileUser } from './mobileUser.svg';
-import styles from './BeginInfoBlock.module.scss';
+import React from "react";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { ReactComponent as MobileUser } from "./mobileUser.svg";
+import CONSTANTS from "../../../constants";
+import styles from "./BeginInfoBlock.module.scss";
 
-function BeginInfoBlock () {
+function BeginInfoBlock() {
+  const {
+    HOW_IT_WORKS: { PLAY_VIDEO },
+  } = CONSTANTS;
+
   return (
     <article className={styles.beginInfoBlock}>
       <section>
@@ -15,10 +20,10 @@ function BeginInfoBlock () {
           Agency-level validation services.
         </p>
         <button className={styles.playVideoButton}>
-          {' '}
-          <PlayArrowIcon />{' '}
-          <a target='_blank' rel="noreferrer" href='https://vimeo.com/368584367'>
-            Play Video
+          {" "}
+          <PlayArrowIcon />{" "}
+          <a target="_blank" rel="noreferrer" href={PLAY_VIDEO.link}>
+            {PLAY_VIDEO.text}
           </a>
         </button>
       </section>

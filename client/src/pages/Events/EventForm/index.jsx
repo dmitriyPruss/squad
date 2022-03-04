@@ -1,26 +1,26 @@
-import { Formik, Form } from 'formik';
-import React, { useState } from 'react';
-import Input from '../Input';
-import { Button } from 'react-bootstrap';
-import { INPUT_SCHEMA } from '../../../utils/validatingSchemas';
-import validateInputData from '../helperFuncs/validateInputData';
-import createNewEvents from '../helperFuncs/createNewEvents';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
-import TimePicker from '@mui/lab/TimePicker';
-import TextField from '@mui/material/TextField';
-import styles from './../Events.module.scss';
+import { Formik, Form } from "formik";
+import React, { useState } from "react";
+import Input from "../Input";
+import { Button } from "react-bootstrap";
+import { INPUT_SCHEMA } from "../../../utils/validatingSchemas";
+import validateInputData from "../helperFuncs/validateInputData";
+import createNewEvents from "../helperFuncs/createNewEvents";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import TimePicker from "@mui/lab/TimePicker";
+import TextField from "@mui/material/TextField";
+import styles from "./../Events.module.scss";
 
-function EventForm (props) {
+function EventForm(props) {
   const {
-    eventArr: [events, setEvents]
+    eventArr: [events, setEvents],
   } = props;
 
   const [invalidInputData, setInvalidInputData] = useState(false);
 
   const initValues = {
-    eventName: ''
+    eventName: "",
   };
 
   const [dateValue, setDateValue] = useState(new Date());
@@ -34,7 +34,7 @@ function EventForm (props) {
       month: dateValue.getMonth(),
       day: dateValue.getDate(),
       hours: timeValue.getHours(),
-      minutes: timeValue.getMinutes()
+      minutes: timeValue.getMinutes(),
     };
 
     const createdEventDate = new Date();
@@ -73,51 +73,51 @@ function EventForm (props) {
         validationSchema={INPUT_SCHEMA}
         onSubmit={addEvent}
       >
-        {formikProps => {
+        {(formikProps) => {
           return (
             <Form className={styles.eventForm}>
               <fieldset className={styles.formContainer}>
                 <legend>Enter an Event</legend>
                 <label>
                   <Input
-                    type='text'
-                    name='eventName'
-                    placeholder='Enter an event name...'
+                    type="text"
+                    name="eventName"
+                    placeholder="Enter an event name..."
                   />
                 </label>
                 {invalidInputData ? (
                   <span className={styles.invalidData}>{invalidInputData}</span>
                 ) : (
-                  ''
+                  ""
                 )}
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
-                    label='Enter a date'
+                    label="Enter a date"
                     value={dateValue}
-                    onChange={newValue => {
+                    onChange={(newValue) => {
                       setDateValue(newValue);
                     }}
-                    renderInput={params => (
+                    renderInput={(params) => (
                       <TextField
                         style={{
-                          width: '300px',
-                          margin: '10px 0 25px'
+                          width: "300px",
+                          margin: "10px 0 25px",
                         }}
                         {...params}
                       />
                     )}
                   />
                   <TimePicker
-                    label='Enter time'
+                    label="Enter time"
                     value={timeValue}
-                    onChange={newValue => {
+                    onChange={(newValue) => {
                       setTimeValue(newValue);
                     }}
-                    renderInput={params => (
+                    renderInput={(params) => (
                       <TextField
                         style={{
-                          width: '300px',
-                          margin: '10px 0 25px'
+                          width: "300px",
+                          margin: "10px 0 25px",
                         }}
                         {...params}
                       />
@@ -126,10 +126,10 @@ function EventForm (props) {
                 </LocalizationProvider>
                 <Button
                   className={styles.eventButton}
-                  as='input'
-                  type='submit'
-                  variant='outline-primary'
-                  value='Add event'
+                  as="input"
+                  type="submit"
+                  variant="outline-dark"
+                  value="Add event"
                 />
               </fieldset>
             </Form>

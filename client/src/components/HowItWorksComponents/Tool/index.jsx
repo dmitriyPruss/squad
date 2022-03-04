@@ -1,14 +1,18 @@
-import React from 'react';
-import styles from './Tool.module.scss';
+import React from "react";
+import CONSTANTS from "../../../constants";
+import styles from "./Tool.module.scss";
 
-function Tool () {
+function Tool() {
+  const {
+    HOW_IT_WORKS: {
+      TOOL_LINKS: { stars, users, sharingFiles },
+    },
+  } = CONSTANTS;
+
   return (
     <section className={styles.toolContainer}>
       <div className={styles.toolItem}>
-        <img
-          src='https://www.squadhelp.com/resources/assets/imgs/front/stars.svg'
-          alt=''
-        />
+        <img src={stars.link} alt={stars.altText} />
         <p>
           <b>4.9 out of 5 stars</b>
           <span> from 25,000+ customers.</span>
@@ -16,10 +20,7 @@ function Tool () {
       </div>
       <div className={styles.slash}>/</div>
       <div className={styles.toolItem}>
-        <img
-          src='https://www.squadhelp.com/resources/assets/imgs/front/img2(1).png'
-          alt=''
-        />
+        <img src={users.link} alt={users.altText} />
         <p>
           <span>Our branding community stands</span>
           <b> 200,000+</b>
@@ -28,10 +29,7 @@ function Tool () {
       </div>
       <div className={styles.slash}>/</div>
       <div className={styles.toolItem}>
-        <img
-          src='https://www.squadhelp.com/resources/assets/imgs/front/sharing-files.svg'
-          alt=''
-        />
+        <img src={sharingFiles.link} alt={sharingFiles.altText} />
         <p>
           <b>140+ Industries</b>
           <span> supported across more than</span>

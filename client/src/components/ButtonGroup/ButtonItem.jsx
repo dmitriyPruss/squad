@@ -1,18 +1,18 @@
-import React from 'react';
-import styles from './ButtonGroup.module.scss';
+import React from "react";
+import styles from "./ButtonGroup.module.scss";
 
-function ButtonItem (props) {
+function ButtonItem(props) {
   const {
     id,
     infoData: { header, main, isHighlighted },
-    highlightElement
+    highlightElement,
   } = props;
 
   return (
     <li
       key={id}
       className={isHighlighted ? styles.highlightElement : styles.buttonItem}
-      onClick={e => highlightElement(id)}
+      onClick={(e) => highlightElement(id)}
     >
       <h3>{header}</h3>
       <p>{main}</p>

@@ -1,7 +1,5 @@
-function getInitData () {
+function getInitData() {
   let initialData = [];
-
-  // localStorage.clear();
 
   for (let key of Object.keys(localStorage)) {
     if (!isNaN(key)) {
@@ -9,8 +7,8 @@ function getInitData () {
 
       const {
         eventBody: {
-          eventDate: { year, month, day, hours, minutes }
-        }
+          eventDate: { year, month, day, hours, minutes },
+        },
       } = newItem;
 
       const date = new Date(year, month, day, hours, minutes);
@@ -22,7 +20,7 @@ function getInitData () {
 
   initialData.sort((a, b) => a.date - b.date);
 
-  initialData.forEach(data => delete data.date);
+  initialData.forEach((data) => delete data.date);
 
   return initialData;
 }

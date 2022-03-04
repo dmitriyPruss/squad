@@ -16,15 +16,15 @@ function LaunchingContest() {
 
   CONTEST_LIST.forEach((i, index) => {
     i.data = infoData[index];
-    i.link = i.link.substring(1);
+    i.id = i.link.substring(1);
   });
 
   const showList = (item, index) => (
-    <section key={index} id={item.link} className={styles.launchingContests}>
+    <section key={index} id={item.id} className={styles.launchingContests}>
       <h3 className={styles.contextHeader}>{item.text}</h3>
       <ul>
         {item.data.map((i, index) => (
-          <InfoItem key={index} info={i} index={index} sectionId={item.link} />
+          <InfoItem key={index} info={i} index={index} sectionId={item.id} />
         ))}
       </ul>
     </section>

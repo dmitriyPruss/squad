@@ -1,13 +1,13 @@
-function validateInputData (events, eventName, eventDate, createdEventDate) {
+function validateInputData(events, eventName, eventDate, createdEventDate) {
   let stopFunc = null;
-  events.forEach(event => {
+  events.forEach((event) => {
     if (event.eventBody.eventName === eventName.trim()) {
       stopFunc = true;
     }
   });
 
   if (stopFunc) {
-    return 'Repeated name!';
+    return "Repeated name!";
   }
 
   if (
@@ -15,7 +15,7 @@ function validateInputData (events, eventName, eventDate, createdEventDate) {
     eventDate.month <= createdEventDate.getMonth() &&
     eventDate.day < createdEventDate.getDate()
   ) {
-    return 'This isn`t a future date';
+    return "This isn`t a future date";
   }
 
   if (
@@ -24,8 +24,7 @@ function validateInputData (events, eventName, eventDate, createdEventDate) {
     eventDate.day === createdEventDate.getDate() &&
     eventDate.hours < createdEventDate.getHours()
   ) {
-    console.log('eventDate.hours', eventDate.hours);
-    return 'This hour has already passed';
+    return "This hour has already passed";
   }
 
   if (
@@ -35,7 +34,7 @@ function validateInputData (events, eventName, eventDate, createdEventDate) {
     eventDate.hours === createdEventDate.getHours() &&
     eventDate.minutes < createdEventDate.getMinutes()
   ) {
-    return 'These minutes have already passed';
+    return "These minutes have already passed";
   }
 
   return false;

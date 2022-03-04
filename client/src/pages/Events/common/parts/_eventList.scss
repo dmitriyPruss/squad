@@ -1,5 +1,5 @@
-@import './../styles/templates';
-@import './../styles/vars';
+@import "./../styles/templates";
+@import "./../styles/vars";
 
 .eventList {
   background-color: #e5e7eb;
@@ -64,7 +64,7 @@
 
   & > p {
     color: #fff;
-    text-shadow: 0px 2px black;
+    text-shadow: 0px 1px black;
     padding: 3px;
     margin: 0;
   }
@@ -130,7 +130,6 @@
   background-color: rgb(237, 87, 87);
   border-radius: 5px;
   margin: 3px auto;
-
   display: flex;
 
   & > span {

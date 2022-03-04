@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { subMilliseconds } from 'date-fns';
-import TimeIsOver from '../EventList/TimeIsOver';
-import calcTime from '../helperFuncs/calcTime';
-import ProgressItem from './ProgressItem';
-import styles from './../Events.module.scss';
+import React, { useState, useEffect, useMemo } from "react";
+import { subMilliseconds } from "date-fns";
+import TimeIsOver from "../EventList/TimeIsOver";
+import calcTime from "../helperFuncs/calcTime";
+import ProgressItem from "./ProgressItem";
+import styles from "./../Events.module.scss";
 
-function EventListItem (props) {
+function EventListItem(props) {
   const {
     id,
     eventBody: {
       eventName,
       eventDate: { year, month, day, hours, minutes },
-      createdEventDate
+      createdEventDate,
     },
     eventArr: [events, setEvents],
-    finishItem
+    finishItem,
   } = props;
 
   const currentDate = new Date();
@@ -22,7 +22,7 @@ function EventListItem (props) {
   const userDate = new Date(year, month, day, hours, minutes);
 
   const timerData =
-    currentDate < userDate ? Number(userDate - currentDate) : '';
+    currentDate < userDate ? Number(userDate - currentDate) : "";
 
   const [timer, setTimer] = useState(timerData);
   const timeValues = calcTime(timerData);
@@ -35,7 +35,7 @@ function EventListItem (props) {
 
   useEffect(() => {
     if (timer > 0) {
-      let timerId = setTimeout(function runTimer () {
+      let timerId = setTimeout(function runTimer() {
         setTimer(subMilliseconds(timer, 1000));
 
         const { days, hours, minutes, seconds } = calcTime(timer);
@@ -55,7 +55,7 @@ function EventListItem (props) {
   });
 
   useEffect(() => {
-    let progressId = setTimeout(function runProgress () {
+    let progressId = setTimeout(function runProgress() {
       setProgressState(progressState + 1000);
 
       progressId = setTimeout(runProgress, 1000);
@@ -68,8 +68,8 @@ function EventListItem (props) {
 
   return (
     <li className={styles.eventItem}>
-      <div className={timerData !== '' ? styles.runTimer : styles.stopTimer}>
-        {timerData !== '' ? (
+      <div className={timerData !== "" ? styles.runTimer : styles.stopTimer}>
+        {timerData !== "" ? (
           <div className={styles.progressContainer}>
             <ProgressItem progressState={progressState} period={period} />
             <span>{eventName}</span>

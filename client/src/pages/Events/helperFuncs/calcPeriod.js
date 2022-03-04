@@ -1,4 +1,4 @@
-function calcPeriod (val, time) {
+function calcPeriod(val, time) {
   return Math.round((val / time) * 100);
 }
 

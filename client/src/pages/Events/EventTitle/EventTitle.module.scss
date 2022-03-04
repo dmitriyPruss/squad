@@ -1,0 +1,32 @@
+.eventHeader {
+  width: 90%;
+  min-width: 320px;
+  margin: 50px auto 0;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+  background-color: #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > h2,
+  span:first-child {
+    color: #a2a2a2;
+    text-shadow: -1px -1px 1px rgb(237, 237, 237), 2px 2px 1px #f0f0f0;
+  }
+}
+
+.pastEvents {
+  position: absolute;
+  top: -25px;
+  right: 0px;
+
+  padding: 2px;
+  background-color: rgb(237, 87, 87);
+  color: #fff;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.8em;
+}

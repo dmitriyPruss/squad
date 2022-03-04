@@ -1,31 +1,16 @@
-import React, { useState } from 'react';
-import ButtonItem from './ButtonItem';
-import Header from './../Header';
-import Footer from './../Footer';
-import styles from './ButtonGroup.module.scss';
+import React, { useState } from "react";
+import ButtonItem from "./ButtonItem";
+import Header from "./../Header";
+import Footer from "./../Footer";
+import CONSTANTS from "../../constants";
+import styles from "./ButtonGroup.module.scss";
 
-function ButtonGroup () {
-  const data = [
-    {
-      header: 'Yes',
-      main: 'The Domain should exactly match the name',
-      isHighlighted: false
-    },
-    {
-      header: 'Yes',
-      main: 'But minor variants are allowed (Recommended)',
-      isHighlighted: false
-    },
-    {
-      header: 'No',
-      main: 'I am only looking for a name, not a Domain',
-      isHighlighted: false
-    }
-  ];
+function ButtonGroup() {
+  const { BUTTON_GROUP_DATA } = CONSTANTS;
 
-  const [highlightedItems, setHighlightedItems] = useState(data);
+  const [highlightedItems, setHighlightedItems] = useState(BUTTON_GROUP_DATA);
 
-  const highlightElement = id => {
+  const highlightElement = (id) => {
     const newHighlightedItems = highlightedItems.map((item, index) => {
       if (index === id) {
         item.isHighlighted = true;

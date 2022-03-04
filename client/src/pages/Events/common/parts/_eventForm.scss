@@ -1,5 +1,5 @@
-@import './../styles/templates';
-@import './../styles/vars';
+@import "./../styles/templates";
+@import "./../styles/vars";
 
 .eventForm {
   min-width: 320px;
@@ -8,8 +8,6 @@
   margin: 20px auto;
   background-color: #e5e7eb;
   color: #1e2022;
-  border-radius: 2px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,11 +26,12 @@
 
   position: relative;
 
-  border-radius: 2px;
+  border-radius: 3px;
   box-shadow: $formShadow;
 
   & > legend {
-    color: #377dff;
+    color: #a2a2a2;
+    text-shadow: -1px -1px 1px rgb(237, 237, 237), 2px 2px 1px #f0f0f0;
     font-weight: 700;
     font-size: 1.5em;
     padding: 3px 10px;

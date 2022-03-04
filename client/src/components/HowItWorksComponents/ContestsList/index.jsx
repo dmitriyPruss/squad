@@ -1,14 +1,11 @@
-import React from 'react';
-import InfoContest from '../InfoContest';
-import CONSTANTS from '../../../constants';
-import styles from './ContestsList.module.scss';
+import React from "react";
+import InfoContest from "../InfoContest";
+import CONSTANTS from "../../../constants";
+import styles from "./ContestsList.module.scss";
 
-function ContestsList () {
-
+function ContestsList() {
   const {
-    HOW_IT_WORKS: {
-      CONTEST_LIST
-    } 
+    HOW_IT_WORKS: { CONTEST_LIST },
   } = CONSTANTS;
 
   const showContestList = (item, index) => (
@@ -19,9 +16,7 @@ function ContestsList () {
 
   return (
     <article className={styles.listContainer}>
-      <ul className={styles.listGroup}>
-        {CONTEST_LIST.map(showContestList)}
-      </ul>
+      <ul className={styles.listGroup}>{CONTEST_LIST.map(showContestList)}</ul>
       <InfoContest />
     </article>
   );
