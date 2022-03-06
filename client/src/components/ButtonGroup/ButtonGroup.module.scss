@@ -98,12 +98,10 @@
 .highlightElement {
   & > h3 {
     background-color: #95dcdb;
-
     transition: background-color 0.3s ease-in-out;
   }
 
   box-sizing: content-box;
-
   border-width: 3px;
   border-style: solid;
   border-color: #95dcdb;

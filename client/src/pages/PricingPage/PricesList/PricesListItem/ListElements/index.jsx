@@ -1,7 +1,8 @@
-import React from 'react';
-import ElemWithLinkViewReport from './ElemWithLinkViewReport';
+import React from "react";
+import ElemWithLinkViewReport from "./ElemWithLinkViewReport";
+import CONSTANTS from "../../../../../constants";
 
-function ListElements (props) {
+function ListElements(props) {
   const {
     options,
     listElementsClasses: {
@@ -11,6 +12,10 @@ function ListElements (props) {
     },
   } = props;
 
+  const {
+    PRICING_PAGE: { managedContestsLink },
+  } = CONSTANTS;
+
   return (
     <ul className={optionsListClass}>
       {options.map((o, i) => {
@@ -19,7 +24,7 @@ function ListElements (props) {
             <li key={i}>
               {o.map((item, index) =>
                 Array.isArray(item) ? (
-                  item.map( (innerItem, index ) => (
+                  item.map((innerItem, index) => (
                     <ElemWithLinkViewReport
                       key={index}
                       innerItem={innerItem}
@@ -30,32 +35,31 @@ function ListElements (props) {
                   <div
                     key={index}
                     className={showedElemClass}
-                    data-tooltip={item['tooltip']}
+                    data-tooltip={item["tooltip"]}
                   >
-                    {item['text']}
+                    {item["text"]}
                   </div>
                 )
               )}
             </li>
           );
-        } else if (typeof o === 'string') {
-          return o.indexOf('Learn') === 0 ? (
+        } else if (typeof o === "string") {
+          return o.indexOf("Learn") === 0 ? (
             <li key={i} className={unshowedElemClass}>
-              {o.split('|')[0]}
-              <a
-                style={{ textDecoration: 'none' }}
-                href='https://www.squadhelp.com/managed-contests'
-              >
-                {o.split('|')[1]}
+              {o.split("|")[0]}
+              <a style={{ textDecoration: "none" }} href={managedContestsLink}>
+                {o.split("|")[1]}
               </a>
             </li>
           ) : (
-            <li key={i} className={unshowedElemClass}>{o}</li>
+            <li key={i} className={unshowedElemClass}>
+              {o}
+            </li>
           );
         } else {
           return (
-            <li className={showedElemClass} data-tooltip={o['tooltip']} key={i}>
-              {o['text']}
+            <li className={showedElemClass} data-tooltip={o["tooltip"]} key={i}>
+              {o["text"]}
             </li>
           );
         }

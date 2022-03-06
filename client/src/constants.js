@@ -179,6 +179,11 @@ const CONSTANTS = {
       main: "I am only looking for a name, not a Domain",
     },
   ],
+  PRICING_PAGE: {
+    testingReportLink:
+      "https://www.squadhelp.com/assets/nimages/AudienceTestingReport.pdf",
+    managedContestsLink: "https://www.squadhelp.com/managed-contests",
+  },
 };
 
 export default CONSTANTS;
