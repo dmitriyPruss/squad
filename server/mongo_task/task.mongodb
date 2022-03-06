@@ -1,22 +1,25 @@
 use("squadhelp-chat-dev")
 db.messages.aggregate([
     {
-        $match: {body: { $regex: /паровоз/ }}
+        $match: { body: { $regex: /паровоз/ } }
     },
     {
-        $group: {"Message quantity": {$sum: 1}, _id: {message: "$body"}}
-    }, {
-        $sort: {"Message quantity": -1}
-    }, {
+        $group: { "Message quantity": { $sum: 1 }, _id: { message: "$body" } }
+    }, 
+    {
+        $sort: { "Message quantity": -1 }
+    }, 
+    {
         $unionWith: {
-          coll: 'messages',
-          pipeline: [
-            {
-                $match: {body: { $regex: /паровоз/ }}
-            }, {
-                $count: 'Total quantity'
-            }
-          ]
+            coll: "messages",
+            pipeline: [
+                {
+                    $match: { body: { $regex: /паровоз/ } }
+                }, 
+                {
+                    $count: "Total quantity of word 'паровоз'"
+                }
+            ]
         }
     }
 ]);
