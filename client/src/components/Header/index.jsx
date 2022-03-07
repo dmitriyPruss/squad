@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import MarkAsUnreadIcon from '@mui/icons-material/MarkAsUnread';
+import MarkAsUnreadIcon from "@mui/icons-material/MarkAsUnread";
 import styles from "./Header.module.sass";
 import CONSTANTS from "../../constants";
 import { clearUserStore, headerRequest } from "../../actions/actionCreator";
@@ -10,6 +10,7 @@ const {
   ANONYM_IMAGE_PATH,
   PUBLIC_URL,
   STATIC_IMAGES_PATH,
+  CUSTOMER,
   CREATOR,
   MODERATOR,
   CONTACTS: { TEL },
@@ -42,12 +43,15 @@ class Header extends React.Component {
     const { data } = this.props;
 
     if (data) {
-
       return (
         <>
           <div className={styles.userInfo}>
             <img
-              src={data.avatar === "anon.png" ? ANONYM_IMAGE_PATH : `${PUBLIC_URL}${data.avatar}`}
+              src={
+                data.avatar === "anon.png"
+                  ? ANONYM_IMAGE_PATH
+                  : `${PUBLIC_URL}${data.avatar}`
+              }
               alt="user"
             />
             <span>{`Hi, ${data.displayName}`}</span>
@@ -71,12 +75,18 @@ class Header extends React.Component {
                 </Link>
               </li>
               <li>
-                <Link to="http:/www.google.com" style={{ textDecoration: "none" }}>
+                <Link
+                  to="http:/www.google.com"
+                  style={{ textDecoration: "none" }}
+                >
                   <span>Messages</span>
                 </Link>
               </li>
               <li>
-                <Link to="http:/www.google.com" style={{ textDecoration: "none" }}>
+                <Link
+                  to="http:/www.google.com"
+                  style={{ textDecoration: "none" }}
+                >
                   <span>Affiliate Dashboard</span>
                 </Link>
               </li>
@@ -93,15 +103,18 @@ class Header extends React.Component {
             </ul>
           </div>
           {data.role !== CREATOR ? (
-            <img src={`${STATIC_IMAGES_PATH}email.png`} className={styles.emailIcon} alt="email" />
+            <img
+              src={`${STATIC_IMAGES_PATH}email.png`}
+              className={styles.emailIcon}
+              alt="email"
+            />
           ) : (
             <div>
               <Link to="/emailPage" style={{ textDecoration: "none" }}>
                 <MarkAsUnreadIcon className={styles.creatorEmailIcon} />
-             </Link>
-          </div>
-          )
-          }
+              </Link>
+            </div>
+          )}
         </>
       );
     }
@@ -120,7 +133,7 @@ class Header extends React.Component {
   render() {
     const { isFetching, data } = this.props;
 
-    console.log('this.props', this.props);
+    console.log("this.props", this.props);
 
     if (isFetching) {
       return null;
@@ -130,7 +143,8 @@ class Header extends React.Component {
       <div className={styles.headerContainer}>
         <div className={styles.fixedHeader}>
           <span className={styles.info}>
-            Squadhelp recognized as one of the Most Innovative Companies by Inc Magazine.
+            Squadhelp recognized as one of the Most Innovative Companies by Inc
+            Magazine.
           </span>
           <a href="http://www.google.com">Read Announcement</a>
         </div>
@@ -139,10 +153,16 @@ class Header extends React.Component {
             <img src={`${STATIC_IMAGES_PATH}phone.png`} alt="phone" />
             <span>{TEL}</span>
           </div>
-          <div className={styles.userButtonsContainer}>{this.renderLoginButtons()}</div>
+          <div className={styles.userButtonsContainer}>
+            {this.renderLoginButtons()}
+          </div>
         </div>
         <div className={styles.navContainer}>
-          <img src={`${STATIC_IMAGES_PATH}blue-logo.png`} className={styles.logo} alt="blue_logo" />
+          <img
+            src={`${STATIC_IMAGES_PATH}blue-logo.png`}
+            className={styles.logo}
+            alt="blue_logo"
+          />
           <div className={styles.leftNav}>
             <div className={styles.nav}>
               <ul>
@@ -259,7 +279,9 @@ class Header extends React.Component {
                       <a href="http://www.google.com">ULTIMATE NAMING GUIDE</a>
                     </li>
                     <li>
-                      <a href="http://www.google.com">POETIC DEVICES IN BUSINESS NAMING</a>
+                      <a href="http://www.google.com">
+                        POETIC DEVICES IN BUSINESS NAMING
+                      </a>
                     </li>
                     <li>
                       <a href="http://www.google.com">CROWDED BAR THEORY</a>
@@ -271,8 +293,11 @@ class Header extends React.Component {
                 </li>
               </ul>
             </div>
-            {data && data.role !== CREATOR && (
-              <div className={styles.startContestBtn} onClick={this.startContests}>
+            {data && data.role === CUSTOMER && (
+              <div
+                className={styles.startContestBtn}
+                onClick={this.startContests}
+              >
                 START CONTEST
               </div>
             )}

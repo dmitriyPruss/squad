@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import Rating from "react-rating";
 import { withRouter } from "react-router-dom";
-import classNames from "classnames";
 import { confirmAlert } from "react-confirm-alert";
 import {
   changeMark,
@@ -13,10 +12,10 @@ import {
 } from "./../../../actions/actionCreator";
 import CONSTANTS from "./../../../constants";
 import { Button } from "react-bootstrap";
-import styles from "./CreatorBox.module.sass";
+import OfferInfo from "../OfferInfo";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import "./confirmStyle.css";
-import OfferInfo from "../OfferInfo";
+import styles from "./CreatorBox.module.scss";
 
 const CreatorBox = (props) => {
   const {
@@ -72,7 +71,7 @@ const CreatorBox = (props) => {
               });
 
               setTimeout(() => {
-                console.log('before or after?');
+                console.log("before or after?");
                 resolve(true);
               }, 300);
             }).then((res) => {
@@ -106,7 +105,7 @@ const CreatorBox = (props) => {
               });
 
               setTimeout(() => {
-                console.log('before or after?');
+                console.log("before or after?");
                 resolve(true);
               }, 300);
             }).then((res) => {
@@ -131,23 +130,17 @@ const CreatorBox = (props) => {
   // //   });
   // // };
 
-  const offerStatus = () => {
-    if (status === REJECTED) {
-      return <i className={classNames("fas fa-times-circle reject", styles.reject)} />;
-    }
-    if (status === WON) {
-      return <i className={classNames("fas fa-check-circle resolve", styles.resolve)} />;
-    }
-    return null;
-  };
   return (
-    <div className={styles.offerContainer}>
-      {offerStatus()}
+    <article className={styles.offerContainer}>
       <div className={styles.mainInfoContainer}>
         <div className={styles.userInfo}>
           <div className={styles.creativeInfoContainer}>
             <img
-              src={User_avatar === "anon.png" ? ANONYM_IMAGE_PATH : `${PUBLIC_URL}${User_avatar}`}
+              src={
+                User_avatar === "anon.png"
+                  ? ANONYM_IMAGE_PATH
+                  : `${PUBLIC_URL}${User_avatar}`
+              }
               alt="user"
             />
             <div className={styles.nameAndEmail}>
@@ -160,14 +153,23 @@ const CreatorBox = (props) => {
             <Rating
               initialRating={User_rating}
               fractions={2}
-              fullSymbol={<img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />}
-              placeholderSymbol={<img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />}
-              emptySymbol={<img src={`${STATIC_IMAGES_PATH}star-outline.png`} alt="star-outline" />}
+              fullSymbol={
+                <img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />
+              }
+              placeholderSymbol={
+                <img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />
+              }
+              emptySymbol={
+                <img
+                  src={`${STATIC_IMAGES_PATH}star-outline.png`}
+                  alt="star-outline"
+                />
+              }
               readonly
             />
           </div>
         </div>
-        <div className={styles.responseConainer}>
+        <div className={styles.responseContainer}>
           {Contest_contestType === LOGO ? (
             <img
               onClick={() =>
@@ -204,15 +206,16 @@ const CreatorBox = (props) => {
             Confirm
           </Button>
           <Button
-            as="input"
+            as="button"
             variant="outline-danger"
             className={styles.rejectBtn}
             onClick={rejectOffer}
-            defaultValue="Reject"
-          />
+          >
+            Reject
+          </Button>
         </div>
       )}
-    </div>
+    </article>
   );
 };
 
@@ -239,7 +242,9 @@ const mapDispatchToProps = (dispatch) => ({
   clearError: () => dispatch(clearChangeMarkError()),
   goToExpandedDialog: (data) => dispatch(goToExpandedDialog(data)),
   changeShowImage: (data) => dispatch(changeShowImage(data)),
-  setOfferStatus: (data) => dispatch(setOfferStatus(data))
+  setOfferStatus: (data) => dispatch(setOfferStatus(data)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatorBox));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CreatorBox)
+);

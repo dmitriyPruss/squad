@@ -1,0 +1,138 @@
+.offerContainer {
+  position: relative;
+  background: #ebf2ff radial-gradient(circle at 50% 0, #ebf2ff, #dbe3f0);
+  border-radius: 5px;
+
+  @media screen and (max-width: 450px) {
+    padding: 10px 0;
+  }
+
+  & > i {
+    position: absolute;
+    left: calc(100% - 35px);
+    top: -15px;
+    font-size: 54px;
+  }
+}
+
+.btnsContainer {
+  margin: 5px 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  & > button {
+    border-radius: 8px;
+  }
+}
+
+.resolveBtn {
+  width: 100px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border-width: 2px;
+
+  &:hover {
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.rejectBtn {
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+  padding: 10px;
+  border-width: 2px;
+
+  &:hover {
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.mainInfoContainer {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+
+.userInfo {
+  min-width: 215px;
+}
+
+.responseContainer {
+  width: 70%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: 800px) {
+    margin-top: 10px;
+    max-width: 200px;
+  }
+}
+
+.responseLogo {
+  width: auto;
+  height: 100px;
+}
+
+.response {
+  text-align: center;
+  overflow-wrap: break-word;
+  align-self: stretch;
+  margin-left: 10px;
+  color: #556da5;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.creativeRating {
+  display: flex;
+  margin-top: 5px;
+  align-items: center;
+}
+
+.userScoreLabel {
+  margin-right: 10px;
+  color: #46568a;
+  font-size: 15px;
+}
+
+.creativeInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  & img {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+  }
+}
+
+.nameAndEmail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  span {
+    color: #46568a;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 10px;
+  }
+}

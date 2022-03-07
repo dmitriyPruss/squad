@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  box-sizing: border-box;
+}
+
 .emailContainer {
   display: flex;
   flex-direction: column;
@@ -12,7 +22,7 @@
   }
 }
 
-.loaderContainer{
+.loaderContainer {
   position: absolute;
   top: 52px;
 
@@ -23,7 +33,7 @@
   margin: 0 auto;
   align-self: center;
 
-  & div{
+  & div {
     background-image: radial-gradient(circle at 35% 35%, #e5e7eb, #a0a0a0);
     border-radius: 2px;
     width: 12px;
@@ -99,12 +109,11 @@
         font-size: 0.8em;
       }
 
-      & > a.emailInfoLink{
+      & > a.emailInfoLink {
         color: rgb(167, 8, 8);
         text-decoration: underline dashed;
         letter-spacing: 1px;
       }
-
 
       @media screen and (max-width: 800px) {
         position: static;
