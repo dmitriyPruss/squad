@@ -53,10 +53,9 @@ class ContestForm extends React.Component {
         getData({ characteristic1: "brandStyle" });
         break;
       }
-      default:{
+      default: {
         break;
       }
-
     }
   };
 
@@ -126,7 +125,9 @@ class ContestForm extends React.Component {
                 />
               </div>
               <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>What does your company / business do?</span>
+                <span className={styles.inputHeader}>
+                  What does your company / business do?
+                </span>
                 <FormTextArea
                   name="focusOfWork"
                   type="text"
@@ -139,7 +140,9 @@ class ContestForm extends React.Component {
                 />
               </div>
               <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>Tell us about your customers</span>
+                <span className={styles.inputHeader}>
+                  Tell us about your customers
+                </span>
                 <FormTextArea
                   name="targetCustomer"
                   type="text"
@@ -194,4 +197,6 @@ const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch(getDataForContest(data)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContestForm));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ContestForm)
+);

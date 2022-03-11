@@ -49,6 +49,9 @@ export function* changeMarkSaga(action) {
 export function* addOfferSaga(action) {
   try {
     const { data } = yield restController.setNewOffer(action.data);
+
+    console.log("setNewOffer data", data);
+
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.unshift(data);
     yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
@@ -58,13 +61,12 @@ export function* addOfferSaga(action) {
 }
 
 export function* setOfferStatusSaga(action) {
-
   try {
-    console.log('action setOfferStatus ', action);
+    console.log("action setOfferStatus ", action);
 
     const { data } = yield restController.setOfferStatus(action.data);
 
-    console.log('setOfferStatus data ', data);
+    console.log("setOfferStatus data ", data);
 
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {

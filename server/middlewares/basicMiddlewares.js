@@ -1,19 +1,22 @@
-const { Contest } = require('../models/postgreModels');
-const { Op } = require('sequelize');
-const NotFound = require('../errors/UserNotFoundError');
-const RightsError = require('../errors/RightsError');
-const ServerError = require('../errors/ServerError');
+const { Contest } = require("../models/postgreModels");
+const { Op } = require("sequelize");
+const NotFound = require("../errors/UserNotFoundError");
+const RightsError = require("../errors/RightsError");
+const ServerError = require("../errors/ServerError");
 const {
   CUSTOMER,
   CREATOR: { NAME },
   MODERATOR,
   CONTEST: {
-    STATUS: { ACTIVE, FINISHED }
-  }
-} = require('../constants');
-const { mapStringToValues } = require('../utils/functions');
+    STATUS: { ACTIVE, FINISHED },
+  },
+} = require("../constants");
+const { mapStringToValues } = require("../utils/functions");
 
 module.exports.parseBody = (req, res, next) => {
+  console.log("parseBody req.body", req.body);
+  console.log("req.files", req.files);
+
   req.body.contests = JSON.parse(req.body.contests);
   for (let i = 0; i < req.body.contests.length; i++) {
     if (req.body.contests[i].haveFile) {
@@ -30,13 +33,13 @@ module.exports.canGetContest = async (req, res, next) => {
 
   const {
     params: { contestId: id },
-    tokenData: { userId, role }
+    tokenData: { userId, role },
   } = req;
 
   try {
     if (req.tokenData.role === CUSTOMER) {
       result = await Contest.findOne({
-        where: { id, userId }
+        where: { id, userId },
       });
       console.log(`result`, result);
     } else if (role === NAME) {
@@ -44,9 +47,9 @@ module.exports.canGetContest = async (req, res, next) => {
         where: {
           id,
           status: {
-            [Op.or]: [ACTIVE, FINISHED]
-          }
-        }
+            [Op.or]: [ACTIVE, FINISHED],
+          },
+        },
       });
     }
     result ? next() : next(new RightsError());
@@ -65,15 +68,15 @@ module.exports.onlyForCreative = (req, res, next) => {
 
 module.exports.onlyForCustomer = (req, res, next) => {
   if (req.tokenData.role !== CUSTOMER) {
-    return next(new RightsError('This page is only for customers'));
+    return next(new RightsError("This page is only for customers"));
   } else {
     next();
   }
 };
 
 module.exports.onlyForModerator = (req, res, next) => {
-  if(req.tokenData.role !== MODERATOR) {
-    return next(new RightsError('This page is only for moderator'));
+  if (req.tokenData.role !== MODERATOR) {
+    return next(new RightsError("This page is only for moderator"));
   } else {
     next();
   }
@@ -82,11 +85,11 @@ module.exports.onlyForModerator = (req, res, next) => {
 module.exports.canSendOffer = async (req, res, next) => {
   const {
     tokenData: { role },
-    body: { contestId: id }
+    body: { contestId: id },
   } = req;
 
-  console.log('role', role);
-  console.log('id', id);
+  console.log("role", role);
+  console.log("id", id);
 
   if (role === CUSTOMER || role === MODERATOR) {
     return next(new RightsError());
@@ -94,14 +97,15 @@ module.exports.canSendOffer = async (req, res, next) => {
   try {
     const result = await Contest.findOne({
       where: {
-        id
+        id,
       },
-      raw: true
+      raw: true,
     });
 
-    console.log('canSendOffer result', result)
+    console.log("canSendOffer result", result);
 
     if (result.status === ACTIVE) {
+      console.log("result.status", result.status);
       next();
     } else {
       return next(new RightsError());
@@ -113,21 +117,21 @@ module.exports.canSendOffer = async (req, res, next) => {
 
 module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
   const {
-    body: { contestId: id, orderId}
+    body: { contestId: id, orderId },
   } = req;
 
-  console.log('req.body', req.body);
+  console.log("req.body", req.body);
 
   try {
     const result = await Contest.findOne({
       where: {
         orderId,
         id,
-        status: ACTIVE
-      }
+        status: ACTIVE,
+      },
     });
 
-    console.log('result', result)
+    console.log("result", result);
 
     if (!result) {
       return next(new RightsError());
@@ -141,7 +145,7 @@ module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
 module.exports.canUpdateContest = async (req, res, next) => {
   const {
     tokenData: { userId },
-    body: { contestId: id }
+    body: { contestId: id },
   } = req;
 
   try {
@@ -149,8 +153,8 @@ module.exports.canUpdateContest = async (req, res, next) => {
       where: {
         userId,
         id,
-        status: { [Op.not]: FINISHED }
-      }
+        status: { [Op.not]: FINISHED },
+      },
     });
     if (!result) {
       return next(new RightsError());

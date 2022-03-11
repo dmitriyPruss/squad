@@ -1,7 +1,10 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import styles from "./ContestCreationPage.module.sass";
-import { saveContestToStore, clearDataForContest } from "../../actions/actionCreator";
+import {
+  saveContestToStore,
+  clearDataForContest,
+} from "../../actions/actionCreator";
 import NextButton from "../../components/NextButton";
 import ContestForm from "../../components/ContestForm";
 import BackButton from "../../components/BackButton";
@@ -20,11 +23,18 @@ const ContestCreationPage = (props) => {
   } = props;
 
   const formRef = useRef();
-  const contestData = contests[contestType] ? contests[contestType] : { contestType };
+  const contestData = contests[contestType]
+    ? contests[contestType]
+    : { contestType };
 
   const handleSubmit = (values) => {
+    console.log("values", values);
+
     saveContest({ type: contestType, info: values });
-    const route = bundle[contestType] === "payment" ? "/payment" : `${bundle[contestType]}Contest`;
+    const route =
+      bundle[contestType] === "payment"
+        ? "/payment"
+        : `${bundle[contestType]}Contest`;
     history.push(route);
   };
 
@@ -43,8 +53,8 @@ const ContestCreationPage = (props) => {
         <div className={styles.startContestInfo}>
           <h2>{title}</h2>
           <span>
-            Tell us a bit more about your business as well as your preferences so that creatives get
-            a better idea about what you are looking for
+            Tell us a bit more about your business as well as your preferences
+            so that creatives get a better idea about what you are looking for
           </span>
         </div>
         <ProgressBar currentStep={2} />
@@ -82,4 +92,7 @@ const mapDispatchToProps = (dispatch) => ({
   clearDataForContest: () => dispatch(clearDataForContest()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContestCreationPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContestCreationPage);

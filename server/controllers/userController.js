@@ -1,27 +1,27 @@
-const jwt = require('jsonwebtoken');
-const moment = require('moment');
-const { v4: uuid } = require('uuid');
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
+const { v4: uuid } = require("uuid");
 
-const CONSTANTS = require('./../constants');
+const CONSTANTS = require("./../constants");
 const {
   Contest,
   Rating,
   Offer,
   Transaction,
   sequelize,
-  Sequelize
-} = require('../models/postgreModels');
-const { Op } = require('sequelize');
-const NotUniqueEmail = require('../errors/NotUniqueEmail');
-const controller = require('../socketInit');
-const userQueries = require('./queries/userQueries');
-const bankQueries = require('./queries/bankQueries');
-const ratingQueries = require('./queries/ratingQueries');
+  Sequelize,
+} = require("../models/postgreModels");
+const { Op } = require("sequelize");
+const NotUniqueEmail = require("../errors/NotUniqueEmail");
+const controller = require("../socketInit");
+const userQueries = require("./queries/userQueries");
+const bankQueries = require("./queries/bankQueries");
+const ratingQueries = require("./queries/ratingQueries");
 
 module.exports.login = async (req, res, next) => {
   // console.log(`login!`, req.body);
   const {
-    body: { email, password }
+    body: { email, password },
   } = req;
 
   try {
@@ -37,7 +37,7 @@ module.exports.login = async (req, res, next) => {
       balance,
       email: userEmail,
       rating,
-      password: userPassword
+      password: userPassword,
     } = foundUser;
 
     await userQueries.passwordCompare(password, userPassword);
@@ -51,7 +51,7 @@ module.exports.login = async (req, res, next) => {
         displayName,
         balance,
         email: userEmail,
-        rating
+        rating,
       },
       CONSTANTS.JWT_SECRET,
       { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
@@ -80,7 +80,7 @@ module.exports.registration = async (req, res, next) => {
       displayName,
       balance,
       email,
-      rating
+      rating,
     } = newUser;
 
     const accessToken = jwt.sign(
@@ -93,7 +93,7 @@ module.exports.registration = async (req, res, next) => {
         displayName,
         balance,
         email,
-        rating
+        rating,
       },
       CONSTANTS.JWT_SECRET,
       { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
@@ -101,7 +101,7 @@ module.exports.registration = async (req, res, next) => {
     await userQueries.updateUser({ accessToken }, id);
     res.send({ token: accessToken });
   } catch (err) {
-    if (err.name === 'SequelizeUniqueConstraintError') {
+    if (err.name === "SequelizeUniqueConstraintError") {
       next(new NotUniqueEmail());
     } else {
       next(err);
@@ -109,13 +109,13 @@ module.exports.registration = async (req, res, next) => {
   }
 };
 
-function getQuery (offerId, userId, mark, isFirst, transaction) {
+function getQuery(offerId, userId, mark, isFirst, transaction) {
   const getCreateQuery = () =>
     ratingQueries.createRating(
       {
         offerId,
         mark,
-        userId
+        userId,
       },
       transaction
     );
@@ -130,12 +130,12 @@ module.exports.changeMark = async (req, res, next) => {
 
   const {
     body: { isFirst, offerId, mark, creatorId },
-    tokenData: { userId }
+    tokenData: { userId },
   } = req;
 
   try {
     transaction = await sequelize.transaction({
-      isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED
+      isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.READ_UNCOMMITTED,
     });
     const query = getQuery(offerId, userId, mark, isFirst, transaction);
     await query();
@@ -144,10 +144,10 @@ module.exports.changeMark = async (req, res, next) => {
         {
           model: Offer,
           required: true,
-          where: { userId: creatorId }
-        }
+          where: { userId: creatorId },
+        },
       ],
-      transaction
+      transaction,
     });
 
     // for (let i = 0; i < offers.length; i++) {
@@ -173,7 +173,7 @@ module.exports.payment = async (req, res, next) => {
 
   const {
     body: { contests, cvc, expiry, number, price },
-    tokenData: { userId }
+    tokenData: { userId },
   } = req;
 
   try {
@@ -184,19 +184,19 @@ module.exports.payment = async (req, res, next) => {
                 CASE
             WHEN "cardNumber"='${number.replace(
               / /g,
-              ''
+              ""
             )}' AND "cvc"='${cvc}' AND "expiry"='${expiry}'
                 THEN "balance"-${price}
             WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK.NUMBER}' AND "cvc"='${
           CONSTANTS.SQUADHELP_BANK.CVC
         }' AND "expiry"='${CONSTANTS.SQUADHELP_BANK.EXPIRY}'
                 THEN "balance"+${price} END
-        `)
+        `),
       },
       {
         cardNumber: {
-          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, '')]
-        }
+          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
+        },
       },
       transaction
     );
@@ -209,12 +209,12 @@ module.exports.payment = async (req, res, next) => {
           ? Math.ceil(price / contests.length)
           : Math.floor(price / contests.length);
       contest = Object.assign(contest, {
-        status: index === 0 ? 'active' : 'pending',
+        status: index === 0 ? "active" : "pending",
         userId,
         priority: index + 1,
         orderId,
-        createdAt: moment().format('YYYY-MM-DD HH:mm'),
-        prize
+        createdAt: moment().format("YYYY-MM-DD HH:mm"),
+        prize,
       });
     });
     await Contest.bulkCreate(contests, transaction);
@@ -230,15 +230,20 @@ module.exports.updateUser = async (req, res, next) => {
   const {
     body,
     file,
-    tokenData: { userId }
+    tokenData: { userId },
   } = req;
+
+  console.log("req.body", body);
+  console.log("req.file", file);
 
   try {
     if (file) {
       req.body.avatar = file.filename;
+      console.log("req.body", req.body);
     }
     const updatedUser = await userQueries.updateUser(body, userId);
 
+    console.log("updatedUser", updatedUser);
     const {
       firstName,
       lastName,
@@ -247,7 +252,7 @@ module.exports.updateUser = async (req, res, next) => {
       email,
       balance,
       role,
-      id
+      id,
     } = updatedUser;
 
     res.send({
@@ -258,7 +263,7 @@ module.exports.updateUser = async (req, res, next) => {
       email,
       balance,
       role,
-      id
+      id,
     });
   } catch (err) {
     next(err);
@@ -270,7 +275,7 @@ module.exports.cashout = async (req, res, next) => {
 
   const {
     body: { cvc, expiry, number, sum },
-    tokenData: { userId }
+    tokenData: { userId },
   } = req;
 
   // console.log('req.body', req.body);
@@ -278,7 +283,7 @@ module.exports.cashout = async (req, res, next) => {
   try {
     transaction = await sequelize.transaction();
     const updatedUser = await userQueries.updateUser(
-      { balance: sequelize.literal('balance - ' + sum) },
+      { balance: sequelize.literal("balance - " + sum) },
       userId,
       transaction
     );
@@ -290,7 +295,7 @@ module.exports.cashout = async (req, res, next) => {
         balance: sequelize.literal(`CASE 
                 WHEN "cardNumber"='${number.replace(
                   / /g,
-                  ''
+                  ""
                 )}' AND "expiry"='${expiry}' AND "cvc"='${cvc}'
                     THEN "balance"+${sum}
                 WHEN "cardNumber"='${
@@ -300,12 +305,12 @@ module.exports.cashout = async (req, res, next) => {
         }' AND "cvc"='${CONSTANTS.SQUADHELP_BANK.CVC}'
                     THEN "balance"-${sum}
                  END
-                `)
+                `),
       },
       {
         cardNumber: {
-          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, '')]
-        }
+          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
+        },
       },
       transaction
     );
@@ -313,7 +318,7 @@ module.exports.cashout = async (req, res, next) => {
     const newTransactionInfo = {
       operationType: CONSTANTS.TRANSACTION_OPERATION_TYPES.INCOME,
       amount: sum,
-      userId
+      userId,
     };
     await Transaction.create(newTransactionInfo, { transaction });
 
@@ -327,14 +332,14 @@ module.exports.cashout = async (req, res, next) => {
 
 module.exports.getUserTransactions = async (req, res, next) => {
   const {
-    tokenData: { userId }
+    tokenData: { userId },
   } = req;
 
   try {
     const foundTransactions = await Transaction.findAll({
       where: { userId },
       raw: true,
-      attributes: { exclude: ['updatedAt', 'userId'] }
+      attributes: { exclude: ["updatedAt", "userId"] },
       //пагинация
     });
     res.status(200).send(foundTransactions);
