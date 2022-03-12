@@ -52,6 +52,8 @@ class ContestPage extends React.Component {
       },
     } = this.props;
 
+    console.log("ContestPage offers", offers);
+
     offers.forEach((i) => {
       array.push(
         <OfferBox
@@ -66,7 +68,9 @@ class ContestPage extends React.Component {
     return array.length !== 0 ? (
       array
     ) : (
-      <div className={styles.notFound}>There is no suggestion at this moment</div>
+      <div className={styles.notFound}>
+        There is no suggestion at this moment
+      </div>
     );
   };
 
@@ -90,7 +94,11 @@ class ContestPage extends React.Component {
       },
     } = CONSTANTS;
 
-    return contestCreatorId === userId && contestStatus === ACTIVE && offerStatus === PENDING;
+    return (
+      contestCreatorId === userId &&
+      contestStatus === ACTIVE &&
+      offerStatus === PENDING
+    );
   };
 
   setOfferStatus = (creatorId, offerId, command) => {
@@ -125,7 +133,9 @@ class ContestPage extends React.Component {
     } = this.props;
 
     const participants = [id, interlocutorId];
-    participants.sort((participant1, participant2) => participant1 - participant2);
+    participants.sort(
+      (participant1, participant2) => participant1 - participant2
+    );
 
     const findedMsgPrev = messagesPreview.find((prev) => {
       if (isEqual(participants, prev.participants)) {
@@ -168,7 +178,7 @@ class ContestPage extends React.Component {
       clearSetOfferStatusError,
     } = this.props;
 
-    console.log('this.props ContestPage', this.props);
+    console.log("this.props ContestPage", this.props);
 
     const {
       isShowOnFull,
@@ -194,7 +204,9 @@ class ContestPage extends React.Component {
         {isShowOnFull && (
           <LightBox
             mainSrc={`${PUBLIC_URL}${imagePath}`}
-            onCloseRequest={() => changeShowImage({ isShowOnFull: false, imagePath: null })}
+            onCloseRequest={() =>
+              changeShowImage({ isShowOnFull: false, imagePath: null })
+            }
           />
         )}
         <Header />
@@ -218,23 +230,24 @@ class ContestPage extends React.Component {
                 >
                   Brief
                 </span>
-                {
-                  (contestData.status === CONSTANTS.STATUS.CONTEST.ACTIVE && role === CONSTANTS.CUSTOMER) ? (
-                    null
-                  ) : (
-                    <span
-                      onClick={() => changeContestViewMode(false)}
-                      className={classNames(styles.btn, {
+                {contestData.status === CONSTANTS.STATUS.CONTEST.ACTIVE &&
+                role === CONSTANTS.CUSTOMER ? null : (
+                  <span
+                    onClick={() => changeContestViewMode(false)}
+                    className={classNames(styles.btn, {
                       [styles.activeBtn]: !isBrief,
                     })}
                   >
-                  Offer
-                </span>
-                  )
-                }
+                    Offer
+                  </span>
+                )}
               </div>
               {isBrief ? (
-                <Brief contestData={contestData} role={role} goChat={this.goChat} />
+                <Brief
+                  contestData={contestData}
+                  role={role}
+                  goChat={this.goChat}
+                />
               ) : (
                 <div className={styles.offersContainer}>
                   {role === CREATOR && contestData.status === ACTIVE && (
@@ -255,7 +268,10 @@ class ContestPage extends React.Component {
                 </div>
               )}
             </div>
-            <ContestSideBar contestData={contestData} totalEntries={offers.length} />
+            <ContestSideBar
+              contestData={contestData}
+              totalEntries={offers.length}
+            />
           </div>
         )}
       </div>

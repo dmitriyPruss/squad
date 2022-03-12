@@ -161,6 +161,8 @@ module.exports.getOffersForModerator = async (req, res, next) => {
       isEndData = true;
     }
 
+    // console.log("foundOffers", foundOffers);
+
     res.status(200).send({ foundOffers, isEndData });
   } catch (error) {
     next(error);
@@ -265,10 +267,12 @@ module.exports.setNewOffer = async (req, res, next) => {
     delete result.contestId;
     delete result.userId;
 
-    console.log("setNewOffer result", result);
-
     controller.getNotificationController().emitEntryCreated(customerId);
     const User = Object.assign({}, req.tokenData, { id: userId });
+
+    console.log("setNewOffer result", result);
+    console.log("User", User);
+
     res.send(Object.assign({}, result, { User }));
   } catch (e) {
     return next(new ServerError());

@@ -40,12 +40,7 @@ const OfferBox = (props) => {
     goToExpandedDialog,
   } = props;
 
-  console.log("OfferBox data", props.contestByIdStore);
-
   const { User } = props.data;
-
-  console.log("User", User);
-  console.log("offers :>> ", offers);
 
   const findConversationInfo = () => {
     const participants = [id, User.id];
@@ -165,12 +160,12 @@ const OfferBox = (props) => {
             <img
               onClick={() =>
                 changeShowImage({
-                  imagePath: offers[0].fileName,
+                  imagePath: data.fileName,
                   isShowOnFull: true,
                 })
               }
               className={styles.responseLogo}
-              src={`${PUBLIC_URL}${offers[0].fileName}`}
+              src={`${PUBLIC_URL}${data.fileName}`}
               alt="logo"
             />
           ) : (

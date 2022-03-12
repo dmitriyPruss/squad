@@ -70,12 +70,16 @@
 }
 
 .responseContainer {
-  width: 70%;
+  width: 10%;
   align-self: center;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  position: absolute;
+  right: 1px;
+  top: 0px;
 
   @media screen and (max-width: 800px) {
     margin-top: 10px;
@@ -84,8 +88,11 @@
 }
 
 .responseLogo {
-  width: auto;
-  height: 100px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #2b3030;
+  border-radius: 38px;
+  object-fit: cover;
 }
 
 .response {

@@ -53,7 +53,12 @@ export function* addOfferSaga(action) {
     console.log("setNewOffer data", data);
 
     const offers = yield select((state) => state.contestByIdStore.offers);
+
+    console.log("select offers", offers);
+
     offers.unshift(data);
+
+    console.log("setNewOffer offers", offers);
     yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
   } catch (e) {
     yield put({ type: ACTION.ADD_OFFER_ERROR, error: e.response });
