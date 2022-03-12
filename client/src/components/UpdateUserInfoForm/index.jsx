@@ -73,6 +73,7 @@ const UpdateUserInfoForm = (props) => {
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
             imgStyle: styles.imgStyle,
+            missingImg: styles.missingImg
           }}
         />
         <button type="submit" disabled={submitting}>

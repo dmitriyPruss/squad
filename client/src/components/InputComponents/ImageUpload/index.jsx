@@ -1,11 +1,10 @@
 import React from "react";
-import classNames from "classnames";
 import { useField } from "formik";
 
 const ImageUpload = (props) => {
   const {
     name,
-    classes: { uploadContainer, inputContainer, imgStyle },
+    classes: { uploadContainer, inputContainer, imgStyle, missingImg },
   } = props;
 
   const [field, meta, { setValue }] = useField(props);
@@ -35,17 +34,17 @@ const ImageUpload = (props) => {
         <span>Support only images (*.jpg, *.png, *.gif, *.jpeg)</span>
         <input
           {...field}
-          value={undefined}
+          value={""}
           id="fileInput"
           type="file"
           accept=".jpg, .gif, .png, .jpeg"
           onChange={onChange}
         />
-        <label htmlFor="fileInput">Chose file</label>
+        <label htmlFor="fileInput">Choose file</label>
       </div>
       <img
         id="imagePreview"
-        className={classNames({ [imgStyle]: !!field.value })}
+        className={field.value ? imgStyle : missingImg}
         alt="user"
       />
     </div>

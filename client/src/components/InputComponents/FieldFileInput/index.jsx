@@ -2,8 +2,13 @@ import React from "react";
 import { Field, useField } from "formik";
 
 const FieldFileInput = (props) => {
-  const { fileUploadContainer, labelClass, fileNameClass, fileInput } =
-    props.classes;
+  const {
+    fileUploadContainer,
+    labelClass,
+    imageStyle,
+    missingImage,
+    fileInput,
+  } = props.classes;
 
   const [field, meta, { setValue }] = useField(props);
 
@@ -32,35 +37,27 @@ const FieldFileInput = (props) => {
     }
   };
 
-  // return (
-  //   <Field name={rest.name}>
-  //     {(props) => {
-  //       const { field } = props;
-
-  //       const getFileName = () => (field.value ? field.value.name : "???");
-
   return (
     <div className={fileUploadContainer}>
       <label htmlFor="fileInput" className={labelClass}>
         Choose file
       </label>
 
-      {/* {getFileName()} */}
-
       <input
         {...field}
-        value={undefined}
+        value={""}
         className={fileInput}
         id="fileInput"
         type="file"
         onChange={getFile}
       />
-      <img id="fileNameContainer" alt="image" />
+      <img
+        id="fileNameContainer"
+        className={field.value !== "" ? imageStyle : missingImage}
+        alt="image"
+      />
     </div>
   );
-  //   }}
-  // </Field>
-  // );
 };
 
 export default FieldFileInput;

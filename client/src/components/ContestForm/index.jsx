@@ -160,7 +160,8 @@ class ContestForm extends React.Component {
                 classes={{
                   fileUploadContainer: styles.fileUploadContainer,
                   labelClass: styles.label,
-                  fileNameClass: styles.fileName,
+                  imageStyle: styles.imgStyle,
+                  missingImage: styles.missingImage,
                   fileInput: styles.fileInput,
                   warning: styles.warning,
                 }}
