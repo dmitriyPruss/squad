@@ -203,7 +203,7 @@ const CreatorBox = (props) => {
         <div className={styles.btnsContainer}>
           <Button
             as="button"
-            variant="success"
+            variant="outline-success"
             className={styles.resolveBtn}
             onClick={resolveOffer}
           >
@@ -211,7 +211,7 @@ const CreatorBox = (props) => {
           </Button>
           <Button
             as="button"
-            variant="danger"
+            variant="outline-danger"
             className={styles.rejectBtn}
             onClick={rejectOffer}
           >

@@ -1,11 +1,8 @@
 .offerContainer {
   position: relative;
-  border-radius: 5px;
-  background: #46568a radial-gradient(circle at 0 0, #6e83ce, #4f619d);
+  background: #2b3030;
 
-  box-shadow: inset rgba(0, 0, 0, 0.5) -3px -3px 8px,
-    inset rgba(177, 208, 255, 0.9) 3px 3px 8px,
-    rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
+  box-shadow: 0 0 7px 3px #46568a;
 
   @media screen and (max-width: 450px) {
     padding: 10px 0;
@@ -103,6 +100,7 @@
   border: 1px solid #2b3030;
   border-radius: 38px;
   object-fit: cover;
+  background-color: #fff;
 }
 
 .response {
@@ -110,7 +108,7 @@
   overflow-wrap: break-word;
   align-self: stretch;
   margin-left: 10px;
-  // color: #556da5;
+  color: #ebf2ff;
   margin-bottom: 10px;
   font-size: 18px;
 }
@@ -123,7 +121,7 @@
 
 .userScoreLabel {
   margin-right: 10px;
-  // color: #46568a;
+  color: #ebf2ff;
   font-size: 15px;
 }
 
@@ -147,7 +145,7 @@
   justify-content: flex-start;
 
   span {
-    // color: #46568a;
+    color: #ebf2ff;
     font-size: 16px;
     font-weight: 500;
     margin-left: 10px;
