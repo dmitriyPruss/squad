@@ -5,11 +5,18 @@ import { Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import CreatorBox from "./CreatorBox";
-import { setOfferStatus, getOffersForModeratorAction } from "../../actions/actionCreator";
+import {
+  setOfferStatus,
+  getOffersForModeratorAction,
+} from "../../actions/actionCreator";
 import CONSTANTS from "../../constants";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowAltCircleLeft, faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowAltCircleLeft,
+  faArrowAltCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { ReactComponent as OfferImg } from "./offer.svg";
 
 import styles from "./OfferList.module.scss";
 
@@ -23,13 +30,13 @@ function OfferList(props) {
   const { getOffersForModerator, checkOffers, isEndData } = props;
 
   console.log("OfferList checkOffers", checkOffers);
-  console.log('OfferList isEndData', isEndData);
+  console.log("OfferList isEndData", isEndData);
 
   const [page, setPage] = useState(1);
 
   const clickNextPage = () => {
     if (checkOffers.length) {
-      setPage(page + 1); 
+      setPage(page + 1);
     }
 
     console.log("page", page);
@@ -43,7 +50,7 @@ function OfferList(props) {
   };
 
   useLayoutEffect(() => {
-    setPage(1); 
+    setPage(1);
   }, [isEndData]);
 
   useEffect(() => {
@@ -78,7 +85,15 @@ function OfferList(props) {
     <>
       <Header />
       <article className={styles.offerList}>
-        <h1>OFFERS</h1>
+        {/* <h1>OFFERS</h1> */}
+        <OfferImg className={styles.header} />
+        <div className={styles.moderatorImg}>
+          <span>ONLY FOR </span>
+          <img
+            src="https://as1.ftcdn.net/v2/jpg/01/29/15/06/1000_F_129150651_ZXbFPssqK8wrfP3Zz7hwD1BWG6Xun4lC.jpg"
+            alt=""
+          />
+        </div>
         <section className={styles.offerContainer}>
           {checkOffers.length !== 0 ? (
             checkOffers.map(setOfferList)
@@ -118,4 +133,6 @@ const mapDispatchToProps = (dispatch) => ({
   getOffersForModerator: (page) => dispatch(getOffersForModeratorAction(page)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferList));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OfferList)
+);

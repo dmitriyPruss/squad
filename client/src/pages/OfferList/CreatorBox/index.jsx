@@ -151,16 +151,26 @@ const CreatorBox = (props) => {
           <div className={styles.creativeRating}>
             <span className={styles.userScoreLabel}>Creative Rating </span>
             <Rating
+              className={styles.ratingStars}
               initialRating={User_rating}
               fractions={2}
               fullSymbol={
-                <img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />
+                <img
+                  className={styles.ratingStar}
+                  src={`${STATIC_IMAGES_PATH}star.png`}
+                  alt="star"
+                />
               }
               placeholderSymbol={
-                <img src={`${STATIC_IMAGES_PATH}star.png`} alt="star" />
+                <img
+                  className={styles.ratingStar}
+                  src={`${STATIC_IMAGES_PATH}star.png`}
+                  alt="star"
+                />
               }
               emptySymbol={
                 <img
+                  className={styles.ratingStar}
                   src={`${STATIC_IMAGES_PATH}star-outline.png`}
                   alt="star-outline"
                 />
@@ -172,12 +182,6 @@ const CreatorBox = (props) => {
         <div className={styles.responseContainer}>
           {Contest_contestType === LOGO ? (
             <img
-              onClick={() =>
-                changeShowImage({
-                  imagePath: fileName,
-                  isShowOnFull: true,
-                })
-              }
               className={styles.responseLogo}
               src={`${PUBLIC_URL}${fileName}`}
               alt="logo"
@@ -199,7 +203,7 @@ const CreatorBox = (props) => {
         <div className={styles.btnsContainer}>
           <Button
             as="button"
-            variant="outline-success"
+            variant="success"
             className={styles.resolveBtn}
             onClick={resolveOffer}
           >
@@ -207,7 +211,7 @@ const CreatorBox = (props) => {
           </Button>
           <Button
             as="button"
-            variant="outline-danger"
+            variant="danger"
             className={styles.rejectBtn}
             onClick={rejectOffer}
           >

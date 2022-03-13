@@ -146,6 +146,8 @@ module.exports.messagesForCreator = async (
     return offerData;
   });
 
+  console.log("messages", messages);
+
   return messages;
 };
 
