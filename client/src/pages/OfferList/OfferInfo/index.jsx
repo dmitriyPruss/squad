@@ -1,4 +1,5 @@
 import React from "react";
+import CONSTANTS from "../../../constants";
 import styles from "./OfferInfo.module.scss";
 
 const OfferInfo = (props) => {
@@ -11,6 +12,7 @@ const OfferInfo = (props) => {
       "Contest.focusOfWork": Contest_focusOfWork,
       "Contest.targetCustomer": Contest_targetCustomer,
       "Contest.industry": Contest_industry,
+      "Contest.fileName": Contest_fileName,
     },
   } = props;
 
@@ -48,6 +50,18 @@ const OfferInfo = (props) => {
           <span>Industry of company:</span>
           <span>{Contest_industry}</span>
         </li>
+        {Contest_fileName ? (
+          <li>
+            <span>Image:</span>
+            <img
+              className={styles.chosenImg}
+              src={`${CONSTANTS.PUBLIC_URL}${Contest_fileName}`}
+              alt="file"
+            />
+          </li>
+        ) : (
+          ""
+        )}
       </ul>
     </section>
   );

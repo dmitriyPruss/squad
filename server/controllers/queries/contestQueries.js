@@ -100,6 +100,7 @@ module.exports.offersForModerator = async (currentOffset) => {
           "targetCustomer",
           "industry",
           "priority",
+          "fileName",
         ],
       },
     ],
