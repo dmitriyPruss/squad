@@ -16,7 +16,6 @@ header {
   & > h1 {
     color: #e5e7eb;
     text-shadow: 0px 1px 1px #a0a0a0;
-
     font-weight: bold;
     font-size: 2.5em;
     margin: 10px;
@@ -39,7 +38,6 @@ header {
 .loaderContainer {
   position: absolute;
   top: 0px;
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -153,14 +151,13 @@ header {
 }
 
 .pageButtons {
-  width: 70%;
-  min-width: 320px;
+  width: 320px;
   padding: 10px;
   display: flex;
   justify-content: space-evenly;
 
   & > button {
-    width: 12%;
+    width: 30%;
     min-width: 80px;
     padding: 5px 12px;
     border: 2px solid #dee0e4;

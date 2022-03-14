@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Rating from "react-rating";
-import { withRouter } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 import {
   changeMark,
@@ -19,9 +18,6 @@ import styles from "./CreatorBox.module.scss";
 
 const CreatorBox = (props) => {
   const {
-    STATUS: {
-      OFFER: { REJECTED, WON },
-    },
     CONTEST: { LOGO },
     ANONYM_IMAGE_PATH,
     PUBLIC_URL,
@@ -35,22 +31,19 @@ const CreatorBox = (props) => {
       contestId,
       text,
       fileName,
-      status,
-      "User.id": User_id,
-      "User.avatar": User_avatar,
-      "User.firstName": User_firstName,
-      "User.lastName": User_lastName,
-      "User.email": User_email,
-      "User.rating": User_rating,
-      "Contest.contestType": Contest_contestType,
-      "Contest.orderId": Contest_orderId,
-      "Contest.priority": Contest_priority,
+      "User.id": userId,
+      "User.avatar": avatar,
+      "User.firstName": firstName,
+      "User.lastName": lastName,
+      "User.email": email,
+      "User.rating": rating,
+      "Contest.contestType": contestType,
+      "Contest.orderId": orderId,
+      "Contest.priority": priority,
     },
     setOfferStatus,
     getOffersForModerator,
   } = props;
-
-  console.log("CREATOR_BOX props.data", props.data);
 
   const resolveOffer = () => {
     confirmAlert({
@@ -64,18 +57,16 @@ const CreatorBox = (props) => {
               setOfferStatus({
                 command: "resolve",
                 contestId,
-                creatorId: User_id,
+                creatorId: userId,
                 offerId: id,
-                orderId: Contest_orderId,
-                priority: Contest_priority,
+                orderId,
+                priority: priority,
               });
 
               setTimeout(() => {
-                console.log("before or after?");
                 resolve(true);
               }, 300);
             }).then((res) => {
-              console.log("res", res);
               getOffersForModerator(page);
             });
           },
@@ -86,6 +77,7 @@ const CreatorBox = (props) => {
       ],
     });
   };
+
   const rejectOffer = () => {
     confirmAlert({
       title: "confirm",
@@ -98,18 +90,16 @@ const CreatorBox = (props) => {
               setOfferStatus({
                 command: "reject",
                 contestId,
-                creatorId: User_id,
+                creatorId: userId,
                 offerId: id,
-                orderId: Contest_orderId,
-                priority: Contest_priority,
+                orderId,
+                priority: priority,
               });
 
               setTimeout(() => {
-                console.log("before or after?");
                 resolve(true);
               }, 300);
             }).then((res) => {
-              console.log("res reject", res);
               getOffersForModerator(page);
             });
           },
@@ -120,15 +110,6 @@ const CreatorBox = (props) => {
       ],
     });
   };
-  // // const changeMarkValue = (value) => {
-  // //   clearError();
-  // //   changeMark({
-  // //     mark: value,
-  // //     offerId: id,
-  // //     isFirst: !data.mark,
-  // //     creatorId: User.id,
-  // //   });
-  // // };
 
   return (
     <article className={styles.offerContainer}>
@@ -137,22 +118,22 @@ const CreatorBox = (props) => {
           <div className={styles.creativeInfoContainer}>
             <img
               src={
-                User_avatar === "anon.png"
+                avatar === "anon.png"
                   ? ANONYM_IMAGE_PATH
-                  : `${PUBLIC_URL}${User_avatar}`
+                  : `${PUBLIC_URL}${avatar}`
               }
               alt="user"
             />
             <div className={styles.nameAndEmail}>
-              <span>{`${User_firstName} ${User_lastName}`}</span>
-              <span>{User_email}</span>
+              <span>{`${firstName} ${lastName}`}</span>
+              <span>{email}</span>
             </div>
           </div>
           <div className={styles.creativeRating}>
             <span className={styles.userScoreLabel}>Creative Rating </span>
             <Rating
               className={styles.ratingStars}
-              initialRating={User_rating}
+              initialRating={rating}
               fractions={2}
               fullSymbol={
                 <img
@@ -180,45 +161,39 @@ const CreatorBox = (props) => {
           </div>
         </div>
         <div className={styles.responseContainer}>
-          {Contest_contestType === LOGO ? (
-            <img
-              className={styles.responseLogo}
-              src={`${PUBLIC_URL}${fileName}`}
-              alt="logo"
-            />
+          {contestType === LOGO ? (
+            <div className={styles.responseImg}>
+              <span>Logo </span>
+              <img
+                className={styles.responseLogo}
+                src={`${PUBLIC_URL}${fileName}`}
+                alt="logo"
+              />
+            </div>
           ) : (
             <span className={styles.response}>{text}</span>
           )}
         </div>
       </div>
-      <OfferInfo
-        data={props.data}
-        // userId={id}
-        // contestData={contestData}
-        // changeEditContest={changeEditContest}
-        // role={role}
-        // goChat={goChat}
-      />
-      {props.needButtons(status) && (
-        <div className={styles.btnsContainer}>
-          <Button
-            as="button"
-            variant="outline-success"
-            className={styles.resolveBtn}
-            onClick={resolveOffer}
-          >
-            Confirm
-          </Button>
-          <Button
-            as="button"
-            variant="outline-danger"
-            className={styles.rejectBtn}
-            onClick={rejectOffer}
-          >
-            Reject
-          </Button>
-        </div>
-      )}
+      <OfferInfo data={props.data} />
+      <div className={styles.btnsContainer}>
+        <Button
+          as="button"
+          variant="outline-success"
+          className={styles.resolveBtn}
+          onClick={resolveOffer}
+        >
+          Confirm
+        </Button>
+        <Button
+          as="button"
+          variant="outline-danger"
+          className={styles.rejectBtn}
+          onClick={rejectOffer}
+        >
+          Reject
+        </Button>
+      </div>
     </article>
   );
 };
@@ -249,6 +224,4 @@ const mapDispatchToProps = (dispatch) => ({
   setOfferStatus: (data) => dispatch(setOfferStatus(data)),
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CreatorBox)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatorBox);

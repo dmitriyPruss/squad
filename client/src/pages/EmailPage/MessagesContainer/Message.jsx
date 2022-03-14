@@ -1,12 +1,12 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
-import styles from "./../EmailPage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShareFromSquare,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import CONSTANTS from "./../../../constants";
+import styles from "./../EmailPage.module.scss";
 
 function Message(props) {
   const {
@@ -26,8 +26,6 @@ function Message(props) {
     },
     PUBLIC_URL,
   } = CONSTANTS;
-
-  console.log("creatorEmail", email);
 
   return (
     <li className={styles.message}>

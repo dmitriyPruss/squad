@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import Message from "./Message";
-import {
-  getEmailMessageAction,
-  directEmailBoxAction,
-} from "../../../actions/actionCreator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowAltCircleLeft,
   faArrowAltCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Message from "./Message";
+import {
+  getEmailMessageAction,
+  directEmailBoxAction,
+} from "../../../actions/actionCreator";
 import Spinner from "react-bootstrap/Spinner";
 import styles from "./../EmailPage.module.scss";
 
 function MessagesContainer(props) {
-  console.log("props MessagesContainer", props);
-
   const {
     getEmailMessages,
     directEmailBox,
@@ -29,13 +27,11 @@ function MessagesContainer(props) {
 
   const clickNextPage = () => {
     setPage(page + 1);
-    console.log("page", page);
   };
 
   const clickPrevPage = () => {
     if (page !== 1 && page > 1) {
       setPage(page - 1);
-      console.log("page", page);
     }
   };
 

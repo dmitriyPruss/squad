@@ -335,13 +335,17 @@ module.exports.getUserTransactions = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
+  console.log("userId", userId);
+
   try {
     const foundTransactions = await Transaction.findAll({
       where: { userId },
       raw: true,
       attributes: { exclude: ["updatedAt", "userId"] },
-      //пагинация
     });
+
+    console.log("foundTransactions", foundTransactions);
+
     res.status(200).send(foundTransactions);
   } catch (err) {
     next(new ServerError());
