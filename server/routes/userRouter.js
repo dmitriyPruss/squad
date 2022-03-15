@@ -53,7 +53,7 @@ userRouter.post(
 userRouter.get(
   "/transactions",
   checkToken,
-  // basicMiddlewares.onlyForCreative,
+  basicMiddlewares.onlyForCreative,
   userController.getUserTransactions
 );
 

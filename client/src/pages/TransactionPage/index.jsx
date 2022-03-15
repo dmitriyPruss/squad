@@ -16,8 +16,6 @@ function TransactionPage(props) {
     getTransactions,
   } = props;
 
-  console.log("transactions", transactions);
-
   useEffect(() => {
     getTransactions();
   }, [transactions.length]);

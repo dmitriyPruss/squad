@@ -185,19 +185,28 @@ class ContestPage extends React.Component {
       imagePath,
       error,
       isFetching,
-      isBrief,
       contestData,
       offers,
       setOfferStatusError,
     } = contestByIdStore;
 
+    let { isBrief } = contestByIdStore;
+
     const {
       CREATOR,
+      CUSTOMER,
       PUBLIC_URL,
       STATUS: {
         CONTEST: { ACTIVE },
       },
     } = CONSTANTS;
+
+    console.log("contestData.status", contestData && contestData.status);
+    console.log("isBrief", isBrief);
+
+    if (contestData?.status === ACTIVE) {
+      isBrief = true;
+    }
 
     return (
       <div>
@@ -230,8 +239,7 @@ class ContestPage extends React.Component {
                 >
                   Brief
                 </span>
-                {contestData.status === CONSTANTS.STATUS.CONTEST.ACTIVE &&
-                role === CONSTANTS.CUSTOMER ? null : (
+                {contestData.status === ACTIVE && role === CUSTOMER ? null : (
                   <span
                     onClick={() => changeContestViewMode(false)}
                     className={classNames(styles.btn, {

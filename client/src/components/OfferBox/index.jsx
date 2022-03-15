@@ -68,9 +68,15 @@ const OfferBox = (props) => {
 
   const changeMarkValue = (value) => {
     clearError();
+    console.log("value", value);
+    console.log("data.mark :>> ", data.mark);
+    console.log("User.id :>> ", User.id);
+
+    console.log("data :>> ", data);
+
     changeMark({
       mark: value,
-      offerId: id,
+      offerId: data.id,
       isFirst: !data.mark,
       creatorId: User.id,
     });
@@ -144,19 +150,6 @@ const OfferBox = (props) => {
         </div>
         <div className={styles.responseConainer}>
           {contestType === LOGO ? (
-            // <img
-            //   onClick={() =>
-            //     changeShowImage({
-            //       imagePath: User.fileName,
-            //       isShowOnFull: true,
-            //     })
-            //   }
-            //   className={styles.responseLogo}
-            //   src={`${PUBLIC_URL}${User.fileName}`}
-            //   alt="logo"
-            // />
-
-            // Черновик
             <img
               onClick={() =>
                 changeShowImage({
