@@ -204,7 +204,7 @@ class ContestPage extends React.Component {
     console.log("contestData.status", contestData && contestData.status);
     console.log("isBrief", isBrief);
 
-    if (contestData?.status === ACTIVE) {
+    if (contestData?.status === ACTIVE && role === CUSTOMER) {
       isBrief = true;
     }
 

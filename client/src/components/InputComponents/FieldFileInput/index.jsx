@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, useField } from "formik";
+import CONSTANTS from "./../../../constants";
 
 const FieldFileInput = (props) => {
   const {
@@ -12,19 +13,15 @@ const FieldFileInput = (props) => {
 
   const [field, meta, { setValue }] = useField(props);
 
+  const nameContainer = window.document.getElementById("fileNameContainer");
+
   const getFile = (e) => {
-    // console.log("e.target.files :>> ", e.target.files);
-    // console.log("e.target.value :>> ", e.target.value);
-
-    const nameContainer = window.document.getElementById("fileNameContainer");
-
     const file = e.target.files[0];
     const imageType = /image\/jpeg|gif|png|jpg/;
 
     if (!file.type.match(imageType)) {
       e.target.value = "";
     } else {
-      // nameContainer.textContent = file.name;
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -36,6 +33,8 @@ const FieldFileInput = (props) => {
       setValue(file);
     }
   };
+
+  console.log("field", field);
 
   return (
     <div className={fileUploadContainer}>
@@ -53,7 +52,7 @@ const FieldFileInput = (props) => {
       />
       <img
         id="fileNameContainer"
-        className={field.value !== "" ? imageStyle : missingImage}
+        className={field.value.type ? imageStyle : missingImage}
         alt="image"
       />
     </div>
