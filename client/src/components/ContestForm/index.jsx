@@ -53,10 +53,9 @@ class ContestForm extends React.Component {
         getData({ characteristic1: "brandStyle" });
         break;
       }
-      default:{
+      default: {
         break;
       }
-
     }
   };
 
@@ -73,6 +72,8 @@ class ContestForm extends React.Component {
       isEditContest,
       initialValues: initVals,
     } = this.props;
+
+    console.log("this.props", this.props);
 
     if (error) {
       return <TryAgain getData={this.getPreference} />;
@@ -126,7 +127,9 @@ class ContestForm extends React.Component {
                 />
               </div>
               <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>What does your company / business do?</span>
+                <span className={styles.inputHeader}>
+                  What does your company / business do?
+                </span>
                 <FormTextArea
                   name="focusOfWork"
                   type="text"
@@ -139,7 +142,9 @@ class ContestForm extends React.Component {
                 />
               </div>
               <div className={styles.inputContainer}>
-                <span className={styles.inputHeader}>Tell us about your customers</span>
+                <span className={styles.inputHeader}>
+                  Tell us about your customers
+                </span>
                 <FormTextArea
                   name="targetCustomer"
                   type="text"
@@ -157,7 +162,8 @@ class ContestForm extends React.Component {
                 classes={{
                   fileUploadContainer: styles.fileUploadContainer,
                   labelClass: styles.label,
-                  fileNameClass: styles.fileName,
+                  imageStyle: styles.imgStyle,
+                  missingImage: styles.missingImage,
                   fileInput: styles.fileInput,
                   warning: styles.warning,
                 }}
@@ -194,4 +200,6 @@ const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch(getDataForContest(data)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ContestForm));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ContestForm)
+);

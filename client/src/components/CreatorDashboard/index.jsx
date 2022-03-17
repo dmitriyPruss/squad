@@ -12,8 +12,15 @@ import {
 } from "../../actions/actionCreator";
 import ContestsContainer from "../ContestsContainer";
 import ContestBox from "../ContestBox";
-import styles from "./CreatorDashboard.module.sass";
 import TryAgain from "../TryAgain";
+import CONSTANTS from "./../../constants";
+import styles from "./CreatorDashboard.module.sass";
+
+const {
+  STATUS: {
+    CONTEST: { ACTIVE },
+  },
+} = CONSTANTS;
 
 const types = [
   "",
@@ -218,11 +225,13 @@ class CreatorDashboard extends React.Component {
   setContestList = () => {
     const { contests } = this.props;
 
-    const array = contests.map((item) => (
+    const activeContests = contests.filter(
+      (contest) => contest.status === ACTIVE
+    );
+
+    return activeContests.map((item) => (
       <ContestBox data={item} key={item.id} goToExtended={this.goToExtended} />
     ));
-
-    return array;
   };
 
   goToExtended = (contestId) => {
@@ -344,4 +353,6 @@ const mapDispatchToProps = (dispatch) => ({
   getDataForContest: () => dispatch(getDataForContest()),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatorDashboard));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CreatorDashboard)
+);

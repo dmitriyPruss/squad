@@ -1,9 +1,9 @@
-import { put } from 'redux-saga/effects';
-import ACTION from '../actions/actionTypes';
-import * as restController from '../api/rest/restController';
-import { controller } from '../api/ws/socketController';
+import { put } from "redux-saga/effects";
+import ACTION from "../actions/actionTypes";
+import * as restController from "../api/rest/restController";
+import { controller } from "../api/ws/socketController";
 
-export function * privateSaga (action) {
+export function* privateSaga(action) {
   yield put({ type: ACTION.GET_USER_REQUEST });
 
   try {
@@ -17,22 +17,27 @@ export function * privateSaga (action) {
   }
 }
 
-export function * notAuthorizeSaga (action) {
+export function* notAuthorizeSaga(action) {
   yield put({ type: ACTION.GET_USER_REQUEST });
   try {
     const { data } = yield restController.getUser();
 
     console.log(`notAuthorizeSaga data`, data);
-    action.replace('/');
+    action.replace("/");
     yield put({ type: ACTION.GET_USER_SUCCESS, data });
   } catch (e) {
     yield put({ type: ACTION.GET_USER_ERROR, error: e });
   }
 }
 
-export function * updateUserData (action) {
+export function* updateUserData(action) {
+  console.log("action.data", action.data);
+
   try {
     const { data } = yield restController.updateUser(action.data);
+
+    console.log("data", data);
+
     yield put({ type: ACTION.UPDATE_USER_DATA_SUCCESS, data });
     yield put({ type: ACTION.CHANGE_EDIT_MODE_ON_USER_PROFILE, data: false });
   } catch (e) {
@@ -40,7 +45,7 @@ export function * updateUserData (action) {
   }
 }
 
-export function * headerRequest () {
+export function* headerRequest() {
   yield put({ type: ACTION.GET_USER_REQUEST });
   try {
     const { data } = yield restController.getUser();

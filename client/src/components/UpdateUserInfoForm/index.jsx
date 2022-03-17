@@ -18,7 +18,13 @@ const UpdateUserInfoForm = (props) => {
       validationSchema={Schemes.UpdateUserSchema}
     >
       <Form className={styles.updateContainer}>
-        {error && <Error data={error.data} status={error.status} clearError={clearUserError} />}
+        {error && (
+          <Error
+            data={error.data}
+            status={error.status}
+            clearError={clearUserError}
+          />
+        )}
         <div className={styles.container}>
           <span className={styles.label}>First Name</span>
           <FormInput
@@ -67,6 +73,7 @@ const UpdateUserInfoForm = (props) => {
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
             imgStyle: styles.imgStyle,
+            missingImg: styles.missingImg
           }}
         />
         <button type="submit" disabled={submitting}>
@@ -79,15 +86,19 @@ const UpdateUserInfoForm = (props) => {
 
 const mapStateToProps = (state) => {
   const {
-    data: { firstName, lastName, displayName },
+    data: { firstName, lastName, displayName, avatar },
     error,
   } = state.userStore;
+
+  console.log("state.userStore :>> ", state.userStore);
+
   return {
     error,
     initialValues: {
       firstName,
       lastName,
       displayName,
+      avatar,
     },
   };
 };

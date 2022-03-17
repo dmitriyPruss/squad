@@ -1,16 +1,16 @@
-import { put } from 'redux-saga/effects';
+import { put } from "redux-saga/effects";
 import {
   getTransactionError,
   getTransactionRequest,
-  getTransactionSuccess
-} from '../actions/actionCreator';
-import * as restController from '../api/rest/restController';
+  getTransactionSuccess,
+} from "../actions/actionCreator";
+import * as restController from "../api/rest/restController";
 
-export function * getTransactionSaga () {
+export function* getTransactionSaga() {
   yield put(getTransactionRequest());
   try {
     const { data: transactions } = yield restController.getTransactions();
-    console.log(`transactions`, transactions);
+
     yield put(getTransactionSuccess(transactions));
   } catch (err) {
     console.log(`err`, err.response);

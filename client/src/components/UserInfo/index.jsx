@@ -1,33 +1,30 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import UpdateUserInfoForm from '../UpdateUserInfoForm';
+import React from "react";
+import { connect } from "react-redux";
+import UpdateUserInfoForm from "../UpdateUserInfoForm";
 import {
   updateUserData,
-  changeEditModeOnUserProfile
-} from '../../actions/actionCreator';
-import CONSTANTS from '../../constants';
-import styles from './UserInfo.module.sass';
+  changeEditModeOnUserProfile,
+} from "../../actions/actionCreator";
+import CONSTANTS from "../../constants";
+import styles from "./UserInfo.module.sass";
 
-const UserInfo = props => {
+const UserInfo = (props) => {
   const { isEdit, changeEditMode, data, updateUser } = props;
-  const {
-    avatar,
-    firstName,
-    lastName,
-    displayName,
-    email,
-    role,
-    balance
-  } = data;
+  const { avatar, firstName, lastName, displayName, email, role, balance } =
+    data;
 
-  const updateUserData = values => {
+  const updateUserData = (values) => {
     const { file, firstName, lastName, displayName } = values;
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('displayName', displayName);
+    formData.append("file", file);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("displayName", displayName);
+
+    console.log("values", values);
+    console.log("formData", formData);
+
     updateUser(formData);
   };
 
@@ -39,12 +36,12 @@ const UserInfo = props => {
         <div className={styles.infoContainer}>
           <img
             src={
-              avatar === 'anon.png'
+              avatar === "anon.png"
                 ? CONSTANTS.ANONYM_IMAGE_PATH
                 : `${CONSTANTS.PUBLIC_URL}${avatar}`
             }
             className={styles.avatar}
-            alt='user'
+            alt="user"
           />
           <div className={styles.infoContainer}>
             <div className={styles.infoBlock}>
@@ -80,24 +77,24 @@ const UserInfo = props => {
         onClick={() => changeEditMode(!isEdit)}
         className={styles.buttonEdit}
       >
-        {isEdit ? 'Cancel' : 'Edit'}
+        {isEdit ? "Cancel" : "Edit"}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     userStore: { data },
-    userProfile: { isEdit }
+    userProfile: { isEdit },
   } = state;
 
   return { data, isEdit };
 };
 
-const mapDispatchToProps = dispatch => ({
-  updateUser: data => dispatch(updateUserData(data)),
-  changeEditMode: data => dispatch(changeEditModeOnUserProfile(data))
+const mapDispatchToProps = (dispatch) => ({
+  updateUser: (data) => dispatch(updateUserData(data)),
+  changeEditMode: (data) => dispatch(changeEditModeOnUserProfile(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInfo);

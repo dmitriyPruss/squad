@@ -1,24 +1,24 @@
-const { Router } = require('express');
-const validators = require('./../middlewares/validators');
-const hashPass = require('./../middlewares/hashPassMiddle');
-const userController = require('./../controllers/userController');
-const { checkToken, checkAuth } = require('./../middlewares/checkToken');
-const basicMiddlewares = require('./../middlewares/basicMiddlewares');
-const upload = require('./../utils/fileUpload');
+const { Router } = require("express");
+const validators = require("./../middlewares/validators");
+const hashPass = require("./../middlewares/hashPassMiddle");
+const userController = require("./../controllers/userController");
+const { checkToken, checkAuth } = require("./../middlewares/checkToken");
+const basicMiddlewares = require("./../middlewares/basicMiddlewares");
+const upload = require("./../utils/fileUpload");
 
 const userRouter = Router();
 
 userRouter.post(
-  '/registration',
+  "/registration",
   validators.validateRegistrationData,
   hashPass,
   userController.registration
 );
 
-userRouter.post('/login', validators.validateLogin, userController.login);
+userRouter.post("/login", validators.validateLogin, userController.login);
 
 userRouter.post(
-  '/pay',
+  "/pay",
   checkToken,
   basicMiddlewares.onlyForCustomer,
   upload.uploadContestFiles,
@@ -27,27 +27,34 @@ userRouter.post(
   userController.payment
 );
 
-userRouter.post('/getUser', checkAuth);
+userRouter.post("/getUser", checkAuth);
 
 userRouter.post(
-  '/changeMark',
+  "/changeMark",
   checkToken,
   basicMiddlewares.onlyForCustomer,
   userController.changeMark
 );
 
 userRouter.post(
-  '/updateUser',
+  "/updateUser",
   checkToken,
   upload.uploadAvatar,
   userController.updateUser
 );
 
 userRouter.post(
-  '/cashout',
+  "/cashout",
   checkToken,
   basicMiddlewares.onlyForCreative,
   userController.cashout
+);
+
+userRouter.get(
+  "/transactions",
+  checkToken,
+  basicMiddlewares.onlyForCreative,
+  userController.getUserTransactions
 );
 
 module.exports = userRouter;

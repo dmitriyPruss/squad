@@ -101,8 +101,6 @@ export const setOffer = (data) => ({
 });
 
 export const setOfferStatus = (data) => {
-  console.log("data", data);
-
   return {
     type: ACTION.SET_OFFER_STATUS_ACTION,
     data,

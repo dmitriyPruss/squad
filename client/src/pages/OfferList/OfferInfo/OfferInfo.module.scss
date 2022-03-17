@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  height: 300px;
+  height: 310px;
 
   & > h4 {
     color: #46568a;
@@ -15,6 +15,10 @@
     text-align: end;
     letter-spacing: 2px;
     padding-bottom: 5px;
+  }
+
+  @media screen and (max-width: 450px) {
+    height: 320px;
   }
 }
 
@@ -27,7 +31,7 @@
   width: 80%;
 
   & > li {
-    background-color: #fff;
+    background-color: #f4f7fd;
     padding: 2px;
     margin: 2px;
     width: 100%;
@@ -42,6 +46,15 @@
     & > span:last-child {
       margin-left: 5px;
       color: #2b3030;
+    }
+
+    .chosenImg {
+      width: 45px;
+      max-height: 45px;
+      margin-left: 10px;
+      padding: 2px;
+
+      border: 1px solid #46568a;
     }
   }
 }

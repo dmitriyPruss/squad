@@ -7,6 +7,7 @@ const initialState = {
   isEditContest: false,
   error: null,
   offers: [],
+
   changeMarkError: null,
   addOfferError: null,
   setOfferStatusError: null,

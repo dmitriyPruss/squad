@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import { connect } from 'react-redux';
-import styles from './TransactionPage.module.sass';
-import { getTransactionAction } from '../../actions/actionCreator';
-import TransactionTable from './TransactionTable';
+import React, { useEffect } from "react";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import { connect } from "react-redux";
+import styles from "./TransactionPage.module.sass";
+import { getTransactionAction } from "../../actions/actionCreator";
+import TransactionTable from "./TransactionTable";
 
-function TransactionPage (props) {
+function TransactionPage(props) {
   const {
     firstName,
     lastName,
@@ -26,10 +26,10 @@ function TransactionPage (props) {
       {isFetching && (
         <div
           style={{
-            fontSize: '22px',
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '30px',
+            fontSize: "22px",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "30px",
           }}
         >
           Loading...
@@ -38,9 +38,9 @@ function TransactionPage (props) {
       {error && (
         <div
           style={{
-            fontSize: '28px',
-            fontWeight: 'bold',
-            color: '',
+            fontSize: "28px",
+            fontWeight: "bold",
+            color: "",
           }}
         >
           Something went wrong. Visit our site later...
@@ -57,7 +57,7 @@ function TransactionPage (props) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const {
     userStore: {
       data: { firstName, lastName },
@@ -68,7 +68,7 @@ const mapStateToProps = state => {
   return { firstName, lastName, transactions, error, isFetching };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   getTransactions: () => dispatch(getTransactionAction()),
 });
 

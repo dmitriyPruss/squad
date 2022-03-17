@@ -18,6 +18,9 @@ const Payment = (props) => {
 
   const pay = (values) => {
     const contestArray = [];
+
+    console.log("PAY contests :>> ", contests);
+
     Object.keys(contests).forEach((key) => contestArray.push(contests[key]));
     const { number, expiry, cvc } = values;
     const data = new FormData();
@@ -56,13 +59,20 @@ const Payment = (props) => {
   return (
     <div>
       <div className={styles.header}>
-        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`} alt="blue-logo" />
+        <img
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
+          alt="blue-logo"
+        />
       </div>
       <div className={styles.mainContainer}>
         <div className={styles.paymentContainer}>
           <span className={styles.headerLabel}>Checkout</span>
           {error && (
-            <Error data={error.data} status={error.status} clearError={clearPaymentStore} />
+            <Error
+              data={error.data}
+              status={error.status}
+              clearError={clearPaymentStore}
+            />
           )}
           <PayForm sendRequest={pay} back={goBack} isPayForOrder />
         </div>

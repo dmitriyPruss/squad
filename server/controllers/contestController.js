@@ -1,5 +1,12 @@
 const queryString = require("query-string");
-const { Contest, Offer, Rating, Select, User, sequelize } = require("../models/postgreModels");
+const {
+  Contest,
+  Offer,
+  Rating,
+  Select,
+  User,
+  sequelize,
+} = require("../models/postgreModels");
 const { Op } = require("sequelize");
 const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
@@ -15,7 +22,9 @@ module.exports.dataForContest = async (req, res, next) => {
       body: { characteristic1, characteristic2 },
     } = req;
 
-    const types = [characteristic1, characteristic2, "industry"].filter(Boolean);
+    const types = [characteristic1, characteristic2, "industry"].filter(
+      Boolean
+    );
 
     const characteristics = await Select.findAll({
       where: {
@@ -96,11 +105,6 @@ module.exports.getContestById = async (req, res, next) => {
   }
 };
 
-module.exports.downloadFile = async (req, res, next) => {
-  const file = CONSTANTS.CONTESTS_DEFAULT_DIR + req.params.fileName;
-  res.download(file);
-};
-
 module.exports.updateContest = async (req, res, next) => {
   if (req.file) {
     const {
@@ -123,6 +127,7 @@ module.exports.updateContest = async (req, res, next) => {
       id,
       userId,
     });
+
     res.send(updatedContest);
   } catch (e) {
     next(e);
@@ -131,7 +136,7 @@ module.exports.updateContest = async (req, res, next) => {
 
 // +
 // GET OFFERS FOR MODERATOR!
-module.exports.getOffersForModerator= async (req, res, next) => {
+module.exports.getOffersForModerator = async (req, res, next) => {
   const {
     tokenData: { userId },
     params: { page },
@@ -147,12 +152,12 @@ module.exports.getOffersForModerator= async (req, res, next) => {
     let isEndData = false;
 
     if (!foundOffers.length) {
-      foundOffers = await contestQueries.offersForModerator(0);;
+      foundOffers = await contestQueries.offersForModerator(0);
 
       isEndData = true;
     }
 
-    res.status(200).send({foundOffers, isEndData});
+    res.status(200).send({ foundOffers, isEndData });
   } catch (error) {
     next(error);
   }
@@ -176,18 +181,22 @@ module.exports.getEmailMessages = async (req, res, next) => {
     let currentOffset;
 
     page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
-  
-    let messages = await contestQueries.messagesForCreator(userId, currentOffset, moderator);
-  
+
+    let messages = await contestQueries.messagesForCreator(
+      userId,
+      currentOffset,
+      moderator
+    );
+
     let isEndMessages = false;
-  
-    if(!messages.length) {
+
+    if (!messages.length) {
       isEndMessages = true;
-  
+
       messages = await contestQueries.messagesForCreator(userId, 0, moderator);
-    };
-  
-    res.status(200).send({messages, isEndMessages});
+    }
+
+    res.status(200).send({ messages, isEndMessages });
   } catch (error) {
     next(error);
   }
@@ -196,14 +205,29 @@ module.exports.getEmailMessages = async (req, res, next) => {
 // +
 module.exports.directEmailBox = async (req, res, next) => {
   const {
-    moderator: {
-      role, firstName, lastName
-    }, status, contestId, id, userId, text
+    moderator: { role, firstName, lastName },
+    status,
+    contestId,
+    id,
+    userId,
+    text,
   } = req.body;
 
+  console.log("req.body", req.body);
+
   try {
-    const emailLink = await contestQueries.createEmailLink(userId, contestId, text, status, role, firstName, lastName);
-  
+    const emailLink = await contestQueries.createEmailLink(
+      userId,
+      contestId,
+      text,
+      status,
+      role,
+      firstName,
+      lastName
+    );
+
+    console.log("emailLink", emailLink);
+
     res.status(201).send({ id, emailLink });
   } catch (error) {
     next(error);
@@ -216,9 +240,10 @@ module.exports.setNewOffer = async (req, res, next) => {
   const {
     body: { contestId, customerId, offerData },
     tokenData: { userId },
+    file,
   } = req;
 
-  if (req.body.contestType === CONSTANTS.LOGO_CONTEST) {
+  if (req.body.contestType === CONSTANTS.CONTEST.LOGO) {
     obj.fileName = file.filename;
     obj.originalFileName = file.originalname;
   } else {
@@ -235,7 +260,8 @@ module.exports.setNewOffer = async (req, res, next) => {
 
     controller.getNotificationController().emitEntryCreated(customerId);
     const User = Object.assign({}, req.tokenData, { id: userId });
-    res.send(Object.assign({}, result, { User }));
+
+    res.status(201).send(Object.assign({}, result, { User }));
   } catch (e) {
     return next(new ServerError());
   }
@@ -248,11 +274,22 @@ const rejectOffer = async (offerId, creatorId, contestId) => {
   );
   controller
     .getNotificationController()
-    .emitChangeOfferStatus(creatorId, "Someone of yours offers was rejected", contestId);
+    .emitChangeOfferStatus(
+      creatorId,
+      "Someone of yours offers was rejected",
+      contestId
+    );
   return rejectedOffer;
 };
 
-const resolveOffer = async (contestId, creatorId, orderId, offerId, priority, transaction) => {
+const resolveOffer = async (
+  contestId,
+  creatorId,
+  orderId,
+  offerId,
+  priority,
+  transaction
+) => {
   const finishedContest = await contestQueries.updateContestStatus(
     {
       status: sequelize.literal(`   CASE
@@ -290,15 +327,24 @@ const resolveOffer = async (contestId, creatorId, orderId, offerId, priority, tr
   );
   transaction.commit();
 
+  console.log("updatedOffers", updatedOffers);
+
   const arrayRoomsId = [];
   updatedOffers.forEach((offer) => {
-    if (offer.status === CONSTANTS.OFFER_STATUS.REJECTED && creatorId !== offer.userId) {
+    if (
+      offer.status === CONSTANTS.OFFER_STATUS.REJECTED &&
+      creatorId !== offer.userId
+    ) {
       arrayRoomsId.push(offer.userId);
     }
   });
   controller
     .getNotificationController()
-    .emitChangeOfferStatus(arrayRoomsId, "Someone of yours offers was rejected", contestId);
+    .emitChangeOfferStatus(
+      arrayRoomsId,
+      "Someone of yours offers was rejected",
+      contestId
+    );
   controller
     .getNotificationController()
     .emitChangeOfferStatus(creatorId, "Someone of your offers WIN", contestId);
@@ -308,16 +354,17 @@ const resolveOffer = async (contestId, creatorId, orderId, offerId, priority, tr
 module.exports.setOfferStatus = async (req, res, next) => {
   let transaction;
 
-  const { command, offerId, orderId, creatorId, contestId, priority } = req.body;
+  const { command, offerId, orderId, creatorId, contestId, priority } =
+    req.body;
 
-  console.log("req", command, offerId, orderId, creatorId, contestId, priority);
+  console.log("!!!req!!!", req.body);
 
   if (command === "reject") {
     try {
       const offer = await rejectOffer(offerId, creatorId, contestId);
 
-      console.log('reject offer', offer)
-      res.send(offer);
+      console.log("reject offer", offer);
+      res.status(201).send(offer);
     } catch (err) {
       next(err);
     }
@@ -333,9 +380,9 @@ module.exports.setOfferStatus = async (req, res, next) => {
         transaction
       );
 
-      console.log('resolve winningOffer', winningOffer)
+      console.log("resolve winningOffer", winningOffer);
 
-      res.send(winningOffer);
+      res.status(201).send(winningOffer);
     } catch (err) {
       transaction.rollback();
       next(err);
@@ -367,7 +414,9 @@ module.exports.getCustomersContests = async (req, res, next) => {
 
     // console.log(`contests`, contests);
 
-    contests.forEach((contest) => (contest.dataValues.count = contest.dataValues.Offers.length));
+    contests.forEach(
+      (contest) => (contest.dataValues.count = contest.dataValues.Offers.length)
+    );
     let haveMore = true;
     if (contests.length === 0) {
       haveMore = false;
@@ -382,7 +431,15 @@ module.exports.getContests = async (req, res, next) => {
   // console.log(`req`, req);
 
   const {
-    query: { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries },
+    query: {
+      offset,
+      limit,
+      typeIndex,
+      contestId,
+      industry,
+      awardSort,
+      ownEntries,
+    },
     tokenData: { userId },
   } = req;
 
@@ -411,7 +468,9 @@ module.exports.getContests = async (req, res, next) => {
       ],
     });
 
-    contests.forEach((contest) => (contest.dataValues.count = contest.dataValues.Offers.length));
+    contests.forEach(
+      (contest) => (contest.dataValues.count = contest.dataValues.Offers.length)
+    );
     let haveMore = true;
     if (contests.length === 0) {
       haveMore = false;

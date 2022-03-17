@@ -1,9 +1,12 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
-import styles from "./../EmailPage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShareFromSquare, faArrowAltCircleRight} from "@fortawesome/free-solid-svg-icons";
-import CONSTANTS from './../../../constants';
+import {
+  faShareFromSquare,
+  faArrowAltCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import CONSTANTS from "./../../../constants";
+import styles from "./../EmailPage.module.scss";
 
 function Message(props) {
   const {
@@ -11,25 +14,28 @@ function Message(props) {
       moderator: { firstName, lastName, role },
       text,
       status,
-      email
+      email,
+      fileName,
     },
     directEmailBox,
   } = props;
 
   const {
     STATUS: {
-      OFFER: {
-        WON
-      }
-    }
+      OFFER: { WON },
+    },
+    PUBLIC_URL,
   } = CONSTANTS;
-
-  console.log('creatorEmail', email);
 
   return (
     <li className={styles.message}>
       <Alert variant={status === WON ? "success" : "dark"}>
         <p>{text}</p>
+        <img
+          className={fileName ? styles.imgStyle : styles.missingImg}
+          src={`${PUBLIC_URL}${fileName}`}
+          alt="logo"
+        />
         <div>
           <span className={styles.messageSender}>
             From: {role[0].toUpperCase() + role.substr(1)}
@@ -40,12 +46,11 @@ function Message(props) {
           <hr />
           {email ? (
             <a className={styles.emailInfoLink} href={email} target="blank">
-              <span>Follow </span>               
+              <span>Follow </span>
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </a>
-          ) :
-          (
-            <a href='#' onClick={() => directEmailBox(props.message)}>
+          ) : (
+            <a href="#" onClick={() => directEmailBox(props.message)}>
               <span>See more details... </span>
               <FontAwesomeIcon icon={faShareFromSquare} />
             </a>

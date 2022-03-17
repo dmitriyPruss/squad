@@ -1,8 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './TransactionTable.module.sass';
+import React from "react";
+import PropTypes from "prop-types";
+import format from "date-fns/format";
+import styles from "./TransactionTable.module.sass";
 
-const TransactionTable = props => {
+const TransactionTable = (props) => {
   const {
     transactions,
     fullName: { firstName, lastName },
@@ -15,7 +16,7 @@ const TransactionTable = props => {
       </h3>
       <table className={styles.transTable}>
         <caption className={styles.transCaption}>
-          {' '}
+          {" "}
           Transaction Table ($ - USD)
         </caption>
         <thead>
@@ -26,9 +27,9 @@ const TransactionTable = props => {
           </tr>
         </thead>
         <tbody>
-          {transactions.map(({ id, date, operationType, amount }) => (
+          {transactions.map(({ id, createdAt, operationType, amount }) => (
             <tr key={id}>
-              <td>{date}</td>
+              <td>{format(new Date(createdAt), "HH:mm dd.MM.yyyy")}</td>
               <td>{operationType}</td>
               <td>{amount}</td>
             </tr>

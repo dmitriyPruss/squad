@@ -1,7 +1,13 @@
 const { Op } = require("sequelize");
 const _ = require("lodash");
 // const { Conversation, Message, Catalog } = require("./../models/mongoModels");
-const { User, Conversation, Message, Catalog, sequelize} = require("./../models/postgreModels");
+const {
+  User,
+  Conversation,
+  Message,
+  Catalog,
+  sequelize,
+} = require("./../models/postgreModels");
 
 const userQueries = require("./queries/userQueries");
 const controller = require("../socketInit");
@@ -34,7 +40,9 @@ module.exports.addMessage = async (req, res, next) => {
 
     message.participants = participants; // обратить внимание - расхождение с Мангусом(*) message._doc.participants = participants;
 
-    const interlocutorId = participants.filter((participant) => participant !== userId)[0];
+    const interlocutorId = participants.filter(
+      (participant) => participant !== userId
+    )[0];
 
     const postgresPreview = {
       id,
@@ -193,7 +201,9 @@ module.exports.getPreview = async (req, res, next) => {
 
     const interlocutors = [];
     conversations.forEach((conversation) => {
-      interlocutors.push(conversation.participants.find((participant) => participant !== userId));
+      interlocutors.push(
+        conversation.participants.find((participant) => participant !== userId)
+      );
     });
 
     const senders = await User.findAll({
@@ -240,7 +250,8 @@ module.exports.blackList = async (req, res, next) => {
       raw: true,
     });
 
-    const foundParticipantIndex = foundConversation.participants.indexOf(userId);
+    const foundParticipantIndex =
+      foundConversation.participants.indexOf(userId);
 
     const newBlackList = foundConversation.blackList.map((i, index) =>
       index === foundParticipantIndex ? blackListFlag : i
@@ -257,7 +268,9 @@ module.exports.blackList = async (req, res, next) => {
 
     res.status(200).send(chat);
 
-    const interlocutorId = participants.filter((participant) => participant !== userId)[0];
+    const interlocutorId = participants.filter(
+      (participant) => participant !== userId
+    )[0];
 
     controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
   } catch (err) {
@@ -278,7 +291,8 @@ module.exports.favoriteList = async (req, res, next) => {
       raw: true,
     });
 
-    const foundParticipantIndex = foundConversation.participants.indexOf(userId);
+    const foundParticipantIndex =
+      foundConversation.participants.indexOf(userId);
 
     const newFavoriteList = foundConversation.favoriteList.map((i, index) =>
       index === foundParticipantIndex ? favoriteFlag : i
@@ -327,8 +341,8 @@ module.exports.updateNameCatalog = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
-  console.log('req.query', req.query);
-  console.log('req.params', req.params);
+  console.log("req.query", req.query);
+  console.log("req.params", req.params);
 
   try {
     const [catalogCount, [catalog]] = await Catalog.update(
@@ -353,7 +367,7 @@ module.exports.addNewChatToCatalog = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
-  console.log('id, chatId', id, chatId);
+  console.log("id, chatId", id, chatId);
 
   try {
     const { chats } = await Catalog.findOne({
