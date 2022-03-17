@@ -60,6 +60,3 @@ export const setNewOffer = (data) => http.post("/contests/setNewOffer", data);
 
 export const setOfferStatus = (data) =>
   http.post("/contests/setOfferStatus", data);
-
-export const downloadContestFile = (data) =>
-  http.get(`/contests/downloadFile/${data.fileName}`);

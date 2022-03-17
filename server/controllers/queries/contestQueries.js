@@ -106,7 +106,7 @@ module.exports.offersForModerator = async (currentOffset) => {
     ],
   });
 
-  console.log("offers", offers);
+  // console.log("offers", offers);
 
   return offers;
 };

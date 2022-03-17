@@ -105,11 +105,6 @@ module.exports.getContestById = async (req, res, next) => {
   }
 };
 
-module.exports.downloadFile = async (req, res, next) => {
-  const file = CONSTANTS.CONTESTS_DEFAULT_DIR + req.params.fileName;
-  res.download(file);
-};
-
 module.exports.updateContest = async (req, res, next) => {
   if (req.file) {
     const {
@@ -132,6 +127,7 @@ module.exports.updateContest = async (req, res, next) => {
       id,
       userId,
     });
+
     res.send(updatedContest);
   } catch (e) {
     next(e);
@@ -160,8 +156,6 @@ module.exports.getOffersForModerator = async (req, res, next) => {
 
       isEndData = true;
     }
-
-    // console.log("foundOffers", foundOffers);
 
     res.status(200).send({ foundOffers, isEndData });
   } catch (error) {
@@ -249,8 +243,6 @@ module.exports.setNewOffer = async (req, res, next) => {
     file,
   } = req;
 
-  console.log("req", req.file);
-
   if (req.body.contestType === CONSTANTS.CONTEST.LOGO) {
     obj.fileName = file.filename;
     obj.originalFileName = file.originalname;
@@ -262,7 +254,6 @@ module.exports.setNewOffer = async (req, res, next) => {
   obj.contestId = contestId;
 
   try {
-    console.log("obj", obj);
     const result = await contestQueries.createOffer(obj);
     delete result.contestId;
     delete result.userId;
@@ -270,10 +261,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     controller.getNotificationController().emitEntryCreated(customerId);
     const User = Object.assign({}, req.tokenData, { id: userId });
 
-    console.log("setNewOffer result", result);
-    console.log("User", User);
-
-    res.send(Object.assign({}, result, { User }));
+    res.status(201).send(Object.assign({}, result, { User }));
   } catch (e) {
     return next(new ServerError());
   }
@@ -339,6 +327,8 @@ const resolveOffer = async (
   );
   transaction.commit();
 
+  console.log("updatedOffers", updatedOffers);
+
   const arrayRoomsId = [];
   updatedOffers.forEach((offer) => {
     if (
@@ -367,14 +357,14 @@ module.exports.setOfferStatus = async (req, res, next) => {
   const { command, offerId, orderId, creatorId, contestId, priority } =
     req.body;
 
-  console.log("req", command, offerId, orderId, creatorId, contestId, priority);
+  console.log("!!!req!!!", req.body);
 
   if (command === "reject") {
     try {
       const offer = await rejectOffer(offerId, creatorId, contestId);
 
       console.log("reject offer", offer);
-      res.send(offer);
+      res.status(201).send(offer);
     } catch (err) {
       next(err);
     }
@@ -392,7 +382,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
 
       console.log("resolve winningOffer", winningOffer);
 
-      res.send(winningOffer);
+      res.status(201).send(winningOffer);
     } catch (err) {
       transaction.rollback();
       next(err);

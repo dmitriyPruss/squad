@@ -115,33 +115,6 @@ module.exports.canSendOffer = async (req, res, next) => {
   }
 };
 
-module.exports.onlyForCustomerWhoCreateContest = async (req, res, next) => {
-  const {
-    body: { contestId: id, orderId },
-  } = req;
-
-  console.log("req.body", req.body);
-
-  try {
-    const result = await Contest.findOne({
-      where: {
-        orderId,
-        id,
-        status: ACTIVE,
-      },
-    });
-
-    console.log("result", result);
-
-    if (!result) {
-      return next(new RightsError());
-    }
-    next();
-  } catch (e) {
-    next(new ServerError());
-  }
-};
-
 module.exports.canUpdateContest = async (req, res, next) => {
   const {
     tokenData: { userId },

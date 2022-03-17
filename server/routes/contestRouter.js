@@ -4,7 +4,6 @@ const {
   canGetContest,
   parseQuery,
   canSendOffer,
-  onlyForCustomerWhoCreateContest,
   onlyForModerator,
 } = require("./../middlewares/basicMiddlewares");
 const { checkToken } = require("./../middlewares/checkToken");
@@ -14,7 +13,6 @@ const {
   getCustomersContests,
   getContestById,
   updateContest,
-  downloadFile,
   setNewOffer,
   getOffersForModerator,
   getEmailMessages,
@@ -42,10 +40,8 @@ contestRouter
   .get(canGetContest, getContestById)
   .patch(updateContestFile, updateContest);
 
-contestRouter.get("/downloadFile/:fileName", downloadFile);
-
 contestRouter.post("/setNewOffer", uploadLogoFiles, canSendOffer, setNewOffer);
 
-contestRouter.post("/setOfferStatus", onlyForCustomerWhoCreateContest, setOfferStatus);
+contestRouter.post("/setOfferStatus", onlyForModerator, setOfferStatus);
 
 module.exports = contestRouter;
