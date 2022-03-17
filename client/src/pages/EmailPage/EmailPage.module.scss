@@ -6,6 +6,7 @@
   line-height: 1.5;
   text-align: left;
   box-sizing: border-box;
+  // color: none;
 }
 
 header {
@@ -115,10 +116,10 @@ header {
         text-shadow: 0px 1px 1px black;
       }
 
-      & > a:link {
-        color: #4083ff;
+      & a:link {
         text-decoration: none;
         font-size: 0.8em;
+        color: #4083ff;
       }
 
       & > a:hover {
@@ -160,20 +161,19 @@ header {
     width: 30%;
     min-width: 80px;
     padding: 5px 12px;
-    border: 2px solid #dee0e4;
-    color: #4083ff;
+    border: 2px solid #cbcdcf;
+    background-color: #cbcdcf;
     border-radius: 8px;
     font-weight: bold;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e5e7eb;
   }
 
   & > button:hover {
-    background-color: #4083ff;
-    border: 2px solid #4083ff;
+    border: 2px solid #e5e7eb;
+    background-color: #e5e7eb;
     transition: all 0.3s ease-in-out;
   }
 }

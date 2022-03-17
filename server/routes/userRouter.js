@@ -27,16 +27,16 @@ userRouter.post(
   userController.payment
 );
 
-userRouter.post("/getUser", checkAuth);
+userRouter.get("/getUser", checkAuth);
 
-userRouter.post(
+userRouter.patch(
   "/changeMark",
   checkToken,
   basicMiddlewares.onlyForCustomer,
   userController.changeMark
 );
 
-userRouter.post(
+userRouter.patch(
   "/updateUser",
   checkToken,
   upload.uploadAvatar,

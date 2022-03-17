@@ -73,11 +73,11 @@ function MessagesContainer(props) {
           {sendedEmailMessages.map(getMessage)}
         </ul>
         <section className={styles.pageButtons}>
-          <Button onClick={clickPrevPage} as="button" variant="outline-primary">
+          <Button onClick={clickPrevPage} as="button" variant="light">
             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
             <span>Prev</span>
           </Button>
-          <Button onClick={clickNextPage} as="button" variant="outline-primary">
+          <Button onClick={clickNextPage} as="button" variant="light">
             <span>Next</span>
             <FontAwesomeIcon icon={faArrowAltCircleRight} />
           </Button>

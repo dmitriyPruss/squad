@@ -86,14 +86,14 @@ function OfferList(props) {
           )}
         </section>
         <section className={styles.pageButtons}>
-          <Button onClick={clickPrevPage} as="button" variant="outline-primary">
+          <Button onClick={clickPrevPage} as="button" variant="light">
             <FontAwesomeIcon icon={faArrowAltCircleLeft} />
             <span>Prev</span>
           </Button>
           <div className={styles.pageNumber}>
             <span>{page}</span>
           </div>
-          <Button onClick={clickNextPage} as="button" variant="outline-primary">
+          <Button onClick={clickNextPage} as="button" variant="light">
             <span>Next</span>
             <FontAwesomeIcon icon={faArrowAltCircleRight} />
           </Button>

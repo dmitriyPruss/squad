@@ -26,6 +26,9 @@ const {
 export function* changeMarkSaga(action) {
   try {
     const { data } = yield restController.changeMark(action.data);
+
+    console.log("changeMarkSaga data", data);
+
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
       const {
