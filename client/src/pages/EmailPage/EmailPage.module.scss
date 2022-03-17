@@ -6,7 +6,7 @@
   line-height: 1.5;
   text-align: left;
   box-sizing: border-box;
-  // color: none;
+  color: #2b3030;
 }
 
 header {
@@ -116,26 +116,25 @@ header {
         text-shadow: 0px 1px 1px black;
       }
 
-      & a:link {
+      & a {
         text-decoration: none;
         font-size: 0.8em;
-        color: #4083ff;
+        padding: 3px;
+        border-radius: 5px;
+        background-color: #e5e7eb;
       }
 
       & > a:hover {
-        color: #2b3030;
-        text-decoration: underline;
+        background-color: #eff0f2;
       }
 
       & > a:active {
-        color: rgb(157, 157, 116);
-        text-decoration: none;
         font-size: 0.8em;
+        background-color: pink;
       }
 
       & > a.emailInfoLink {
-        color: rgb(167, 8, 8);
-        text-decoration: underline dashed;
+        background-color: #fff;
         letter-spacing: 1px;
       }
 

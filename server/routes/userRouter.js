@@ -15,7 +15,7 @@ userRouter.post(
   userController.registration
 );
 
-userRouter.post("/login", validators.validateLogin, userController.login);
+userRouter.patch("/login", validators.validateLogin, userController.login);
 
 userRouter.post(
   "/pay",

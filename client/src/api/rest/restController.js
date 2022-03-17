@@ -4,16 +4,14 @@ import queryString from "query-string";
 // Users
 export const registerRequest = (data) => http.post("/users/registration", data);
 
-export const loginRequest = (data) => http.post("/users/login", data);
+export const loginRequest = (data) => http.patch("/users/login", data);
 export const payMent = ({ formData }) => http.post("/users/pay", formData);
 export const getUser = () => http.get("/users/getUser");
 
 export const changeMark = (data) => http.patch("/users/changeMark", data);
 
-export const updateUser = (data) => {
-  console.log(" updateUser data", data);
-  return http.patch("/users/updateUser", data);
-};
+export const updateUser = (data) => http.patch("/users/updateUser", data);
+
 export const cashOut = (data) => http.post("/users/cashout", data);
 // Transactions
 export const getTransactions = () => http.get("/users/transactions");

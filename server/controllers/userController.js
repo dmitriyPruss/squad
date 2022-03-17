@@ -56,6 +56,9 @@ module.exports.login = async (req, res, next) => {
       CONSTANTS.JWT_SECRET,
       { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
     );
+
+    console.log("accessToken", accessToken);
+
     await userQueries.updateUser({ accessToken }, id);
     res.send({ token: accessToken });
   } catch (err) {
