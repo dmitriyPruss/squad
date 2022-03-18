@@ -3,19 +3,10 @@
   border-radius: 5px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
   height: 315px;
-
-  & > h4 {
-    color: #46568a;
-    writing-mode: tb-rl;
-    transform: rotate(180deg);
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-    text-align: end;
-    letter-spacing: 2px;
-    padding-bottom: 5px;
-  }
 
   @media screen and (max-width: 450px) {
     height: 320px;
@@ -25,15 +16,15 @@
 .offerInfoList {
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
-  color: #46568a;
   font-size: 0.8em;
-  width: 80%;
+  width: 90%;
+  padding: 0;
 
   & > li {
-    background-color: #f4f7fd;
+    background-color: #2b3030;
+    border-radius: 5px;
     padding: 2px;
-    margin: 2px;
+    margin: 2px auto;
     width: 100%;
 
     display: flex;
@@ -41,11 +32,12 @@
 
     & > span:first-child {
       font-style: italic;
+      color: #ebf2ff;
     }
 
     & > span:last-child {
       margin-left: 5px;
-      color: #2b3030;
+      color: #ebf2ff;
     }
 
     .chosenImg {

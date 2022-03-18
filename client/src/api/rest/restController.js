@@ -50,15 +50,12 @@ export const updateContest = (data) =>
 export const dataForContest = (data) =>
   http.post("/contests/dataForContest", data);
 
-// Contests 2
-export const getOffersForModerator = (page) =>
-  http.get(`/contests/offers/${page}`);
-export const getEmailMessages = (page) =>
-  http.get(`/contests/emailMessages/${page}`);
-export const directEmailBox = (data) =>
-  http.post("/contests/directEmailBox", data);
-
-export const setNewOffer = (data) => http.post("/contests/setNewOffer", data);
-
+// Offers
+export const setNewOffer = (data) => http.post("/offers/setNewOffer", data);
 export const setOfferStatus = (data) =>
-  http.post("/contests/setOfferStatus", data);
+  http.post("/offers/setOfferStatus", data);
+export const getOffersForModerator = (page) => http.get(`/offers/${page}`);
+export const getEmailMessages = (page) =>
+  http.get(`/offers/emailMessages/${page}`);
+export const directEmailBox = (data) =>
+  http.post("/offers/directEmailBox", data);

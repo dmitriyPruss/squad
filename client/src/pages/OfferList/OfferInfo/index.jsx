@@ -18,7 +18,6 @@ const OfferInfo = (props) => {
 
   return (
     <section className={styles.offerInfoContainer}>
-      <h4>Offer Information</h4>
       <ul className={styles.offerInfoList}>
         <li>
           <span>Contest Type:</span>

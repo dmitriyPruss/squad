@@ -14,7 +14,6 @@ import {
   updateContestSaga,
   dataForContestSaga,
   getContestByIdSaga,
-  downloadContestFileSaga,
 } from "./contestsSagas";
 import {
   changeMarkSaga,

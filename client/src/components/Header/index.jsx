@@ -69,11 +69,13 @@ class Header extends React.Component {
                   <span>My Account</span>
                 </Link>
               </li>
-              <li>
-                <Link to="/transactions" style={{ textDecoration: "none" }}>
-                  <span>Transactions</span>
-                </Link>
-              </li>
+              {data.role === CREATOR && (
+                <li>
+                  <Link to="/transactions" style={{ textDecoration: "none" }}>
+                    <span>Transactions</span>
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link
                   to="http:/www.google.com"

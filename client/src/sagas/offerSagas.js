@@ -11,9 +11,6 @@ import {
   directEmailBoxRequest,
   directEmailBoxSuccess,
   directEmailBoxError,
-  changeOfferStatusRequest,
-  changeOfferStatusSuccess,
-  changeOfferStatusError,
 } from "../actions/actionCreator";
 import CONSTANTS from "../constants";
 

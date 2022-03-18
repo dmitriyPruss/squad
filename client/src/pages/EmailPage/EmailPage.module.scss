@@ -121,11 +121,10 @@ header {
         font-size: 0.8em;
         padding: 3px;
         border-radius: 5px;
-        background-color: #e5e7eb;
       }
 
       & > a:hover {
-        background-color: #eff0f2;
+        background-color: #e5e7eb;
       }
 
       & > a:active {
@@ -134,7 +133,7 @@ header {
       }
 
       & > a.emailInfoLink {
-        background-color: #fff;
+        background-color: #e5e7eb;
         letter-spacing: 1px;
       }
 
