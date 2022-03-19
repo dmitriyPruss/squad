@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-function DataColumn (props) {
+function DataColumn(props) {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
@@ -10,9 +10,9 @@ function DataColumn (props) {
     setIsFetching(true);
 
     fetch(fileName)
-      .then(res => res.json())
-      .then(data => setData(data))
-      .catch(error => setError(error))
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((error) => setError(error))
       .finally(() => {
         setIsFetching(false);
       });

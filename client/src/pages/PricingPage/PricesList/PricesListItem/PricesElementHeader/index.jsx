@@ -1,8 +1,8 @@
-import React from 'react';
-import ToggleButton from './ToggleButton';
-import CurrencyValues from './CurrencyValues';
+import React from "react";
+import ToggleButton from "./ToggleButton";
+import CurrencyValues from "./CurrencyValues";
 
-function PricesElementHeader (props) {
+function PricesElementHeader(props) {
   const {
     priceHeaderClasses: { classHeader },
     styleColor,

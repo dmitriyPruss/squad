@@ -6,15 +6,11 @@ export const authActionLogin = (data, history) => ({
   history,
 });
 
-export const authActionRegister = (data, history) => {
-  console.log(`data!`, data);
-
-  return {
-    type: ACTION.AUTH_ACTION_REGISTER,
-    data,
-    history,
-  };
-};
+export const authActionRegister = (data, history) => ({
+  type: ACTION.AUTH_ACTION_REGISTER,
+  data,
+  history,
+});
 
 export const payRequest = (data, history) => ({
   type: ACTION.PAYMENT_ACTION,
@@ -299,7 +295,6 @@ export const changeModalShow = (data) => ({
   data,
 });
 
-// Transactions
 export const getTransactionAction = () => ({
   type: ACTION.GET_TRANSACTION_ACTION,
 });
@@ -318,8 +313,6 @@ export const getTransactionError = (error) => ({
   error,
 });
 
-// +
-// get New Offers
 export const getOffersForModeratorAction = (page) => ({
   type: ACTION.GET_OFFERS_FOR_MODERATOR_ACTION,
   page,
@@ -331,7 +324,7 @@ export const getOffersForModeratorRequest = () => ({
 
 export const getOffersForModeratorSuccess = (data) => ({
   type: ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS,
-  data, //?
+  data,
 });
 
 export const getOffersForModeratorError = (error) => ({
@@ -339,7 +332,6 @@ export const getOffersForModeratorError = (error) => ({
   error,
 });
 
-// get email
 export const getEmailMessageAction = (page) => ({
   type: ACTION.GET_EMAIL_MESSAGE_ACTION,
   page,
@@ -351,7 +343,7 @@ export const getEmailMessageRequest = () => ({
 
 export const getEmailMessageSuccess = (data) => ({
   type: ACTION.GET_EMAIL_MESSAGE_SUCCESS,
-  data, //?
+  data,
 });
 
 export const getEmailMessageError = (error) => ({
@@ -359,7 +351,6 @@ export const getEmailMessageError = (error) => ({
   error,
 });
 
-// direct to email box
 export const directEmailBoxAction = (data) => ({
   type: ACTION.DIRECT_EMAIL_BOX_ACTION,
   data,

@@ -50,9 +50,17 @@ class App extends Component {
           <Route path="/buttonGroup" component={ButtonGroup} />
           <Route path="/eventsPage" component={Events} />
           <Route exact path="/login" component={withNotAuth(LoginPage)} />
-          <Route exact path="/registration" component={withNotAuth(RegistrationPage)} />
+          <Route
+            exact
+            path="/registration"
+            component={withNotAuth(RegistrationPage)}
+          />
           <Route exact path="/payment" component={withAuth(Payment)} />
-          <Route exact path="/startContest" component={withAuth(StartContestPage)} />
+          <Route
+            exact
+            path="/startContest"
+            component={withAuth(StartContestPage)}
+          />
           <Route
             exact
             path="/startContest/nameContest"
@@ -81,7 +89,11 @@ class App extends Component {
           <Route exact path="/contest/:id" component={withAuth(ContestPage)} />
           <Route exact path="/account" component={withAuth(UserProfile)} />
 
-          <Route exact path="/transactions" component={withAuth(TransactionPage)} />
+          <Route
+            exact
+            path="/transactions"
+            component={withAuth(TransactionPage)}
+          />
           <Route exact path="/offerList" component={withAuth(OfferList)} />
           <Route exact path="/emailPage" component={withAuth(EmailPage)} />
           <Route exact path="/pricing" component={PricingPage} />

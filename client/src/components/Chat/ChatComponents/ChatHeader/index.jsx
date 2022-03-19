@@ -10,8 +10,6 @@ import styles from "./ChatHeader.module.sass";
 import CONSTANTS from "../../../../constants";
 
 const ChatHeader = (props) => {
-  console.log("props", props);
-
   const {
     backToDialogList,
     chatData,
@@ -43,8 +41,14 @@ const ChatHeader = (props) => {
 
   return (
     <div className={styles.chatHeader}>
-      <div className={styles.buttonContainer} onClick={() => backToDialogList()}>
-        <img src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow-left-thick.png`} alt="back" />
+      <div
+        className={styles.buttonContainer}
+        onClick={() => backToDialogList()}
+      >
+        <img
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow-left-thick.png`}
+          alt="back"
+        />
       </div>
       <div className={styles.infoContainer}>
         <div>

@@ -19,8 +19,6 @@ const Payment = (props) => {
   const pay = (values) => {
     const contestArray = [];
 
-    console.log("PAY contests :>> ", contests);
-
     Object.keys(contests).forEach((key) => contestArray.push(contests[key]));
     const { number, expiry, cvc } = values;
     const data = new FormData();
@@ -29,11 +27,6 @@ const Payment = (props) => {
       data.append("files", contest.file);
       contest.haveFile = !!contest.file;
     });
-
-    // for (let i = 0; i < contestArray.length; i++) {
-    //   data.append('files', contestArray[i].file);
-    //   contestArray[i].haveFile = !!contestArray[i].file;
-    // }
 
     data.append("number", number);
     data.append("expiry", expiry);

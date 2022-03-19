@@ -24,8 +24,6 @@ export function* changeMarkSaga(action) {
   try {
     const { data } = yield restController.changeMark(action.data);
 
-    console.log("changeMarkSaga data", data);
-
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
       const {
@@ -49,16 +47,10 @@ export function* changeMarkSaga(action) {
 export function* addOfferSaga(action) {
   try {
     const { data } = yield restController.setNewOffer(action.data);
-
-    console.log("setNewOffer data", data);
-
     const offers = yield select((state) => state.contestByIdStore.offers);
-
-    console.log("select offers", offers);
 
     offers.unshift(data);
 
-    console.log("setNewOffer offers", offers);
     yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
   } catch (e) {
     yield put({ type: ACTION.ADD_OFFER_ERROR, error: e.response });
@@ -67,11 +59,7 @@ export function* addOfferSaga(action) {
 
 export function* setOfferStatusSaga(action) {
   try {
-    console.log("action setOfferStatus ", action);
-
     const { data } = yield restController.setOfferStatus(action.data);
-
-    console.log("setOfferStatus data ", data);
 
     const offers = yield select((state) => state.contestByIdStore.offers);
     offers.forEach((offer) => {
@@ -90,16 +78,12 @@ export function* setOfferStatusSaga(action) {
 
 // Check new Offer
 export function* getOffersForModeratorSaga(action) {
-  console.log("checkOfferSaga action", action);
-
   const { page } = action;
 
   yield put(getOffersForModeratorRequest());
 
   try {
     const { data } = yield restController.getOffersForModerator(page);
-    console.log("restController.getOffersForModerator data", data);
-
     yield put(getOffersForModeratorSuccess(data));
   } catch (error) {
     yield put(getOffersForModeratorError(error));
@@ -114,8 +98,6 @@ export function* getEmailMessageSaga(action) {
 
   try {
     const { data } = yield restController.getEmailMessages(page);
-    console.log("restController.getEmailMessages data", data);
-
     yield put(getEmailMessageSuccess(data));
   } catch (error) {
     yield put(getEmailMessageError(error));
@@ -124,14 +106,10 @@ export function* getEmailMessageSaga(action) {
 
 // direct email box
 export function* directEmailBoxSaga(action) {
-  console.log("action.data EMAIL BOX", action.data);
-
   yield put(directEmailBoxRequest());
 
   try {
     const { data } = yield restController.directEmailBox(action.data);
-    console.log("restController.directEmailBox data", data);
-
     yield put(directEmailBoxSuccess(data));
   } catch (error) {
     yield put(directEmailBoxError(error));

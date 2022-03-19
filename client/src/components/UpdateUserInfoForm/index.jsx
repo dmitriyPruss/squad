@@ -73,7 +73,7 @@ const UpdateUserInfoForm = (props) => {
             uploadContainer: styles.imageUploadContainer,
             inputContainer: styles.uploadInputContainer,
             imgStyle: styles.imgStyle,
-            missingImg: styles.missingImg
+            missingImg: styles.missingImg,
           }}
         />
         <button type="submit" disabled={submitting}>
@@ -89,8 +89,6 @@ const mapStateToProps = (state) => {
     data: { firstName, lastName, displayName, avatar },
     error,
   } = state.userStore;
-
-  console.log("state.userStore :>> ", state.userStore);
 
   return {
     error,

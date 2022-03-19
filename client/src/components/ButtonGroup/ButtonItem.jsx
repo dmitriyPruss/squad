@@ -10,7 +10,6 @@ function ButtonItem(props) {
 
   return (
     <li
-      key={id}
       className={isHighlighted ? styles.highlightElement : styles.buttonItem}
       onClick={(e) => highlightElement(id)}
     >

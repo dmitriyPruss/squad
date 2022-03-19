@@ -1,10 +1,10 @@
-import React from 'react';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import PricesList from './PricesList';
-import styles from './PricingPage.module.sass';
+import React from "react";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import PricesList from "./PricesList";
+import styles from "./PricingPage.module.sass";
 
-function PricingPage () {
+function PricingPage() {
   return (
     <>
       <Header />

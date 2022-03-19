@@ -1,19 +1,19 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { initSocket } from '../api/ws/socketController';
-import configureStore from './configureStore';
-import App from '../App';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { initSocket } from "../api/ws/socketController";
+import configureStore from "./configureStore";
+import App from "../App";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class Setup extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      store: initSocket(configureStore())
+      store: initSocket(configureStore()),
     };
   }
 
-  render () {
+  render() {
     return (
       <Provider store={this.state.store}>
         <App />

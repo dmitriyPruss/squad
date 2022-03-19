@@ -1,26 +1,26 @@
-import axios from 'axios';
-import CONTANTS from '../constants';
-import history from '../browserHistory';
+import axios from "axios";
+import CONTANTS from "../constants";
+import history from "../browserHistory";
 
 const instance = axios.create({
-  baseURL: CONTANTS.BASE_URL
+  baseURL: CONTANTS.BASE_URL,
 });
 
 instance.interceptors.request.use(
-  config => {
+  (config) => {
     const token = window.localStorage.getItem(CONTANTS.ACCESS_TOKEN);
     if (token) {
       config.headers = { ...config.headers, Authorization: token };
     }
     return config;
   },
-  err => Promise.reject(err)
+  (err) => Promise.reject(err)
 );
 
 instance.interceptors.response.use(
-  response => {
+  (response) => {
     const {
-      data: { token }
+      data: { token },
     } = response;
 
     if (token) {
@@ -28,18 +28,18 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  err => {
+  (err) => {
     const {
-      location: { pathname }
+      location: { pathname },
     } = history;
 
     if (
       err.response.status === 408 &&
-      pathname !== '/login' &&
-      pathname !== '/registration' &&
-      pathname !== '/'
+      pathname !== "/login" &&
+      pathname !== "/registration" &&
+      pathname !== "/"
     ) {
-      history.replace('/login');
+      history.replace("/login");
     }
     return Promise.reject(err);
   }

@@ -6,7 +6,11 @@ import styles from "./UserProfile.module.sass";
 import CONSTANTS from "../../constants";
 import UserInfo from "../../components/UserInfo";
 import PayForm from "../../components/PayForm";
-import { cashOut, changeProfileModeView, clearPaymentStore } from "../../actions/actionCreator";
+import {
+  cashOut,
+  changeProfileModeView,
+  clearPaymentStore,
+} from "../../actions/actionCreator";
 import Error from "../../components/Error";
 
 const UserProfile = (props) => {
@@ -64,11 +68,17 @@ const UserProfile = (props) => {
         ) : (
           <div className={styles.container}>
             {parseInt(balance) === 0 ? (
-              <span className={styles.notMoney}>There is no money on your balance</span>
+              <span className={styles.notMoney}>
+                There is no money on your balance
+              </span>
             ) : (
               <div>
                 {error && (
-                  <Error data={error.data} status={error.status} clearError={clearPaymentStore} />
+                  <Error
+                    data={error.data}
+                    status={error.status}
+                    clearError={clearPaymentStore}
+                  />
                 )}
                 <PayForm sendRequest={pay} />
               </div>

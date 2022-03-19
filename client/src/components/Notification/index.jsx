@@ -1,8 +1,8 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import styles from './Notification.module.sass';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import styles from "./Notification.module.sass";
 
-const Notification = props => {
+const Notification = (props) => {
   const { message, contestId, history } = props;
 
   return (

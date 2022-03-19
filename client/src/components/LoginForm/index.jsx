@@ -35,7 +35,13 @@ class LoginForm extends React.Component {
 
     return (
       <div className={styles.loginForm}>
-        {error && <Error data={error.data} status={error.status} clearError={authClear} />}
+        {error && (
+          <Error
+            data={error.data}
+            status={error.status}
+            clearError={authClear}
+          />
+        )}
         <h2>LOGIN TO YOUR ACCOUNT</h2>
         <Formik
           initialValues={{
@@ -46,15 +52,26 @@ class LoginForm extends React.Component {
           validationSchema={Schemes.LoginSchema}
         >
           <Form>
-            <FormInput classes={formInputClasses} name="email" type="text" label="Email Address" />
+            <FormInput
+              classes={formInputClasses}
+              name="email"
+              type="text"
+              label="Email Address"
+            />
             <FormInput
               classes={formInputClasses}
               name="password"
               type="password"
               label="Password"
             />
-            <button type="submit" disabled={submitting} className={styles.submitContainer}>
-              <span className={styles.inscription}>{isFetching ? "Submitting..." : "LOGIN"}</span>
+            <button
+              type="submit"
+              disabled={submitting}
+              className={styles.submitContainer}
+            >
+              <span className={styles.inscription}>
+                {isFetching ? "Submitting..." : "LOGIN"}
+              </span>
             </button>
           </Form>
         </Formik>

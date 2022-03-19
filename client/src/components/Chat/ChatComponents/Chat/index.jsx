@@ -98,7 +98,11 @@ class Chat extends React.Component {
             </span>
           </div>
         )}
-        {chatMode === CATALOG ? <CatalogListContainer /> : <DialogListContainer userId={id} />}
+        {chatMode === CATALOG ? (
+          <CatalogListContainer />
+        ) : (
+          <DialogListContainer userId={id} />
+        )}
       </div>
     );
   };

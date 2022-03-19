@@ -3,7 +3,6 @@ import { useField } from "formik";
 
 const ImageUpload = (props) => {
   const {
-    name,
     classes: { uploadContainer, inputContainer, imgStyle, missingImg },
   } = props;
 
@@ -21,7 +20,6 @@ const ImageUpload = (props) => {
       const reader = new FileReader();
       reader.onload = () => {
         node.src = reader.result;
-        console.log("node", node);
       };
       reader.readAsDataURL(file);
       setValue(file);

@@ -8,8 +8,6 @@ module.exports.updateRating = async (data, predicate, transaction) => {
     transaction,
   });
 
-  console.log("updatedRating.dataValues", updatedRating.dataValues);
-
   if (updatedCount !== 1) {
     throw new ServerError("cannot update mark on this offer");
   }
@@ -17,11 +15,7 @@ module.exports.updateRating = async (data, predicate, transaction) => {
 };
 
 module.exports.createRating = async (data, transaction) => {
-  console.log("data", data);
-
   const result = await Rating.create(data, { transaction });
-
-  console.log("createRating result", result);
 
   if (!result) {
     throw new ServerError("cannot mark offer");

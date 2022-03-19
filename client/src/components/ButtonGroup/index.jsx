@@ -30,6 +30,7 @@ function ButtonGroup() {
       <ul className={styles.buttonContainer}>
         {highlightedItems.map((i, index) => (
           <ButtonItem
+            key={index}
             infoData={i}
             id={index}
             highlightElement={highlightElement}

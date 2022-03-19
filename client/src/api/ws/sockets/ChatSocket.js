@@ -1,13 +1,13 @@
-import isEqual from 'lodash/isEqual';
-import WebSocket from './WebSocket';
-import CONTANTS from '../../../constants';
+import isEqual from "lodash/isEqual";
+import WebSocket from "./WebSocket";
+import CONTANTS from "../../../constants";
 import {
   addMessage,
-  changeBlockStatusInStore
-} from '../../../actions/actionCreator';
+  changeBlockStatusInStore,
+} from "../../../actions/actionCreator";
 
 class ChatSocket extends WebSocket {
-  constructor (dispatch, getState, room) {
+  constructor(dispatch, getState, room) {
     super(dispatch, getState, room);
   }
 
@@ -17,10 +17,10 @@ class ChatSocket extends WebSocket {
   };
 
   onChangeBlockStatus = () => {
-    this.socket.on(CONTANTS.CHANGE_BLOCK_STATUS, data => {
+    this.socket.on(CONTANTS.CHANGE_BLOCK_STATUS, (data) => {
       const { message } = data;
       const { messagesPreview } = this.getState().chatStore;
-      messagesPreview.forEach(preview => {
+      messagesPreview.forEach((preview) => {
         if (isEqual(preview.participants, message.participants))
           preview.blackList = message.blackList;
       });
@@ -31,26 +31,16 @@ class ChatSocket extends WebSocket {
   };
 
   onNewMessage = () => {
-    this.socket.on('newMessage', data => {
-      // const { message, preview } = data.message;
-
+    this.socket.on("newMessage", (data) => {
       const {
         message,
         message: { body, createdAt, sender },
-        preview
+        preview,
       } = data;
       const { messagesPreview } = this.getState().chatStore;
 
-      console.log('onNewMessage');
-      console.log('data', data);
-      console.log('data.message', data.message);
-      console.log('messagesPreview', messagesPreview);
-      console.log('preview', preview);
-      console.log('onNewMessage');
-
       let isNew = true;
-      messagesPreview.forEach(preview => {
-        console.log('PARTICIPANTS preview', preview);
+      messagesPreview.forEach((preview) => {
         if (isEqual(preview.participants, data.message.participants)) {
           preview.text = body;
           preview.sender = sender;
@@ -65,12 +55,12 @@ class ChatSocket extends WebSocket {
     });
   };
 
-  subscribeChat = id => {
-    this.socket.emit('subscribeChat', id);
+  subscribeChat = (id) => {
+    this.socket.emit("subscribeChat", id);
   };
 
-  unsubscribeChat = id => {
-    this.socket.emit('unsubscribeChat', id);
+  unsubscribeChat = (id) => {
+    this.socket.emit("unsubscribeChat", id);
   };
 }
 

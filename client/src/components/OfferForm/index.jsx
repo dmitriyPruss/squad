@@ -14,10 +14,14 @@ const OfferForm = (props) => {
     CONTEST: { LOGO },
   } = CONSTANTS;
 
-  const { contestId, contestType, customerId, valid, addOfferError, clearOfferError, setNewOffer } =
-    props;
-
-  console.log("props valid", props.valid);
+  const {
+    contestId,
+    contestType,
+    customerId,
+    addOfferError,
+    clearOfferError,
+    setNewOffer,
+  } = props;
 
   const renderOfferInput = () => {
     if (contestType === LOGO) {
@@ -61,7 +65,8 @@ const OfferForm = (props) => {
     resetForm();
   };
 
-  const validationSchema = contestType === LOGO ? Schemes.LogoOfferSchema : Schemes.TextOfferSchema;
+  const validationSchema =
+    contestType === LOGO ? Schemes.LogoOfferSchema : Schemes.TextOfferSchema;
 
   return (
     <div className={styles.offerContainer}>

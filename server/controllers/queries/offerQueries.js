@@ -64,8 +64,6 @@ module.exports.resolveOffer = async (
   );
   transaction.commit();
 
-  console.log("updatedOffers", updatedOffers);
-
   const arrayRoomsId = [];
   updatedOffers.forEach((offer) => {
     if (

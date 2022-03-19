@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Catalog from "../Catalog";
 import styles from "../CatalogListContainer/CatalogListContainer.module.sass";
-import { changeShowModeCatalog, deleteCatalog } from "../../../../actions/actionCreator";
+import {
+  changeShowModeCatalog,
+  deleteCatalog,
+} from "../../../../actions/actionCreator";
 
 const CatalogList = (props) => {
   const { catalogList, changeShowModeCatalog, deleteCatalog } = props;
@@ -29,7 +32,11 @@ const CatalogList = (props) => {
         />
       );
     });
-    return elementList.length ? elementList : <span className={styles.notFound}>Not found</span>;
+    return elementList.length ? (
+      elementList
+    ) : (
+      <span className={styles.notFound}>Not found</span>
+    );
   };
 
   return <div className={styles.listContainer}>{getListCatalog()}</div>;

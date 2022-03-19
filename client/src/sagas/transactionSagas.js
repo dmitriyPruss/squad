@@ -13,7 +13,6 @@ export function* getTransactionSaga() {
 
     yield put(getTransactionSuccess(transactions));
   } catch (err) {
-    console.log(`err`, err.response);
     yield put(getTransactionError(err.response));
   }
 }

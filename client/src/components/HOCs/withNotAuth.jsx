@@ -1,17 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { onlyForNotAuthorize } from '../../actions/actionCreator';
-import SpinnerLoader from '../SpinnerLoader';
+import React from "react";
+import { connect } from "react-redux";
+import { onlyForNotAuthorize } from "../../actions/actionCreator";
+import SpinnerLoader from "../SpinnerLoader";
 
-const withNotAuth = Component => {
+const withNotAuth = (Component) => {
   class HocForLoginSignUp extends React.Component {
-    componentDidMount () {
+    componentDidMount() {
       const { checkAuth, history } = this.props;
 
       checkAuth(history.replace);
     }
 
-    render () {
+    render() {
       const { isFetching, data, history } = this.props;
 
       if (isFetching) {
@@ -24,10 +24,10 @@ const withNotAuth = Component => {
     }
   }
 
-  const mapStateToProps = state => state.userStore;
+  const mapStateToProps = (state) => state.userStore;
 
-  const mapDispatchToProps = dispatch => ({
-    checkAuth: data => dispatch(onlyForNotAuthorize(data))
+  const mapDispatchToProps = (dispatch) => ({
+    checkAuth: (data) => dispatch(onlyForNotAuthorize(data)),
   });
 
   return connect(mapStateToProps, mapDispatchToProps)(HocForLoginSignUp);

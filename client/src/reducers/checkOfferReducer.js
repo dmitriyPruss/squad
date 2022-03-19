@@ -6,11 +6,12 @@ const initialState = {
   isFetching: false,
   error: null,
   sendedEmailMessages: [],
-  isEndMessages: false
+  isEndMessages: false,
 };
 
 function checkOfferReducer(state = initialState, action) {
   switch (action.type) {
+    // OFFERS FOR MODERATOR
     case ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST: {
       return {
         ...state,
@@ -25,7 +26,7 @@ function checkOfferReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         checkOffers: foundOffers,
-        isEndData
+        isEndData,
       };
     }
     case ACTION.GET_OFFERS_FOR_MODERATOR_ERROR: {
@@ -52,7 +53,7 @@ function checkOfferReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         sendedEmailMessages: messages,
-        isEndMessages
+        isEndMessages,
       };
     }
     case ACTION.GET_EMAIL_MESSAGE_ERROR: {
@@ -105,6 +106,6 @@ function checkOfferReducer(state = initialState, action) {
     default:
       return state;
   }
-};
+}
 
 export default checkOfferReducer;

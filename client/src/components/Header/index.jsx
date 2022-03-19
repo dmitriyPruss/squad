@@ -26,7 +26,7 @@ class Header extends React.Component {
   }
 
   logOut = () => {
-    localStorage.clear(); // ???
+    localStorage.clear();
 
     const { clearUserStore, history } = this.props;
 
@@ -134,8 +134,6 @@ class Header extends React.Component {
 
   render() {
     const { isFetching, data } = this.props;
-
-    console.log("this.props", this.props);
 
     if (isFetching) {
       return null;

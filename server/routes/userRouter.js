@@ -8,14 +8,21 @@ const upload = require("./../utils/fileUpload");
 
 const userRouter = Router();
 
-userRouter.post(
-  "/registration",
-  validators.validateRegistrationData,
-  hashPass,
-  userController.registration
+userRouter.get("/getUser", checkAuth);
+
+userRouter.get(
+  "/transactions",
+  checkToken,
+  basicMiddlewares.onlyForCreative,
+  userController.getUserTransactions
 );
 
-userRouter.patch("/login", validators.validateLogin, userController.login);
+userRouter.post(
+  "/cashout",
+  checkToken,
+  basicMiddlewares.onlyForCreative,
+  userController.cashout
+);
 
 userRouter.post(
   "/pay",
@@ -27,7 +34,14 @@ userRouter.post(
   userController.payment
 );
 
-userRouter.get("/getUser", checkAuth);
+userRouter.post(
+  "/registration",
+  validators.validateRegistrationData,
+  hashPass,
+  userController.registration
+);
+
+userRouter.patch("/login", validators.validateLogin, userController.login);
 
 userRouter.patch(
   "/changeMark",
@@ -41,20 +55,6 @@ userRouter.patch(
   checkToken,
   upload.uploadAvatar,
   userController.updateUser
-);
-
-userRouter.post(
-  "/cashout",
-  checkToken,
-  basicMiddlewares.onlyForCreative,
-  userController.cashout
-);
-
-userRouter.get(
-  "/transactions",
-  checkToken,
-  basicMiddlewares.onlyForCreative,
-  userController.getUserTransactions
 );
 
 module.exports = userRouter;

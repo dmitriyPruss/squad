@@ -1,19 +1,14 @@
 const { Op } = require("sequelize");
 const _ = require("lodash");
-// const { Conversation, Message, Catalog } = require("./../models/mongoModels");
 const {
   User,
   Conversation,
   Message,
   Catalog,
-  sequelize,
 } = require("./../models/postgreModels");
-
 const userQueries = require("./queries/userQueries");
 const controller = require("../socketInit");
 
-// (bugs ChatSocket)
-// ++
 module.exports.addMessage = async (req, res, next) => {
   const {
     body: { messageBody, recipient, interlocutor },
@@ -38,7 +33,7 @@ module.exports.addMessage = async (req, res, next) => {
       conversation: id,
     });
 
-    message.participants = participants; // обратить внимание - расхождение с Мангусом(*) message._doc.participants = participants;
+    message.participants = participants;
 
     const interlocutorId = participants.filter(
       (participant) => participant !== userId
@@ -84,7 +79,6 @@ module.exports.addMessage = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.getChat = async (req, res, next) => {
   const {
     params: { interlocutorId },
@@ -137,13 +131,10 @@ module.exports.getChat = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.getPreview = async (req, res, next) => {
   const {
     tokenData: { userId },
   } = req;
-
-  console.log("GET PREVIEW userId", userId);
 
   try {
     // 1 variant - using Eager Loading
@@ -237,7 +228,6 @@ module.exports.getPreview = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.blackList = async (req, res, next) => {
   const {
     body: { blackListFlag, participants },
@@ -278,7 +268,6 @@ module.exports.blackList = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.favoriteList = async (req, res, next) => {
   const {
     body: { favoriteFlag, participants },
@@ -313,7 +302,6 @@ module.exports.favoriteList = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.createCatalog = async (req, res, next) => {
   const {
     body: { catalogName, chatId },
@@ -333,16 +321,12 @@ module.exports.createCatalog = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.updateNameCatalog = async (req, res, next) => {
   const {
     query: { catalogName },
     params: { catalogId: id },
     tokenData: { userId },
   } = req;
-
-  console.log("req.query", req.query);
-  console.log("req.params", req.params);
 
   try {
     const [catalogCount, [catalog]] = await Catalog.update(
@@ -360,14 +344,11 @@ module.exports.updateNameCatalog = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.addNewChatToCatalog = async (req, res, next) => {
   const {
     params: { catalogId: id, chatId },
     tokenData: { userId },
   } = req;
-
-  console.log("id, chatId", id, chatId);
 
   try {
     const { chats } = await Catalog.findOne({
@@ -393,7 +374,6 @@ module.exports.addNewChatToCatalog = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.removeChatFromCatalog = async (req, res, next) => {
   const {
     params: { catalogId: id, chatId },
@@ -412,7 +392,7 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
     const [catalogCount, [catalog]] = await Catalog.update(
       { chats: newChats },
       {
-        where: { id, userId }, // test
+        where: { id, userId },
         returning: true,
         raw: true,
       }
@@ -424,14 +404,11 @@ module.exports.removeChatFromCatalog = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.deleteCatalog = async (req, res, next) => {
   const {
     params: { catalogId: id },
     tokenData: { userId },
   } = req;
-
-  console.log("req.params", req.params);
 
   try {
     await Catalog.destroy({
@@ -447,7 +424,6 @@ module.exports.deleteCatalog = async (req, res, next) => {
   }
 };
 
-// + +
 module.exports.getCatalogs = async (req, res, next) => {
   const {
     tokenData: { userId },
@@ -459,7 +435,7 @@ module.exports.getCatalogs = async (req, res, next) => {
         userId,
       },
       raw: true,
-      attributes: ["id", "catalogName", "chats"], // alternate variant
+      attributes: ["id", "catalogName", "chats"],
     });
 
     res.status(200).send(catalogs);

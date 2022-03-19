@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-function ToggleButton (props) {
+function ToggleButton(props) {
   const {
     toggleElement,
     toggleSign,
@@ -11,9 +11,9 @@ function ToggleButton (props) {
   return (
     <div className={toggledButton} style={color} onClick={toggleElement}>
       {toggleSign ? (
-        <i className='far fa-plus-square'></i>
+        <i className="far fa-plus-square"></i>
       ) : (
-        <i className='far fa-minus-square'></i>
+        <i className="far fa-minus-square"></i>
       )}
     </div>
   );

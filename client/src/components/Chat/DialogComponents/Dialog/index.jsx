@@ -2,7 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 import className from "classnames";
-import { getDialogMessages, clearMessageList } from "../../../../actions/actionCreator";
+import {
+  getDialogMessages,
+  clearMessageList,
+} from "../../../../actions/actionCreator";
 import ChatHeader from "../../ChatComponents/ChatHeader";
 import styles from "./Dialog.module.sass";
 import ChatInput from "../../ChatComponents/ChatInput";
@@ -23,16 +26,6 @@ class Dialog extends React.Component {
   scrollToBottom = () => {
     this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
   };
-
-  // componentWillReceiveProps (nextProps, nextContext) {
-  //   const {
-  //     getDialog,
-  //     interlocutor: { id }
-  //   } = this.props;
-
-  //   if (nextProps.interlocutor.id !== id)
-  //     getDialog({ interlocutorId: nextProps.interlocutor.id });
-  // }
 
   componentWillUnmount() {
     this.props.clearMessageList();
@@ -65,10 +58,14 @@ class Dialog extends React.Component {
       messagesArray.push(
         <div
           key={i}
-          className={className(userId === message.sender ? styles.ownMessage : styles.message)}
+          className={className(
+            userId === message.sender ? styles.ownMessage : styles.message
+          )}
         >
           <span>{message.body}</span>
-          <span className={styles.messageTime}>{moment(message.createdAt).format("HH:mm")}</span>
+          <span className={styles.messageTime}>
+            {moment(message.createdAt).format("HH:mm")}
+          </span>
           <div ref={this.messagesEnd} />
         </div>
       );
@@ -101,7 +98,11 @@ class Dialog extends React.Component {
         <ChatHeader userId={userId} />
         {this.renderMainDialog()}
         <div ref={this.messagesEnd} />
-        {chatData && chatData.blackList.includes(true) ? this.blockMessage() : <ChatInput />}
+        {chatData && chatData.blackList.includes(true) ? (
+          this.blockMessage()
+        ) : (
+          <ChatInput />
+        )}
       </>
     );
   }

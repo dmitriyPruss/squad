@@ -1,13 +1,13 @@
-import React from 'react';
-import styles from './ProgressBar.module.sass';
+import React from "react";
+import styles from "./ProgressBar.module.sass";
 
-const ProgressBar = props => {
+const ProgressBar = (props) => {
   const { currentStep } = props;
 
-  const renderBar = count => {
+  const renderBar = (count) => {
     let classOuter = styles.outerNotActive;
     let classInner = styles.innerNotActive;
-    let classProgress = '';
+    let classProgress = "";
 
     if (count === currentStep) {
       classOuter = styles.outerActive;

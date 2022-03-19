@@ -1,6 +1,5 @@
 import React from "react";
-import { Field, useField } from "formik";
-import CONSTANTS from "./../../../constants";
+import { useField } from "formik";
 
 const FieldFileInput = (props) => {
   const {
@@ -26,15 +25,12 @@ const FieldFileInput = (props) => {
 
       reader.onload = () => {
         nameContainer.src = reader.result;
-        console.log("node", nameContainer);
       };
 
       reader.readAsDataURL(file);
       setValue(file);
     }
   };
-
-  console.log("field", field);
 
   return (
     <div className={fileUploadContainer}>

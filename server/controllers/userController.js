@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const { v4: uuid } = require("uuid");
-
 const CONSTANTS = require("./../constants");
 const {
   Contest,
@@ -19,7 +18,6 @@ const bankQueries = require("./queries/bankQueries");
 const ratingQueries = require("./queries/ratingQueries");
 
 module.exports.login = async (req, res, next) => {
-  // console.log(`login!`, req.body);
   const {
     body: { email, password },
   } = req;
@@ -57,18 +55,14 @@ module.exports.login = async (req, res, next) => {
       { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
     );
 
-    console.log("accessToken", accessToken);
-
     await userQueries.updateUser({ accessToken }, id);
-    res.send({ token: accessToken });
+    res.status(200).send({ token: accessToken });
   } catch (err) {
     next(err);
   }
 };
 
 module.exports.registration = async (req, res, next) => {
-  // console.log(`registration!`, req.body);
-
   try {
     const newUser = await userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass })
@@ -102,7 +96,7 @@ module.exports.registration = async (req, res, next) => {
       { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
     );
     await userQueries.updateUser({ accessToken }, id);
-    res.send({ token: accessToken });
+    res.status(201).send({ token: accessToken });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
       next(new NotUniqueEmail());
@@ -128,7 +122,6 @@ function getQuery(offerId, userId, mark, isFirst, transaction) {
 }
 
 module.exports.changeMark = async (req, res, next) => {
-  // let avg = 0;
   let transaction;
 
   const {
@@ -153,10 +146,6 @@ module.exports.changeMark = async (req, res, next) => {
       transaction,
     });
 
-    // for (let i = 0; i < offers.length; i++) {
-    //   sum += offers[i].dataValues.mark;
-    // }
-
     const sum = offers.reduce((sum, offer) => sum + offer.dataValues.mark, 0);
 
     const avg = sum / offers.length || 0;
@@ -164,7 +153,7 @@ module.exports.changeMark = async (req, res, next) => {
     await userQueries.updateUser({ rating: avg }, creatorId, transaction);
     transaction.commit();
     controller.getNotificationController().emitChangeMark(creatorId);
-    res.send({ userId: creatorId, rating: avg });
+    res.status(200).send({ userId: creatorId, rating: avg });
   } catch (err) {
     transaction.rollback();
     next(err);
@@ -222,7 +211,7 @@ module.exports.payment = async (req, res, next) => {
     });
     await Contest.bulkCreate(contests, transaction);
     transaction.commit();
-    res.send();
+    res.send(); // !!!
   } catch (err) {
     transaction.rollback();
     next(err);
@@ -236,17 +225,12 @@ module.exports.updateUser = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
-  console.log("req.body", body);
-  console.log("req.file", file);
-
   try {
     if (file) {
       req.body.avatar = file.filename;
-      console.log("req.body", req.body);
     }
     const updatedUser = await userQueries.updateUser(body, userId);
 
-    console.log("updatedUser", updatedUser);
     const {
       firstName,
       lastName,
@@ -258,7 +242,7 @@ module.exports.updateUser = async (req, res, next) => {
       id,
     } = updatedUser;
 
-    res.send({
+    res.status(200).send({
       firstName,
       lastName,
       displayName,
@@ -281,8 +265,6 @@ module.exports.cashout = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
-  // console.log('req.body', req.body);
-
   try {
     transaction = await sequelize.transaction();
     const updatedUser = await userQueries.updateUser(
@@ -290,8 +272,6 @@ module.exports.cashout = async (req, res, next) => {
       userId,
       transaction
     );
-
-    // console.log('updatedUser', updatedUser);
 
     await bankQueries.updateBankBalance(
       {
@@ -323,10 +303,11 @@ module.exports.cashout = async (req, res, next) => {
       amount: sum,
       userId,
     };
+
     await Transaction.create(newTransactionInfo, { transaction });
 
     transaction.commit();
-    res.send({ balance: updatedUser.balance });
+    res.status(201).send({ balance: updatedUser.balance });
   } catch (err) {
     transaction.rollback();
     next(err);
@@ -338,16 +319,12 @@ module.exports.getUserTransactions = async (req, res, next) => {
     tokenData: { userId },
   } = req;
 
-  console.log("userId", userId);
-
   try {
     const foundTransactions = await Transaction.findAll({
       where: { userId },
       raw: true,
       attributes: { exclude: ["updatedAt", "userId"] },
     });
-
-    console.log("foundTransactions", foundTransactions);
 
     res.status(200).send(foundTransactions);
   } catch (err) {

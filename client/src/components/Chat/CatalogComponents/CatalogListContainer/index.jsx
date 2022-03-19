@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCatalogList, removeChatFromCatalog } from "../../../../actions/actionCreator";
+import {
+  getCatalogList,
+  removeChatFromCatalog,
+} from "../../../../actions/actionCreator";
 import CatalogList from "../CatalogList";
 import DialogList from "../../DialogComponents/DialogList";
 
@@ -37,18 +40,6 @@ class CatalogListContainer extends React.Component {
         }
       });
     });
-
-    console.log("dialogsInCatalog", dialogsInCatalog);
-
-    // const dialogsInCatalog = [];
-
-    // for (let i = 0; i < messagesPreview.length; i++) {
-    //   for (let j = 0; j < chats.length; j++) {
-    //     if (chats[j] === messagesPreview[i].id) {
-    //       dialogsInCatalog.push(messagesPreview[i]);
-    //     }
-    //   }
-    // }
 
     return dialogsInCatalog;
   };
@@ -87,4 +78,7 @@ const mapDispatchToProps = (dispatch) => ({
   removeChatFromCatalog: (data) => dispatch(removeChatFromCatalog(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CatalogListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CatalogListContainer);

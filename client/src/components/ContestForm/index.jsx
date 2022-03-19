@@ -73,8 +73,6 @@ class ContestForm extends React.Component {
       initialValues: initVals,
     } = this.props;
 
-    console.log("this.props", this.props);
-
     if (error) {
       return <TryAgain getData={this.getPreference} />;
     }

@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './LevelElement.module.scss';
+import React from "react";
+import styles from "./LevelElement.module.scss";
 
-function LevelElement (props) {
+function LevelElement(props) {
   const {
     levelElementData: { id, src, header, mainContent, learnMoreLink },
   } = props;

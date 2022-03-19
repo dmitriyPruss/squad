@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import calcPeriod from '../helperFuncs/calcPeriod';
+import React, { useState, useEffect, useMemo } from "react";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import calcPeriod from "../helperFuncs/calcPeriod";
 
-function ProgressItem (props) {
+function ProgressItem(props) {
   const { progressState, period } = props;
 
-  const initProgBarValue = useMemo(() => calcPeriod(progressState, period), [
-    progressState
-  ]);
+  const initProgBarValue = useMemo(
+    () => calcPeriod(progressState, period),
+    [progressState]
+  );
 
   const [progressBarValue, setProgressBarValue] = useState(initProgBarValue);
 
   useEffect(() => {
-    let progressValueId = setTimeout(function runProgressValue () {
+    let progressValueId = setTimeout(function runProgressValue() {
       setProgressBarValue(calcPeriod(progressState, period));
 
       progressValueId = setTimeout(runProgressValue, 1000);
@@ -23,7 +24,7 @@ function ProgressItem (props) {
     };
   }, [progressState]);
 
-  return <ProgressBar animated variant='primary' now={progressBarValue} />;
+  return <ProgressBar animated variant="primary" now={progressBarValue} />;
 }
 
 export default ProgressItem;

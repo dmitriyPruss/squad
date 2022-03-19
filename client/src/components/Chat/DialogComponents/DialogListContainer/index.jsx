@@ -5,7 +5,7 @@ import DialogList from "../DialogList";
 
 class DialogListContainer extends React.Component {
   componentDidMount() {
-    // this.props.getChatPreview();
+    this.props.getChatPreview();
   }
 
   render() {
@@ -20,4 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   getChatPreview: () => dispatch(getPreviewChat()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DialogListContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DialogListContainer);

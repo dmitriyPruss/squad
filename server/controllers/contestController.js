@@ -13,6 +13,7 @@ const CONSTANTS = require("./../constants");
 
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
+
   try {
     const {
       body: { characteristic1, characteristic2 },
@@ -29,9 +30,11 @@ module.exports.dataForContest = async (req, res, next) => {
         },
       },
     });
+
     if (!characteristics) {
       return next(new ServerError());
     }
+
     characteristics.forEach((characteristic) => {
       const { type, describe } = characteristic;
       if (!response[type]) {
@@ -39,9 +42,9 @@ module.exports.dataForContest = async (req, res, next) => {
       }
       response[type].push(describe);
     });
-    res.send(response);
+
+    res.status(201).send(response);
   } catch (err) {
-    console.log(err);
     next(new ServerError("cannot get contest preferences"));
   }
 };
@@ -95,7 +98,8 @@ module.exports.getContestById = async (req, res, next) => {
       }
       delete offer.Rating;
     });
-    res.send(contestInfo);
+
+    res.status(200).send(contestInfo);
   } catch (e) {
     next(new ServerError());
   }
@@ -124,14 +128,13 @@ module.exports.updateContest = async (req, res, next) => {
       userId,
     });
 
-    res.send(updatedContest);
+    res.status(200).send(updatedContest);
   } catch (e) {
     next(e);
   }
 };
 
 module.exports.getCustomersContests = async (req, res, next) => {
-  // console.log(`req`, req.tokenData);
   const {
     query: { limit, offset, contestStatus: status },
     tokenData: { userId },
@@ -152,24 +155,22 @@ module.exports.getCustomersContests = async (req, res, next) => {
       ],
     });
 
-    // console.log(`contests`, contests);
-
     contests.forEach(
       (contest) => (contest.dataValues.count = contest.dataValues.Offers.length)
     );
+
     let haveMore = true;
     if (contests.length === 0) {
       haveMore = false;
     }
-    res.send({ contests, haveMore });
+
+    res.status(200).send({ contests, haveMore });
   } catch (err) {
     return next(new ServerError(err));
   }
 };
 
 module.exports.getContests = async (req, res, next) => {
-  // console.log(`req`, req);
-
   const {
     query: {
       offset,
@@ -215,9 +216,8 @@ module.exports.getContests = async (req, res, next) => {
     if (contests.length === 0) {
       haveMore = false;
     }
-    res.send({ contests, haveMore });
+    res.status(200).send({ contests, haveMore });
   } catch (err) {
-    // next(new ServerError());
     return next(new ServerError());
   }
 };

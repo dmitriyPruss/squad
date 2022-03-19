@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import styles from './../Events.module.scss';
+import React, { useEffect } from "react";
+import styles from "./../Events.module.scss";
 
-function TimeIsOver (props) {
+function TimeIsOver(props) {
   const { id, finishItem } = props;
 
   useEffect(() => finishItem(id), []);

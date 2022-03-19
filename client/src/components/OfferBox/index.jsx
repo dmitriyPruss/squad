@@ -33,7 +33,6 @@ const OfferBox = (props) => {
     role,
     id,
     contestType,
-    offers,
     clearError,
     changeMark,
     changeShowImage,
@@ -68,11 +67,6 @@ const OfferBox = (props) => {
 
   const changeMarkValue = (value) => {
     clearError();
-    console.log("value", value);
-    console.log("data.mark :>> ", data.mark);
-    console.log("User.id :>> ", User.id);
-
-    console.log("data :>> ", data);
 
     changeMark({
       mark: value,
@@ -190,7 +184,7 @@ const OfferBox = (props) => {
 const mapStateToProps = (state) => {
   const {
     chatStore: { messagesPreview },
-    contestByIdStore: { changeMarkError, isShowModal, offers },
+    contestByIdStore: { changeMarkError, isShowModal },
     contestByIdStore,
     userStore: {
       data: { id, role },
@@ -201,7 +195,6 @@ const mapStateToProps = (state) => {
     changeMarkError,
     id,
     role,
-    offers,
     messagesPreview,
     isShowModal,
     contestByIdStore,

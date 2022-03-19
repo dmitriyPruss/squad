@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './BundleBox.module.sass';
-import CONSTANTS from '../../constants';
+import React from "react";
+import styles from "./BundleBox.module.sass";
+import CONSTANTS from "../../constants";
 
-const BundleBox = props => {
+const BundleBox = (props) => {
   const defaultPathToImages = `${CONSTANTS.STATIC_IMAGES_PATH}contestLabels/`;
 
   const { path, header, setBundle, describe } = props;
@@ -16,21 +16,10 @@ const BundleBox = props => {
           src={defaultPathToImages + item}
           key={index}
           className={styles.imgContainer}
-          alt={item.replace(/.png/g, 'Contest')}
+          alt={item.replace(/.png/g, "Contest")}
         />
       );
     });
-
-    // for (let i = 0; i < props.path.length; i++) {
-    //   array.push(
-    //     <img
-    //       src={defaultPathToImages + props.path[i]}
-    //       key={i}
-    //       className={styles.imgContainer}
-    //       alt={props.path[i].replace(/.png/g, 'Contest')}
-    //     />
-    //   );
-    // }
 
     return array;
   };
@@ -53,7 +42,7 @@ const BundleBox = props => {
   };
 
   const getBackClass = () =>
-    path.length === 1 ? ' ' : ` ${styles.combinedBundle}`;
+    path.length === 1 ? " " : ` ${styles.combinedBundle}`;
 
   return (
     <div

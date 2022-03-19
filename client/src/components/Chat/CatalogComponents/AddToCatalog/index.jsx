@@ -50,7 +50,9 @@ const AddToCatalog = (props) => {
           </Form>
         </Formik>
       ) : (
-        <div className={styles.notFound}>You have not created any directories.</div>
+        <div className={styles.notFound}>
+          You have not created any directories.
+        </div>
       )}
     </>
   );

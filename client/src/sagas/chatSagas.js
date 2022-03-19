@@ -15,7 +15,7 @@ export function* previewSaga() {
 
 export function* getDialog(action) {
   try {
-    const {interlocutorId} = action.data;
+    const { interlocutorId } = action.data;
 
     const { data } = yield restController.getDialog(interlocutorId);
     yield put({ type: ACTION.GET_DIALOG_MESSAGES, data });
@@ -86,7 +86,8 @@ export function* changeChatBlock(action) {
     const { data } = yield restController.changeChatBlock(action.data);
     const { messagesPreview } = yield select((state) => state.chatStore);
     messagesPreview.forEach((preview) => {
-      if (isEqual(preview.participants, data.participants)) preview.blackList = data.blackList;
+      if (isEqual(preview.participants, data.participants))
+        preview.blackList = data.blackList;
     });
     yield put({
       type: ACTION.CHANGE_CHAT_BLOCK,
@@ -108,8 +109,7 @@ export function* getCatalogListSaga() {
 
 export function* addChatToCatalog(action) {
   try {
-
-    const {catalogId, chatId} = action.data;
+    const { catalogId, chatId } = action.data;
 
     const { data } = yield restController.addChatToCatalog(catalogId, chatId);
     const { catalogList } = yield select((state) => state.chatStore);
@@ -138,8 +138,6 @@ export function* deleteCatalog(action) {
   try {
     const { catalogId: id } = action.data;
 
-    console.log('action.data', action.data)
-
     yield restController.deleteCatalog(id);
 
     const { catalogList } = yield select((state) => state.chatStore);
@@ -148,7 +146,10 @@ export function* deleteCatalog(action) {
       data: { catalogId },
     } = action;
 
-    const newCatalogList = remove(catalogList, (catalog) => catalogId !== catalog.id);
+    const newCatalogList = remove(
+      catalogList,
+      (catalog) => catalogId !== catalog.id
+    );
     yield put({ type: ACTION.DELETE_CATALOG_SUCCESS, data: newCatalogList });
   } catch (err) {
     yield put({ type: ACTION.DELETE_CATALOG_ERROR, error: err.response });
@@ -159,7 +160,10 @@ export function* removeChatFromCatalogSaga(action) {
   try {
     const { catalogId, chatId } = action.data;
 
-    const { data } = yield restController.removeChatFromCatalog(catalogId, chatId);
+    const { data } = yield restController.removeChatFromCatalog(
+      catalogId,
+      chatId
+    );
     const { catalogList } = yield select((state) => state.chatStore);
 
     for (let i = 0; i < catalogList.length; i++) {
@@ -184,7 +188,10 @@ export function* changeCatalogName(action) {
   try {
     const { catalogName, catalogId } = action.data;
 
-    const { data } = yield restController.changeCatalogName(catalogName, catalogId);
+    const { data } = yield restController.changeCatalogName(
+      catalogName,
+      catalogId
+    );
     const { catalogList } = yield select((state) => state.chatStore);
     for (let i = 0; i < catalogList.length; i++) {
       if (catalogList[i].id === data.id) {

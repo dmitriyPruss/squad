@@ -22,9 +22,6 @@ const UserInfo = (props) => {
     formData.append("lastName", lastName);
     formData.append("displayName", displayName);
 
-    console.log("values", values);
-    console.log("formData", formData);
-
     updateUser(formData);
   };
 

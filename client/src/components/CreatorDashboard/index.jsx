@@ -72,20 +72,6 @@ class CreatorDashboard extends React.Component {
       },
     } = this.props;
 
-    // const array = [];
-    // array.push(
-    //   <option key={0} value={null}>
-    //     Choose industry
-    //   </option>
-    // );
-    // industry.forEach((ind, i) =>
-    //   array.push(
-    //     <option key={i + 1} value={ind}>
-    //       {ind}
-    //     </option>
-    //   )
-    // );
-
     const array = industry.map((ind, index) =>
       index === 0 ? (
         <>
@@ -124,7 +110,6 @@ class CreatorDashboard extends React.Component {
       location: { search },
     } = this.props;
 
-    // ?????
     if (nextProps.location.search !== search) {
       this.parseUrlForParams(nextProps.location.search);
     }
@@ -165,10 +150,6 @@ class CreatorDashboard extends React.Component {
     const obj = {};
     Object.keys(creatFilter).forEach((item) => {
       obj[item] = creatFilter[item];
-
-      // if (creatFilter[item]) {
-      //   obj[item] = creatFilter[item];
-      // }
     });
     history.push(`/Dashboard?${queryString.stringify(obj)}`);
   };
@@ -202,12 +183,7 @@ class CreatorDashboard extends React.Component {
 
     Object.keys(creatorFilter).forEach((item) => {
       obj[item] = creatorFilter[item];
-      // if (creatorFilter[item]) {
-      //   obj[item] = creatorFilter[item];
-      // }
     });
-
-    // obj.ownEntries = creatorFilter.ownEntries; // ????? sense??
 
     return obj;
   };
@@ -257,7 +233,7 @@ class CreatorDashboard extends React.Component {
       error,
       haveMore,
       creatorFilter: { ownEntries, awardSort, contestId },
-      isFeching: isFetch, //??????????
+      isFeching: isFetch,
       dataForContest: { isFetching },
     } = this.props;
 
@@ -328,7 +304,7 @@ class CreatorDashboard extends React.Component {
           </div>
         ) : (
           <ContestsContainer
-            isFetching={isFetch} // ?????
+            isFetching={isFetch}
             loadMore={this.loadMore}
             history={history}
             haveMore={haveMore}

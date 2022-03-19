@@ -7,7 +7,6 @@ const initialState = {
   isEditContest: false,
   error: null,
   offers: [],
-
   changeMarkError: null,
   addOfferError: null,
   setOfferStatusError: null,
@@ -73,12 +72,6 @@ function getContestByIdReducer(state = initialState, action) {
         draftState.error = null;
         draftState.offers = [...action.data];
       });
-
-      // {
-      //   ...state,
-      //   error: null,
-      //   offers: [...action.data]
-      // };
     }
 
     case ACTION.CHANGE_MARK_ERROR: {

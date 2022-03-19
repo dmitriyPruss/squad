@@ -1,10 +1,10 @@
-import React from 'react';
-import { toast } from 'react-toastify';
-import WebSocket from './WebSocket';
-import Notification from '../../../components/Notification';
+import React from "react";
+import { toast } from "react-toastify";
+import WebSocket from "./WebSocket";
+import Notification from "../../../components/Notification";
 
 class NotificationSocket extends WebSocket {
-  constructor (dispatch, getState, room) {
+  constructor(dispatch, getState, room) {
     super(dispatch, getState, room);
   }
 
@@ -15,13 +15,13 @@ class NotificationSocket extends WebSocket {
   };
 
   onChangeMark = () => {
-    this.socket.on('changeMark', () => {
-      toast('Someone liked your offer');
+    this.socket.on("changeMark", () => {
+      toast("Someone liked your offer");
     });
   };
 
   onChangeOfferStatus = () => {
-    this.socket.on('changeOfferStatus', message => {
+    this.socket.on("changeOfferStatus", (message) => {
       const { message: mes, contestId } = message;
 
       toast(<Notification message={mes} contestId={contestId} />);
@@ -29,17 +29,17 @@ class NotificationSocket extends WebSocket {
   };
 
   onEntryCreated = () => {
-    this.socket.on('onEntryCreated', () => {
-      toast('New Entry');
+    this.socket.on("onEntryCreated", () => {
+      toast("New Entry");
     });
   };
 
-  subscribe = id => {
-    this.socket.emit('subscribe', id);
+  subscribe = (id) => {
+    this.socket.emit("subscribe", id);
   };
 
-  unsubsctibe = id => {
-    this.socket.emit('unsubscribe', id);
+  unsubsctibe = (id) => {
+    this.socket.emit("unsubscribe", id);
   };
 }
 

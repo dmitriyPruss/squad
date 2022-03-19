@@ -73,7 +73,6 @@ module.exports.setNewOffer = async (req, res, next) => {
 
 module.exports.getOffersForModerator = async (req, res, next) => {
   const {
-    tokenData: { userId },
     params: { page },
   } = req;
 
@@ -100,7 +99,7 @@ module.exports.getOffersForModerator = async (req, res, next) => {
 
 module.exports.getEmailMessages = async (req, res, next) => {
   const {
-    tokenData: { userId, email },
+    tokenData: { userId },
     params: { page },
   } = req;
 

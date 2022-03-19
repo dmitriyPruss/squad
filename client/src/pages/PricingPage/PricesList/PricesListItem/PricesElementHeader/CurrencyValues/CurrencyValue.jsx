@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-function CurrencyValue (props) {
+function CurrencyValue(props) {
   const { value, leftVal, translateVal, fontSizeVal } = props;
 
   return (
     <span
       style={{
-        position: 'absolute',
+        position: "absolute",
         left: `${leftVal}px`,
         transform: `translateY(${translateVal}px)`,
         fontSize: `${fontSizeVal}`,

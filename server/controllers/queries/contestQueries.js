@@ -106,8 +106,6 @@ module.exports.offersForModerator = async (currentOffset) => {
     ],
   });
 
-  // console.log("offers", offers);
-
   return offers;
 };
 
@@ -147,8 +145,6 @@ module.exports.messagesForCreator = async (
     return offerData;
   });
 
-  console.log("messages", messages);
-
   return messages;
 };
 
@@ -168,16 +164,12 @@ module.exports.createEmailLink = async (
     raw: true,
   });
 
-  // console.log("moderator", moderator);
-
   const creator = await User.findOne({
     where: {
       id: userId,
     },
     raw: true,
   });
-
-  // console.log("creator", creator);
 
   const offerDetails = await Contest.findOne({
     where: {
@@ -193,11 +185,7 @@ module.exports.createEmailLink = async (
     raw: true,
   });
 
-  // console.log("offerDetails", offerDetails);
-
   const myTestAccount = await nodemailer.createTestAccount();
-
-  // console.log("myTestAccount", myTestAccount);
 
   const transportOptions = {
     host: "smtp.ethereal.email",
@@ -209,11 +197,7 @@ module.exports.createEmailLink = async (
     },
   };
 
-  // console.log("transportOptions", transportOptions);
-
   const transporter = nodemailer.createTransport(transportOptions);
-
-  console.log("transporter", transporter);
 
   const sendMailOptions = {
     from: moderator.email,
@@ -230,11 +214,7 @@ module.exports.createEmailLink = async (
     )}`,
   };
 
-  // console.log("sendMailOptions", sendMailOptions);
-
   const info = await transporter.sendMail(sendMailOptions);
-
-  console.log("Message sent: %s", info.messageId);
 
   const link = nodemailer.getTestMessageUrl(info);
 

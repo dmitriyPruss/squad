@@ -6,8 +6,6 @@ import * as restController from "../api/rest/restController";
 export function* paymentSaga(action) {
   yield put({ type: ACTION.PAYMENT_ACTION_REQUEST });
 
-  console.log("PAYMENT action.data", action.data);
-
   try {
     yield restController.payMent(action.data);
     action.history.replace("dashboard");
@@ -20,6 +18,7 @@ export function* paymentSaga(action) {
 
 export function* cashoutSaga(action) {
   yield put({ type: ACTION.PAYMENT_ACTION_REQUEST, data: action.data });
+
   try {
     const { data } = yield restController.cashOut(action.data);
     yield put({ type: ACTION.UPDATE_USER_DATA_SUCCESS, data });

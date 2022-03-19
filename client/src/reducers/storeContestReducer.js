@@ -7,8 +7,6 @@ const initialState = {
 function storeContestReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION.SAVE_CONTEST_TO_STORE: {
-      console.log("action", action);
-
       return {
         ...state,
         contests: {

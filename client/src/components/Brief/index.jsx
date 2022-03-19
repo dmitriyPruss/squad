@@ -25,7 +25,6 @@ const Brief = (props) => {
   };
 
   const getContestObjInfo = () => {
-    // ОТрефакторить - перекопировать по нормальному свойства из обного обьекта в другой!
     const {
       contestData: {
         focusOfWork,
@@ -96,7 +95,11 @@ const Brief = (props) => {
   return (
     <div className={styles.contestForm}>
       {error && (
-        <Error data={error.data} status={error.status} clearError={clearUpdateContestStore} />
+        <Error
+          data={error.data}
+          status={error.status}
+          clearError={clearUpdateContestStore}
+        />
       )}
       <ContestForm
         contestType={contestData.contestType}

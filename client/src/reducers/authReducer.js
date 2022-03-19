@@ -1,35 +1,34 @@
-import ACTION from '../actions/actionTypes';
+import ACTION from "../actions/actionTypes";
 
 const initialState = {
   isFetching: false,
-  error: null
+  error: null,
 };
 
-function authReducer (state = initialState, action) {
+function authReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION.AUTH_ACTION_REQUEST: {
-      console.log(`action!`, action);
       return {
         isFetching: true,
-        error: null
+        error: null,
       };
     }
     case ACTION.AUTH_ACTION_SUCCESS: {
       return {
         isFetching: false,
-        error: null
+        error: null,
       };
     }
     case ACTION.AUTH_ACTION_ERROR: {
       return {
         isFetching: false,
-        error: action.error
+        error: action.error,
       };
     }
     case ACTION.AUTH_ACTION_CLEAR_ERROR: {
       return {
         ...state,
-        error: null
+        error: null,
       };
     }
     case ACTION.AUTH_ACTION_CLEAR: {
@@ -38,6 +37,6 @@ function authReducer (state = initialState, action) {
     default:
       return state;
   }
-};
+}
 
 export default authReducer;

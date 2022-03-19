@@ -17,11 +17,7 @@ class RegistrationForm extends React.Component {
 
   clicked = (values) => {
     const { firstName, lastName, displayName, email, password, role } = values;
-
     const { register, history } = this.props;
-
-    console.log('values', values);
-    console.log('this.props', this.props);
 
     register({
       data: {
@@ -52,7 +48,13 @@ class RegistrationForm extends React.Component {
     };
     return (
       <div className={styles.signUpFormContainer}>
-        {error && <Error data={error.data} status={error.status} clearError={authClear} />}
+        {error && (
+          <Error
+            data={error.data}
+            status={error.status}
+            clearError={authClear}
+          />
+        )}
         <div className={styles.headerFormContainer}>
           <h2>CREATE AN ACCOUNT</h2>
           <h4>We always keep your name and email address private.</h4>
@@ -79,7 +81,12 @@ class RegistrationForm extends React.Component {
                 type="text"
                 label="First name"
               />
-              <FormInput name="lastName" classes={formInputClasses} type="text" label="Last name" />
+              <FormInput
+                name="lastName"
+                classes={formInputClasses}
+                type="text"
+                label="Last name"
+              />
             </div>
             <div className={styles.row}>
               <FormInput
@@ -149,7 +156,11 @@ class RegistrationForm extends React.Component {
                 type="checkbox"
               />
             </div>
-            <button type="submit" disabled={submitting} className={styles.submitContainer}>
+            <button
+              type="submit"
+              disabled={submitting}
+              className={styles.submitContainer}
+            >
               <span className={styles.inscription}>Create Account</span>
             </button>
           </Form>

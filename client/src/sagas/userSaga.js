@@ -9,7 +9,6 @@ export function* privateSaga(action) {
   try {
     const { data } = yield restController.getUser();
 
-    console.log(`notAuthorizeSaga data`, data);
     yield put({ type: ACTION.GET_USER_SUCCESS, data });
     controller.subscribe(data.id);
   } catch (e) {
@@ -22,7 +21,6 @@ export function* notAuthorizeSaga(action) {
   try {
     const { data } = yield restController.getUser();
 
-    console.log(`notAuthorizeSaga data`, data);
     action.replace("/");
     yield put({ type: ACTION.GET_USER_SUCCESS, data });
   } catch (e) {
@@ -31,12 +29,8 @@ export function* notAuthorizeSaga(action) {
 }
 
 export function* updateUserData(action) {
-  console.log("action.data", action.data);
-
   try {
     const { data } = yield restController.updateUser(action.data);
-
-    console.log("data", data);
 
     yield put({ type: ACTION.UPDATE_USER_DATA_SUCCESS, data });
     yield put({ type: ACTION.CHANGE_EDIT_MODE_ON_USER_PROFILE, data: false });

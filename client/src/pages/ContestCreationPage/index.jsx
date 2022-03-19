@@ -28,8 +28,6 @@ const ContestCreationPage = (props) => {
     : { contestType };
 
   const handleSubmit = (values) => {
-    console.log("values", values);
-
     saveContest({ type: contestType, info: values });
     const route =
       bundle[contestType] === "payment"

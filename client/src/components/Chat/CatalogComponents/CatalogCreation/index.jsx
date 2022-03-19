@@ -17,28 +17,40 @@ class CatalogCreation extends React.Component {
   }
 
   render() {
-    const { changeTypeOfChatAdding, catalogCreationMode, changeShowAddChatToCatalog, isFetching } =
-      this.props;
+    const {
+      changeTypeOfChatAdding,
+      catalogCreationMode,
+      changeShowAddChatToCatalog,
+      isFetching,
+    } = this.props;
 
-    const { ADD_CHAT_TO_OLD_CATALOG, CREATE_NEW_CATALOG_AND_ADD_CHAT } = CONSTANTS;
+    const { ADD_CHAT_TO_OLD_CATALOG, CREATE_NEW_CATALOG_AND_ADD_CHAT } =
+      CONSTANTS;
     return (
       <>
         {!isFetching && (
           <div className={styles.catalogCreationContainer}>
-            <i className="far fa-times-circle" onClick={() => changeShowAddChatToCatalog()} />
+            <i
+              className="far fa-times-circle"
+              onClick={() => changeShowAddChatToCatalog()}
+            />
             <div className={styles.buttonsContainer}>
               <span
                 onClick={() => changeTypeOfChatAdding(ADD_CHAT_TO_OLD_CATALOG)}
                 className={classNames({
-                  [styles.active]: catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
+                  [styles.active]:
+                    catalogCreationMode === ADD_CHAT_TO_OLD_CATALOG,
                 })}
               >
                 Old
               </span>
               <span
-                onClick={() => changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)}
+                onClick={() =>
+                  changeTypeOfChatAdding(CREATE_NEW_CATALOG_AND_ADD_CHAT)
+                }
                 className={classNames({
-                  [styles.active]: catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT,
+                  [styles.active]:
+                    catalogCreationMode === CREATE_NEW_CATALOG_AND_ADD_CHAT,
                 })}
               >
                 New

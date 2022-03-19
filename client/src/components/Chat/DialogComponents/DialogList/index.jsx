@@ -86,7 +86,9 @@ const DialogList = (props) => {
           changeFavorite={changeFavorite}
           changeBlackList={changeBlackList}
           chatMode={chatMode}
-          catalogOperation={chatMode === CATALOG ? removeChat : changeShowCatalogCreation}
+          catalogOperation={
+            chatMode === CATALOG ? removeChat : changeShowCatalogCreation
+          }
           goToExpandedDialog={goToExpandedDialog}
         />
       );
@@ -96,7 +98,11 @@ const DialogList = (props) => {
         arrayList.push(dialogNode);
       }
     });
-    return arrayList.length ? arrayList : <span className={styles.notFound}>Not found</span>;
+    return arrayList.length ? (
+      arrayList
+    ) : (
+      <span className={styles.notFound}>Not found</span>
+    );
   };
 
   const renderChatPreview = () => {
@@ -119,7 +125,8 @@ const mapDispatchToProps = (dispatch) => ({
   goToExpandedDialog: (data) => dispatch(goToExpandedDialog(data)),
   changeChatFavorite: (data) => dispatch(changeChatFavorite(data)),
   changeChatBlock: (data) => dispatch(changeChatBlock(data)),
-  changeShowAddChatToCatalog: (data) => dispatch(changeShowAddChatToCatalog(data)),
+  changeShowAddChatToCatalog: (data) =>
+    dispatch(changeShowAddChatToCatalog(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DialogList);

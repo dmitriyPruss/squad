@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './NotFound.module.sass';
+import React from "react";
+import styles from "./NotFound.module.sass";
 
 const NotFound = () => (
   <div className={styles.container}>

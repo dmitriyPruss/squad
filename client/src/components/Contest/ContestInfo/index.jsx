@@ -42,29 +42,47 @@ const ContestInfo = (props) => {
             <span className={styles.data}>{contestType}</span>
           </div>
           {User.id === userId && status !== FINISHED && (
-            <div onClick={() => changeEditContest(true)} className={styles.editBtn}>
+            <div
+              onClick={() => changeEditContest(true)}
+              className={styles.editBtn}
+            >
               Edit
             </div>
           )}
-          {role !== CUSTOMER && <i onClick={goChat} className="fas fa-comments" />}
+          {role !== CUSTOMER && (
+            <i onClick={goChat} className="fas fa-comments" />
+          )}
         </div>
         <div className={styles.dataContainer}>
           <span className={styles.label}>Title of the Project</span>
           <span className={styles.data}>{title}</span>
         </div>
         {contestType === NAME ? (
-          <NameContestSpecialInfo typeOfName={typeOfName} styleName={styleName} />
+          <NameContestSpecialInfo
+            typeOfName={typeOfName}
+            styleName={styleName}
+          />
         ) : contestType === TAGLINE ? (
-          <TaglineContestSpecialInfo typeOfTagline={typeOfTagline} nameVenture={nameVenture} />
+          <TaglineContestSpecialInfo
+            typeOfTagline={typeOfTagline}
+            nameVenture={nameVenture}
+          />
         ) : (
-          <LogoContestSpecialInfo brandStyle={brandStyle} nameVenture={nameVenture} />
+          <LogoContestSpecialInfo
+            brandStyle={brandStyle}
+            nameVenture={nameVenture}
+          />
         )}
         <div className={styles.dataContainer}>
-          <span className={styles.label}>What is your Business/ Brand about?</span>
+          <span className={styles.label}>
+            What is your Business/ Brand about?
+          </span>
           <span className={styles.data}>{focusOfWork}</span>
         </div>
         <div className={styles.dataContainer}>
-          <span className={styles.label}>Description target customers of company </span>
+          <span className={styles.label}>
+            Description target customers of company{" "}
+          </span>
           <span className={styles.data}>{targetCustomer}</span>
         </div>
         <div className={styles.dataContainer}>

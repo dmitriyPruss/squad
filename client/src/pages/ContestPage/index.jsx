@@ -52,8 +52,6 @@ class ContestPage extends React.Component {
       },
     } = this.props;
 
-    console.log("ContestPage offers", offers);
-
     offers.forEach((i) => {
       array.push(
         <OfferBox
@@ -178,8 +176,6 @@ class ContestPage extends React.Component {
       clearSetOfferStatusError,
     } = this.props;
 
-    console.log("this.props ContestPage", this.props);
-
     const {
       isShowOnFull,
       imagePath,
@@ -200,9 +196,6 @@ class ContestPage extends React.Component {
         CONTEST: { ACTIVE },
       },
     } = CONSTANTS;
-
-    console.log("contestData.status", contestData && contestData.status);
-    console.log("isBrief", isBrief);
 
     if (contestData?.status === ACTIVE && role === CUSTOMER) {
       isBrief = true;
