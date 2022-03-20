@@ -26,7 +26,7 @@ function InfoBlock() {
           <p>
             Of course! We have policies in place to ensure that you are
             satisfied with your experience.
-            <a href="#"> Learn More</a>
+            <a href="https://www.squadhelp.com/how-it-works"> Learn More</a>
           </p>
         </div>
       </div>

@@ -1,5 +1,5 @@
-const { Op } = require('sequelize');
-const CONSTANTS = require('../constants');
+const { Op } = require("sequelize");
+const CONSTANTS = require("../constants");
 
 module.exports.createWhereForAllContests = (
   typeIndex,
@@ -9,7 +9,7 @@ module.exports.createWhereForAllContests = (
 ) => {
   const object = {
     where: {},
-    order: []
+    order: [],
   };
   if (typeIndex) {
     Object.assign(object.where, { contestType: getPredicateTypes(typeIndex) });
@@ -21,44 +21,44 @@ module.exports.createWhereForAllContests = (
     Object.assign(object.where, { industry });
   }
   if (awardSort) {
-    object.order.push(['prize', awardSort]);
+    object.order.push(["prize", awardSort]);
   }
   Object.assign(object.where, {
     status: {
       [Op.or]: [
         CONSTANTS.CONTEST.STATUS.FINISHED,
-        CONSTANTS.CONTEST.STATUS.ACTIVE
-      ]
-    }
+        CONSTANTS.CONTEST.STATUS.ACTIVE,
+      ],
+    },
   });
-  object.order.push(['id', 'desc']);
+  object.order.push(["id", "desc"]);
   return object;
 };
 
-function getPredicateTypes (index) {
-  return { [Op.or]: [types[index].split(',')] };
+function getPredicateTypes(index) {
+  return { [Op.or]: [types[index].split(",")] };
 }
 
 const types = [
-  '',
-  'name,tagline,logo',
-  'name',
-  'tagline',
-  'logo',
-  'name,tagline',
-  'logo,tagline',
-  'name,logo'
+  "",
+  "name,tagline,logo",
+  "name",
+  "tagline",
+  "logo",
+  "name,tagline",
+  "logo,tagline",
+  "name,logo",
 ];
 
-module.exports.mapStringToValues = val => {
+module.exports.mapStringToValues = (val) => {
   switch (val) {
-    case 'true':
+    case "true":
       return true;
-    case 'false':
+    case "false":
       return false;
-    case 'null':
+    case "null":
       return null;
-    case 'undefined':
+    case "undefined":
       return undefined;
     default:
       return val;

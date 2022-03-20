@@ -211,7 +211,7 @@ module.exports.payment = async (req, res, next) => {
     });
     await Contest.bulkCreate(contests, transaction);
     transaction.commit();
-    res.send(); // !!!
+    res.status(204).send(); // !!!
   } catch (err) {
     transaction.rollback();
     next(err);

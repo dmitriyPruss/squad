@@ -1,60 +1,56 @@
 const { Router } = require("express");
-const validators = require("./../middlewares/validators");
-const hashPass = require("./../middlewares/hashPassMiddle");
-const userController = require("./../controllers/userController");
 const { checkToken, checkAuth } = require("./../middlewares/checkToken");
-const basicMiddlewares = require("./../middlewares/basicMiddlewares");
-const upload = require("./../utils/fileUpload");
+const hashPass = require("./../middlewares/hashPassMiddle");
+const {
+  onlyForCreative,
+  onlyForCustomer,
+  parseBody,
+} = require("./../middlewares/basicMiddlewares");
+const {
+  validateContestCreation,
+  validateLogin,
+  validateRegistrationData,
+} = require("./../middlewares/validators");
+const {
+  getUserTransactions,
+  cashout,
+  registration,
+  login,
+  changeMark,
+  updateUser,
+  payment,
+} = require("./../controllers/userController");
+const { uploadAvatar, uploadContestFiles } = require("./../utils/fileUpload");
 
 const userRouter = Router();
 
 userRouter.get("/getUser", checkAuth);
-
 userRouter.get(
   "/transactions",
   checkToken,
-  basicMiddlewares.onlyForCreative,
-  userController.getUserTransactions
+  onlyForCreative,
+  getUserTransactions
 );
 
-userRouter.post(
-  "/cashout",
-  checkToken,
-  basicMiddlewares.onlyForCreative,
-  userController.cashout
-);
-
-userRouter.post(
-  "/pay",
-  checkToken,
-  basicMiddlewares.onlyForCustomer,
-  upload.uploadContestFiles,
-  basicMiddlewares.parseBody,
-  validators.validateContestCreation,
-  userController.payment
-);
-
+userRouter.post("/cashout", checkToken, onlyForCreative, cashout);
 userRouter.post(
   "/registration",
-  validators.validateRegistrationData,
+  validateRegistrationData,
   hashPass,
-  userController.registration
+  registration
 );
 
-userRouter.patch("/login", validators.validateLogin, userController.login);
-
+userRouter.patch("/login", validateLogin, login);
+userRouter.patch("/changeMark", checkToken, onlyForCustomer, changeMark);
+userRouter.patch("/updateUser", checkToken, uploadAvatar, updateUser);
 userRouter.patch(
-  "/changeMark",
+  "/pay",
   checkToken,
-  basicMiddlewares.onlyForCustomer,
-  userController.changeMark
-);
-
-userRouter.patch(
-  "/updateUser",
-  checkToken,
-  upload.uploadAvatar,
-  userController.updateUser
+  onlyForCustomer,
+  uploadContestFiles,
+  parseBody,
+  validateContestCreation,
+  payment
 );
 
 module.exports = userRouter;

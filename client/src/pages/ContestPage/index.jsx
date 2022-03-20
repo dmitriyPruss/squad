@@ -145,9 +145,11 @@ class ContestPage extends React.Component {
           favoriteList,
         };
       }
+
+      return null;
     });
 
-    return findedMsgPrev === undefined ? null : findedMsgPrev;
+    return findedMsgPrev === null ? null : findedMsgPrev;
   };
 
   goChat = () => {

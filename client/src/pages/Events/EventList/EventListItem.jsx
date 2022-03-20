@@ -13,7 +13,7 @@ function EventListItem(props) {
       eventDate: { year, month, day, hours, minutes },
       createdEventDate,
     },
-    eventArr: [events, setEvents],
+    eventArr: [events],
     finishItem,
   } = props;
 

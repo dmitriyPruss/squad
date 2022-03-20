@@ -10,7 +10,7 @@ const FieldFileInput = (props) => {
     fileInput,
   } = props.classes;
 
-  const [field, meta, { setValue }] = useField(props);
+  const [field, , { setValue }] = useField(props);
 
   const nameContainer = window.document.getElementById("fileNameContainer");
 
@@ -49,7 +49,7 @@ const FieldFileInput = (props) => {
       <img
         id="fileNameContainer"
         className={field.value.type ? imageStyle : missingImage}
-        alt="image"
+        alt="imageFile"
       />
     </div>
   );

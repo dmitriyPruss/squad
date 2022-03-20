@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     static associate(models) {
       Message.belongsTo(models.User, { foreignKey: "sender", targetKey: "id" });
-      Message.belongsTo(models.Conversation, { foreignKey: "conversation", targetKey: "id" });
+      Message.belongsTo(models.Conversation, {
+        foreignKey: "conversation",
+        targetKey: "id",
+      });
     }
   }
   Message.init(
@@ -31,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      schema: 'chat',
+      schema: "chat",
       modelName: "Message",
     }
   );

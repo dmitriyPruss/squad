@@ -1,43 +1,32 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Banks', {
+    await queryInterface.createTable("Banks", {
       cardNumber: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       expiry: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       cvc: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       balance: {
         type: Sequelize.DECIMAL,
         allowNull: false,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     });
-    // .then(() =>
-    //   queryInterface.addConstraint('Banks', {
-    //     type: 'check',
-    //     fields: ['balance'],
-    //     where: {
-    //       balance: {
-    //         [Sequelize.Op.gte]: 0
-    //       }
-    //     }
-    //   })
-    // );
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Banks');
-  }
+    await queryInterface.dropTable("Banks");
+  },
 };

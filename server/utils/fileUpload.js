@@ -4,7 +4,6 @@ const multer = require("multer");
 const ServerError = require("../errors/ServerError");
 const env = process.env.NODE_ENV || "development";
 const devFilePath = path.resolve(__dirname, "..", "..", "public/images");
-
 const filePath = env === "production" ? "/var/www/html/images/" : devFilePath;
 
 if (!fs.existsSync(filePath)) {
@@ -35,8 +34,6 @@ const uploadLogoFiles = multer({ storage: storageContestFiles }).single(
 );
 
 module.exports.uploadAvatar = (req, res, next) => {
-  console.log("filePath", filePath);
-
   uploadAvatars(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       next(new ServerError());

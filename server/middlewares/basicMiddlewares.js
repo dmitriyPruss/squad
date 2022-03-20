@@ -1,8 +1,8 @@
 const { Contest } = require("../models/postgreModels");
 const { Op } = require("sequelize");
-const NotFound = require("../errors/UserNotFoundError");
 const RightsError = require("../errors/RightsError");
 const ServerError = require("../errors/ServerError");
+const { mapStringToValues } = require("../utils/functions");
 const {
   CUSTOMER,
   CREATOR: { NAME },
@@ -11,15 +11,13 @@ const {
     STATUS: { ACTIVE, FINISHED },
   },
 } = require("../constants");
-const { mapStringToValues } = require("../utils/functions");
 
 module.exports.parseBody = (req, res, next) => {
-  console.log("parseBody req.body", req.body);
-  console.log("req.files", req.files);
+  const { contests } = req.body;
 
-  req.body.contests = JSON.parse(req.body.contests);
-  for (let i = 0; i < req.body.contests.length; i++) {
-    if (req.body.contests[i].haveFile) {
+  req.body.contests = JSON.parse(contests);
+  for (let i = 0; i < contests.length; i++) {
+    if (contests[i].haveFile) {
       const file = req.files.splice(0, 1);
       req.body.contests[i].fileName = file[0].filename;
       req.body.contests[i].originalFileName = file[0].originalname;
@@ -41,7 +39,6 @@ module.exports.canGetContest = async (req, res, next) => {
       result = await Contest.findOne({
         where: { id, userId },
       });
-      console.log(`result`, result);
     } else if (role === NAME) {
       result = await Contest.findOne({
         where: {
@@ -88,9 +85,6 @@ module.exports.canSendOffer = async (req, res, next) => {
     body: { contestId: id },
   } = req;
 
-  console.log("role", role);
-  console.log("id", id);
-
   if (role === CUSTOMER || role === MODERATOR) {
     return next(new RightsError());
   }
@@ -102,10 +96,7 @@ module.exports.canSendOffer = async (req, res, next) => {
       raw: true,
     });
 
-    console.log("canSendOffer result", result);
-
     if (result.status === ACTIVE) {
-      console.log("result.status", result.status);
       next();
     } else {
       return next(new RightsError());

@@ -6,7 +6,7 @@ const ImageUpload = (props) => {
     classes: { uploadContainer, inputContainer, imgStyle, missingImg },
   } = props;
 
-  const [field, meta, { setValue }] = useField(props);
+  const [field, , { setValue }] = useField(props);
 
   const onChange = (e) => {
     const node = window.document.getElementById("imagePreview");

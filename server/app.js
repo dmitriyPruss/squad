@@ -13,6 +13,7 @@ app.use("/public", express.static("public"));
 app.use("/public/images", express.static("./../public/images"));
 app.use(router);
 app.use(errorLogger());
+
 fileErrorMw();
 
 app.use(handlerError);

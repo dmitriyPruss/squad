@@ -32,6 +32,8 @@ const SlideBar = (props) => {
         return styles.exampleCarousel;
       case FEEDBACK_SLIDER:
         return styles.feedbackCarousel;
+      default:
+        return null;
     }
   };
 
@@ -64,6 +66,8 @@ const SlideBar = (props) => {
           </div>
         ));
       }
+      default:
+        return null;
     }
   };
   return (

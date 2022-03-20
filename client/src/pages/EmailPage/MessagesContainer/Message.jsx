@@ -55,10 +55,10 @@ function Message(props) {
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </a>
           ) : (
-            <a href="#" onClick={() => directEmailBox(props.message)}>
+            <button onClick={() => directEmailBox(props.message)}>
               <span>See more details... </span>
               <FontAwesomeIcon icon={faShareFromSquare} />
-            </a>
+            </button>
           )}
         </div>
       </Alert>

@@ -19,7 +19,6 @@ const contestRouter = Router();
 contestRouter.use(checkToken);
 
 contestRouter.get("/all", onlyForCreative, parseQuery, getContests);
-
 contestRouter.get("/customers", getCustomersContests);
 
 contestRouter.post("/dataForContest", dataForContest);

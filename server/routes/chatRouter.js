@@ -1,35 +1,37 @@
 const { Router } = require("express");
 const { checkToken } = require("./../middlewares/checkToken");
-const chatController = require("./../controllers/chatController");
+const {
+  getPreview,
+  getCatalogs,
+  getChat,
+  addMessage,
+  createCatalog,
+  blackList,
+  favoriteList,
+  addNewChatToCatalog,
+  removeChatFromCatalog,
+  updateNameCatalog,
+  deleteCatalog,
+} = require("./../controllers/chatController");
 
-const chatRouter = Router({strict: true});
+const chatRouter = Router({ strict: true });
 
 chatRouter.use(checkToken);
 
-chatRouter.post("/newMessage", chatController.addMessage);
+chatRouter.get("/preview", getPreview);
+chatRouter.get("/catalogs", getCatalogs);
+chatRouter.get("/:interlocutorId", getChat);
 
-chatRouter.post("/newCatalog", chatController.createCatalog);
+chatRouter.post("/newMessage", addMessage);
+chatRouter.post("/newCatalog", createCatalog);
 
-chatRouter.get("/preview", chatController.getPreview);
-
-chatRouter.get("/catalogs", chatController.getCatalogs);
-
-chatRouter.get("/:interlocutorId", chatController.getChat);
-
-chatRouter.patch("/blackList", chatController.blackList);
-
-chatRouter.patch("/favoriteList", chatController.favoriteList);
+chatRouter.patch("/blackList", blackList);
+chatRouter.patch("/favoriteList", favoriteList);
 
 chatRouter
   .route("/:catalogId/:chatId")
-  .patch( chatController.addNewChatToCatalog)
-  .delete(chatController.removeChatFromCatalog);
-
-chatRouter
-  .route("/:catalogId")
-  .patch(chatController.updateNameCatalog)
-  .delete(chatController.deleteCatalog);
-
-
+  .patch(addNewChatToCatalog)
+  .delete(removeChatFromCatalog);
+chatRouter.route("/:catalogId").patch(updateNameCatalog).delete(deleteCatalog);
 
 module.exports = chatRouter;

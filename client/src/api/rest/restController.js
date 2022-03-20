@@ -4,11 +4,11 @@ import queryString from "query-string";
 export const getUser = () => http.get("/users/getUser");
 export const getTransactions = () => http.get("/users/transactions");
 export const cashOut = (data) => http.post("/users/cashout", data);
-export const payMent = ({ formData }) => http.post("/users/pay", formData);
 export const registerRequest = (data) => http.post("/users/registration", data);
 export const loginRequest = (data) => http.patch("/users/login", data);
 export const changeMark = (data) => http.patch("/users/changeMark", data);
 export const updateUser = (data) => http.patch("/users/updateUser", data);
+export const payMent = ({ formData }) => http.patch("/users/pay", formData);
 
 // Chats
 export const getPreviewChat = () => http.get("/chats/preview");

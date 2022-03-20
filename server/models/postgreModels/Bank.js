@@ -1,39 +1,39 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Bank extends Model {
-    static associate (models) {}
+    static associate(models) {}
   }
   Bank.init(
     {
       cardNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       expiry: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       cvc: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       balance: {
         type: DataTypes.DECIMAL,
         allowNull: false,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
-      modelName: 'Bank',
-      timestamps: false
+      modelName: "Bank",
+      timestamps: false,
     }
   );
   return Bank;

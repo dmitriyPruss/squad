@@ -16,6 +16,10 @@ function TransactionPage(props) {
     getTransactions,
   } = props;
 
+  transactions.forEach((i) => {
+    i.amount = Number(i.amount);
+  });
+
   useEffect(() => {
     getTransactions();
   }, [transactions.length]);

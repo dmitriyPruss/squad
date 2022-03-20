@@ -6,7 +6,7 @@ import { useField } from "formik";
 const PayInput = (props) => {
   const { label, changeFocus, classes, isInputMask, mask, name } = props;
 
-  const [field, meta, helpers] = useField(name);
+  const [field, meta] = useField(name);
   const { touched, error } = meta;
 
   if (field.name === "sum") {

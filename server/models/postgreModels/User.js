@@ -8,9 +8,16 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Contest, { foreignKey: "userId", sourceKey: "id" });
       User.hasMany(models.Rating, { foreignKey: "userId", sourceKey: "id" });
       User.hasMany(models.Transaction, { foreignKey: "userId" });
-      //
-      User.hasMany(models.Message, { foreignKey: "sender", sourceKey: "id", onDelete: "CASCADE" });
-      User.hasMany(models.Catalog, { foreignKey: "userId", sourceKey: "id", onDelete: "CASCADE" });
+      User.hasMany(models.Message, {
+        foreignKey: "sender",
+        sourceKey: "id",
+        onDelete: "CASCADE",
+      });
+      User.hasMany(models.Catalog, {
+        foreignKey: "userId",
+        sourceKey: "id",
+        onDelete: "CASCADE",
+      });
     }
   }
   User.init(

@@ -59,17 +59,6 @@ module.exports = {
         schema: "public",
       }
     );
-    // .then(() =>
-    //   queryInterface.addConstraint('Users', {
-    //     type: 'check',
-    //     fields: ['balance'],
-    //     where: {
-    //       balance: {
-    //         [Sequelize.Op.gte]: 0
-    //       }
-    //     }
-    //   })
-    // );
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Users");

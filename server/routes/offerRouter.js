@@ -19,13 +19,10 @@ const offerRouter = Router();
 offerRouter.use(checkToken);
 
 offerRouter.get("/:page", onlyForModerator, getOffersForModerator);
-
-offerRouter.post("/setNewOffer", uploadLogoFiles, canSendOffer, setNewOffer);
-
-offerRouter.post("/setOfferStatus", onlyForModerator, setOfferStatus);
-
 offerRouter.get("/emailMessages/:page", getEmailMessages);
 
+offerRouter.post("/setNewOffer", uploadLogoFiles, canSendOffer, setNewOffer);
+offerRouter.post("/setOfferStatus", onlyForModerator, setOfferStatus);
 offerRouter.post("/directEmailBox", onlyForCreative, directEmailBox);
 
 module.exports = offerRouter;
