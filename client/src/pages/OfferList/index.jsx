@@ -46,7 +46,7 @@ function OfferList(props) {
 
   useEffect(() => {
     getOffersForModerator(page);
-  }, [page]);
+  }, [page, getOffersForModerator]);
 
   const setOfferList = (item, index) =>
     item.status === PENDING ? (

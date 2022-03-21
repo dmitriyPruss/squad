@@ -7,7 +7,7 @@ function ProgressItem(props) {
 
   const initProgBarValue = useMemo(
     () => calcPeriod(progressState, period),
-    [progressState]
+    [progressState, period]
   );
 
   const [progressBarValue, setProgressBarValue] = useState(initProgBarValue);
@@ -22,7 +22,7 @@ function ProgressItem(props) {
     return () => {
       clearTimeout(progressValueId);
     };
-  }, [progressState]);
+  }, [progressState, period]);
 
   return <ProgressBar animated variant="primary" now={progressBarValue} />;
 }

@@ -19,7 +19,10 @@ function EventListItem(props) {
 
   const currentDate = new Date();
 
-  const userDate = new Date(year, month, day, hours, minutes);
+  const userDate = useMemo(
+    () => new Date(year, month, day, hours, minutes),
+    [year, month, day, hours, minutes]
+  );
 
   const timerData =
     currentDate < userDate ? Number(userDate - currentDate) : "";
@@ -31,7 +34,10 @@ function EventListItem(props) {
     Math.round((new Date() - Number(new Date(createdEventDate))) / 1000) * 1000;
 
   const [progressState, setProgressState] = useState(initialProgressData);
-  const period = useMemo(() => userDate - new Date(createdEventDate), []);
+  const period = useMemo(
+    () => userDate - new Date(createdEventDate),
+    [createdEventDate, userDate]
+  );
 
   useEffect(() => {
     if (timer > 0) {

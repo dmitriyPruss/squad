@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import CONSTANTS from "../../constants.js";
 
-const Logo = ({ to, ...props }) => (
-  <Link to={to}>
-    <img {...props} />
-  </Link>
-);
+const Logo = ({ to, ...props }) => {
+  const { src, alt } = props;
+
+  return (
+    <Link to={to}>
+      <img src={src} alt={alt} />
+    </Link>
+  );
+};
 
 Logo.propTypes = {
   className: PropTypes.string,

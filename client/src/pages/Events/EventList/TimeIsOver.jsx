@@ -4,7 +4,7 @@ import styles from "./../Events.module.scss";
 function TimeIsOver(props) {
   const { id, finishItem } = props;
 
-  useEffect(() => finishItem(id), []);
+  useEffect(() => finishItem(id), [id]);
 
   return (
     <div className={styles.timeIsOver}>

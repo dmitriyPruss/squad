@@ -39,7 +39,7 @@ function MessagesContainer(props) {
     setPage(1);
   }, [isEndMessages]);
 
-  useEffect(() => getEmailMessages(page), [page]);
+  useEffect(() => getEmailMessages(page), [page, getEmailMessages]);
 
   const getMessage = (item, index) => {
     return (

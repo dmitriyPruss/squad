@@ -31,14 +31,14 @@ class ContestsContainer extends React.Component {
       return <div className={styles.notFound}>Nothing not found</div>;
     }
     return (
-      <ul>
-        {children}
+      <>
         {isFetching && (
           <li key={0} className={styles.spinnerContainer}>
             <SpinnerLoader />
           </li>
         )}
-      </ul>
+        <ul>{children}</ul>
+      </>
     );
   }
 }

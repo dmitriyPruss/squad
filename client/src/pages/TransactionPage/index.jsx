@@ -22,7 +22,7 @@ function TransactionPage(props) {
 
   useEffect(() => {
     getTransactions();
-  }, [transactions.length]);
+  }, [transactions.length, getTransactions]);
 
   return (
     <main className={styles.transPageContainer}>
