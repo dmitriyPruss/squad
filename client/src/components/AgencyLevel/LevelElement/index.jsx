@@ -5,6 +5,7 @@ function LevelElement(props) {
   const {
     levelElementData: { id, src, header, mainContent, learnMoreLink },
   } = props;
+
   return (
     <li key={id} className={styles.agencyElement}>
       <div className={styles.imgContainer}>

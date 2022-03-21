@@ -59,7 +59,8 @@ const ContestBox = (props) => {
     string.charAt(0).toUpperCase() + string.slice(1);
 
   return (
-    <div
+    <li
+      key={id}
       className={styles.contestBoxContainer}
       onClick={() => goToExtended(id)}
     >
@@ -105,7 +106,7 @@ const ContestBox = (props) => {
           <span>Going</span>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

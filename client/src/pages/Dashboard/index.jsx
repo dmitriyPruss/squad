@@ -9,14 +9,14 @@ const Dashboard = (props) => {
   const { role, history, match } = props;
 
   return (
-    <div>
+    <>
       <Header />
       {role === CONSTANTS.CUSTOMER ? (
         <CustomerDashboard history={history} match={match} />
       ) : (
         <CreatorDashboard history={history} match={match} />
       )}
-    </div>
+    </>
   );
 };
 

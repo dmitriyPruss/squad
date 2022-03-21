@@ -74,16 +74,11 @@ class CreatorDashboard extends React.Component {
 
     const array = industry.map((ind, index) =>
       index === 0 ? (
-        <>
-          <option key={0} value={null}>
-            Choose industry
-          </option>
-          <option key={index + 1} value={ind}>
-            {ind}
-          </option>
-        </>
+        <option key={0} value={null}>
+          Choose industry
+        </option>
       ) : (
-        <option key={index + 1} value={ind}>
+        <option key={index} value={ind}>
           {ind}
         </option>
       )
@@ -238,11 +233,12 @@ class CreatorDashboard extends React.Component {
     } = this.props;
 
     return (
-      <div className={styles.mainContainer}>
-        <div className={styles.filterContainer}>
+      <ul className={styles.mainContainer}>
+        <li key={0} className={styles.filterContainer}>
           <span className={styles.headerFilter}>Filter Results</span>
-          <div className={styles.inputsContainer}>
-            <div
+          <ul className={styles.inputsContainer}>
+            <li
+              key={0}
               onClick={() =>
                 this.changePredicate({
                   name: "ownEntries",
@@ -254,12 +250,12 @@ class CreatorDashboard extends React.Component {
               })}
             >
               My Entries
-            </div>
-            <div className={styles.inputContainer}>
+            </li>
+            <li key={1} className={styles.inputContainer}>
               <span>By contest type</span>
               {this.renderSelectType()}
-            </div>
-            <div className={styles.inputContainer}>
+            </li>
+            <li key={2} className={styles.inputContainer}>
               <span>By contest ID</span>
               <input
                 type="text"
@@ -273,14 +269,14 @@ class CreatorDashboard extends React.Component {
                 value={contestId}
                 className={styles.input}
               />
-            </div>
+            </li>
             {!isFetching && (
-              <div className={styles.inputContainer}>
+              <li key={3} className={styles.inputContainer}>
                 <span>By industry</span>
                 {this.renderIndustryType()}
-              </div>
+              </li>
             )}
-            <div className={styles.inputContainer}>
+            <li key={4} className={styles.inputContainer}>
               <span>By amount award</span>
               <select
                 onChange={({ target }) =>
@@ -292,18 +288,23 @@ class CreatorDashboard extends React.Component {
                 value={awardSort}
                 className={styles.input}
               >
-                <option value="desc">Descending</option>
-                <option value="asc">Ascending</option>
+                <option key={0} value="desc">
+                  Descending
+                </option>
+                <option key={1} value="asc">
+                  Ascending
+                </option>
               </select>
-            </div>
-          </div>
-        </div>
+            </li>
+          </ul>
+        </li>
         {error ? (
-          <div className={styles.messageContainer}>
+          <li key={1} className={styles.messageContainer}>
             <TryAgain getData={this.tryLoadAgain} />
-          </div>
+          </li>
         ) : (
           <ContestsContainer
+            key={1}
             isFetching={isFetch}
             loadMore={this.loadMore}
             history={history}
@@ -312,7 +313,7 @@ class CreatorDashboard extends React.Component {
             {this.setContestList()}
           </ContestsContainer>
         )}
-      </div>
+      </ul>
     );
   }
 }
