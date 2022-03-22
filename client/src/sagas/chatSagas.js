@@ -43,6 +43,7 @@ export function* sendMessage(action) {
         isNew = false;
       }
     });
+
     if (isNew) {
       messagesPreview.push(data.preview);
     }

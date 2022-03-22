@@ -1,4 +1,9 @@
 .offerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  margin: 0 auto;
   position: relative;
   background: #2b3030;
   border-radius: 8px;
@@ -6,50 +11,6 @@
 
   @media screen and (max-width: 450px) {
     padding: 10px 0;
-  }
-
-  & > i {
-    position: absolute;
-    left: calc(100% - 35px);
-    top: -15px;
-    font-size: 54px;
-  }
-}
-
-.btnsContainer {
-  margin: 5px 0;
-  align-self: stretch;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  & > button {
-    border-radius: 8px;
-  }
-}
-
-.resolveBtn {
-  width: 100px;
-  cursor: pointer;
-  text-align: center;
-  padding: 10px;
-  border-width: 2px;
-
-  &:hover {
-    transition: 0.3s ease-in-out;
-  }
-}
-
-.rejectBtn {
-  text-align: center;
-  cursor: pointer;
-  width: 100px;
-  padding: 10px;
-  border-width: 2px;
-
-  &:hover {
-    transition: 0.3s ease-in-out;
   }
 }
 
@@ -178,5 +139,42 @@
 
   @media screen and (max-width: 750px) {
     align-items: center;
+  }
+}
+
+.btnsContainer {
+  margin: 5px 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  & > button {
+    border-radius: 8px;
+  }
+}
+
+.resolveBtn {
+  width: 100px;
+  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  border-width: 2px;
+
+  &:hover {
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.rejectBtn {
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+  padding: 10px;
+  border-width: 2px;
+
+  &:hover {
+    transition: 0.3s ease-in-out;
   }
 }

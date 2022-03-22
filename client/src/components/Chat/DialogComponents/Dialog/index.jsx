@@ -32,19 +32,24 @@ class Dialog extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.messagesEnd.current) this.scrollToBottom();
+    if (this.messagesEnd.current) {
+      this.scrollToBottom();
+    }
 
     const {
       getDialog,
       interlocutor: { id },
     } = this.props;
 
-    if (prevProps.interlocutor.id !== id) getDialog({ interlocutorId: id });
+    if (prevProps.interlocutor.id !== id) {
+      getDialog({ interlocutorId: id });
+    }
   }
 
   renderMainDialog = () => {
     const messagesArray = [];
     const { messages, userId } = this.props;
+
     let currentTime = moment();
     messages.forEach((message, i) => {
       if (!currentTime.isSame(message.createdAt, "date")) {

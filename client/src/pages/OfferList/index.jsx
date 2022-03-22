@@ -68,7 +68,6 @@ function OfferList(props) {
     <>
       <Header />
       <article className={styles.offerList}>
-        <OfferImg className={styles.header} />
         <div className={styles.moderatorImg}>
           <span>ONLY FOR </span>
           <img
@@ -76,6 +75,7 @@ function OfferList(props) {
             alt="Offers"
           />
         </div>
+        <OfferImg className={styles.header} />
         <section className={styles.offerContainer}>
           {checkOffers.length !== 0 ? (
             checkOffers.map(setOfferList)

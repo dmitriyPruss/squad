@@ -28,13 +28,17 @@
   border-radius: 8px;
   padding: 5px;
 
-  margin: 17px 10px 10px;
+  margin: 20px 10px 10px;
 
   background: #46568a radial-gradient(circle at 0 0, #586baa, #46568a);
   box-shadow: inset rgba(0, 0, 0, 0.5) -3px -3px 8px,
     inset rgba(177, 208, 255, 0.9) 3px 3px 8px,
     rgba(0, 0, 0, 0.8) 3px 3px 8px -3px;
   transform: rotate(15deg);
+
+  @media screen and (max-width: 700px) {
+    transform: rotate(0deg);
+  }
 }
 
 .moderatorImg {
@@ -54,6 +58,16 @@
     height: 45px;
     border: 2px solid #46568a;
     border-radius: 10px;
+  }
+
+  @media screen and (max-width: 700px) {
+    position: static;
+    margin: 10px auto 15px;
+    opacity: 0.8;
+
+    & > span {
+      letter-spacing: 15px;
+    }
   }
 }
 
@@ -104,14 +118,6 @@
   @media screen and (max-width: 440px) {
     width: 99%;
   }
-
-  & > * {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 10px;
-    margin: 0 auto;
-  }
 }
 
 .pageButtons {
@@ -129,7 +135,8 @@
   }
 
   & > button {
-    width: 12%;
+    width: 11%;
+    max-width: 100px;
     padding: 5px 15px;
     border: 2px solid #46568a;
     border-radius: 8px;

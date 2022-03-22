@@ -33,11 +33,15 @@ class ChatSocket extends WebSocket {
   onNewMessage = () => {
     this.socket.on("newMessage", (data) => {
       const {
-        message,
-        message: { body, createdAt, sender },
-        preview,
+        message: {
+          message,
+          preview,
+          message: { body, createdAt, sender },
+        },
       } = data;
       const { messagesPreview } = this.getState().chatStore;
+
+      console.log("data", data);
 
       let isNew = true;
       messagesPreview.forEach((preview) => {

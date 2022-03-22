@@ -48,7 +48,7 @@ const OfferInfo = (props) => {
           <span>{industry}</span>
         </li>
         {fileName ? (
-          <li>
+          <li className={styles.imageFileElement}>
             <span>Image:</span>
             <img
               className={styles.chosenImg}
