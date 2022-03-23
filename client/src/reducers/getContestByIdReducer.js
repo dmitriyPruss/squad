@@ -70,7 +70,7 @@ function getContestByIdReducer(state = initialState, action) {
     case ACTION.CHANGE_STORE_FOR_STATUS: {
       return produce(state, (draftState) => {
         draftState.error = null;
-        draftState.offers = [...action.data];
+        draftState.offers.push(action.data);
       });
     }
 

@@ -47,11 +47,8 @@ export function* changeMarkSaga(action) {
 export function* addOfferSaga(action) {
   try {
     const { data } = yield restController.setNewOffer(action.data);
-    const offers = yield select((state) => state.contestByIdStore.offers);
 
-    offers.unshift(data);
-
-    yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data: offers });
+    yield put({ type: ACTION.ADD_NEW_OFFER_TO_STORE, data });
   } catch (e) {
     yield put({ type: ACTION.ADD_OFFER_ERROR, error: e.response });
   }

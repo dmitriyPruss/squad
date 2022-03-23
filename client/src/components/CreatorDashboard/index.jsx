@@ -196,9 +196,9 @@ class CreatorDashboard extends React.Component {
   setContestList = () => {
     const { contests } = this.props;
 
-    const activeContests = contests.filter(
-      (contest) => contest.status === ACTIVE
-    );
+    const activeContests = contests
+      .filter((contest) => contest.status === ACTIVE)
+      .sort((a, b) => b.id - a.id);
 
     return activeContests.map((item) => (
       <ContestBox data={item} key={item.id} goToExtended={this.goToExtended} />

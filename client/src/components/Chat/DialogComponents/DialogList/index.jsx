@@ -75,8 +75,6 @@ const DialogList = (props) => {
     const arrayList = [];
 
     preview.forEach((chatPreview, index) => {
-      console.log("chatPreview :>> ", chatPreview);
-
       const dialogNode = (
         <DialogBox
           interlocutor={chatPreview?.interlocutor}
