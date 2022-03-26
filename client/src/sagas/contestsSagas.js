@@ -7,6 +7,7 @@ export function* activeContestsSaga(action) {
 
   try {
     const { data } = yield restController.getActiveContests(action.data);
+
     yield put({ type: ACTION.GET_CONTESTS_ACTION_SUCCESS, data });
   } catch (e) {
     yield put({ type: ACTION.GET_CONTESTS_ACTION_ERROR, error: e.response });

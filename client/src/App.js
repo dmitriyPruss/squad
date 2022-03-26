@@ -16,7 +16,7 @@ import ContestCreationPage from "./pages/ContestCreationPage";
 import CONSTANTS from "./constants";
 import browserHistory from "./browserHistory";
 import ChatContainer from "./components/Chat/ChatComponents/ChatContainer";
-import { withAuth, withNotAuth } from "./components/HOCs";
+import withAuth from "./components/HOCs/withAuth";
 import PricingPage from "./pages/PricingPage";
 import TransactionPage from "./pages/TransactionPage";
 import ButtonGroup from "./components/ButtonGroup";
@@ -49,12 +49,8 @@ class App extends Component {
           <Route path="/howItWorks" component={HowItWorks} />
           <Route path="/buttonGroup" component={ButtonGroup} />
           <Route path="/eventsPage" component={Events} />
-          <Route exact path="/login" component={withNotAuth(LoginPage)} />
-          <Route
-            exact
-            path="/registration"
-            component={withNotAuth(RegistrationPage)}
-          />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/registration" component={RegistrationPage} />
           <Route exact path="/payment" component={withAuth(Payment)} />
           <Route
             exact

@@ -1,15 +1,15 @@
-const fileHandler = require('./fileHandler');
+const fileHandler = require("./fileHandler");
 
 module.exports = (err, req, res, next) => {
   setInterval(() => {
     const date = new Date();
 
     console.log(
-      'date.getHours(',
+      "date.getHours(",
       date.getHours(),
-      ':',
+      ":",
       date.getMinutes(),
-      ':',
+      ":",
       date.getSeconds()
     );
 

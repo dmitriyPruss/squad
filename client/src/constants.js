@@ -28,7 +28,12 @@ const CONSTANTS = {
       WON: "won",
     },
   },
-
+  HEADER_PATHS_WITHOUT_AUTH: [
+    "/howItWorks",
+    "/buttonGroup",
+    "/eventsPage",
+    "/pricing",
+  ],
   STATIC_IMAGES_PATH: "/staticImages/",
   ANONYM_IMAGE_PATH: "/staticImages/anonym.png",
   BASE_URL: `http://${serverIP}:${serverPort}/`,

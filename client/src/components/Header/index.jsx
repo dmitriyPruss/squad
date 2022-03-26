@@ -14,11 +14,24 @@ const {
   CREATOR,
   MODERATOR,
   CONTACTS: { TEL },
+  HEADER_PATHS_WITHOUT_AUTH,
 } = CONSTANTS;
 
 class Header extends React.Component {
   componentDidMount() {
-    const { data, getUser } = this.props;
+    const { data, getUser, location } = this.props;
+
+    let getWithoutAuth;
+
+    HEADER_PATHS_WITHOUT_AUTH.forEach((path) => {
+      if (location.pathname === path) {
+        getWithoutAuth = true;
+      }
+    });
+
+    if (getWithoutAuth) {
+      return;
+    }
 
     if (!data) {
       getUser();

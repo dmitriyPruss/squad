@@ -114,8 +114,11 @@ class CreatorDashboard extends React.Component {
     const { getDataForContest, location, contests, creatorFilter } = this.props;
 
     getDataForContest();
-    if (this.parseUrlForParams(location.search) && !contests.length)
+    if (this.parseUrlForParams(location.search) && !contests.length) {
+      console.log("mount!");
+      console.log("this.props", this.props);
       this.getContests(creatorFilter);
+    }
   }
 
   getContests = (filter) => {
@@ -200,6 +203,8 @@ class CreatorDashboard extends React.Component {
       .filter((contest) => contest.status === ACTIVE)
       .sort((a, b) => b.id - a.id);
 
+    // console.log("activeContests", activeContests);
+
     return activeContests.map((item) => (
       <ContestBox data={item} key={item.id} goToExtended={this.goToExtended} />
     ));
@@ -231,6 +236,8 @@ class CreatorDashboard extends React.Component {
       isFeching: isFetch,
       dataForContest: { isFetching },
     } = this.props;
+
+    const contests = this.setContestList();
 
     return (
       <ul className={styles.mainContainer}>
@@ -310,7 +317,7 @@ class CreatorDashboard extends React.Component {
             history={history}
             haveMore={haveMore}
           >
-            {this.setContestList()}
+            {contests}
           </ContestsContainer>
         )}
       </ul>

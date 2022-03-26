@@ -43,6 +43,9 @@ export function* headerRequest() {
   yield put({ type: ACTION.GET_USER_REQUEST });
   try {
     const { data } = yield restController.getUser();
+
+    console.log("headerRequest data", data);
+
     yield put({ type: ACTION.GET_USER_SUCCESS, data });
     controller.subscribe(data.id);
   } catch (e) {

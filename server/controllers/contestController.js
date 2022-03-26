@@ -216,6 +216,7 @@ module.exports.getContests = async (req, res, next) => {
     if (contests.length === 0) {
       haveMore = false;
     }
+
     res.status(200).send({ contests, haveMore });
   } catch (err) {
     return next(new ServerError());

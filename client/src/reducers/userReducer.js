@@ -17,6 +17,8 @@ function userReducer(state = initialState, action) {
       };
     }
     case ACTION.GET_USER_SUCCESS: {
+      console.log("action.data", action.data);
+
       return {
         ...state,
         isFetching: false,

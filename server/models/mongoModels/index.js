@@ -6,14 +6,16 @@ const configPath = path.join(__dirname, "./../..", "config/mongoConfig.json");
 const config = require(configPath)[env];
 
 mongoose
-  .connect(`mongodb://${config.host}:${config.port}/${config.database}`)
+  .connect(`mongodb://${config.host}:${config.port}/${config.database}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
   .then((data) => console.log(`Connect with mongoDB`))
   .catch((err) => {
     console.log(`err`, err);
     process.exit(1);
   });
-
-mongoose.set("debug", env === "development");
 
 const db = {};
 const fileRegExp = /^[^.].*?\.js$/;
