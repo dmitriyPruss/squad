@@ -73,7 +73,6 @@ export function* setOfferStatusSaga(action) {
   }
 }
 
-// Check new Offer
 export function* getOffersForModeratorSaga(action) {
   const { page } = action;
 
@@ -87,7 +86,6 @@ export function* getOffersForModeratorSaga(action) {
   }
 }
 
-// Get email messages
 export function* getEmailMessageSaga(action) {
   const { page } = action;
 
@@ -101,7 +99,6 @@ export function* getEmailMessageSaga(action) {
   }
 }
 
-// direct email box
 export function* directEmailBoxSaga(action) {
   yield put(directEmailBoxRequest());
 

@@ -115,8 +115,6 @@ class CreatorDashboard extends React.Component {
 
     getDataForContest();
     if (this.parseUrlForParams(location.search) && !contests.length) {
-      console.log("mount!");
-      console.log("this.props", this.props);
       this.getContests(creatorFilter);
     }
   }
@@ -201,9 +199,7 @@ class CreatorDashboard extends React.Component {
 
     const activeContests = contests
       .filter((contest) => contest.status === ACTIVE)
-      .sort((a, b) => b.id - a.id);
-
-    // console.log("activeContests", activeContests);
+      .sort((current, next) => next.id - current.id);
 
     return activeContests.map((item) => (
       <ContestBox data={item} key={item.id} goToExtended={this.goToExtended} />

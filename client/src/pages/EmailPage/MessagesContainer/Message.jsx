@@ -33,7 +33,7 @@ function Message(props) {
         <p>{text}</p>
         <img
           className={fileName ? styles.imgStyle : styles.missingImg}
-          src={`${PUBLIC_URL}${fileName}`}
+          src={fileName ? `${PUBLIC_URL}${fileName}` : ""}
           alt="logo"
         />
         <div>

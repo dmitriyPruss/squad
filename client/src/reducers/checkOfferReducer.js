@@ -11,7 +11,6 @@ const initialState = {
 
 function checkOfferReducer(state = initialState, action) {
   switch (action.type) {
-    // OFFERS FOR MODERATOR
     case ACTION.GET_OFFERS_FOR_MODERATOR_REQUEST: {
       return {
         ...state,
@@ -21,7 +20,6 @@ function checkOfferReducer(state = initialState, action) {
     }
     case ACTION.GET_OFFERS_FOR_MODERATOR_SUCCESS: {
       const { foundOffers, isEndData } = action.data;
-
       return {
         ...state,
         isFetching: false,
@@ -38,7 +36,6 @@ function checkOfferReducer(state = initialState, action) {
       };
     }
 
-    // GET EMAIL
     case ACTION.GET_EMAIL_MESSAGE_REQUEST: {
       return {
         ...state,
@@ -48,7 +45,6 @@ function checkOfferReducer(state = initialState, action) {
     }
     case ACTION.GET_EMAIL_MESSAGE_SUCCESS: {
       const { messages, isEndMessages } = action.data;
-
       return {
         ...state,
         isFetching: false,
@@ -65,7 +61,6 @@ function checkOfferReducer(state = initialState, action) {
       };
     }
 
-    // DIRECT EMAIL BOX
     case ACTION.DIRECT_EMAIL_BOX_REQUEST: {
       return {
         ...state,
