@@ -9,23 +9,17 @@
   }
 }
 
-// -------------
-
 .contextHeader {
   color: #377dff;
   font-weight: 600;
   font-size: 1.75em;
 }
 
-// -------------
-
 .launchingContests {
   display: flex;
   flex-direction: column;
   padding: 64px 0;
-
   border-bottom: 1px solid #e7eaf3;
-
   width: 95%;
   align-items: space-evenly;
 
@@ -56,10 +50,8 @@
   background-color: #fff;
   border: 1px solid #e7eaf3;
   padding: 16px;
-
   display: flex;
   justify-content: space-between;
-
   color: #1e2022;
 
   & > *:first-child {
@@ -79,11 +71,8 @@
 .launchingContextShow {
   opacity: 1;
   height: 200px;
-
   border: 1px solid #e7eaf3;
-
   transition: height 0.3s, opacity 0.1s, border 0.3s;
-
   padding: 5px 30px;
 }
 
@@ -91,20 +80,20 @@
   opacity: 0;
   height: 0px;
   visibility: hidden;
-  border: 0px solid #e7eaf3;
   transition: height 0.3s, opacity 0.1s, border 0.3s, visibility 1s;
 }
 
 .arrowDown {
-  color: #D2D8A1;
+  color: #d2d8a1;
   transform: rotate(90deg);
-  transition-property: transform, color;
-  transition-duration: 0.5s;
 }
 
 .arrowRight {
   color: #377dff;
   transform: rotate(0deg);
-  transition-property: transform, color;
-  transition-duration: 0.5s;
+}
+
+.arrowDown,
+.arrowRight {
+  transition: all 0.2s ease-out;
 }

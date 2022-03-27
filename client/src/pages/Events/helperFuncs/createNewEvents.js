@@ -1,6 +1,6 @@
 import getInitData from "./getInitData";
 
-function createNewEvents(events, eventName, eventDate, createdEventDate) {
+function createNewEvents(eventName, eventDate, createdEventDate) {
   const newEvent = {
     id: Date.now(),
     eventBody: {

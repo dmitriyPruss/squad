@@ -12,11 +12,7 @@ function ButtonGroup() {
 
   const highlightElement = (id) => {
     const newHighlightedItems = highlightedItems.map((item, index) => {
-      if (index === id) {
-        item.isHighlighted = true;
-      } else {
-        item.isHighlighted = false;
-      }
+      item.isHighlighted = index === id ? true : false;
 
       return item;
     });
@@ -26,7 +22,7 @@ function ButtonGroup() {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <ul className={styles.buttonContainer}>
         {highlightedItems.map((i, index) => (
           <ButtonItem
@@ -37,7 +33,7 @@ function ButtonGroup() {
           />
         ))}
       </ul>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

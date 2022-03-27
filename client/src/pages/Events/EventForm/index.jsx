@@ -53,12 +53,7 @@ function EventForm(props) {
 
     setInvalidInputData(isValidData);
 
-    const newEvents = createNewEvents(
-      events,
-      eventName,
-      eventDate,
-      createdEventDate
-    );
+    const newEvents = createNewEvents(eventName, eventDate, createdEventDate);
 
     setEvents([]);
     setEvents(newEvents);

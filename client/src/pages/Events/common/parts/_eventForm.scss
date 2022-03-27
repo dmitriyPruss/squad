@@ -19,13 +19,10 @@
   width: 99%;
   height: 98%;
   padding: 10px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   position: relative;
-
   border-radius: 3px;
   box-shadow: $formShadow;
 
@@ -43,7 +40,6 @@
     position: relative;
     width: 100%;
     margin: 0 auto 24px;
-
     display: flex;
     align-items: center;
 
@@ -60,10 +56,8 @@
 .invalidData {
   position: absolute;
   top: 2px;
-
   background-image: $invalid;
   color: #fff;
-
   border-radius: 2px;
   font-weight: bold;
   font-size: 0.8em;

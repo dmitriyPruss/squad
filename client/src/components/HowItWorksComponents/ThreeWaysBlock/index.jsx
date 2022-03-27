@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./ThreeWaysBlock.module.scss";
 import threeWaysData from "./threeWaysData.json";
 import { ReactComponent as Users } from "./svg_images/users.svg";
 import { ReactComponent as Pc } from "./svg_images/pc.svg";
 import { ReactComponent as IdeaHand } from "./svg_images/idea_hand.svg";
+import styles from "./ThreeWaysBlock.module.scss";
 
 function ThreeWaysBlock() {
   const svgComponents = [Users, Pc, IdeaHand];

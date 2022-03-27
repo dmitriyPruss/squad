@@ -18,9 +18,9 @@ function getInitData() {
     }
   }
 
-  initialData.sort((a, b) => a.date - b.date);
-
-  initialData.forEach((data) => delete data.date);
+  initialData
+    .sort((a, b) => a.date - b.date)
+    .forEach((data) => delete data.date);
 
   return initialData;
 }

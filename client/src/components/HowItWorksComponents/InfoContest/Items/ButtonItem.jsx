@@ -1,8 +1,14 @@
-import React from 'react';
-import styles from './../InfoContest.module.scss';
+import React from "react";
+import classNames from "classnames";
+import styles from "./../InfoContest.module.scss";
 
-function ButtonItem (props) {
+function ButtonItem(props) {
   const { children, view, changeView, decoratedClick } = props;
+
+  const arrowClass = classNames(
+    "fas fa-arrow-right",
+    view ? `${styles.arrowDown}` : `${styles.arrowRight}`
+  );
 
   return (
     <button
@@ -14,15 +20,7 @@ function ButtonItem (props) {
     >
       <span>{children}</span>
       <span>
-        {view ? (
-          <i
-            className={`fas fa-arrow-right ${styles.arrowDown}`}
-          ></i>
-        ) : (
-          <i
-            className={`fas fa-arrow-right ${styles.arrowRight}`}
-          ></i>
-        )}
+        <i className={arrowClass}></i>
       </span>
     </button>
   );

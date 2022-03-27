@@ -13,7 +13,7 @@ import ContestsList from "./../../components/HowItWorksComponents/ContestsList";
 const HowItWorks = () => {
   return (
     <>
-      <Header></Header>
+      <Header />
       <BeginInfoBlock />
       <ThreeWaysBlock />
       <NamingContestWork />
@@ -22,7 +22,7 @@ const HowItWorks = () => {
       <Tool />
       <InfoBlock />
       <CompaniesList />
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };

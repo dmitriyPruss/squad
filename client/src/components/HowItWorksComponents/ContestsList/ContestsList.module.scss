@@ -1,7 +1,6 @@
 .listContainer {
   display: flex;
   justify-content: space-evenly;
-
   padding: 0px 15px;
 
   @media screen and (max-width: 800px) {
@@ -13,16 +12,12 @@
   margin-top: 64px;
   width: 25%;
   background: #377dff;
-
   list-style: none;
   max-height: 720px;
   height: 100%;
   overflow-y: auto;
-
   border-radius: 5px;
-
   padding: 1em 2em;
-
   display: flex;
   flex-direction: column;
 
@@ -36,6 +31,7 @@
     color: rgb(208, 208, 208);
     text-decoration: none;
   }
+
   & a:hover {
     color: white;
   }

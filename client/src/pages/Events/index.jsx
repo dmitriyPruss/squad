@@ -15,11 +15,11 @@ const Events = () => {
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <EventForm eventArr={eventArr} />
       <EventTitle timeendData={timeendData} />
       <EventList eventArr={eventArr} />
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };
