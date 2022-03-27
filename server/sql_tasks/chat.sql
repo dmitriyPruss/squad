@@ -1,12 +1,12 @@
-CREATE DATABASE "squadhelp-dev"
+CREATE DATABASE "squadhelp-dev";
 
-DROP DATABASE IF EXISTS "squadhelp-dev"
+DROP DATABASE IF EXISTS "squadhelp-dev";
 
 CREATE SCHEMA CHAT;
 
 DROP SCHEMA IF EXISTS CHAT;
 
--- messages
+-- Messages
 CREATE TABLE CHAT.Messages(
   id SERIAL PRIMARY KEY,
   sender SMALLINT REFERENCES public."Users" ON DELETE CASCADE, -- reference Users
