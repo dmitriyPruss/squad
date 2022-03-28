@@ -7,7 +7,7 @@ module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
 
   if (!accessToken) {
-    return next(new TokenError("Session without authorization - need token"));
+    return next(new TokenError());
   }
 
   try {
@@ -45,13 +45,13 @@ module.exports.checkToken = async (req, res, next) => {
   const accessToken = req.headers.authorization;
 
   if (!accessToken) {
-    return next(new TokenError("Session expired or token is invalid"));
+    return next(new TokenError());
   }
 
   try {
     req.tokenData = jwt.verify(accessToken, JWT_SECRET);
     next();
   } catch (err) {
-    next(new TokenError());
+    next(new TokenError("Session expired or token is invalid"));
   }
 };

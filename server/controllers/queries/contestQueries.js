@@ -68,8 +68,14 @@ module.exports.createOffer = async (data) => {
 };
 
 module.exports.offersForModerator = async (currentOffset) => {
+  const {
+    CONTEST: {
+      STATUS: { PENDING },
+    },
+  } = CONSTANTS;
+
   const offers = await Offer.findAll({
-    where: { status: CONSTANTS.CONTEST.STATUS.PENDING },
+    where: { status: PENDING },
     raw: true,
     limit: 3,
     order: [["id"]],
@@ -114,11 +120,15 @@ module.exports.messagesForCreator = async (
   currentOffset,
   moderator
 ) => {
+  const {
+    OFFER_STATUS: { REJECTED, WON },
+  } = CONSTANTS;
+
   const messages = await Offer.findAll({
     where: {
       userId,
       status: {
-        [Op.or]: [CONSTANTS.OFFER_STATUS.REJECTED, CONSTANTS.OFFER_STATUS.WON],
+        [Op.or]: [REJECTED, WON],
       },
     },
     limit: 3,
@@ -157,9 +167,14 @@ module.exports.createEmailLink = async (
   firstName,
   lastName
 ) => {
+  const {
+    MODERATOR,
+    OFFER_STATUS: { REJECTED, WON },
+  } = CONSTANTS;
+
   const moderator = await User.findOne({
     where: {
-      role: CONSTANTS.MODERATOR,
+      role: MODERATOR,
     },
     raw: true,
   });
@@ -204,9 +219,7 @@ module.exports.createEmailLink = async (
     to: creator.email,
     subject: `Moderator's permission`,
     text: `Your offer ${text} is ${
-      status === CONSTANTS.OFFER_STATUS.REJECTED
-        ? CONSTANTS.OFFER_STATUS.REJECTED
-        : CONSTANTS.OFFER_STATUS.WON
+      status === REJECTED ? REJECTED : WON
     } by ${role} ${firstName} ${lastName}. Details: ${JSON.stringify(
       offerDetails,
       null,

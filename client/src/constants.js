@@ -189,6 +189,8 @@ const CONSTANTS = {
       "https://www.squadhelp.com/assets/nimages/AudienceTestingReport.pdf",
     managedContestsLink: "https://www.squadhelp.com/managed-contests",
   },
+  EMAIL_PAGE_LINK:
+    "https://icons.iconarchive.com/icons/icondesigner.net/hyperion/128/3D-Mail-icon.png",
 };
 
 export default CONSTANTS;

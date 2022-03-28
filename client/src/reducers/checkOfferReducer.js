@@ -2,11 +2,11 @@ import ACTION from "../actions/actionTypes";
 
 const initialState = {
   checkOffers: [],
+  sendedEmailMessages: [],
   isEndData: false,
+  isEndMessages: false,
   isFetching: false,
   error: null,
-  sendedEmailMessages: [],
-  isEndMessages: false,
 };
 
 function checkOfferReducer(state = initialState, action) {

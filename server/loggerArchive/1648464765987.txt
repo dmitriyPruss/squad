@@ -1,0 +1,55 @@
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648382476000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648382476000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648382477000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648382477000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648382477000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648455824000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648455824000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648455899000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648461546000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648461546000
+} 
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648461546000
+} 

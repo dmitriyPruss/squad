@@ -3,12 +3,12 @@ module.exports = (i) => {
     let data;
     data = i + "}";
 
-    const newItem = JSON.parse(data);
+    const { message, code, time } = JSON.parse(data);
 
     const newItemForArch = {
-      message: newItem.message,
-      code: newItem.code,
-      time: newItem.time,
+      message,
+      code,
+      time,
     };
 
     return JSON.stringify(newItemForArch, null, 2);

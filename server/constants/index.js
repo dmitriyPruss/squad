@@ -49,6 +49,7 @@ const CONSTANTS = {
     INCOME: "INCOME",
     EXPENSE: "EXPENSE",
   },
+  ITEMS_ON_PAGE: 3,
 };
 
 module.exports = CONSTANTS;

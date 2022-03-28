@@ -23,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
       participants: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
         allowNull: false,
+        validate: (val) => {
+          if (val.length !== 2) {
+            throw new Error("Participants must have two integer values!");
+          }
+        },
       },
       favoriteList: {
         type: DataTypes.ARRAY(DataTypes.BOOLEAN),

@@ -15,6 +15,9 @@ module.exports.addMessage = async (req, res, next) => {
     tokenData: { userId, firstName, lastName, displayName, avatar, email },
   } = req;
 
+  console.log("req.body", req.body);
+  console.log("req.tokenData", req.tokenData);
+
   const participants = [userId, recipient];
 
   participants.sort((a, b) => a - b);
@@ -39,7 +42,7 @@ module.exports.addMessage = async (req, res, next) => {
       (participant) => participant !== userId
     )[0];
 
-    const postgresPreview = {
+    const preview = {
       id,
       sender: userId,
       text: messageBody,
@@ -70,9 +73,12 @@ module.exports.addMessage = async (req, res, next) => {
       },
     });
 
+    console.log("message", message);
+    console.log("preview", preview);
+
     res.status(201).send({
       message,
-      preview: Object.assign(postgresPreview, { interlocutor }),
+      preview: Object.assign(preview, { interlocutor }),
     });
   } catch (err) {
     next(err);
@@ -99,7 +105,6 @@ module.exports.getChat = async (req, res, next) => {
         order: [["createdAt"]],
       })
     ).map((foundMessage) => {
-      console.log("foundMessage", foundMessage);
       return _.pick(foundMessage, [
         "id",
         "sender",

@@ -79,7 +79,9 @@ module.exports.getOffersForModerator = async (req, res, next) => {
   try {
     let currentOffset;
 
-    page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
+    page === 1
+      ? (currentOffset = 0)
+      : (currentOffset = CONSTANTS.ITEMS_ON_PAGE * (page - 1));
 
     let foundOffers = await contestQueries.offersForModerator(currentOffset);
 
@@ -113,7 +115,9 @@ module.exports.getEmailMessages = async (req, res, next) => {
   try {
     let currentOffset;
 
-    page === 1 ? (currentOffset = 0) : (currentOffset = 3 * (page - 1));
+    page === 1
+      ? (currentOffset = 0)
+      : (currentOffset = CONSTANTS.ITEMS_ON_PAGE * (page - 1));
 
     let messages = await contestQueries.messagesForCreator(
       userId,

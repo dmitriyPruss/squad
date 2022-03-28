@@ -15,6 +15,9 @@ const ChatInput = (props) => {
       sendMessage,
     } = props;
 
+    console.log("values :>> ", values);
+    console.log("interlocutor", interlocutor);
+
     sendMessage({
       messageBody: values.message,
       recipient: id,

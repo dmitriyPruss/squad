@@ -13,6 +13,7 @@ import {
 } from "../../../actions/actionCreator";
 import Spinner from "react-bootstrap/Spinner";
 import styles from "./../EmailPage.module.scss";
+import CONSTANTS from "../../../constants";
 
 function MessagesContainer(props) {
   const {
@@ -56,10 +57,7 @@ function MessagesContainer(props) {
     <>
       <header>
         <h1>Email Post</h1>
-        <img
-          src="https://icons.iconarchive.com/icons/icondesigner.net/hyperion/128/3D-Mail-icon.png"
-          alt="email"
-        />
+        <img src={CONSTANTS.EMAIL_PAGE_LINK} alt="email" />
       </header>
       <main className={styles.emailContainer}>
         {isFetching && (

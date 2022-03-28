@@ -45,12 +45,7 @@ function Message(props) {
           <span>Status: {status}</span>
           <hr />
           {email ? (
-            <a
-              style={{ color: "red" }}
-              className={styles.emailInfoLink}
-              href={email}
-              target="blank"
-            >
+            <a className={styles.emailInfoLink} href={email} target="blank">
               <span>Follow </span>
               <FontAwesomeIcon icon={faArrowAltCircleRight} />
             </a>

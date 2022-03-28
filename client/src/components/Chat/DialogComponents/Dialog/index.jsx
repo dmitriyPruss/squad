@@ -42,6 +42,8 @@ class Dialog extends React.Component {
     } = this.props;
 
     if (prevProps.interlocutor.id !== id) {
+      console.log("prevProps.interlocutor :>> ", prevProps.interlocutor);
+      console.log("id :>> ", id);
       getDialog({ interlocutorId: id });
     }
   }
@@ -49,6 +51,10 @@ class Dialog extends React.Component {
   renderMainDialog = () => {
     const messagesArray = [];
     const { messages, userId } = this.props;
+
+    // console.log("!!! :>> ");
+    // console.log("renderMainDialog messages :>> ", messages);
+    // console.log("renderMainDialog messagesArray :>> ", messagesArray);
 
     let currentTime = moment();
     messages.forEach((message, i) => {
@@ -84,6 +90,8 @@ class Dialog extends React.Component {
       chatData,
       chatData: { blackList, participants },
     } = this.props;
+
+    console.log("this.props :>> ", this.props);
 
     const userIndex = participants.indexOf(userId);
 

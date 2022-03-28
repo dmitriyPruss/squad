@@ -12,7 +12,7 @@ module.exports = {
         },
         sender: {
           allowNull: false,
-          type: Sequelize.SMALLINT,
+          type: Sequelize.INTEGER,
         },
         body: {
           allowNull: false,
@@ -20,7 +20,7 @@ module.exports = {
         },
         conversation: {
           allowNull: false,
-          type: Sequelize.SMALLINT,
+          type: Sequelize.INTEGER,
           references: {
             model: "Conversations",
             key: "id",

@@ -12,11 +12,13 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "sender",
         sourceKey: "id",
         onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       });
       User.hasMany(models.Catalog, {
         foreignKey: "userId",
         sourceKey: "id",
         onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       });
     }
   }

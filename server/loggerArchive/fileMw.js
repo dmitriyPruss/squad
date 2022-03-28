@@ -1,19 +1,10 @@
 const fileHandler = require("./fileHandler");
 
-module.exports = (err, req, res, next) => {
+module.exports = () => {
   setInterval(() => {
     const date = new Date();
 
-    console.log(
-      "date.getHours(",
-      date.getHours(),
-      ":",
-      date.getMinutes(),
-      ":",
-      date.getSeconds()
-    );
-
-    if (date.getHours() === 14 && date.getMinutes() === 30) {
+    if (date.getHours() === 13 && date.getMinutes() === 52) {
       fileHandler();
     }
   }, 60 * 1000);

@@ -6,12 +6,13 @@ CREATE SCHEMA CHAT;
 
 DROP SCHEMA IF EXISTS CHAT;
 
+
 -- Messages
 CREATE TABLE CHAT.Messages(
   id SERIAL PRIMARY KEY,
-  sender SMALLINT REFERENCES public."Users" ON DELETE CASCADE, -- reference Users
+  sender SMALLINT REFERENCES public."Users" ON DELETE CASCADE ON UPDATE CASCADE,
   body VARCHAR(55) NOT NULL,
-  conversation SMALLINT REFERENCES CHAT.Conversations ON DELETE CASCADE ON UPDATE CASCADE, -- reference Conversations
+  conversation SMALLINT REFERENCES CHAT.Conversations ON DELETE CASCADE ON UPDATE CASCADE,
   created_at VARCHAR(55) NOT NULL,
   updated_at VARCHAR(55)
 );
@@ -20,8 +21,6 @@ DROP TABLE IF EXISTS CHAT.Messages;
 
 
 -- Conversations
-
--- table "Convarsations"
 CREATE TABLE CHAT.Conversations(
   id SERIAL PRIMARY KEY,
   participants INTEGER[2] NOT NULL,
@@ -37,9 +36,9 @@ DROP TABLE IF EXISTS CHAT.Conversations;
 -- Catalogs
 CREATE TABLE CHAT.Catalogs(
   id SERIAL PRIMARY KEY,
-  user_id SMALLINT REFERENCES public."Users" ON DELETE CASCADE, -- reference Users
+  user_id SMALLINT REFERENCES public."Users" ON DELETE CASCADE ON UPDATE CASCADE,
   catalog_name VARCHAR(20) NOT NULL,
-  chats INTEGER[] NOT NULL -- reference Conversations
+  chats INTEGER[] NOT NULL
 )
 
 DROP TABLE IF EXISTS CHAT.Catalogs;
