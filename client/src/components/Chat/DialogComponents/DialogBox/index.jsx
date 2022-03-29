@@ -5,7 +5,7 @@ import CONSTANTS from "../../../../constants";
 
 const DialogBox = (props) => {
   const {
-    chatPreview: { favoriteList, participants, blackList, id, text, createAt },
+    chatPreview: { favoriteList, participants, blackList, id, text, createdAt },
     userId,
     getTimeStr,
     changeFavorite,
@@ -15,6 +15,8 @@ const DialogBox = (props) => {
     chatMode,
     interlocutor,
   } = props;
+
+  console.log("props", props);
 
   const {
     ANONYM_IMAGE_PATH,
@@ -56,7 +58,7 @@ const DialogBox = (props) => {
           <span className={styles.interlocutorMessage}>{text}</span>
         </div>
         <div className={styles.buttonsContainer}>
-          <span className={styles.time}>{getTimeStr(createAt)}</span>
+          <span className={styles.time}>{getTimeStr(createdAt)}</span>
           <i
             onClick={(event) =>
               changeFavorite(

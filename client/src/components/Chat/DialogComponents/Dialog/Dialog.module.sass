@@ -4,7 +4,6 @@
   width: 100%
   text-align: center
 
-
 .messageList
   height: 280px
   overflow: auto
@@ -31,35 +30,8 @@
     border-radius: 6px
     padding: 2px
 
-
-  .ownMessage
-    align-self: flex-end
-    color: white
+  .message, .ownMessage
     max-width: 200px
-    padding: 6px
-    background-color: #6b89b0
-    border-bottom-left-radius: 8px
-    border-top-left-radius: 8px
-    border-top-right-radius: 4px
-    border-bottom-right-radius: 8px
-    margin: 4px 0
-    overflow-wrap: break-word
-    box-sizing: border-box
-
-    .messageTime
-      position: relative
-      float: right
-      margin-left: 5px
-      top: 12px
-      font-size: 10px
-      color: white
-
-
-  .message
-    align-self: flex-start
-    color: white
-    max-width: 200px
-    background-color: #4e618d
     border-bottom-left-radius: 8px
     border-top-left-radius: 4px
     border-top-right-radius: 8px
@@ -69,12 +41,22 @@
     overflow-wrap: break-word
     box-sizing: border-box
 
+    span
+      color: #fff
+
     .messageTime
       position: relative
       float: right
       margin-left: 5px
       top: 12px
       font-size: 10px
-      color: white
+
+  .ownMessage
+    align-self: flex-end
+    background-color: #6b89b0
+
+  .message
+    align-self: flex-start
+    background-color: #4e618d
 
 

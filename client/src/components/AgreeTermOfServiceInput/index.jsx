@@ -15,8 +15,12 @@ const AgreeTermOfServiceInput = ({ id, type, classes, label, ...rest }) => (
             <input {...field} placeholder={label} id={id} type={type} />
             <label htmlFor={id}>
               By clicking this checkbox, you agree to our{" "}
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
-                Terms of Service.
+              <a
+                href="https://www.squadhelp.com/Terms&Conditions"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Terms of Service
               </a>
             </label>
           </div>
