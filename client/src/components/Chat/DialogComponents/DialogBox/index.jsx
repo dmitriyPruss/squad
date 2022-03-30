@@ -16,8 +16,6 @@ const DialogBox = (props) => {
     interlocutor,
   } = props;
 
-  console.log("props", props);
-
   const {
     ANONYM_IMAGE_PATH,
     PUBLIC_URL,

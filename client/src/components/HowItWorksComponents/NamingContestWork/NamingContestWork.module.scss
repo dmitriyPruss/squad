@@ -2,6 +2,7 @@
   border-top: 1px solid #e7eaf3;
   border-bottom: 1px solid #e7eaf3;
   padding: 128px 30px;
+  min-width: 320px;
 }
 
 .contestWorkItems {
@@ -15,6 +16,7 @@
 
   @media screen and (max-width: 800px) {
     order: -1;
+    margin: 0;
   }
 }
 
@@ -53,6 +55,10 @@
   display: flex;
   align-items: center;
   padding: 5px;
+
+  @media screen and (max-width: 600px) {
+    height: 24%;
+  }
 }
 
 .workItemNum {
@@ -60,11 +66,31 @@
   font-size: 3.5rem;
   width: 23%;
   text-align: center;
+
+  @media screen and (max-width: 600px) {
+    font-size: 1.5rem;
+    width: 15%;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 1.2rem;
+    width: 12%;
+  }
 }
 
 .workItemContext {
   color: #77838f;
   width: 75%;
+
+  @media screen and (max-width: 600px) {
+    font-size: 0.9rem;
+    width: 83%;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 0.8rem;
+    width: 85%;
+  }
 }
 
 .linesVisualItem {

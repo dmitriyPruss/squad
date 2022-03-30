@@ -1,0 +1,205 @@
+{
+  "message": "Session without authorization - need token",
+  "code": 408,
+  "time": 1648472230000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648476278000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648476278000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476507000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476507000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476507000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476507000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476842000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476842000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476842000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476842000
+} 
+{
+  "message": "Session expired or token is invalid",
+  "code": 408,
+  "time": 1648476842000
+} 
+{
+  "message": "Wrong password",
+  "code": 404,
+  "time": 1648476870000
+} 
+{
+  "message": "Wrong password",
+  "code": 404,
+  "time": 1648476870000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648540767000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648540767000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648540775000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648540775000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648541655000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648542906000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648544531000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648561234000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648561234000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648561414000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648561414000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648564837000
+} 
+{
+  "message": "user with this data didn`t exist",
+  "code": 404,
+  "time": 1648565321000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648566689000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648566710000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648566710000
+} 
+{
+  "message": "Wrong password",
+  "code": 404,
+  "time": 1648566760000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648566907000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648566907000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648567001000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648567001000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648567001000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648567001000
+} 
+{
+  "message": "Bad request",
+  "code": 400,
+  "time": 1648568357000
+} 
+{
+  "message": "Bad request",
+  "code": 400,
+  "time": 1648568391000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648571248000
+} 
+{
+  "message": "Token error",
+  "code": 408,
+  "time": 1648571248000
+} 

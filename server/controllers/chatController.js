@@ -15,9 +15,6 @@ module.exports.addMessage = async (req, res, next) => {
     tokenData: { userId, firstName, lastName, displayName, avatar, email },
   } = req;
 
-  console.log("req.body", req.body);
-  console.log("req.tokenData", req.tokenData);
-
   const participants = [userId, recipient];
 
   participants.sort((a, b) => a - b);
@@ -72,9 +69,6 @@ module.exports.addMessage = async (req, res, next) => {
         },
       },
     });
-
-    console.log("message", message);
-    console.log("preview", preview);
 
     res.status(201).send({
       message,

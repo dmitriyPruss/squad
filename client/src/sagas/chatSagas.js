@@ -26,9 +26,7 @@ export function* getDialog(action) {
 
 export function* sendMessage(action) {
   try {
-    console.log("action.data", action.data);
     const { data } = yield restController.newMessage(action.data);
-    console.log("data", data);
     const { messagesPreview } = yield select((state) => state.chatStore);
     let isNew = true;
 
