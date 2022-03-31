@@ -7,7 +7,7 @@ const {
   Catalog,
 } = require("./../models/postgreModels");
 const userQueries = require("./queries/userQueries");
-const controller = require("../socketInit");
+const { getChatController } = require("../socketInit");
 
 module.exports.addMessage = async (req, res, next) => {
   const {
@@ -49,7 +49,7 @@ module.exports.addMessage = async (req, res, next) => {
       favoriteList,
     };
 
-    controller.getChatController().emitNewMessage(interlocutorId, {
+    getChatController().emitNewMessage(interlocutorId, {
       message,
       preview: {
         id,
@@ -261,7 +261,7 @@ module.exports.blackList = async (req, res, next) => {
       (participant) => participant !== userId
     )[0];
 
-    controller.getChatController().emitChangeBlockStatus(interlocutorId, chat);
+    getChatController().emitChangeBlockStatus(interlocutorId, chat);
   } catch (err) {
     res.send(err);
   }

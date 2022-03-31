@@ -17,10 +17,6 @@ module.exports.createConnection = (httpServer) => {
   chatController.connect("/chat", io);
 };
 
-module.exports.getChatController = () => {
-  return chatController;
-};
+module.exports.getChatController = () => chatController;
 
-module.exports.getNotificationController = () => {
-  return notificationController;
-};
+module.exports.getNotificationController = () => notificationController;

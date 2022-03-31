@@ -33,8 +33,8 @@ const CONSTANTS = {
   FILES_PATH: "public/",
   SOCKET: {
     CONNECTION: "connection",
-    SUBSCRIBE: "subscribe",
-    UNSUBSCRIBE: "unsubscribe",
+    SUBSCRIBE_CHAT: "subscribeChat",
+    UNSUBSCRIBE_CHAT: "unsubscribeChat",
   },
   NOTIFICATION: {
     ENTRY_CREATED: "onEntryCreated",

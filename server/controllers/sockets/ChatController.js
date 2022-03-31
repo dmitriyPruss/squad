@@ -1,5 +1,5 @@
 const WebSocket = require("./WebSocket");
-const { NEW_MESSAGE, CHANGE_BLOCK_STATUS } = require("../../constants");
+const { NEW_MESSAGE, CHANGE_BLOCK_STATUS, SOCKET } = require("../../constants");
 
 class ChatController extends WebSocket {
   anotherSubscribes(socket) {
@@ -8,23 +8,23 @@ class ChatController extends WebSocket {
   }
 
   onSubscribeChat(socket) {
-    socket.on("subscribeChat", (id) => {
+    socket.on(SOCKET.SUBSCRIBE_CHAT, (id) => {
       socket.join(id);
     });
   }
 
   onUnsubscribeChat(socket) {
-    socket.on("unsubscribeChat", (id) => {
-      socket.join(id);
+    socket.on(SOCKET.UNSUBSCRIBE_CHAT, (id) => {
+      socket.leave(id);
     });
   }
 
   emitNewMessage(target, message) {
-    this.io.to(parseInt(target)).emit(NEW_MESSAGE, { message });
+    this.io.to(target).emit(NEW_MESSAGE, { message });
   }
 
   emitChangeBlockStatus(target, message) {
-    this.io.to(parseInt(target)).emit(CHANGE_BLOCK_STATUS, { message });
+    this.io.to(target).emit(CHANGE_BLOCK_STATUS, { message });
   }
 }
 
