@@ -2,6 +2,11 @@ import React from "react";
 import { toast } from "react-toastify";
 import WebSocket from "./WebSocket";
 import Notification from "../../../components/Notification";
+import CONSTANTS from "../../../constants";
+
+const {
+  NOTIFICATION: { ENTRY_CREATED, CHANGE, SUBSCRIBE, UNSUBSCRIBE },
+} = CONSTANTS.SOCKET;
 
 class NotificationSocket extends WebSocket {
   constructor(dispatch, getState, room) {
@@ -15,13 +20,13 @@ class NotificationSocket extends WebSocket {
   };
 
   onChangeMark = () => {
-    this.socket.on("changeMark", () => {
+    this.socket.on(CHANGE.MARK, () => {
       toast("Someone liked your offer");
     });
   };
 
   onChangeOfferStatus = () => {
-    this.socket.on("changeOfferStatus", (message) => {
+    this.socket.on(CHANGE.OFFER_STATUS, (message) => {
       const { message: mes, contestId } = message;
 
       toast(<Notification message={mes} contestId={contestId} />);
@@ -29,17 +34,17 @@ class NotificationSocket extends WebSocket {
   };
 
   onEntryCreated = () => {
-    this.socket.on("onEntryCreated", () => {
+    this.socket.on(ENTRY_CREATED, () => {
       toast("New Entry");
     });
   };
 
   subscribe = (id) => {
-    this.socket.emit("subscribe", id);
+    this.socket.emit(SUBSCRIBE, id);
   };
 
   unsubsctibe = (id) => {
-    this.socket.emit("unsubscribe", id);
+    this.socket.emit(UNSUBSCRIBE, id);
   };
 }
 

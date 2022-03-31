@@ -6,6 +6,10 @@ import {
   changeBlockStatusInStore,
 } from "../../../actions/actionCreator";
 
+const {
+  CHAT: { CHANGE_BLOCK_STATUS, NEW_MESSAGE, SUBSCRIBE_CHAT, UNSUBSCRIBE_CHAT },
+} = CONSTANTS.SOCKET;
+
 class ChatSocket extends WebSocket {
   constructor(dispatch, getState, room) {
     super(dispatch, getState, room);
@@ -17,7 +21,7 @@ class ChatSocket extends WebSocket {
   };
 
   onChangeBlockStatus = () => {
-    this.socket.on(CONSTANTS.CHANGE_BLOCK_STATUS, (data) => {
+    this.socket.on(CHANGE_BLOCK_STATUS, (data) => {
       const { message } = data;
       const { messagesPreview } = this.getState().chatStore;
       messagesPreview.forEach((preview) => {
@@ -31,7 +35,7 @@ class ChatSocket extends WebSocket {
   };
 
   onNewMessage = () => {
-    this.socket.on("newMessage", (data) => {
+    this.socket.on(NEW_MESSAGE, (data) => {
       const {
         message: {
           message,
@@ -59,11 +63,11 @@ class ChatSocket extends WebSocket {
   };
 
   subscribeChat = (id) => {
-    this.socket.emit("subscribeChat", id);
+    this.socket.emit(SUBSCRIBE_CHAT, id);
   };
 
   unsubscribeChat = (id) => {
-    this.socket.emit("unsubscribeChat", id);
+    this.socket.emit(UNSUBSCRIBE_CHAT, id);
   };
 }
 

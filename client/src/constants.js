@@ -9,13 +9,11 @@ const CONSTANTS = {
   CUSTOMER: "customer",
   CREATOR: "creator",
   MODERATOR: "moderator",
-
   CONTEST: {
     NAME: "name",
     LOGO: "logo",
     TAGLINE: "tagline",
   },
-
   STATUS: {
     CONTEST: {
       ACTIVE: "active",
@@ -26,6 +24,28 @@ const CONSTANTS = {
       PENDING: "pending",
       REJECTED: "rejected",
       WON: "won",
+    },
+  },
+  SOCKET: {
+    WEB: {
+      CONNECT: "connect",
+    },
+    CHAT: {
+      ROOM: "chat",
+      NEW_MESSAGE: "newMessage",
+      CHANGE_BLOCK_STATUS: "CHANGE_BLOCK_STATUS",
+      SUBSCRIBE_CHAT: "subscribeChat",
+      UNSUBSCRIBE_CHAT: "unsubscribeChat",
+    },
+    NOTIFICATION: {
+      ROOM: "notifications",
+      ENTRY_CREATED: "onEntryCreated",
+      CHANGE: {
+        MARK: "changeMark",
+        OFFER_STATUS: "changeOfferStatus",
+      },
+      SUBSCRIBE: "subscribe",
+      UNSUBSCRIBE: "unsubscribe",
     },
   },
   HEADER_PATHS_WITHOUT_AUTH: [
@@ -49,8 +69,6 @@ const CONSTANTS = {
     CATALOG: "CATALOG",
     NORMAL: "NORMAL",
   },
-
-  CHANGE_BLOCK_STATUS: "CHANGE_BLOCK_STATUS",
   ADD_CHAT_TO_OLD_CATALOG: "ADD_CHAT_TO_OLD_CATALOG",
   CREATE_NEW_CATALOG_AND_ADD_CHAT: "CREATE_NEW_CATALOG_AND_ADD_CHAT",
   USER_INFO_MODE: "USER_INFO_MODE",
