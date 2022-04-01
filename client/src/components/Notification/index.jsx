@@ -1,12 +1,17 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 import styles from "./Notification.module.sass";
 
 const Notification = (props) => {
   const { message, contestId, history } = props;
 
   return (
-    <div>
+    <Alert
+      variant={
+        message === "Some of your offers have won" ? "success" : "danger"
+      }
+    >
       <br />
       <span>{message}</span>
       <br />
@@ -18,7 +23,7 @@ const Notification = (props) => {
           Go to contest
         </span>
       )}
-    </div>
+    </Alert>
   );
 };
 

@@ -38,6 +38,8 @@ const CONSTANTS = {
   },
   NOTIFICATION: {
     ENTRY_CREATED: "onEntryCreated",
+    SUBSCRIBE: "subscribe",
+    UNSUBSCRIBE: "unsubscribe",
     CHANGE: {
       MARK: "changeMark",
       OFFER_STATUS: "changeOfferStatus",

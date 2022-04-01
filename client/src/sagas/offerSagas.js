@@ -38,6 +38,7 @@ export function* changeMarkSaga(action) {
         offer.mark = mark;
       }
     });
+
     yield put({ type: ACTION.CHANGE_MARK_SUCCESS, data: offers });
   } catch (err) {
     yield put({ type: ACTION.CHANGE_MARK_ERROR, error: err.response });

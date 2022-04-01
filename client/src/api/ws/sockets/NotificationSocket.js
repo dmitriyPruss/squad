@@ -19,6 +19,12 @@ class NotificationSocket extends WebSocket {
     this.onChangeOfferStatus();
   };
 
+  onEntryCreated = () => {
+    this.socket.on(ENTRY_CREATED, () => {
+      toast("New Entry");
+    });
+  };
+
   onChangeMark = () => {
     this.socket.on(CHANGE.MARK, () => {
       toast("Someone liked your offer");
@@ -30,12 +36,6 @@ class NotificationSocket extends WebSocket {
       const { message: mes, contestId } = message;
 
       toast(<Notification message={mes} contestId={contestId} />);
-    });
-  };
-
-  onEntryCreated = () => {
-    this.socket.on(ENTRY_CREATED, () => {
-      toast("New Entry");
     });
   };
 

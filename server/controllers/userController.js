@@ -12,7 +12,7 @@ const {
 } = require("../models/postgreModels");
 const { Op } = require("sequelize");
 const NotUniqueEmail = require("../errors/NotUniqueEmail");
-const controller = require("../socketInit");
+const { getNotificationController } = require("../socketInit");
 const userQueries = require("./queries/userQueries");
 const bankQueries = require("./queries/bankQueries");
 const ratingQueries = require("./queries/ratingQueries");
@@ -152,7 +152,7 @@ module.exports.changeMark = async (req, res, next) => {
 
     await userQueries.updateUser({ rating: avg }, creatorId, transaction);
     transaction.commit();
-    controller.getNotificationController().emitChangeMark(creatorId);
+    getNotificationController().emitChangeMark(creatorId);
     res.status(200).send({ userId: creatorId, rating: avg });
   } catch (err) {
     transaction.rollback();

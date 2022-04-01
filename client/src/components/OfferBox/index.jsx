@@ -75,14 +75,14 @@ const OfferBox = (props) => {
   };
 
   const offerStatus = () => {
-    if (User.status === REJECTED) {
+    if (data.status === REJECTED) {
       return (
         <i
           className={classNames("fas fa-times-circle reject", styles.reject)}
         />
       );
     }
-    if (User.status === WON) {
+    if (data.status === WON) {
       return (
         <i
           className={classNames("fas fa-check-circle resolve", styles.resolve)}
@@ -140,7 +140,7 @@ const OfferBox = (props) => {
             />
           </div>
         </div>
-        <div className={styles.responseConainer}>
+        <div className={styles.responseContainer}>
           {contestType === LOGO ? (
             <img
               onClick={() =>

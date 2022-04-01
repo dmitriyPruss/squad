@@ -66,11 +66,17 @@ function getContestByIdReducer(state = initialState, action) {
     }
 
     case ACTION.ADD_NEW_OFFER_TO_STORE:
-    case ACTION.CHANGE_MARK_SUCCESS:
     case ACTION.CHANGE_STORE_FOR_STATUS: {
       return produce(state, (draftState) => {
         draftState.error = null;
         draftState.offers.push(action.data);
+      });
+    }
+
+    case ACTION.CHANGE_MARK_SUCCESS: {
+      return produce(state, (draftState) => {
+        draftState.error = null;
+        draftState.offers = action.data;
       });
     }
 

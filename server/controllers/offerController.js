@@ -2,7 +2,7 @@ const { User, sequelize } = require("../models/postgreModels");
 const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
 const { resolveOffer, rejectOffer } = require("./queries/offerQueries");
-const controller = require("../socketInit");
+const { getNotificationController } = require("../socketInit");
 const CONSTANTS = require("./../constants");
 
 module.exports.setOfferStatus = async (req, res, next) => {
@@ -62,7 +62,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     delete result.contestId;
     delete result.userId;
 
-    controller.getNotificationController().emitEntryCreated(customerId);
+    getNotificationController().emitEntryCreated(customerId);
     const User = Object.assign({}, req.tokenData, { id: userId });
 
     res.status(201).send(Object.assign({}, result, { User }));
