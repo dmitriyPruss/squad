@@ -1,4 +1,4 @@
-const { sequelize } = require("./../../models/postgreModels");
+const { sequelize, Contest, User } = require("./../../models/postgreModels");
 const contestQueries = require("./contestQueries");
 const userQueries = require("./userQueries");
 const { getNotificationController } = require("./../../socketInit");
@@ -77,6 +77,15 @@ module.exports.resolveOffer = async (
       contestId
     );
   }
+
+  const contest = await Contest.findByPk(contestId, { raw: true });
+  const customer = await userQueries.findUser({ id: contest.userId });
+
+  getNotificationController().emitChangeOfferStatus(
+    customer.id,
+    "Your contest is moderated",
+    contestId
+  );
 
   getNotificationController().emitChangeOfferStatus(
     creatorId,

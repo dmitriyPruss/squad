@@ -1,4 +1,4 @@
-const { User, sequelize } = require("../models/postgreModels");
+const { User: dbUser, sequelize } = require("../models/postgreModels");
 const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
 const { resolveOffer, rejectOffer } = require("./queries/offerQueries");
@@ -62,8 +62,22 @@ module.exports.setNewOffer = async (req, res, next) => {
     delete result.contestId;
     delete result.userId;
 
-    getNotificationController().emitEntryCreated(customerId);
     const User = Object.assign({}, req.tokenData, { id: userId });
+
+    const moderators = await dbUser.findAll({
+      where: { role: CONSTANTS.MODERATOR },
+      raw: true,
+    });
+
+    if (moderators.length) {
+      const moderatorRoom = moderators
+        .map((moderator) => moderator.id)
+        .sort((current, next) => current - next);
+
+      console.log("moderatorRoom", moderatorRoom);
+
+      getNotificationController().emitNewContest(moderatorRoom);
+    }
 
     res.status(201).send(Object.assign({}, result, { User }));
   } catch (e) {
@@ -105,7 +119,7 @@ module.exports.getEmailMessages = async (req, res, next) => {
     params: { page },
   } = req;
 
-  const moderator = await User.findOne({
+  const moderator = await dbUser.findOne({
     where: {
       role: CONSTANTS.MODERATOR,
     },

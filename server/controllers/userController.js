@@ -7,6 +7,7 @@ const {
   Rating,
   Offer,
   Transaction,
+  User,
   sequelize,
   Sequelize,
 } = require("../models/postgreModels");
@@ -211,7 +212,21 @@ module.exports.payment = async (req, res, next) => {
     });
     await Contest.bulkCreate(contests, transaction);
     transaction.commit();
-    res.status(204).send(); // !!!
+
+    const creators = await User.findAll({
+      where: { role: CONSTANTS.CREATOR.NAME },
+      raw: true,
+    });
+
+    if (creators.length) {
+      const creatorRoom = creators
+        .map((creator) => creator.id)
+        .sort((current, next) => current - next);
+
+      getNotificationController().emitNewContest(creatorRoom);
+    }
+
+    res.status(204).send();
   } catch (err) {
     transaction.rollback();
     next(err);

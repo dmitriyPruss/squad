@@ -21,16 +21,22 @@ class NotificationController extends WebSocket {
     });
   }
 
-  emitEntryCreated(target) {
-    this.io.to(target).emit(ENTRY_CREATED);
-  }
-
   emitChangeMark(target) {
     this.io.to(target).emit(CHANGE.MARK);
   }
 
   emitChangeOfferStatus(target, message, contestId) {
     this.io.to(target).emit(CHANGE.OFFER_STATUS, { message, contestId });
+  }
+
+  emitNewContest(target) {
+    console.log("New Contest");
+    this.io.to(target).emit("newContest");
+  }
+
+  emitNewOffer(target) {
+    console.log("New offer");
+    this.io.to(target).emit("newOffer");
   }
 }
 

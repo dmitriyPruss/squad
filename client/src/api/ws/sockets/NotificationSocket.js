@@ -14,15 +14,10 @@ class NotificationSocket extends WebSocket {
   }
 
   anotherSubscribes = () => {
-    this.onEntryCreated();
     this.onChangeMark();
     this.onChangeOfferStatus();
-  };
-
-  onEntryCreated = () => {
-    this.socket.on(ENTRY_CREATED, () => {
-      toast("New Entry");
-    });
+    this.onNewContest();
+    this.onNewOffer();
   };
 
   onChangeMark = () => {
@@ -36,6 +31,18 @@ class NotificationSocket extends WebSocket {
       const { message: mes, contestId } = message;
 
       toast(<Notification message={mes} contestId={contestId} />);
+    });
+  };
+
+  onNewContest = () => {
+    this.socket.on("newContest", () => {
+      toast("Received a new contest. Please update the data...");
+    });
+  };
+
+  onNewOffer = () => {
+    this.socket.on("newOffer", () => {
+      toast("Received a new offer. Please update the data...");
     });
   };
 

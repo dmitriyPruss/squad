@@ -9,7 +9,7 @@ const Notification = (props) => {
   return (
     <Alert
       variant={
-        message === "Some of your offers have won" ? "success" : "danger"
+        message === "Some of your offers were rejected" ? "danger" : "success"
       }
     >
       <br />
