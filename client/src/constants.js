@@ -39,11 +39,12 @@ const CONSTANTS = {
     },
     NOTIFICATION: {
       ROOM: "notifications",
-      ENTRY_CREATED: "onEntryCreated",
       CHANGE: {
         MARK: "changeMark",
         OFFER_STATUS: "changeOfferStatus",
       },
+      NEW_CONTEST: "newContest",
+      NEW_OFFER: "newOffer",
       SUBSCRIBE: "subscribe",
       UNSUBSCRIBE: "unsubscribe",
     },

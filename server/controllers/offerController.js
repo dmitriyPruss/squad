@@ -1,19 +1,22 @@
-const { User: dbUser, sequelize } = require("../models/postgreModels");
+const { User, sequelize } = require("../models/postgreModels");
 const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
 const { resolveOffer, rejectOffer } = require("./queries/offerQueries");
 const { getNotificationController } = require("../socketInit");
+const userQueries = require("./queries/userQueries");
 const CONSTANTS = require("./../constants");
 
 module.exports.setOfferStatus = async (req, res, next) => {
   let transaction;
 
-  const { command, offerId, orderId, creatorId, contestId, priority } =
-    req.body;
+  const {
+    tokenData: { userId },
+    body: { command, offerId, orderId, creatorId, contestId, priority },
+  } = req;
 
   if (command === "reject") {
     try {
-      const offer = await rejectOffer(offerId, creatorId, contestId);
+      const offer = await rejectOffer(offerId, creatorId, contestId, userId);
       res.status(201).send(offer);
     } catch (err) {
       next(err);
@@ -27,6 +30,7 @@ module.exports.setOfferStatus = async (req, res, next) => {
         orderId,
         offerId,
         priority,
+        userId,
         transaction
       );
 
@@ -42,7 +46,7 @@ module.exports.setNewOffer = async (req, res, next) => {
   const obj = {};
 
   const {
-    body: { contestId, customerId, offerData },
+    body: { contestId, offerData },
     tokenData: { userId },
     file,
   } = req;
@@ -62,9 +66,9 @@ module.exports.setNewOffer = async (req, res, next) => {
     delete result.contestId;
     delete result.userId;
 
-    const User = Object.assign({}, req.tokenData, { id: userId });
+    const user = Object.assign({}, req.tokenData, { id: userId });
 
-    const moderators = await dbUser.findAll({
+    const moderators = await User.findAll({
       where: { role: CONSTANTS.MODERATOR },
       raw: true,
     });
@@ -74,12 +78,19 @@ module.exports.setNewOffer = async (req, res, next) => {
         .map((moderator) => moderator.id)
         .sort((current, next) => current - next);
 
-      console.log("moderatorRoom", moderatorRoom);
+      const { firstName, lastName, role, avatar } = await userQueries.findUser({
+        id: userId,
+      });
 
-      getNotificationController().emitNewContest(moderatorRoom);
+      getNotificationController().emitNewOffer(moderatorRoom, {
+        firstName,
+        lastName,
+        role,
+        avatar,
+      });
     }
 
-    res.status(201).send(Object.assign({}, result, { User }));
+    res.status(201).send(Object.assign({}, result, { user: User }));
   } catch (e) {
     return next(new ServerError());
   }
@@ -119,7 +130,7 @@ module.exports.getEmailMessages = async (req, res, next) => {
     params: { page },
   } = req;
 
-  const moderator = await dbUser.findOne({
+  const moderator = await User.findOne({
     where: {
       role: CONSTANTS.MODERATOR,
     },

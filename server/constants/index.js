@@ -37,9 +37,10 @@ const CONSTANTS = {
     UNSUBSCRIBE_CHAT: "unsubscribeChat",
   },
   NOTIFICATION: {
-    ENTRY_CREATED: "onEntryCreated",
     SUBSCRIBE: "subscribe",
     UNSUBSCRIBE: "unsubscribe",
+    NEW_CONTEST: "newContest",
+    NEW_OFFER: "newOffer",
     CHANGE: {
       MARK: "changeMark",
       OFFER_STATUS: "changeOfferStatus",

@@ -1,11 +1,13 @@
 import React from "react";
 import { toast } from "react-toastify";
 import WebSocket from "./WebSocket";
-import Notification from "../../../components/Notification";
+import OfferStatusNotification from "../../../components/Notifications/OfferStatusNotification";
+import NewNotification from "../../../components/Notifications/NewNotification";
+import ChangeMarkNotification from "../../../components/Notifications/ChangeMarkNotification";
 import CONSTANTS from "../../../constants";
 
 const {
-  NOTIFICATION: { ENTRY_CREATED, CHANGE, SUBSCRIBE, UNSUBSCRIBE },
+  NOTIFICATION: { CHANGE, NEW_CONTEST, NEW_OFFER, SUBSCRIBE, UNSUBSCRIBE },
 } = CONSTANTS.SOCKET;
 
 class NotificationSocket extends WebSocket {
@@ -21,28 +23,34 @@ class NotificationSocket extends WebSocket {
   };
 
   onChangeMark = () => {
-    this.socket.on(CHANGE.MARK, () => {
-      toast("Someone liked your offer");
+    this.socket.on(CHANGE.MARK, (data) => {
+      toast(<ChangeMarkNotification data={data} />);
     });
   };
 
   onChangeOfferStatus = () => {
     this.socket.on(CHANGE.OFFER_STATUS, (message) => {
-      const { message: mes, contestId } = message;
+      const { message: mes, contestId, data } = message;
 
-      toast(<Notification message={mes} contestId={contestId} />);
+      toast(
+        <OfferStatusNotification
+          message={mes}
+          contestId={contestId}
+          data={data}
+        />
+      );
     });
   };
 
   onNewContest = () => {
-    this.socket.on("newContest", () => {
-      toast("Received a new contest. Please update the data...");
+    this.socket.on(NEW_CONTEST, (data) => {
+      toast(<NewNotification data={data} />);
     });
   };
 
   onNewOffer = () => {
-    this.socket.on("newOffer", () => {
-      toast("Received a new offer. Please update the data...");
+    this.socket.on(NEW_OFFER, (data) => {
+      toast(<NewNotification data={data} />);
     });
   };
 

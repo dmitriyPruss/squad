@@ -153,7 +153,17 @@ module.exports.changeMark = async (req, res, next) => {
 
     await userQueries.updateUser({ rating: avg }, creatorId, transaction);
     transaction.commit();
-    getNotificationController().emitChangeMark(creatorId);
+
+    const { firstName, lastName, role, avatar } = await userQueries.findUser({
+      id: userId,
+    });
+
+    getNotificationController().emitChangeMark(creatorId, {
+      firstName,
+      lastName,
+      role,
+      avatar,
+    });
     res.status(200).send({ userId: creatorId, rating: avg });
   } catch (err) {
     transaction.rollback();
@@ -223,7 +233,16 @@ module.exports.payment = async (req, res, next) => {
         .map((creator) => creator.id)
         .sort((current, next) => current - next);
 
-      getNotificationController().emitNewContest(creatorRoom);
+      const { firstName, lastName, role, avatar } = await userQueries.findUser({
+        id: userId,
+      });
+
+      getNotificationController().emitNewContest(creatorRoom, {
+        firstName,
+        lastName,
+        role,
+        avatar,
+      });
     }
 
     res.status(204).send();

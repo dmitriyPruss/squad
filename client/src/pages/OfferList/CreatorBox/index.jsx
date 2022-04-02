@@ -2,13 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Rating from "react-rating";
 import { confirmAlert } from "react-confirm-alert";
-import {
-  changeMark,
-  clearChangeMarkError,
-  goToExpandedDialog,
-  changeShowImage,
-  setOfferStatus,
-} from "./../../../actions/actionCreator";
+import { setOfferStatus } from "./../../../actions/actionCreator";
 import CONSTANTS from "./../../../constants";
 import { Button } from "react-bootstrap";
 import OfferInfo from "../OfferInfo";
@@ -60,7 +54,7 @@ const CreatorBox = (props) => {
                 creatorId: userId,
                 offerId: id,
                 orderId,
-                priority: priority,
+                priority,
               });
 
               setTimeout(() => {
@@ -93,7 +87,7 @@ const CreatorBox = (props) => {
                 creatorId: userId,
                 offerId: id,
                 orderId,
-                priority: priority,
+                priority,
               });
 
               setTimeout(() => {
@@ -198,30 +192,8 @@ const CreatorBox = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const {
-    chatStore: { messagesPreview },
-    contestByIdStore: { changeMarkError, isShowModal },
-    userStore: {
-      data: { id, role },
-    },
-  } = state;
-
-  return {
-    changeMarkError,
-    id,
-    role,
-    messagesPreview,
-    isShowModal,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => ({
-  changeMark: (data) => dispatch(changeMark(data)),
-  clearError: () => dispatch(clearChangeMarkError()),
-  goToExpandedDialog: (data) => dispatch(goToExpandedDialog(data)),
-  changeShowImage: (data) => dispatch(changeShowImage(data)),
   setOfferStatus: (data) => dispatch(setOfferStatus(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatorBox);
+export default connect(null, mapDispatchToProps)(CreatorBox);

@@ -1,6 +1,6 @@
 const WebSocket = require("./WebSocket");
 const {
-  NOTIFICATION: { ENTRY_CREATED, CHANGE, SUBSCRIBE, UNSUBSCRIBE },
+  NOTIFICATION: { CHANGE, NEW_CONTEST, NEW_OFFER, SUBSCRIBE, UNSUBSCRIBE },
 } = require("../../constants");
 
 class NotificationController extends WebSocket {
@@ -21,22 +21,20 @@ class NotificationController extends WebSocket {
     });
   }
 
-  emitChangeMark(target) {
-    this.io.to(target).emit(CHANGE.MARK);
+  emitChangeMark(target, data) {
+    this.io.to(target).emit(CHANGE.MARK, data);
   }
 
-  emitChangeOfferStatus(target, message, contestId) {
-    this.io.to(target).emit(CHANGE.OFFER_STATUS, { message, contestId });
+  emitChangeOfferStatus(target, message, contestId, data) {
+    this.io.to(target).emit(CHANGE.OFFER_STATUS, { message, contestId, data });
   }
 
-  emitNewContest(target) {
-    console.log("New Contest");
-    this.io.to(target).emit("newContest");
+  emitNewContest(target, data) {
+    this.io.to(target).emit(NEW_CONTEST, data);
   }
 
-  emitNewOffer(target) {
-    console.log("New offer");
-    this.io.to(target).emit("newOffer");
+  emitNewOffer(target, data) {
+    this.io.to(target).emit(NEW_OFFER, data);
   }
 }
 

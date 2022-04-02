@@ -4,16 +4,21 @@ const userQueries = require("./userQueries");
 const { getNotificationController } = require("./../../socketInit");
 const { CONTEST, OFFER_STATUS } = require("./../../constants");
 
-module.exports.rejectOffer = async (offerId, creatorId, contestId) => {
+module.exports.rejectOffer = async (offerId, creatorId, contestId, userId) => {
   const rejectedOffer = await contestQueries.updateOffer(
     { status: OFFER_STATUS.REJECTED },
     { id: offerId }
   );
 
+  const { firstName, lastName, avatar, role } = await userQueries.findUser({
+    id: userId,
+  });
+
   getNotificationController().emitChangeOfferStatus(
     creatorId,
     "Some of your offers were rejected",
-    contestId
+    contestId,
+    { firstName, lastName, avatar, role }
   );
   return rejectedOffer;
 };
@@ -24,6 +29,7 @@ module.exports.resolveOffer = async (
   orderId,
   offerId,
   priority,
+  userId,
   transaction
 ) => {
   const finishedContest = await contestQueries.updateContestStatus(
@@ -63,6 +69,10 @@ module.exports.resolveOffer = async (
   );
   transaction.commit();
 
+  const { firstName, lastName, avatar, role } = await userQueries.findUser({
+    id: userId,
+  });
+
   const arrayRoomsId = [];
   updatedOffers.forEach((offer) => {
     if (offer.status === OFFER_STATUS.REJECTED && creatorId !== offer.userId) {
@@ -74,7 +84,8 @@ module.exports.resolveOffer = async (
     getNotificationController().emitChangeOfferStatus(
       arrayRoomsId,
       "Some of your offers were rejected",
-      contestId
+      contestId,
+      { firstName, lastName, avatar, role }
     );
   }
 
@@ -83,14 +94,16 @@ module.exports.resolveOffer = async (
 
   getNotificationController().emitChangeOfferStatus(
     customer.id,
-    "Your contest is moderated",
-    contestId
+    "Some of your contests have been moderated!",
+    contestId,
+    { firstName, lastName, avatar, role }
   );
 
   getNotificationController().emitChangeOfferStatus(
     creatorId,
     "Some of your offers have won",
-    contestId
+    contestId,
+    { firstName, lastName, avatar, role }
   );
   return updatedOffers[0].dataValues;
 };

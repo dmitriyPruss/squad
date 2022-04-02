@@ -9,10 +9,7 @@ import {
 import Header from "../../components/Header";
 import Footer from "./../../components/Footer";
 import CreatorBox from "./CreatorBox";
-import {
-  setOfferStatus,
-  getOffersForModeratorAction,
-} from "../../actions/actionCreator";
+import { getOffersForModeratorAction } from "../../actions/actionCreator";
 import { ReactComponent as OfferImg } from "./offer.svg";
 import CONSTANTS from "../../constants";
 import styles from "./OfferList.module.scss";
@@ -56,8 +53,6 @@ function OfferList(props) {
           getOffersForModerator={getOffersForModerator}
           data={item}
           key={item.id}
-          setOfferStatus={setOfferStatus}
-          date={new Date()}
         />
       </section>
     ) : (
