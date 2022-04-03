@@ -90,7 +90,7 @@ module.exports.setNewOffer = async (req, res, next) => {
       });
     }
 
-    res.status(201).send(Object.assign({}, result, { user: User }));
+    res.status(201).send(Object.assign({}, result, { User: user }));
   } catch (e) {
     return next(new ServerError());
   }
