@@ -6,11 +6,11 @@ import {
   clearContestList,
   setNewCustomerFilter,
 } from "../../actions/actionCreator";
-import CONSTANTS from "../../constants";
 import ContestsContainer from "../ContestsContainer";
 import ContestBox from "../ContestBox";
-import styles from "./CustomerDashboard.module.sass";
 import TryAgain from "../TryAgain";
+import CONSTANTS from "../../constants";
+import styles from "./CustomerDashboard.module.sass";
 
 class CustomerDashboard extends React.Component {
   loadMore = (startFrom) => {

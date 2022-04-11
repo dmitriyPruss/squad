@@ -6,9 +6,9 @@ import {
   changeRenameCatalogMode,
   changeCatalogName,
 } from "../../../../actions/actionCreator";
-import styles from "./CatalogHeader.module.sass";
 import FormInput from "../../../FormInput";
 import Schemes from "../../../../validators/validationSchemes";
+import styles from "./CatalogHeader.module.sass";
 
 const CatalogListHeader = (props) => {
   const changeCatalogName = (values) => {

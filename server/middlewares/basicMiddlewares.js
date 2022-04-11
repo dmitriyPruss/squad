@@ -1,11 +1,11 @@
-const { Contest } = require("../models/postgreModels");
 const { Op } = require("sequelize");
+const { Contest } = require("../models/postgreModels");
 const RightsError = require("../errors/RightsError");
 const ServerError = require("../errors/ServerError");
 const { mapStringToValues } = require("../utils/functions");
 const {
   CUSTOMER,
-  CREATOR: { NAME },
+  CREATOR,
   MODERATOR,
   CONTEST: {
     STATUS: { ACTIVE, FINISHED },
@@ -39,7 +39,7 @@ module.exports.canGetContest = async (req, res, next) => {
       result = await Contest.findOne({
         where: { id, userId },
       });
-    } else if (role === NAME) {
+    } else if (role === CREATOR) {
       result = await Contest.findOne({
         where: {
           id,
@@ -56,7 +56,7 @@ module.exports.canGetContest = async (req, res, next) => {
 };
 
 module.exports.onlyForCreative = (req, res, next) => {
-  if (req.tokenData.role !== NAME) {
+  if (req.tokenData.role !== CREATOR) {
     next(new RightsError());
   } else {
     next();

@@ -105,5 +105,6 @@ module.exports.resolveOffer = async (
     contestId,
     { firstName, lastName, avatar, role }
   );
+
   return updatedOffers[0].dataValues;
 };

@@ -1,8 +1,8 @@
 const nodemailer = require("nodemailer");
 const { Op } = require("sequelize");
 const { Contest, User, Offer } = require("../../models/postgreModels");
-const CONSTANTS = require("./../../constants");
 const ServerError = require("../../errors/ServerError");
+const CONSTANTS = require("./../../constants");
 
 module.exports.updateContest = async (data, predicate, transaction) => {
   const [updatedCount, [updatedContest]] = await Contest.update(data, {
@@ -140,15 +140,12 @@ module.exports.messagesForCreator = async (
 
     for (const result of results) {
       const { firstName, lastName, role } = moderator;
-
       result.moderator = {
         firstName,
         lastName,
         role,
       };
-
       result.email = null;
-
       offerData.push(result);
     }
 
@@ -228,7 +225,6 @@ module.exports.createEmailLink = async (
   };
 
   const info = await transporter.sendMail(sendMailOptions);
-
   const link = nodemailer.getTestMessageUrl(info);
 
   return link;

@@ -52,6 +52,7 @@ module.exports.uploadContestFiles = (req, res, next) => {
     } else if (err) {
       next(new ServerError());
     }
+
     return next();
   });
 };
@@ -63,6 +64,7 @@ module.exports.updateContestFile = (req, res, next) => {
     } else if (err) {
       next(new ServerError());
     }
+
     return next();
   });
 };
@@ -74,6 +76,7 @@ module.exports.uploadLogoFiles = (req, res, next) => {
     } else if (err) {
       next(new ServerError());
     }
+
     return next();
   });
 };

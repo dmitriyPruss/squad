@@ -52,12 +52,13 @@
 .playVideoButton {
   background-color: #377dff;
   border: 1px solid #377dff;
-
   cursor: pointer;
   border-radius: 6.1875rem;
   display: flex;
   align-items: center;
   padding: 10px 15px;
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: 0.4s;
 
   & *,
   a:link,
@@ -67,9 +68,6 @@
     color: #fff;
     text-decoration: none;
   }
-
-  transition-property: transform, box-shadow, background-color;
-  transition-duration: 0.4s;
 }
 
 .playVideoButton:hover {

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import CONSTANTS from "../../../../constants";
 import {
   goToExpandedDialog,
   changeChatFavorite,
@@ -9,6 +8,7 @@ import {
   changeShowAddChatToCatalog,
 } from "../../../../actions/actionCreator";
 import DialogBox from "../DialogBox";
+import CONSTANTS from "../../../../constants";
 import styles from "./DialogList.module.sass";
 
 const DialogList = (props) => {

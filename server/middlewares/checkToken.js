@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../constants");
+const _ = require("lodash");
 const TokenError = require("../errors/TokenError");
 const userQueries = require("../controllers/queries/userQueries");
+const { JWT_SECRET } = require("../constants");
 
 module.exports.checkAuth = async (req, res, next) => {
   const accessToken = req.headers.authorization;
@@ -15,27 +16,13 @@ module.exports.checkAuth = async (req, res, next) => {
 
     const foundUser = await userQueries.findUser({ id: tokenData.userId });
 
-    const {
-      firstName,
-      lastName,
-      role,
-      id,
-      avatar,
-      displayName,
-      balance,
-      email,
-    } = foundUser;
+    const tokenUserData = _.omit(foundUser, [
+      "accessToken",
+      "password",
+      "rating",
+    ]);
 
-    res.status(200).send({
-      firstName,
-      lastName,
-      role,
-      id,
-      avatar,
-      displayName,
-      balance,
-      email,
-    });
+    res.status(200).send(tokenUserData);
   } catch (err) {
     next(new TokenError());
   }

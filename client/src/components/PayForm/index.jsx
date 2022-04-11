@@ -1,12 +1,12 @@
 import React from "react";
 import Cards from "react-credit-cards";
 import { Form, Formik } from "formik";
-import "react-credit-cards/es/styles-compiled.css";
 import { connect } from "react-redux";
-import styles from "./PayForm.module.sass";
 import { changeFocusOnCard } from "../../actions/actionCreator";
 import PayInput from "../InputComponents/PayInput";
 import Schemes from "../../validators/validationSchemes";
+import "react-credit-cards/es/styles-compiled.css";
+import styles from "./PayForm.module.sass";
 
 const PayForm = (props) => {
   const {

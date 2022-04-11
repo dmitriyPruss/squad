@@ -1,4 +1,4 @@
-import ACTION from '../actions/actionTypes';
+import ACTION from "../actions/actionTypes";
 
 const initialState = {
   bundle: null,

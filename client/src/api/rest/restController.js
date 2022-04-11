@@ -1,5 +1,6 @@
 import http from "../interceptor";
 import queryString from "query-string";
+
 // Users
 export const getUser = () => http.get("/users/getUser");
 export const getTransactions = () => http.get("/users/transactions");

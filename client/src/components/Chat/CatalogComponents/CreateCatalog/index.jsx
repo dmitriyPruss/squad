@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import FormInput from "../../../FormInput";
-import styles from "./CreateCatalog.module.sass";
 import { createCatalog } from "../../../../actions/actionCreator";
 import Schemes from "../../../../validators/validationSchemes";
+import styles from "./CreateCatalog.module.sass";
 
 const CreateCatalog = (props) => {
   const click = (values) => {

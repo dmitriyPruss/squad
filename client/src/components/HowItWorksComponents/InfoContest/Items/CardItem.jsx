@@ -1,10 +1,10 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
-import ToggleElem from './ToggleElem';
-import styles from './../InfoContest.module.scss';
+import React from "react";
+import Card from "react-bootstrap/Card";
+import Accordion from "react-bootstrap/Accordion";
+import ToggleElem from "./ToggleElem";
+import styles from "./../InfoContest.module.scss";
 
-function CardItem (props) {
+function CardItem(props) {
   const { index, buttonText, children } = props;
 
   return (

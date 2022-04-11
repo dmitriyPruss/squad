@@ -16,12 +16,12 @@ import Header from "../../components/Header";
 import ContestSideBar from "../../components/ContestSideBar";
 import OfferBox from "../../components/OfferBox";
 import OfferForm from "../../components/OfferForm";
-import CONSTANTS from "../../constants";
 import Brief from "../../components/Brief";
 import SpinnerLoader from "../../components/SpinnerLoader";
 import TryAgain from "../../components/TryAgain";
 import "react-image-lightbox/style.css";
 import Error from "../../components/Error";
+import CONSTANTS from "../../constants";
 import styles from "./ContestPage.module.sass";
 
 class ContestPage extends React.Component {

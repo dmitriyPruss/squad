@@ -2,11 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-image: linear-gradient(150deg, #2d1582 0%, #19a0ff 100%);
-
   position: relative;
-
   padding: 32px 0;
 
   & > * {
@@ -39,9 +36,7 @@
     background-color: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 5px;
-
     color: #1e2022;
-
     transition-property: transform, box-shadow;
     transition-duration: 0.5s;
   }
@@ -58,18 +53,18 @@
   }
 }
 
-.abstractImg {
+.abstractImg,
+.leavesImg {
   position: absolute;
-  top: 0;
-  left: 0;
-
   width: 150px;
 }
 
+.abstractImg {
+  top: 0;
+  left: 0;
+}
+
 .leavesImg {
-  position: absolute;
   bottom: 0;
   right: 0;
-
-  width: 150px;
 }

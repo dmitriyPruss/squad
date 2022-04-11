@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const {
   Contest,
   Offer,
@@ -5,9 +6,8 @@ const {
   Select,
   User,
 } = require("../models/postgreModels");
-const { Op } = require("sequelize");
-const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
+const ServerError = require("../errors/ServerError");
 const UtilFunctions = require("../utils/functions");
 const CONSTANTS = require("./../constants");
 
@@ -70,7 +70,7 @@ module.exports.getContestById = async (req, res, next) => {
         {
           model: Offer,
           required: false,
-          where: role === CONSTANTS.CREATOR.NAME ? { userId } : {},
+          where: role === CONSTANTS.CREATOR ? { userId } : {},
           attributes: { exclude: ["userId", "contestId"] },
           include: [
             {
@@ -155,9 +155,13 @@ module.exports.getCustomersContests = async (req, res, next) => {
       ],
     });
 
-    contests.forEach(
-      (contest) => (contest.dataValues.count = contest.dataValues.Offers.length)
-    );
+    contests.forEach((contest) => {
+      const {
+        dataValues: { Offers },
+      } = contest;
+
+      contest.dataValues.count = Offers.length;
+    });
 
     let haveMore = true;
     if (contests.length === 0) {
@@ -209,9 +213,14 @@ module.exports.getContests = async (req, res, next) => {
       ],
     });
 
-    contests.forEach(
-      (contest) => (contest.dataValues.count = contest.dataValues.Offers.length)
-    );
+    contests.forEach((contest) => {
+      const {
+        dataValues: { Offers },
+      } = contest;
+
+      contest.dataValues.count = Offers.length;
+    });
+
     let haveMore = true;
     if (contests.length === 0) {
       haveMore = false;

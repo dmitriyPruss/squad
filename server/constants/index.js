@@ -9,10 +9,7 @@ const CONSTANTS = {
     EXPIRY: "11/22",
   },
   CUSTOMER: "customer",
-  CREATOR: {
-    NAME: "creator",
-    CREATOR_ENTRIES: "creator_entries",
-  },
+  CREATOR: "creator",
   MODERATOR: "moderator",
   CONTEST: {
     NAME: "name",
@@ -30,7 +27,6 @@ const CONSTANTS = {
     REJECTED: "rejected",
     WON: "won",
   },
-  FILES_PATH: "public/",
   SOCKET: {
     CONNECTION: "connection",
     SUBSCRIBE_CHAT: "subscribeChat",
@@ -53,6 +49,7 @@ const CONSTANTS = {
     EXPENSE: "EXPENSE",
   },
   ITEMS_ON_PAGE: 3,
+  FILES_PATH: "public/",
 };
 
 module.exports = CONSTANTS;

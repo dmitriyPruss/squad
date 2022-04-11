@@ -35,7 +35,6 @@ function checkOfferReducer(state = initialState, action) {
         error,
       };
     }
-
     case ACTION.GET_EMAIL_MESSAGE_REQUEST: {
       return {
         ...state,
@@ -60,7 +59,6 @@ function checkOfferReducer(state = initialState, action) {
         error,
       };
     }
-
     case ACTION.DIRECT_EMAIL_BOX_REQUEST: {
       return {
         ...state,

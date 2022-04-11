@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
-import CONSTANTS from "../../constants";
 import { setOffer, clearAddOfferError } from "../../actions/actionCreator";
-import styles from "./OfferForm.module.sass";
 import ImageUpload from "../InputComponents/ImageUpload";
 import FormInput from "../FormInput";
 import Schemes from "../../validators/validationSchemes";
 import Error from "../Error";
+import CONSTANTS from "../../constants";
+import styles from "./OfferForm.module.sass";
 
 const OfferForm = (props) => {
   const {

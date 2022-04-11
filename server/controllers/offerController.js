@@ -1,10 +1,10 @@
-const { User, sequelize } = require("../models/postgreModels");
+const { sequelize, User } = require("../models/postgreModels");
 const ServerError = require("../errors/ServerError");
 const contestQueries = require("./queries/contestQueries");
+const userQueries = require("./queries/userQueries");
 const { resolveOffer, rejectOffer } = require("./queries/offerQueries");
 const { getNotificationController } = require("../socketInit");
-const userQueries = require("./queries/userQueries");
-const CONSTANTS = require("./../constants");
+const { CONTEST, MODERATOR, ITEMS_ON_PAGE } = require("./../constants");
 
 module.exports.setOfferStatus = async (req, res, next) => {
   let transaction;
@@ -51,7 +51,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     file,
   } = req;
 
-  if (req.body.contestType === CONSTANTS.CONTEST.LOGO) {
+  if (req.body.contestType === CONTEST.LOGO) {
     obj.fileName = file.filename;
     obj.originalFileName = file.originalname;
   } else {
@@ -69,7 +69,7 @@ module.exports.setNewOffer = async (req, res, next) => {
     const user = Object.assign({}, req.tokenData, { id: userId });
 
     const moderators = await User.findAll({
-      where: { role: CONSTANTS.MODERATOR },
+      where: { role: MODERATOR },
       raw: true,
     });
 
@@ -106,7 +106,7 @@ module.exports.getOffersForModerator = async (req, res, next) => {
 
     page === 1
       ? (currentOffset = 0)
-      : (currentOffset = CONSTANTS.ITEMS_ON_PAGE * (page - 1));
+      : (currentOffset = ITEMS_ON_PAGE * (page - 1));
 
     let foundOffers = await contestQueries.offersForModerator(currentOffset);
 
@@ -132,7 +132,7 @@ module.exports.getEmailMessages = async (req, res, next) => {
 
   const moderator = await User.findOne({
     where: {
-      role: CONSTANTS.MODERATOR,
+      role: MODERATOR,
     },
     raw: true,
   });
@@ -142,7 +142,7 @@ module.exports.getEmailMessages = async (req, res, next) => {
 
     page === 1
       ? (currentOffset = 0)
-      : (currentOffset = CONSTANTS.ITEMS_ON_PAGE * (page - 1));
+      : (currentOffset = ITEMS_ON_PAGE * (page - 1));
 
     let messages = await contestQueries.messagesForCreator(
       userId,

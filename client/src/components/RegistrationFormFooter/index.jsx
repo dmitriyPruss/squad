@@ -1,27 +1,27 @@
-import React from 'react';
-import footerData from './registrationFooterData.json';
-import CONSTANTS from '../../constants';
-import styles from './RegistrationFormFooter.module.scss';
+import React from "react";
+import footerData from "./registrationFooterData.json";
+import CONSTANTS from "../../constants";
+import styles from "./RegistrationFormFooter.module.scss";
 
-function RegistrationFormFooter () {
-  const showLastInfo = index => (
+function RegistrationFormFooter() {
+  const showLastInfo = (index) => (
     <section key={index}>
       <h3 className={styles.headerArticle}>
         I have other questions! How can I get in touch with Squadhelp?
       </h3>
       <p className={styles.article}>
-        Check out our{' '}
-        <a href='http://help.squadhelp.com/' className={styles.orangeSpan}>
+        Check out our{" "}
+        <a href="http://help.squadhelp.com/" className={styles.orangeSpan}>
           FAQs
-        </a>{' '}
-        or send us a{' '}
-        <a href='about:blank#blocked' className={styles.orangeSpan}>
+        </a>{" "}
+        or send us a{" "}
+        <a href="about:blank#blocked" className={styles.orangeSpan}>
           message
         </a>
-        . For assistance with launching a contest, you can also call us at{' '}
-        {CONSTANTS.CONTACTS.TEL} or schedule a{' '}
+        . For assistance with launching a contest, you can also call us at{" "}
+        {CONSTANTS.CONTACTS.TEL} or schedule a{" "}
         <a
-          href='https://www.squadhelp.com/signup'
+          href="https://www.squadhelp.com/signup"
           className={styles.orangeSpan}
         >
           Branding Consultation

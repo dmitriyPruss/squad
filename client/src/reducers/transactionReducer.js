@@ -1,12 +1,12 @@
-import ACTION_TYPES from '../actions/actionTypes';
+import ACTION_TYPES from "../actions/actionTypes";
 
 const initialState = {
   isFetching: false,
   error: null,
-  transactions: []
+  transactions: [],
 };
 
-function transactionReducer (state = initialState, action) {
+function transactionReducer(state = initialState, action) {
   const { type } = action;
   switch (type) {
     case ACTION_TYPES.GET_TRANSACTION_REQUEST: {
@@ -24,8 +24,6 @@ function transactionReducer (state = initialState, action) {
     default:
       return state;
   }
-};
+}
 
 export default transactionReducer;
-
-

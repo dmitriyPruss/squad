@@ -1,6 +1,6 @@
-const { readFile, writeFile, truncate } = require('fs/promises');
-const path = require('path');
-const loggedDataHandler = require('./loggedDataHandler');
+const { readFile, writeFile, truncate } = require("fs/promises");
+const path = require("path");
+const loggedDataHandler = require("./loggedDataHandler");
 
 module.exports = async () => {
   const { dir } = path.parse(__dirname);
@@ -8,16 +8,13 @@ module.exports = async () => {
   const filePath = `${dir}/logger/err_report.txt`;
 
   try {
-    const fileData = await readFile(filePath, 'utf8');
+    const fileData = await readFile(filePath, "utf8");
 
     let newFileData;
-    if (fileData !== '') {
-      newFileData = fileData
-        .split('}')
-        .map(loggedDataHandler)
-        .join(' \n');
+    if (fileData !== "") {
+      newFileData = fileData.split("}").map(loggedDataHandler).join(" \n");
     } else {
-      newFileData = '';
+      newFileData = "";
     }
 
     const newFile = await writeFile(

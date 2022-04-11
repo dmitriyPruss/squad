@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "../../components/Header";
-import CONSTANTS from "../../constants";
 import SlideBar from "../../components/SlideBar";
 import Footer from "../../components/Footer";
-import styles from "./Home.module.sass";
 import carouselConstants from "../../carouselConstants";
 import SpinnerLoader from "../../components/SpinnerLoader";
 import AgencyLevel from "../../components/AgencyLevel";
+import CONSTANTS from "../../constants";
+import styles from "./Home.module.sass";
 
 const Home = (props) => {
   const { isFetching } = props;

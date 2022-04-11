@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ButtonItem from './ButtonItem';
-import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import React, { useState } from "react";
+import ButtonItem from "./ButtonItem";
+import { useAccordionButton } from "react-bootstrap/AccordionButton";
 
-function ToggleElem ({ children, eventKey, callback, index }) {
+function ToggleElem({ children, eventKey, callback, index }) {
   const initView = index === 0 ? true : false;
 
   const [view, setView] = useState(initView);

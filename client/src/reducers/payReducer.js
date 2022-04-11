@@ -1,12 +1,12 @@
-import ACTION from '../actions/actionTypes';
+import ACTION from "../actions/actionTypes";
 
 const initialState = {
   isFetching: false,
   error: null,
-  focusOnElement: 'number',
+  focusOnElement: "number",
 };
 
-function payReducer (state = initialState, action) {
+function payReducer(state = initialState, action) {
   switch (action.type) {
     case ACTION.CHANGE_FOCUS_ON_CARD: {
       return {
@@ -34,6 +34,6 @@ function payReducer (state = initialState, action) {
     default:
       return state;
   }
-};
+}
 
 export default payReducer;

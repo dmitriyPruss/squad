@@ -11,10 +11,6 @@ const {
 } = CONSTANTS.SOCKET;
 
 class NotificationSocket extends WebSocket {
-  constructor(dispatch, getState, room) {
-    super(dispatch, getState, room);
-  }
-
   anotherSubscribes = () => {
     this.onChangeMark();
     this.onChangeOfferStatus();

@@ -11,10 +11,6 @@ const {
 } = CONSTANTS.SOCKET;
 
 class ChatSocket extends WebSocket {
-  constructor(dispatch, getState, room) {
-    super(dispatch, getState, room);
-  }
-
   anotherSubscribes = () => {
     this.onNewMessage();
     this.onChangeBlockStatus();

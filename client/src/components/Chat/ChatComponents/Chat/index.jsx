@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import DialogListContainer from "../../DialogComponents/DialogListContainer";
-import styles from "./Chat.module.sass";
 import Dialog from "../../DialogComponents/Dialog";
 import {
   changeChatShow,
@@ -12,11 +11,12 @@ import {
   getPreviewChat,
 } from "../../../../actions/actionCreator";
 import { chatController } from "../../../../api/ws/socketController";
-import CONSTANTS from "../../../../constants";
 import CatalogListContainer from "../../CatalogComponents/CatalogListContainer";
 import CatalogCreation from "../../CatalogComponents/CatalogCreation";
 import CatalogListHeader from "../../CatalogComponents/CatalogListHeader";
 import ChatError from "../../../ChatError";
+import CONSTANTS from "../../../../constants";
+import styles from "./Chat.module.sass";
 
 class Chat extends React.Component {
   componentDidMount() {

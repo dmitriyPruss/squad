@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Catalog from "../Catalog";
-import styles from "../CatalogListContainer/CatalogListContainer.module.sass";
 import {
   changeShowModeCatalog,
   deleteCatalog,
 } from "../../../../actions/actionCreator";
+import styles from "../CatalogListContainer/CatalogListContainer.module.sass";
 
 const CatalogList = (props) => {
   const { catalogList, changeShowModeCatalog, deleteCatalog } = props;

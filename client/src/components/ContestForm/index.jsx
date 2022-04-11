@@ -2,9 +2,7 @@ import React from "react";
 import { Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import CONSTANTS from "../../constants";
 import { getDataForContest } from "../../actions/actionCreator";
-import styles from "./ContestForm.module.sass";
 import SpinnerLoader from "../SpinnerLoader";
 import FormInput from "../FormInput";
 import SelectInput from "../SelectInput";
@@ -13,6 +11,8 @@ import FormTextArea from "../InputComponents/FormTextArea";
 import TryAgain from "../TryAgain";
 import Schemes from "../../validators/validationSchemes";
 import OptionalSelects from "../OptionalSelects";
+import CONSTANTS from "../../constants";
+import styles from "./ContestForm.module.sass";
 
 const {
   CONTEST: { LOGO, NAME, TAGLINE },

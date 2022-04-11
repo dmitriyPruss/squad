@@ -1,7 +1,7 @@
+const bcrypt = require("bcrypt");
 const { User } = require("../../models/postgreModels");
 const NotFound = require("../../errors/UserNotFoundError");
 const ServerError = require("../../errors/ServerError");
-const bcrypt = require("bcrypt");
 
 module.exports.updateUser = async (data, userId, transaction) => {
   const [updatedCount, [updatedUser]] = await User.update(data, {
@@ -12,6 +12,7 @@ module.exports.updateUser = async (data, userId, transaction) => {
   if (updatedCount !== 1) {
     throw new ServerError("cannot update user");
   }
+
   return updatedUser.dataValues;
 };
 

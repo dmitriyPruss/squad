@@ -1,7 +1,13 @@
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const { v4: uuid } = require("uuid");
-const CONSTANTS = require("./../constants");
+const { Op } = require("sequelize");
+const _ = require("lodash");
+const NotUniqueEmail = require("../errors/NotUniqueEmail");
+const { getNotificationController } = require("../socketInit");
+const userQueries = require("./queries/userQueries");
+const bankQueries = require("./queries/bankQueries");
+const ratingQueries = require("./queries/ratingQueries");
 const {
   Contest,
   Rating,
@@ -11,12 +17,13 @@ const {
   sequelize,
   Sequelize,
 } = require("../models/postgreModels");
-const { Op } = require("sequelize");
-const NotUniqueEmail = require("../errors/NotUniqueEmail");
-const { getNotificationController } = require("../socketInit");
-const userQueries = require("./queries/userQueries");
-const bankQueries = require("./queries/bankQueries");
-const ratingQueries = require("./queries/ratingQueries");
+const {
+  CREATOR,
+  JWT_SECRET,
+  ACCESS_TOKEN_TIME,
+  SQUADHELP_BANK,
+  TRANSACTION_OPERATION_TYPES,
+} = require("./../constants");
 
 module.exports.login = async (req, res, next) => {
   const {
@@ -25,38 +32,18 @@ module.exports.login = async (req, res, next) => {
 
   try {
     const foundUser = await userQueries.findUser({ email });
+    foundUser.userId = foundUser.id;
 
-    const {
-      firstName,
-      id,
-      role,
-      lastName,
-      avatar,
-      displayName,
-      balance,
-      email: userEmail,
-      rating,
-      password: userPassword,
-    } = foundUser;
+    const tokenUserData = _.omit(foundUser, ["id", "password", "accessToken"]);
 
-    await userQueries.passwordCompare(password, userPassword);
-    const accessToken = jwt.sign(
-      {
-        firstName,
-        userId: id,
-        role,
-        lastName,
-        avatar,
-        displayName,
-        balance,
-        email: userEmail,
-        rating,
-      },
-      CONSTANTS.JWT_SECRET,
-      { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
-    );
+    await userQueries.passwordCompare(password, foundUser.password);
 
-    await userQueries.updateUser({ accessToken }, id);
+    const accessToken = jwt.sign(tokenUserData, JWT_SECRET, {
+      expiresIn: ACCESS_TOKEN_TIME,
+    });
+
+    await userQueries.updateUser({ accessToken }, foundUser.userId);
+
     res.status(200).send({ token: accessToken });
   } catch (err) {
     next(err);
@@ -68,35 +55,16 @@ module.exports.registration = async (req, res, next) => {
     const newUser = await userQueries.userCreation(
       Object.assign(req.body, { password: req.hashPass })
     );
+    newUser.userId = newUser.id;
 
-    const {
-      firstName,
-      id,
-      role,
-      lastName,
-      avatar,
-      displayName,
-      balance,
-      email,
-      rating,
-    } = newUser;
+    const tokenUserData = _.omit(newUser, ["id", "password", "accessToken"]);
 
-    const accessToken = jwt.sign(
-      {
-        firstName,
-        userId: id,
-        role,
-        lastName,
-        avatar,
-        displayName,
-        balance,
-        email,
-        rating,
-      },
-      CONSTANTS.JWT_SECRET,
-      { expiresIn: CONSTANTS.ACCESS_TOKEN_TIME }
-    );
-    await userQueries.updateUser({ accessToken }, id);
+    const accessToken = jwt.sign(tokenUserData, JWT_SECRET, {
+      expiresIn: ACCESS_TOKEN_TIME,
+    });
+
+    await userQueries.updateUser({ accessToken }, newUser.userId);
+
     res.status(201).send({ token: accessToken });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {
@@ -106,21 +74,6 @@ module.exports.registration = async (req, res, next) => {
     }
   }
 };
-
-function getQuery(offerId, userId, mark, isFirst, transaction) {
-  const getCreateQuery = () =>
-    ratingQueries.createRating(
-      {
-        offerId,
-        mark,
-        userId,
-      },
-      transaction
-    );
-  const getUpdateQuery = () =>
-    ratingQueries.updateRating({ mark }, { offerId, userId }, transaction);
-  return isFirst ? getCreateQuery : getUpdateQuery;
-}
 
 module.exports.changeMark = async (req, res, next) => {
   let transaction;
@@ -190,15 +143,15 @@ module.exports.payment = async (req, res, next) => {
               ""
             )}' AND "cvc"='${cvc}' AND "expiry"='${expiry}'
                 THEN "balance"-${price}
-            WHEN "cardNumber"='${CONSTANTS.SQUADHELP_BANK.NUMBER}' AND "cvc"='${
-          CONSTANTS.SQUADHELP_BANK.CVC
-        }' AND "expiry"='${CONSTANTS.SQUADHELP_BANK.EXPIRY}'
+            WHEN "cardNumber"='${SQUADHELP_BANK.NUMBER}' AND "cvc"='${
+          SQUADHELP_BANK.CVC
+        }' AND "expiry"='${SQUADHELP_BANK.EXPIRY}'
                 THEN "balance"+${price} END
         `),
       },
       {
         cardNumber: {
-          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
+          [Op.in]: [SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
         },
       },
       transaction
@@ -224,7 +177,7 @@ module.exports.payment = async (req, res, next) => {
     transaction.commit();
 
     const creators = await User.findAll({
-      where: { role: CONSTANTS.CREATOR.NAME },
+      where: { role: CREATOR },
       raw: true,
     });
 
@@ -265,27 +218,13 @@ module.exports.updateUser = async (req, res, next) => {
     }
     const updatedUser = await userQueries.updateUser(body, userId);
 
-    const {
-      firstName,
-      lastName,
-      displayName,
-      avatar,
-      email,
-      balance,
-      role,
-      id,
-    } = updatedUser;
+    const tokenUserData = _.omit(updatedUser, [
+      "rating",
+      "password",
+      "accessToken",
+    ]);
 
-    res.status(200).send({
-      firstName,
-      lastName,
-      displayName,
-      avatar,
-      email,
-      balance,
-      role,
-      id,
-    });
+    res.status(200).send(tokenUserData);
   } catch (err) {
     next(err);
   }
@@ -315,25 +254,23 @@ module.exports.cashout = async (req, res, next) => {
                   ""
                 )}' AND "expiry"='${expiry}' AND "cvc"='${cvc}'
                     THEN "balance"+${sum}
-                WHEN "cardNumber"='${
-                  CONSTANTS.SQUADHELP_BANK.NUMBER
-                }' AND "expiry"='${
-          CONSTANTS.SQUADHELP_BANK.EXPIRY
-        }' AND "cvc"='${CONSTANTS.SQUADHELP_BANK.CVC}'
+                WHEN "cardNumber"='${SQUADHELP_BANK.NUMBER}' AND "expiry"='${
+          SQUADHELP_BANK.EXPIRY
+        }' AND "cvc"='${SQUADHELP_BANK.CVC}'
                     THEN "balance"-${sum}
                  END
                 `),
       },
       {
         cardNumber: {
-          [Op.in]: [CONSTANTS.SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
+          [Op.in]: [SQUADHELP_BANK.NUMBER, number.replace(/ /g, "")],
         },
       },
       transaction
     );
 
     const newTransactionInfo = {
-      operationType: CONSTANTS.TRANSACTION_OPERATION_TYPES.INCOME,
+      operationType: TRANSACTION_OPERATION_TYPES.INCOME,
       amount: sum,
       userId,
     };
@@ -365,3 +302,18 @@ module.exports.getUserTransactions = async (req, res, next) => {
     next(new ServerError());
   }
 };
+
+function getQuery(offerId, userId, mark, isFirst, transaction) {
+  const getCreateQuery = () =>
+    ratingQueries.createRating(
+      {
+        offerId,
+        mark,
+        userId,
+      },
+      transaction
+    );
+  const getUpdateQuery = () =>
+    ratingQueries.updateRating({ mark }, { offerId, userId }, transaction);
+  return isFirst ? getCreateQuery : getUpdateQuery;
+}

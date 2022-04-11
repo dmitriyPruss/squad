@@ -44,7 +44,6 @@ function chatReducer(state = initialState, action) {
         messagesPreview: [],
       };
     }
-
     case ACTION.SET_CHAT_BLOCK_ERROR:
     case ACTION.SET_CHAT_FAVORITE_ERROR:
     case ACTION.SEND_MESSAGE_ERROR:
@@ -61,7 +60,6 @@ function chatReducer(state = initialState, action) {
         isShowCatalogCreation: false,
       };
     }
-
     case ACTION.BACK_TO_DIALOG_LIST: {
       return {
         ...state,
@@ -101,7 +99,6 @@ function chatReducer(state = initialState, action) {
         messages: [...state.messages, action.data.message],
       };
     }
-
     case ACTION.CLEAR_MESSAGE_LIST: {
       return {
         ...state,
@@ -184,14 +181,12 @@ function chatReducer(state = initialState, action) {
         isShowCatalogCreation: false,
       };
     }
-
     case ACTION.DELETE_CATALOG_SUCCESS: {
       return {
         ...state,
         catalogList: [...action.data],
       };
     }
-
     case ACTION.REMOVE_CHAT_FROM_CATALOG_SUCCESS: {
       return {
         ...state,
