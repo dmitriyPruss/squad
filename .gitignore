@@ -2,6 +2,4 @@
 .vscode/
 
 ./client/node_modules
-./public
-./public/images
 ./server/node_modules
