@@ -7,9 +7,9 @@ import {
   clearUpdateContestStore,
 } from "../../actions/actionCreator";
 import ContestForm from "../ContestForm";
-import styles from "./Brief.module.sass";
 import ContestInfo from "../Contest/ContestInfo";
 import Error from "../Error";
+import styles from "./Brief.module.sass";
 
 const Brief = (props) => {
   const setNewContestData = (values) => {

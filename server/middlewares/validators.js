@@ -25,9 +25,11 @@ module.exports.validateLogin = async (req, res, next) => {
 
 module.exports.validateContestCreation = (req, res, next) => {
   const promiseArray = [];
+
   req.body.contests.forEach((el) => {
     promiseArray.push(contestSchema.isValid(el));
   });
+
   return Promise.all(promiseArray)
     .then((results) => {
       results.forEach((result) => {

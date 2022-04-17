@@ -130,7 +130,15 @@ module.exports.payment = async (req, res, next) => {
   const {
     body: { contests, cvc, expiry, number, price },
     tokenData: { userId },
+    files,
   } = req;
+
+  if (files.length) {
+    contests.forEach((contest, index) => {
+      contest.fileName = files[index].filename;
+      contest.originalFileName = files[index].originalname;
+    });
+  }
 
   try {
     transaction = await sequelize.transaction();

@@ -47,7 +47,7 @@ const StartContestPage = (props) => {
         <div className={styles.infoBaseBundles}>
           <span className={styles.headerInfo}>
             Our Most Popular
-            <span>Categories</span>
+            <span> Categories</span>
           </span>
           <span className={styles.info}>
             Pick from our most popular categories, launch a contest and begin

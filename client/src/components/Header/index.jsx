@@ -171,11 +171,13 @@ class Header extends React.Component {
           </div>
         </div>
         <div className={styles.navContainer}>
-          <img
-            src={`${STATIC_IMAGES_PATH}blue-logo.png`}
-            className={styles.logo}
-            alt="blue_logo"
-          />
+          <Link to="/">
+            <img
+              src={`${STATIC_IMAGES_PATH}blue-logo.png`}
+              className={styles.logo}
+              alt="blue_logo"
+            />
+          </Link>
           <div className={styles.leftNav}>
             <div className={styles.nav}>
               <ul>

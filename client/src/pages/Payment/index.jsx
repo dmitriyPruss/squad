@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import isEmpty from "lodash/isEmpty";
 import { payRequest, clearPaymentStore } from "../../actions/actionCreator";
 import PayForm from "../../components/PayForm";
@@ -33,6 +34,7 @@ const Payment = (props) => {
     data.append("cvc", cvc);
     data.append("contests", JSON.stringify(contestArray));
     data.append("price", "100");
+
     toPay({
       data: {
         formData: data,
@@ -52,10 +54,12 @@ const Payment = (props) => {
   return (
     <div>
       <div className={styles.header}>
-        <img
-          src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
-          alt="blue-logo"
-        />
+        <Link to="/">
+          <img
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}blue-logo.png`}
+            alt="blue-logo"
+          />
+        </Link>
       </div>
       <div className={styles.mainContainer}>
         <div className={styles.paymentContainer}>

@@ -17,7 +17,7 @@ class CustomerDashboard extends React.Component {
     const { getContests, customerFilter } = this.props;
 
     getContests({
-      limit: 8,
+      limit: 10,
       offset: startFrom,
       contestStatus: customerFilter,
     });
@@ -31,7 +31,7 @@ class CustomerDashboard extends React.Component {
     const { getContests, customerFilter } = this.props;
 
     getContests({
-      limit: 8,
+      limit: 10,
       contestStatus: customerFilter,
     });
   };
